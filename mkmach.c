@@ -46,7 +46,7 @@
 #define min(x,y) (((x)<(y))?(x):(y))
 
 /* These routines are intended to defeat any attempt at optimisation */
-Dstore(a, b) double a, *b; { *b=a; }
+void Dstore(a, b) double a, *b; { *b=a; }
 double Dsum(a, b) double a, b; { double r; Dstore(a+b, &r); return (r); }
 double Ddiff(a, b) double a, b; { double r; Dstore(a-b, &r); return (r); }
 double Dmul(a, b) double a, b; { double r; Dstore(a*b, &r); return (r); }
@@ -80,7 +80,7 @@ typedef short intlet;
 typedef struct header { HEADER; } header;
 typedef struct value { HEADER; char **cts;} value;
 
-main(argc, argv) int argc; char *argv[]; {
+int main(argc, argv) int argc; char *argv[]; {
 	char co[4], oc[4];	/* Comment starter and ender symbols */
 	char c;
 	short newshort, maxshort, maxershort;
