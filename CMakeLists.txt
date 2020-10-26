@@ -150,9 +150,6 @@ target_sources(abc PRIVATE
 
 
 
-# cc -Wall -Wno-implicit-int -Wno-return-type    -Iunix mkmach.c -o mkmach
-# ./mkmach >unix/mach.h || (rm -f unix/mach.h && exit 1)
-
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
   COMMAND mkmach > ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_
   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_ ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
