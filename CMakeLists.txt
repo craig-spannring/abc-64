@@ -13,6 +13,11 @@ elseif (WIN32)
   set(src_main msdoc/main.c)
 endif()
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc)
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/file.h
+  "#define ABCLIB \"${CMAKE_CURRENT_LIST_DIR}\"")
+
 add_executable(mkmach mkmach.c)
 target_include_directories(mkmach
   PRIVATE ${mach_inc_dir}
@@ -35,9 +40,12 @@ target_include_directories(abc
   ehdrs
   ihdrs
   btr
+  ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc
   ${CURSES_INCLUDE_DIR}  
   )
 target_sources(abc PRIVATE
+  ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
+  
   bint2/i2gen.c
   bint2/i2syn.c
   bint2/i2tar.c
@@ -138,5 +146,18 @@ target_sources(abc PRIVATE
   btr/i1btr.c
   btr/i1obj.c
 )
+
+
+
+
+# cc -Wall -Wno-implicit-int -Wno-return-type    -Iunix mkmach.c -o mkmach
+# ./mkmach >unix/mach.h || (rm -f unix/mach.h && exit 1)
+
+add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
+  COMMAND mkmach > ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_ ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
+  DEPENDS mkmach
+  )
+
 
 
