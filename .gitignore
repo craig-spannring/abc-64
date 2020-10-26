@@ -25,3 +25,5 @@ build/CMakeFiles/
 build/build.ninja
 build/cmake_install.cmake
 build/rules.ninja
+build/compile_commands.json
+build/custom_autogened_files/
