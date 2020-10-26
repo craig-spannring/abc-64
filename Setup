@@ -94,7 +94,7 @@ esac
 echo " "
 echo $n "Trying: $cc $cflags main.c $ldflags ... $c"
 
-echo "main() { int i; i=0; }" >main.c || { echo 'Read only directory?'; exit 1;}
+echo "int main() { int i; i=0; }" >main.c || { echo 'Read only directory?'; exit 1;}
 if $cc $cflags main.c $ldflags >main.out 2>&1
 then
 	echo "seems ok."
@@ -125,7 +125,7 @@ cat >float.c <<EOF
 	double dadd(a, b) double a, b; {
 		return a+b;
 	}
-	main() {
+	int main() {
 		double a, b, c;
 		double dadd();
 		a = 3.14;
@@ -179,7 +179,7 @@ esac
 : 'Check for void type'
 echo " "
 echo $n "Checking to see if $cc accepts the void type ... $c"
-echo "void main() {}" >void.c
+echo "void foo() {} int main() {}" >void.c
 
 if $cc $cflags -c void.c $ldflags >/dev/null 2>&1
 then
@@ -206,7 +206,7 @@ cat >term.c <<EOF
 #include <sgtty.h> /* v7/BSD tty control */
 	struct sgttyb oldtty, newtty;
 #endif
-main() { gtty(0, &oldtty); }
+int main() { gtty(0, &oldtty); }
 EOF
 
 if $cc $cflags -DTERMIO term.c $ldflags >/dev/null 2>&1
@@ -239,7 +239,7 @@ for f in string.h strings.h
 do
 	cat >string.c << EOF
 #include <$f>
-	main() { int i; i=strlen("abc"); }
+	int main() { int i; i=strlen("abc"); }
 EOF
 	if $cc $cflags string.c $ldflags >/dev/null 2>&1
 	then
@@ -265,7 +265,7 @@ modes="no_modes"
 for f in unistd.h sys/file.h
 do
 	echo "#include <$f>" >modes.c
-	echo "main() { int i; i= F_OK; }" >>modes.c
+	echo "int main() { int i; i= F_OK; }" >>modes.c
 
 	if $cc $cflags modes.c $ldflags >/dev/null 2>&1
 	then
@@ -288,8 +288,9 @@ case $no_void in
 	echo " "
 	echo $n "Looking for type for signal handlers ... $c"
 	echo "#include <signal.h>" >sigtype.c
-	echo "main(){ void(*old)(); old= signal(SIGINT, SIG_IGN); }" >>sigtype.c
-	$cc $cflags -c sigtype.c $ldflags >warnings 2>&1
+	echo "int main(){ void(*old)(); old= signal(SIGINT, SIG_IGN); }" >>sigtype.c
+       	# $cc $cflags -c sigtype.c $ldflags >warnings 2>&1
+        $cc $cflags -c sigtype.c $ldflags >warnings
 	if test -s warnings
 	then
 		sigtype=int
@@ -305,7 +306,7 @@ esac
 : 'termcap library for ABC editor'
 echo " "
 echo $n "Looking for termcap-like library routines ... $c"
-echo 'char *tgetent(); main(){ char buf[1024]; tgetent(buf, "dumb"); }' >term.c
+echo 'char *tgetent(); int main(){ char buf[1024]; tgetent(buf, "dumb"); }' >term.c
 
 termlib=""
 for lib in -ltermcap -lcurses -ltermlib /usr/local/lib/libtermcap.a /usr/local/lib/libcurses.a /usr/local/lib/libtermlib.a
@@ -393,7 +394,7 @@ do
 		cat >dir.c <<EOF
 #include <sys/types.h>
 #include <$f>
-		main() { DIR *dp; struct $dirent *dirp; char *name;
+		int main() { DIR *dp; struct $dirent *dirp; char *name;
 			dp=opendir(".");
 			dirp=readdir(dp);
 			name= dirp->d_name;
@@ -450,7 +451,7 @@ do
 	done
 
 	cat >>time.c <<EOF
-	main() {
+	int main() {
 		struct timeval tp; struct timezone tzp;
 		struct tm *lt;
 		long secs1970, fraction;
@@ -483,7 +484,7 @@ case $gettimeofday in
 #include <sys/types.h>
 #include <time.h>
 #include <sys/timeb.h>
-	main() {
+	int main() {
 		struct tm *lt; struct timeb tt;
 
 	        ftime(&tt);
@@ -508,7 +509,7 @@ EOF
 #include <sys/types.h>
 #include <time.h>
 #include <sys/timeb.h>
-		main() {
+		int main() {
 			struct tm *lt; struct timeb tt;
 			tt.millitm= 0;
 		}
@@ -527,7 +528,7 @@ EOF
 		echo $n "No ftime() found, looking for time() ... $c"
 		cat >time3.c <<EOF
 #include <time.h>
-		main() {
+		int main() {
 			long ttt; struct tm *lt;
 			ttt= time((long*)0);
 			lt= localtime(&ttt);
@@ -588,13 +589,13 @@ select="#undef "
 getwd="#undef "
 getcwd="#undef "
 
-echo 'main() { strchr("abc", 0);}' > strchr.c
+echo 'int main() { strchr("abc", 0);}' > strchr.c
 if $cc $cflags strchr.c $ldflags >/dev/null 2>&1
 then
 	echo "Found strchr()"
 else
 	echo $n "Couldn't find strchr() ... $c"
-	echo 'main() { index("abc", 0);}' > strchr.c
+	echo 'int main() { index("abc", 0);}' > strchr.c
 	if $cc $cflags strchr.c $ldflags >/dev/null 2>&1
 	then
 		strchr="index"
@@ -605,7 +606,7 @@ else
 	fi
 fi
 
-echo 'main() { mkdir("junk", 0);}' > mkdir.c
+echo 'int main() { mkdir("junk", 0);}' > mkdir.c
 if $cc $cflags mkdir.c $ldflags >/dev/null 2>&1
 then
 	mkdir="#define"
@@ -614,7 +615,7 @@ else
 	echo "Couldn't find mkdir(); we'll use our own"
 fi
 
-echo 'main(){char buf[1024];getcwd(buf, 1024);}' >getcwd.c
+echo 'int main(){char buf[1024];getcwd(buf, 1024);}' >getcwd.c
 if $cc $cflags getcwd.c $ldflags >/dev/null 2>&1
 then
 	getcwd="#define"
@@ -622,7 +623,7 @@ then
 else
 	echo "Couldn't find getcwd(); looking for getwd() ..."
 
-	echo 'main(){char buf[1024];getwd(buf);}' >getwd.c
+	echo 'int main(){char buf[1024];getwd(buf);}' >getwd.c
 	if $cc $cflags getwd.c $ldflags >/dev/null 2>&1
 	then
 		getwd="#define"
@@ -632,7 +633,7 @@ else
 	fi
 fi
 
-echo 'main() { rename("b", "abc");}' > rename.c
+echo 'int main() { rename("b", "abc");}' > rename.c
 if $cc $cflags rename.c $ldflags >/dev/null 2>&1
 then
 	rename="#define"
@@ -647,7 +648,7 @@ cat >select.c <<EOF
 #ifdef IS_AIX
 #include <sys/select.h>
 #endif
-main() {
+int main() {
 	int width;
 	fd_set *readfds, *writefds, *exceptfds;
 	struct timeval *timeout;
