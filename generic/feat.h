@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 /* Generic version, as basis for porting.
@@ -79,3 +82,7 @@ typedef unsigned char reftype;
 #define GOTOCURSOR	/* enable [goto] operation */
 #define CK_WS_WRITABLE  /* give warning if workspace is read-only */
 #define	TYPE_CHECK	/* do static type checking */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

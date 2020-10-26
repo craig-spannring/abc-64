@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Private definitions for the b-tree module */
@@ -227,3 +230,7 @@ btreeptr mknewroot();
     /* btreeptr ptr0, itemptr pitm0, btreeptr ptr1, literal it */
 /* Procedure relbtree(); */		/* btreeptr pnode; literal it */
 /* Procedure freebtreenode(); */	/* btreeptr pnode; */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

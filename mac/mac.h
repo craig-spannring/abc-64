@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /* Interface for mac specific files */
@@ -78,3 +81,7 @@ extern WindowPtr screen;
 /* The following two macros assume win->(top, left) is (0, 0): */
 #define WINWIDTH(win) ((win)->portRect.right)
 #define WINHEIGHT(win) ((win)->portRect.bottom)
+
+#ifdef __cplusplus
+extern "C" }
+#endif

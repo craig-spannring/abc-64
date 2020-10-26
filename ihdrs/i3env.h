@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* environments and context */
@@ -45,3 +48,7 @@ extern env prmnv;
 extern parsetree curline;
 extern value curlino;
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

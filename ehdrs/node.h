@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
@@ -112,3 +115,7 @@ Visible Procedure pathuniql();
 node grab_node();
 path grab_path();
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 
@@ -39,3 +42,7 @@
 /* do we know the keyboard codes ? */
 #define KNOWN_KEYBOARD
 #endif /* KEYS */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

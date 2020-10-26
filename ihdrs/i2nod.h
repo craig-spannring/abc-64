@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Units */
@@ -268,3 +271,7 @@ typenode nodetype();
 
 #define COLON_SUITE	First_fieldnr		/* COLON_NODE */
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1991. */
 
 /* Compiler: GNU C cross compiler */
@@ -36,3 +39,7 @@ char *malloc();
 char *realloc();
 #endif
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

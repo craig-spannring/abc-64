@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Interpreter utilities */
@@ -16,3 +19,7 @@ value evalthread();
 #define Changed_formal(v) (v == Vnil || !Is_indirect(v))
 
 value locvalue();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
@@ -23,3 +26,7 @@ Visible Procedure qrelease();
 #define emptyqueue(q) (!(q))
 
 node queuebehead();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

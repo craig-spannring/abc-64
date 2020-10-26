@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 #define CMDPROMPT ">>> " /* Prompt user for immediate command */
@@ -50,3 +53,7 @@ extern int doctype;	/* type of document edited by editdocument() */
 #define D_perm 0	/* a how-to definition or permanent location */
 #define D_input 1	/* input for READ or question */
 #define D_immcmd 2	/* editing immediate command */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

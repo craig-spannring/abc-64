@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
@@ -139,3 +142,7 @@
 #define S_MSENSE        "[mouse-sense]"
 #define S_MFORMAT	"[mouse-format]"
 #define S_NOTHING	""
+
+#ifdef __cplusplus
+extern "C" }
+#endif

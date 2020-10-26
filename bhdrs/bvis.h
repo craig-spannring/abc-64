@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1991. */
 
 /* bvis.h: Public declarations for Visible Procedures */
@@ -449,3 +452,7 @@ Visible Procedure trmshow();
 Visible int trminput();
 Visible int trmavail();
 Visible int trmsuspend();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

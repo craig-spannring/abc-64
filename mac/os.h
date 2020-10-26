@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /* Operating system dependent ABC configuration */
@@ -50,3 +53,7 @@ pascal void Debugger() extern 0xA9FF;
 /*pascal void DebugStr(aString) char *aString; extern 0xABFF;*/
 /* use as DebugStr(c2pstr("Entered power loop")); */
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /* communication between interpreter and editor */
@@ -9,3 +12,7 @@
 #define R_answer 'q'	/* Yes/No */
 
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

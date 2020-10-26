@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /* interpreter values */
@@ -142,3 +145,7 @@ typedef struct{value val;} indirect;
 value mk_indirect();
 
 /************************************************************************/
+
+#ifdef __cplusplus
+extern "C" }
+#endif

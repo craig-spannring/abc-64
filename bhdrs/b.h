@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* b.h: general */
@@ -121,3 +124,7 @@ extern char *messbuf;
 
 #define CONSOLE (FILE *) NULL
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

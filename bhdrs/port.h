@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 /* externals of which the definitions are in a port directory */
@@ -55,3 +58,7 @@ extern bool intrptd;                 /* sig.c */
 Visible Procedure initsig();
 
 Visible Procedure abc_usage();       /* usage.c */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

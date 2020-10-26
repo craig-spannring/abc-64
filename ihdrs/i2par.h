@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /***********************************************************************/
@@ -239,3 +242,7 @@ extern literal idf_cntxt;
 #define clearscreen_keyword(kw)	(atkw(kw, K_CLEARSCREEN))
 
 #endif /* GFX */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

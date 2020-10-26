@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 extern Procedure initkeys();
@@ -24,4 +27,8 @@ extern Procedure addkeydef();
 extern Procedure initgetc();
 extern Procedure endgetc();
 
+#endif
+
+#ifdef __cplusplus
+extern "C" }
 #endif

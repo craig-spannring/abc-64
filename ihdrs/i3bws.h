@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 extern char *bwsdir;
@@ -10,3 +13,7 @@ extern value cur_ws;
 value abc_wsname();
 #endif
 extern char *cur_dir; /* absolute path to current workspace */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

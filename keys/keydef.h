@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1989. */
 
 #define ABC_RELEASE "ABC Release %s."
@@ -26,3 +29,7 @@
 
 #endif
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

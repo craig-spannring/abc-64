@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 /* Operating system dependent ABC configuration */
@@ -39,3 +42,7 @@
 #define KNOWN_KEYBOARD
 #endif /* KEYS */
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

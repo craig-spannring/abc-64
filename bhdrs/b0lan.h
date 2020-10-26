@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*  Keywords
@@ -105,3 +108,7 @@
 #define P_in		"in"
 #define P_notin 	"not.in"
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

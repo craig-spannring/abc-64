@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 typedef short item;	/* used for indexing xxxdef[] arrays;
@@ -117,3 +120,7 @@ string savestr();
 itemptr savearray();
 
 #define Assert(cond) ((cond) || asserr(__FILE__, __LINE__))
+
+#ifdef __cplusplus
+extern "C" }
+#endif

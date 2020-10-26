@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1991. */
 
 typedef struct {
@@ -37,3 +40,7 @@ extern char *cen_dir;      /* absolute path to central workspace */
 #define InCentralEnv()     (IsCentralEnv(cur_env))
 #define InStandardEnv()    (IsStandardEnv(cur_env))
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

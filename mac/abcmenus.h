@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* boolean arrays with /en/dis/able status of menus */
 
 #define Prompt_menus		0
@@ -96,3 +99,7 @@ int do_menu_choice();
 #define		MiscFuncsItem 15
 
 #define NMENUS 7
+
+#ifdef __cplusplus
+extern "C" }
+#endif

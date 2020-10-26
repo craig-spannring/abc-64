@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 extern char code_array[];
@@ -10,3 +13,7 @@ extern Procedure initcodes();
 
 #define Code(c) code_array[c]
 #define Invcode(code) invcode_array[code]
+
+#ifdef __cplusplus
+extern "C" }
+#endif

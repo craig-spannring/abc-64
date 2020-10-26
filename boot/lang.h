@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1987. */
 
 /* If you change this file, don't forget ../bhdrs/b0lan.h and bint2/i2dis.c */
@@ -45,4 +48,8 @@
 #define R_LINE		"LINE "
 #define R_TO_line	" TO "
 #define R_CLEAR 	"CLEAR"
+#endif
+
+#ifdef __cplusplus
+extern "C" }
 #endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Interpreter */
@@ -29,4 +32,8 @@ parsetree *_thread2();
 #endif
 #ifndef Thread2
 #define Thread2(t) _Thread2(t)
+#endif
+
+#ifdef __cplusplus
+extern "C" }
 #endif

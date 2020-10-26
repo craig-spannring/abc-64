@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 /* Compiler: MSC 6.0 */
@@ -34,4 +37,8 @@ void *realloc();
 #define MALLOC_ARG (unsigned)
 char *malloc();
 char *realloc();
+#endif
+
+#ifdef __cplusplus
+extern "C" }
 #endif

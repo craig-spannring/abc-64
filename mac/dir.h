@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /*
  * "Dir.h" for the Macintosh.
  */
@@ -19,3 +22,6 @@ struct direct {
 DIR *opendir();
 struct direct *readdir();
 closedir();
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 value get_names();
@@ -24,3 +27,7 @@ extern bool gr_recovered;
 #define G_ERROR		MESS(4610, "*** Errors while recovering the workspace index\n")
 #define G_DNAME		MESS(4611, "*** %s: cannot derive an ABC name for this workspace\n")
 #define G_EXIST		MESS(4612, "*** %s: the ABC name for this workspace is already in use\n")
+
+#ifdef __cplusplus
+extern "C" }
+#endif

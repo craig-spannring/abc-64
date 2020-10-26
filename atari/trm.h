@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 /*
@@ -30,3 +33,7 @@
 #define PLAIN		0	/* normal characters */
 #define STANDOUT	1	/* in inverse video */
 #define UNDERLINE	2	/* underlined */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

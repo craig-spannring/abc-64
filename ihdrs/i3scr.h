@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* screen */
@@ -12,3 +15,7 @@ extern char *get_line();
 extern char q_answer();
 extern char *getfmtbuf();
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

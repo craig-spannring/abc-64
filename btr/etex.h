@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 extern int e_length();
@@ -10,3 +13,7 @@ extern value e_icurtail();
 extern value e_ibehead();
 extern value e_concat();
 /* extern Procedure e_concto(); */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

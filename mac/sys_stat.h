@@ -1,4 +1,7 @@
-struct stat {
+#ifdef __cplusplus
+extern "C" {
+    #endif
+    struct stat {
 	unsigned short st_mode;
 	unsigned long st_size;
 	unsigned long st_mtime;
@@ -10,3 +13,7 @@ struct stat {
 #define S_IREAD    0400
 #define S_IWRITE   0200
 #define S_IEXEC    0100
+
+#ifdef __cplusplus
+extern "C" }
+#endif

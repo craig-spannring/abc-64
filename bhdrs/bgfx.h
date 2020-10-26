@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /*
  * Shared data between graphics routines.
  */
@@ -17,3 +20,7 @@ extern int gfx_mode;
 #define TEXT_MODE 1
 #define GFX_MODE 2
 #define SPLIT_MODE 3
+
+#ifdef __cplusplus
+extern "C" }
+#endif

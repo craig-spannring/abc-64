@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* This file was generated and edited by the Setup command. */
 /* To make lasting changes edit the files unix/os.h.gen and Setup, */
 /* and run Setup again. */
@@ -71,3 +74,7 @@
 /* do we know the keyboard codes ? */
 #undef KNOWN_KEYBOARD
 #endif /* KEYS */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

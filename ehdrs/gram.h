@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
@@ -22,3 +25,7 @@ bool allows_colon();
 #define Fw_negative(str) ((str) && (str)[0] == '\n')
 
 #define MAXNBUILTIN 50	/* should be calculated by boot/mktable */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

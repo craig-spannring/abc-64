@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #define Is_node(t) ((t) != NilTree && Is_parsetree(t))
@@ -18,3 +21,7 @@ struct state {
 Visible value copystddef();
 Visible bool modify_tag();
 Visible bool is_name();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

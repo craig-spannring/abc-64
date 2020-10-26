@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /* Operating system dependent ABC configuration */
@@ -9,3 +12,7 @@ typedef unsigned char literal;	/* to emphasize meaning only */
 
 typedef short reftype;		/* type used for reference counts */
 #define Maxrefcnt Maxintlet	/* Maxintlet is calculated in config.h */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

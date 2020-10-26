@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
@@ -36,3 +39,7 @@ cell *build();
 extern int llength;
 extern int winheight;
 extern int indent;
+
+#ifdef __cplusplus
+extern "C" }
+#endif

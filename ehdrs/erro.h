@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
@@ -16,3 +19,7 @@
 #define REC_OK		MESS(6009, "Keystrokes recorded, use [play] to play back")
 #define REDO_OLD	MESS(6010, "This redo brought you to an older version.  Use [undo] to cancel")
 #define SUSP_BAD	MESS(6011, "Sorry, I failed to suspend ABC")
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*************************************************************************/
@@ -98,3 +101,7 @@ bool equal_vars(); 	/* polytype s, a */
 /* Procedure cyctyperr(); */		/* polytype a */
 
 value conc();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

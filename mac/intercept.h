@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* The structure of the 'device switch' used by the standard I/O library.
    It is possible to install your own versions of selected routines
    by storing function pointers into this table.  The structure of
@@ -38,3 +41,7 @@ struct controlblock {
 };
 
 #define IO_OK 0			/* Return value from dev_write */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

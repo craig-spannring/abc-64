@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* B memory management */
@@ -17,3 +20,7 @@ typedef unsigned long address;	/* for PC and symbol table (on a tahoe) */
 
 struct bufadm {char *buf, *pbuf, *end; };
 typedef struct bufadm bufadm;
+
+#ifdef __cplusplus
+extern "C" }
+#endif

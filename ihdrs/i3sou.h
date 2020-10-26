@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1987. */
 
 Visible bool is_zerfun();
@@ -61,3 +64,7 @@ Visible value mkabcname();	/* vice versa for recovering target name */
 #define CONVDQ_SIGN '@'		/* to map double quote */
 
 Visible bool ckws_writable();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

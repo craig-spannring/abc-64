@@ -330,7 +330,7 @@ Visible Procedure upto1(q, m) txptr q; int m; {
 	}
 }
 
-Visible bool nothing(q, m) txptr q; int m; {
+Visible bool nothing(txptr q; int m)  {
 	if (!Text(q)) {
 		if (Char(tx-1) == ' ') tx--;
 		parerr(m);

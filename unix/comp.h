@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* This file was generated and edited by the Setup command. */
 /* To make lasting changes edit the files unix/comp.h.gen and Setup, */
 /* and run Setup again. */
@@ -46,3 +49,7 @@ char *realloc();
 /* use index for strchr */
 
 /* and rindex for strrchr */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* i1fun.c, i1nua.c, i1nur.c */
@@ -43,3 +46,7 @@
 /* i3loc.c, i3sta.c */
 
 #define SEL_NO_TABLE	MESS(1820, "selection on non-table")
+
+#ifdef __cplusplus
+extern "C" }
+#endif

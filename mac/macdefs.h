@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Useful #includes and #defines for programming a set of Unix
    look-alike file system access functions on the Macintosh. */
 
@@ -21,3 +24,7 @@
 
 /* Call Macsbug: */
 pascal void Debugger() extern 0xA9FF;
+
+#ifdef __cplusplus
+extern "C" }
+#endif

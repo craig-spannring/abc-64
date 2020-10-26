@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /* Header file with grammar table structure. */
@@ -147,3 +150,7 @@ extern struct lexinfo *lextab;
 #define SUGGHOWNAME 104
 
 #define NLEX 10
+
+#ifdef __cplusplus
+extern "C" }
+#endif

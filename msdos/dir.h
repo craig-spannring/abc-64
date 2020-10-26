@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 /*
@@ -15,3 +18,7 @@ typedef char DIR;
 Visible DIR *opendir();
 Visible struct direct *readdir();
 Visible Procedure closedir();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

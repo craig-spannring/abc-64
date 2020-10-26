@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 /* Generic version, as basis for porting.
@@ -22,3 +25,7 @@ Visible struct direct *readdir();
 Visible Procedure closedir();
 
 #endif /* !HAS_READDIR */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

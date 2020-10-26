@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /* general defines, also usable in Rez .r files */
@@ -19,3 +22,7 @@
 #define OKITEM		1
 #define CANCELITEM	2
 #define EDITITEM	3
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /* Interface between mac and abc stuff */
@@ -74,3 +77,7 @@ bool slct_location();
 bool slct_howto();
 bool slct_workspace();
 bool slct_appfiles();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

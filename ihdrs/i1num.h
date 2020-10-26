@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /************************************************************************/
@@ -145,3 +148,7 @@ rational ratsumhalf();
 value grab_num();
 value regrab_num();
 value grab_rat();
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Configuration file: some easy changes to the system.                 */
@@ -20,3 +23,7 @@ typedef int expint;		/*The 2nd argument of frexp points to this */
 
 #define SEED getseed()		/*Any suitable random int (eg date or time) */
 				/*to start the random number generator with */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* char=8 bits, signed */
 /* maxshort=32767 (=2**15-1) */
 /* maxint=2147483647 (=2**31-1) */
@@ -53,3 +56,7 @@ typedef long twodigit;
 
 #define HEADER literal type; reftype refcnt; intlet len
 #define FILLER
+
+#ifdef __cplusplus
+extern "C" }
+#endif

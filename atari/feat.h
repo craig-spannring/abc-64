@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 #define EXT_RANGE	/* extend range of approximate arithmetic */
@@ -19,3 +22,7 @@ typedef literal reftype; /* type used for reference counts */
 #define GOTOCURSOR	/* enable [goto] operation */
 #define CK_WS_WRITABLE  /* give warning if workspace is read-only */
 #define TYPE_CHECK	/* do static type checking */
+
+#ifdef __cplusplus
+extern "C" }
+#endif

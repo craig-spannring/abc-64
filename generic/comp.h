@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 /* Generic version, as basis for porting.
@@ -45,3 +48,7 @@ char *realloc();
 #define strrchr rindex  /* Use rindex for strrchr */
 
 
+
+#ifdef __cplusplus
+extern "C" }
+#endif

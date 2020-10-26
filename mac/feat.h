@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 /*
@@ -38,3 +41,7 @@
 #define WSP_DIRNAME	/* wsp_arg is a directory name, not an ABC name */
 
 #undef TTY_ERRFILE	/* redirect error output from interpreter to /dev/tty */
+
+#ifdef __cplusplus
+extern "C" }
+#endif
