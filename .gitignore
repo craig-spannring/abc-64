@@ -1,1 +1,6 @@
+.gitignore~
 CMakeLists.txt~
+Makefile
+build
+mkmach
+answers
