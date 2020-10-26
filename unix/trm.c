@@ -282,7 +282,7 @@ Forward Hidden int setttymode();
 Forward Hidden Procedure resetttymode();
 Forward Hidden int start_trm();
 Forward Hidden bool get_pos();
-Forward Hidden int put_line();
+Forward Hidden void put_line();
 Forward Hidden Procedure set_mode();
 Forward Hidden Procedure get_so_mode();
 Forward Hidden Procedure standout();
@@ -1110,7 +1110,7 @@ Visible Procedure trmputdata(yfirst, ylast, indent, data, mode)
  * and
  *	d2 maybe less than 0.
  */
-Hidden int put_line(y, xskip, data, mode, len) int y, xskip; string data; string mode; int len; {
+Hidden void put_line(y, xskip, data, mode, len) int y, xskip; string data; string mode; int len; {
 	register char *op, *oq, *mp;
 	register char *np, *nq, *nend, *mo;
 	char *bp, *bq1, *p, *q;

@@ -21,9 +21,8 @@ target_link_libraries(mkmach
   PRIVATE
   )
 
-#cc -Wno-implicit-int -Wno-return-type    -I../bhdrs -I../ehdrs -I../ihdrs -I../unix   -c -o main.o main.c
 add_executable(abc ${src_main})
-target_compile_options(abc PRIVATE -Wno-implicit-int -Wno-return-type)
+target_compile_options(abc PRIVATE -Wall) #  -Wno-implicit-int -Wno-return-type)
 target_link_libraries(abc
   PRIVATE
   m
