@@ -18,3 +18,10 @@ answers
 ex/out
 unix/file.h
 unix/mach.h
+build/.ninja_deps
+build/.ninja_log
+build/CMakeCache.txt
+build/CMakeFiles/
+build/build.ninja
+build/cmake_install.cmake
+build/rules.ninja
