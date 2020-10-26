@@ -1,0 +1,601 @@
+[
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix    -o CMakeFiles/mkmach.dir/mkmach.c.o   -c /home/MTI.local/craig.spannring/abc-unix/mkmach.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/mkmach.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/main.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/main.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/main.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2gen.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2gen.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2gen.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2syn.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2syn.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2syn.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2tar.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2tar.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2tar.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2uni.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2uni.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2uni.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2tes.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2tes.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2tes.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2exp.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2exp.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2exp.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2dis.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2dis.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2dis.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2fix.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2fix.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2fix.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2ana.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2ana.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2ana.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint2/i2cmd.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint2/i2cmd.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint2/i2cmd.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1nuq.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1nuq.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1nuq.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1nur.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1nur.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1nur.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1fun.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1fun.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1fun.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1nui.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1nui.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1nui.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1nua.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1nua.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1nua.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1nug.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1nug.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1nug.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1nut.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1nut.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1nut.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1com.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1com.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1com.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1tra.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1tra.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1tra.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1num.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1num.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1num.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint1/i1nuc.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint1/i1nuc.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint1/i1nuc.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/stc/i2tcu.c.o   -c /home/MTI.local/craig.spannring/abc-unix/stc/i2tcu.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/stc/i2tcu.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/stc/i2tca.c.o   -c /home/MTI.local/craig.spannring/abc-unix/stc/i2tca.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/stc/i2tca.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/stc/i2tce.c.o   -c /home/MTI.local/craig.spannring/abc-unix/stc/i2tce.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/stc/i2tce.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/stc/i2tcp.c.o   -c /home/MTI.local/craig.spannring/abc-unix/stc/i2tcp.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/stc/i2tcp.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3scr.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3scr.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3scr.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3sta.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3sta.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3sta.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3ini.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3ini.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3ini.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3typ.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3typ.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3typ.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3fpr.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3fpr.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3fpr.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3cen.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3cen.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3cen.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3com.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3com.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3com.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3fil.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3fil.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3fil.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3loc.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3loc.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3loc.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3int.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3int.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3int.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3in2.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3in2.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3in2.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3imm.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3imm.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3imm.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3gfx.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3gfx.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3gfx.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3sou.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3sou.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3sou.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3bws.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3bws.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3bws.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3env.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3env.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3env.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bint3/i3err.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bint3/i3err.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bint3/i3err.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bio/i4out.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bio/i4out.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bio/i4out.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bio/i4inp.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bio/i4inp.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bio/i4inp.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bio/i4rec.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bio/i4rec.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bio/i4rec.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bio/i4lis.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bio/i4lis.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bio/i4lis.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bio/i4bio.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bio/i4bio.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bio/i4bio.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bio/i4grp.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bio/i4grp.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bio/i4grp.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bio/i4fil.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bio/i4fil.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bio/i4fil.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bio/i4pack.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bio/i4pack.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bio/i4pack.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/edit.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/edit.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/edit.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/dir.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/dir.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/dir.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/trm.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/trm.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/trm.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/usage.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/usage.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/usage.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/os.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/os.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/os.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/sig.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/sig.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/sig.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/keys.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/keys.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/keys.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/unix/file.c.o   -c /home/MTI.local/craig.spannring/abc-unix/unix/file.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/unix/file.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/b/b1mess.c.o   -c /home/MTI.local/craig.spannring/abc-unix/b/b1mess.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/b/b1mess.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/b/b1file.c.o   -c /home/MTI.local/craig.spannring/abc-unix/b/b1file.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/b/b1file.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/b/getopt.c.o   -c /home/MTI.local/craig.spannring/abc-unix/b/getopt.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/b/getopt.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/b/b1outp.c.o   -c /home/MTI.local/craig.spannring/abc-unix/b/b1outp.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/b/b1outp.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/b/b1memo.c.o   -c /home/MTI.local/craig.spannring/abc-unix/b/b1memo.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/b/b1memo.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/b/b1grab.c.o   -c /home/MTI.local/craig.spannring/abc-unix/b/b1grab.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/b/b1grab.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1deco.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1deco.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1deco.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1que2.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1que2.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1que2.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1edoc.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1edoc.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1edoc.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1inse.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1inse.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1inse.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1line.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1line.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1line.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1erro.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1erro.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1erro.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1getc.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1getc.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1getc.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1help.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1help.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1help.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1cell.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1cell.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1cell.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1code.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1code.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1code.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1node.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1node.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1node.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1goto.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1goto.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1goto.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1tabl.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1tabl.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1tabl.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1save.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1save.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1save.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1scrn.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1scrn.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1scrn.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1que1.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1que1.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1que1.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1spos.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1spos.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1spos.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1gram.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1gram.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1gram.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1comm.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1comm.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1comm.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1ins2.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1ins2.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1ins2.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1eval.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1eval.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1eval.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1lexi.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1lexi.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1lexi.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1supr.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1supr.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1supr.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1move.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1move.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1move.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1outp.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1outp.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1outp.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1sugg.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1sugg.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1sugg.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1edit.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1edit.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1edit.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/bed/e1wide.c.o   -c /home/MTI.local/craig.spannring/abc-unix/bed/e1wide.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/bed/e1wide.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/btr/e1etex.c.o   -c /home/MTI.local/craig.spannring/abc-unix/btr/e1etex.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/btr/e1etex.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/btr/i1tex.c.o   -c /home/MTI.local/craig.spannring/abc-unix/btr/i1tex.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/btr/i1tex.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/btr/i1lta.c.o   -c /home/MTI.local/craig.spannring/abc-unix/btr/i1lta.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/btr/i1lta.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/btr/i1tlt.c.o   -c /home/MTI.local/craig.spannring/abc-unix/btr/i1tlt.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/btr/i1tlt.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/btr/i1btr.c.o   -c /home/MTI.local/craig.spannring/abc-unix/btr/i1btr.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/btr/i1btr.c"
+},
+
+{
+  "directory": "/home/MTI.local/craig.spannring/abc-unix/build",
+  "command": "/usr/bin/cc  -I../unix -I../bhdrs -I../ehdrs -I../ihdrs -I../btr    -Wno-implicit-int -Wno-return-type -o CMakeFiles/abc.dir/btr/i1obj.c.o   -c /home/MTI.local/craig.spannring/abc-unix/btr/i1obj.c",
+  "file": "/home/MTI.local/craig.spannring/abc-unix/btr/i1obj.c"
+}
+]
