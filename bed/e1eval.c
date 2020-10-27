@@ -55,17 +55,17 @@
 
 Visible Procedure
 evalcoord(n, jch, py, px, plevel)
-	register node n;
-	register int jch;
+	node n;
+	int jch;
 	int *py;
 	int *px;
 	int *plevel;
 {
 	node nn;
-	register int i;
-	register string *rp = noderepr(n);
-	register int k;
-	register int y = 0;
+	int i;
+	string *rp = noderepr(n);
+	int k;
+	int y = 0;
 	int x = *px;
 	int level = *plevel;
 	int nch;
@@ -119,11 +119,10 @@ evalcoord(n, jch, py, px, plevel)
  */
 
 Visible int
-fwidth(str)
-	register string str;
+fwidth(string str)
 {
-	register int c;
-	register int n = 0;
+	int c;
+	int n = 0;
 
 	if (!str)
 		return 0;
@@ -147,16 +146,16 @@ fwidth(str)
  */
 
 Visible int
-evalwidth(n)
-	register node n;
+evalwidth(node n)
+	node n;
 {
-	register int w;
-	register int i;
-	register string *rp;
-	register int y = 0;
-	register int x = 0;
-	register int nch;
-	register node nn;
+	int w;
+	int i;
+	string *rp;
+	int y = 0;
+	int x = 0;
+	int nch;
+	node nn;
 
 	rp = noderepr(n);
 	nch = Is_etext(n) ? 0 : nchildren(n);
