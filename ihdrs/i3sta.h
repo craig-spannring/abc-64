@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I3STA_h_e191288aeba0df55cccdaf9d99ce93ec
+#define I3STA_h_e191288aeba0df55cccdaf9d99ce93ec
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 Visible Procedure formula();
 Visible Procedure proposition();
@@ -12,4 +16,7 @@ extern bool report; /* 'Condition code register', outcome of last test */
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

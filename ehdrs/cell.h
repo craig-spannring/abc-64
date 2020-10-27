@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef CELL_h_13c44f041497ddbfb1693d9ca8eee844
+#define CELL_h_13c44f041497ddbfb1693d9ca8eee844
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
  * B editor -- Definitions for linked lists of screen lines, baptized `cells'.
@@ -42,4 +46,7 @@ extern int indent;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

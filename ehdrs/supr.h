@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef SUPR_h_8bf2d693af07fb0b54c5195c572af85a
+#define SUPR_h_8bf2d693af07fb0b54c5195c572af85a
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
  * B editor -- Superstructure for fine focusing.
@@ -83,4 +87,7 @@ bool ishole();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

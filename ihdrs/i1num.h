@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I1NUM_h_9c1d8afe2422b08d3311f4b1691bbedb
+#define I1NUM_h_9c1d8afe2422b08d3311f4b1691bbedb
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /************************************************************************/
 /* Full numeric package: private definitions                            */
@@ -151,4 +155,7 @@ value grab_rat();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

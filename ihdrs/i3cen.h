@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I3CEN_h_b2d9c42c45cf661b7567b994da76882a
+#define I3CEN_h_b2d9c42c45cf661b7567b994da76882a
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -43,4 +48,7 @@ extern char *cen_dir;      /* absolute path to central workspace */
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

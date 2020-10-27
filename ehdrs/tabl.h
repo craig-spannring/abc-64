@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef TABL_h_b767bf5a35e38392c3855c0e5ebe7a42
+#define TABL_h_b767bf5a35e38392c3855c0e5ebe7a42
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -153,4 +158,7 @@ extern struct lexinfo *lextab;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

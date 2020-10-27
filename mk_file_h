@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "/* AUTO-GENERATED.  Do not hand edit */"
+echo "/* AUTO-GENERATED.  Do not hand edit! */"
 echo "#ifdef ABCLIB"
 echo "#undef ABCLIB"
 echo "#endif"

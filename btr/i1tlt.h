@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I1TLT_h_1a82b7d7c21e62e7561d1efbda29f192
+#define I1TLT_h_1a82b7d7c21e62e7561d1efbda29f192
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Private definitions for B texts, lists and tables */
 
@@ -17,4 +21,7 @@ typedef struct telita {
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

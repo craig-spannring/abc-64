@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef BEDI_h_3e5204f0d36fcc21d2c1e4e37e9958be
+#define BEDI_h_3e5204f0d36fcc21d2c1e4e37e9958be
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -56,4 +61,7 @@ extern int doctype;	/* type of document edited by editdocument() */
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef CODE_h_f6df38462c69aa26a8cc45a543a7bb5c
+#define CODE_h_f6df38462c69aa26a8cc45a543a7bb5c
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -16,4 +21,7 @@ extern Procedure initcodes();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

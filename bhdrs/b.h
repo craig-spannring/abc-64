@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef B_h_f3a79ec21e8ae24eef6ee57844d8f0cc
+#define B_h_f3a79ec21e8ae24eef6ee57844d8f0cc
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* b.h: general */
 
@@ -127,4 +131,7 @@ extern char *messbuf;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

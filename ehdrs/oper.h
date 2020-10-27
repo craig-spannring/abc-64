@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef OPER_h_928ff716162f83ac97c81f34408dd202
+#define OPER_h_928ff716162f83ac97c81f34408dd202
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
  * Command key definitions as returned by getoperation() in e1getc.c.
@@ -145,4 +149,7 @@ extern "C" {
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

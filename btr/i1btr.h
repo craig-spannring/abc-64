@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I1BTR_h_bb1040275fcdc1f4455c6eab5174a23d
+#define I1BTR_h_bb1040275fcdc1f4455c6eab5174a23d
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Private definitions for the b-tree module */
 
@@ -233,4 +237,7 @@ btreeptr mknewroot();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

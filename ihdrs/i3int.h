@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I3INT_h_e408d609ab8dd2cd846d26e6887bda33
+#define I3INT_h_e408d609ab8dd2cd846d26e6887bda33
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Interpreter */
 
@@ -36,4 +40,7 @@ parsetree *_thread2();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef MACDEFS_h_8e9ee480ca00bfaaa93852fedd26df06
+#define MACDEFS_h_8e9ee480ca00bfaaa93852fedd26df06
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -27,4 +32,7 @@ pascal void Debugger() extern 0xA9FF;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

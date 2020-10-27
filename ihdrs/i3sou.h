@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I3SOU_h_fd9c7492ed650ce1c146dea84efff0ff
+#define I3SOU_h_fd9c7492ed650ce1c146dea84efff0ff
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -67,4 +72,7 @@ Visible bool ckws_writable();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef B0LAN_h_a45338dadb77d8c88fea7af3462a1c15
+#define B0LAN_h_a45338dadb77d8c88fea7af3462a1c15
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*  Keywords
  *  Predefined functions and predicates
@@ -111,4 +115,7 @@ extern "C" {
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef BINT_h_518e4d988a78ceffeee34b92040daccc
+#define BINT_h_518e4d988a78ceffeee34b92040daccc
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -148,4 +153,7 @@ value mk_indirect();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

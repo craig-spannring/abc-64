@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef BGFX_h_e4e568ab5ac86cc29913d63c2e1e1903
+#define BGFX_h_e4e568ab5ac86cc29913d63c2e1e1903
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -23,4 +28,7 @@ extern int gfx_mode;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

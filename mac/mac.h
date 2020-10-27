@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef MAC_h_3dbf56cdf48266405e3848e1c45d361c
+#define MAC_h_3dbf56cdf48266405e3848e1c45d361c
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -84,4 +89,7 @@ extern WindowPtr screen;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

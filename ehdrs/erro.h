@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef ERRO_h_44190fa5aa5739534230c3c954331e38
+#define ERRO_h_44190fa5aa5739534230c3c954331e38
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
  * B editor -- User (error) messages collected together.
@@ -22,4 +26,7 @@ extern "C" {
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef OSCONF_h_a41621bf8c2a47d884a0d1ae6d6f7bb1
+#define OSCONF_h_a41621bf8c2a47d884a0d1ae6d6f7bb1
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -15,4 +20,7 @@ typedef short reftype;		/* type used for reference counts */
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

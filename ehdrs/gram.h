@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef GRAM_h_64b4d3cfdb1487119a98b4694402681d
+#define GRAM_h_64b4d3cfdb1487119a98b4694402681d
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
  * Routines defined in "gram.c".
@@ -28,4 +32,7 @@ bool allows_colon();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

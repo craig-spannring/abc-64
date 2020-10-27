@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I2EXP_h_be6d4bd6abb880812f0a598b32e92477
+#define I2EXP_h_be6d4bd6abb880812f0a598b32e92477
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* General definitions for parsing expressions */
 
@@ -58,4 +62,7 @@ struct prio * pprio();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

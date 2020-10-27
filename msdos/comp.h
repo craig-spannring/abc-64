@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef COMP_h_ffc637d5db31e33ffc31f6acea83e20b
+#define COMP_h_ffc637d5db31e33ffc31f6acea83e20b
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -41,4 +46,7 @@ char *realloc();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

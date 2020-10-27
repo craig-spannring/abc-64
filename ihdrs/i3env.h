@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I3ENV_h_02cf7d0750a6067fa65376d1ea4bb742
+#define I3ENV_h_02cf7d0750a6067fa65376d1ea4bb742
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* environments and context */
 
@@ -51,4 +55,7 @@ extern value curlino;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

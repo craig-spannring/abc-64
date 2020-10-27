@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef BOBJ_h_945555dcedb9ec8701ff4cfb11761611
+#define BOBJ_h_945555dcedb9ec8701ff4cfb11761611
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* B values, locations, environments: the B abstract machine */
 
@@ -177,4 +181,7 @@ bool empty(); /* whether #v=0: also temporary */
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

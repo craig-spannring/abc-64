@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I4BIO_h_418e655b3a008fd98eb5e00281c5d080
+#define I4BIO_h_418e655b3a008fd98eb5e00281c5d080
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -30,4 +35,7 @@ extern bool gr_recovered;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

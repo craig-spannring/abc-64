@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef DIR_h_e67f6a16bc15ed73144899ab374aab56
+#define DIR_h_e67f6a16bc15ed73144899ab374aab56
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -28,4 +33,7 @@ Visible Procedure closedir();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

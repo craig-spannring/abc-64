@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef QUEU_h_28464c453e1e455b29fec9422c76f353
+#define QUEU_h_28464c453e1e455b29fec9422c76f353
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
  * B editor -- Definitions for queues of nodes.
@@ -29,4 +33,7 @@ node queuebehead();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

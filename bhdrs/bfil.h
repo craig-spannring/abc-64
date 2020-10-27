@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef BFIL_h_6f305cb662512c611b442c7a09e0f9fa
+#define BFIL_h_6f305cb662512c611b442c7a09e0f9fa
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -34,4 +39,7 @@ char *f_getline();		/* return line from file including \n */
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

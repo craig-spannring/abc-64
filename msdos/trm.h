@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef TRM_h_b36e05a639a4c1d1dc8de08e1a0e9fdd
+#define TRM_h_b36e05a639a4c1d1dc8de08e1a0e9fdd
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -36,4 +41,7 @@ extern "C" {
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

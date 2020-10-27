@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I2NOD_h_3798594884b7eec3d40b98e52f7ac058
+#define I2NOD_h_3798594884b7eec3d40b98e52f7ac058
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Units */
 
@@ -274,4 +278,7 @@ typenode nodetype();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I2STC_h_99befec24fc6975d74e08999fe195f4f
+#define I2STC_h_99befec24fc6975d74e08999fe195f4f
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*************************************************************************/
 
@@ -104,4 +108,7 @@ value conc();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

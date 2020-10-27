@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef GETC_h_c06b651237197d844f2ff87b2934f37b
+#define GETC_h_c06b651237197d844f2ff87b2934f37b
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 extern Procedure initkeys();
 
@@ -31,4 +35,7 @@ extern Procedure endgetc();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

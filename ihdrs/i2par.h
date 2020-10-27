@@ -1,7 +1,13 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef I2PAR_h_6b9a47915959416229f3ee9dd029ca64
+#define I2PAR_h_6b9a47915959416229f3ee9dd029ca64
+
+#include "bint.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /***********************************************************************/
 
@@ -245,4 +251,7 @@ extern literal idf_cntxt;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

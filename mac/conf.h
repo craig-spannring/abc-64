@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef CONF_h_c86e4e5fc466e2c946d344624a17e5f0
+#define CONF_h_c86e4e5fc466e2c946d344624a17e5f0
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Configuration file: some easy changes to the system.                 */
 
@@ -26,4 +30,7 @@ typedef int expint;		/*The 2nd argument of frexp points to this */
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

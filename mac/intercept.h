@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef INTERCEPT_h_ee77f25e86cbcee6682e64bea1320f09
+#define INTERCEPT_h_ee77f25e86cbcee6682e64bea1320f09
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -44,4 +49,7 @@ struct controlblock {
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

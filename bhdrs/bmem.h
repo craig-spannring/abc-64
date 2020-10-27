@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef BMEM_h_2282670dac9633c717ceb6650539e29c
+#define BMEM_h_2282670dac9633c717ceb6650539e29c
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* B memory management */
 
@@ -23,4 +27,7 @@ typedef struct bufadm bufadm;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

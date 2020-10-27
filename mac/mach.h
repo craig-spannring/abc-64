@@ -1,3 +1,8 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef MACH_h_78b1b3538b514f1f755f05b637f8a18a
+#define MACH_h_78b1b3538b514f1f755f05b637f8a18a
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,4 +53,7 @@ typedef long twodigit;
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif

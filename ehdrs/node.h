@@ -1,7 +1,11 @@
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+
+#ifndef NODE_h_1ee37b0ed918bd1fa8741727607bc805
+#define NODE_h_1ee37b0ed918bd1fa8741727607bc805
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /*
  * B editor -- Parse tree and Focus stack.
@@ -118,4 +122,7 @@ path grab_path();
 
 #ifdef __cplusplus
 extern "C" }
+#endif
+
+
 #endif
