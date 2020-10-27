@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "/* AUTO-GENERATED.  Do not hand edit */"
+echo "#ifdef ABCLIB"
+echo "#undef ABCLIB"
+echo "#endif"
+echo "#define ABCLIB \"$(cd $(dirname $0); pwd)\""
