@@ -15,8 +15,7 @@ endif()
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc)
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/file.h
-  "#define ABCLIB \"${CMAKE_CURRENT_LIST_DIR}\"")
+
 
 add_executable(mkmach mkmach.c)
 target_include_directories(mkmach
@@ -27,6 +26,7 @@ target_link_libraries(mkmach
   )
 
 add_executable(abc ${src_main})
+add_dependencies(abc mach_h_AutoGened file_h_AutoGened)
 target_compile_options(abc PRIVATE -Wall) #  -Wno-implicit-int -Wno-return-type)
 target_link_libraries(abc
   PRIVATE
@@ -43,8 +43,8 @@ target_include_directories(abc
   ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc
   ${CURSES_INCLUDE_DIR}  
   )
+
 target_sources(abc PRIVATE
-  ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
   
   bint2/i2gen.c
   bint2/i2syn.c
@@ -149,12 +149,22 @@ target_sources(abc PRIVATE
 
 
 
+add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/file.h
+  COMMAND ${CMAKE_CURRENT_LIST_DIR}/mk_file_h > ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/file.h.tmp_
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/file.h.tmp_ ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/file.h
+
+  DEPENDS ${CMAKE_CURRENT_LIST_DIR}/mk_file_h
+  )
+add_custom_target(file_h_AutoGened
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/file.h)
 
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
+  COMMAND date > /tmp/making_mach_h.out
   COMMAND mkmach > ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_
   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_ ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
   DEPENDS mkmach
+  DEPENDS ${CMAKE_CURRENT_LIST_FILE}
   )
-
-
+add_custom_target(mach_h_AutoGened
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h)
 
