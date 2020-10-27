@@ -20,7 +20,7 @@ extern value e_concat();
 /* extern Procedure e_concto(); */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

@@ -4,6 +4,7 @@
 #include "bmem.h"
 #include "i1btr.h"
 #include "i1tlt.h"
+#include "b1grab.h"
 
 /*********************************************************************/
 /* grab, copy, release of btree(node)s                               */

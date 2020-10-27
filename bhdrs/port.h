@@ -65,7 +65,7 @@ Visible Procedure initsig();
 Visible Procedure abc_usage();       /* usage.c */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

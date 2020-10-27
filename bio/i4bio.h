@@ -34,7 +34,7 @@ extern bool gr_recovered;
 #define G_EXIST		MESS(4612, "*** %s: the ABC name for this workspace is already in use\n")
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

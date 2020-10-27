@@ -13,6 +13,7 @@
 #include "i3env.h"
 #include "i3int.h"
 #include "i3sou.h"
+#include "b1grab.h"
 
 Forward Hidden Procedure no_mysteries();
 Forward Hidden Procedure inithreads();
@@ -204,7 +205,7 @@ Visible Procedure jumpto(t) parsetree t; {
 	backpatch(t);
 }
 
-Hidden parsetree seterr(n) int n; {
+Hidden parsetree seterr(int n) {
 	return (parsetree)MkSmallInt(n);
 }
 

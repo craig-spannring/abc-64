@@ -29,7 +29,7 @@ typedef literal reftype; /* type used for reference counts */
 #define TYPE_CHECK	/* do static type checking */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

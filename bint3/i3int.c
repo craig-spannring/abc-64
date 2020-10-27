@@ -13,6 +13,7 @@
 #include "i3in2.h"
 #include "i3sou.h"
 #include "i3sta.h"
+#include "b1grab.h"
 
 Forward Hidden Procedure jumptoend();
 

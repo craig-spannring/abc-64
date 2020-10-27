@@ -12,6 +12,7 @@
 #include "bobj.h"
 #include "node.h"
 #include "gram.h"
+#include "b1grab.h"
 
 Hidden int spaces = 0; /* Saved-up spaces; emitted when non-blank found */
 

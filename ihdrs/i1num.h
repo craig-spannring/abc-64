@@ -3,6 +3,8 @@
 #ifndef I1NUM_h_9c1d8afe2422b08d3311f4b1691bbedb
 #define I1NUM_h_9c1d8afe2422b08d3311f4b1691bbedb
 
+#include "b1grab.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -154,7 +156,7 @@ value regrab_num();
 value grab_rat();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

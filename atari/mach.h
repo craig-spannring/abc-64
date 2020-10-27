@@ -63,7 +63,7 @@ typedef long twodigit;
 #define FILLER
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

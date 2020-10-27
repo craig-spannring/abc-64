@@ -49,7 +49,7 @@ extern "C" {
 #endif /* KEYS */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

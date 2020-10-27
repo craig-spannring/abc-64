@@ -7,6 +7,8 @@
 #include "b0lan.h"
 #include "i2par.h"
 #include "i2nod.h"
+#include "i2syn.h"
+#include "b1grab.h"
 
 /* Avoid name conflict with standard header files: */
 #define relop b_relop
@@ -21,7 +23,7 @@ Forward Hidden Procedure upto_test();
 Forward Hidden parsetree right_test();
 Forward Hidden parsetree tight_test();
 Forward Hidden parsetree ref_or_prop();
-Forward Hidden typenode relop();
+Forward Hidden typenode relop(void);
 
 Visible parsetree test(q) txptr q; {
 	parsetree v;
@@ -150,7 +152,7 @@ Hidden bool order_test(q, v) txptr q; parsetree *v; {
 	return No;
 }
 
-Hidden typenode relop() {
+Hidden typenode relop(void) {
 	skipsp(&tx);
 	return
 		at_most_sign		? AT_MOST :

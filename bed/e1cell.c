@@ -12,6 +12,7 @@
 #include "node.h"
 #include "cell.h"
 #include "port.h"
+#include "b1grab.h"
 
 extern bool noscroll;
 #ifndef NDEBUG

@@ -14,7 +14,7 @@ extern char *optarg;	/* start of option argument */
 extern int getopt();	/* returns option letter or '?' or EOF */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

@@ -11,9 +11,12 @@
 #include "supr.h"       /* for environ */
 #include "tabl.h"
 #include "port.h"
+#include "b1grab.h"
+
 #ifdef GFX
 #include "bgfx.h"
 #endif
+
 
 value editqueue();
 

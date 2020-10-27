@@ -7,6 +7,7 @@
 #include "i3cen.h"
 #include "i3sou.h"
 #include "i4bio.h"
+#include "b1grab.h"
 
 Forward Hidden char *getlocname();
 Forward Hidden char *getlocval();

@@ -25,7 +25,7 @@ value evalthread();
 value locvalue();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

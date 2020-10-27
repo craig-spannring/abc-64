@@ -6,6 +6,7 @@
 #include "bint.h"
 #include "bobj.h"
 #include "i3env.h" 	/* for curline, curlino  */
+#include "b1grab.h"
 
 Visible envtab prmnvtab;
 Visible envchain prmnvchain;
@@ -94,7 +95,7 @@ Visible Procedure setprmnv() {
 	curnv= prmnv;
 }
 
-Visible Procedure e_replace(v, t, k) value v, *t, k; {
+Visible Procedure e_replace(value v, value* t, value k) {
 	if (Is_compound(*t)) {
 		int n= SmallIntVal(k);
 		uniql(t);

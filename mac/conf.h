@@ -29,7 +29,7 @@ typedef int expint;		/*The 2nd argument of frexp points to this */
 				/*to start the random number generator with */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

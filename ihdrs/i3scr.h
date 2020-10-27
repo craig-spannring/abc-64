@@ -21,7 +21,7 @@ extern char *getfmtbuf();
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

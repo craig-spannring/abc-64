@@ -7,6 +7,8 @@
 #include "b0lan.h"
 #include "i2par.h"
 #include "i2nod.h"
+#include "b1grab.h"
+
 
 typedef struct {
 	FILE *file;       /* display file */

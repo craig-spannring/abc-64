@@ -84,7 +84,7 @@ bool slct_workspace();
 bool slct_appfiles();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

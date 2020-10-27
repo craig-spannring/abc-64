@@ -16,6 +16,7 @@
 #include "i3env.h"	/* for curline and curlino */
 #include "i3sou.h"
 #include "port.h"
+#include "b1grab.h"
 
 Forward Hidden Procedure tc_node();
 Forward Hidden Procedure put_code();

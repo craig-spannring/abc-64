@@ -45,7 +45,7 @@ extern int winheight;
 extern int indent;
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

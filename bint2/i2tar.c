@@ -5,6 +5,8 @@
 #include "bobj.h"
 #include "i2par.h"
 #include "i2nod.h"
+#include "i2syn.h"
+
 
 Forward Hidden parsetree singtarg();
 

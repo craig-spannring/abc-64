@@ -39,7 +39,7 @@ parsetree *_thread2();
 #endif
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

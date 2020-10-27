@@ -10,6 +10,7 @@
 #include "bobj.h"
 #include "node.h"
 #include "bmem.h"
+#include "b1grab.h"
 
 Forward Hidden Procedure repwidth();
 

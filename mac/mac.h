@@ -88,7 +88,7 @@ extern WindowPtr screen;
 #define WINHEIGHT(win) ((win)->portRect.bottom)
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

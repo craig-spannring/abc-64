@@ -20,6 +20,7 @@
 #include "tabl.h"
 #include "queu.h"
 #include "port.h"
+#include "b1grab.h"
 
 extern bool lefttorite;
 extern bool incentralws;
@@ -38,7 +39,6 @@ Hidden bool suggchanges= No;
 
 Forward Hidden Procedure getsugg();
 Forward Hidden Procedure savsugg();
-Forward Hidden int findsugg();
 Forward Hidden bool getpattern();
 Forward Hidden Procedure addnode();
 Forward Hidden Procedure addstr();

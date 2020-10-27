@@ -47,7 +47,7 @@ extern char *cen_dir;      /* absolute path to central workspace */
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

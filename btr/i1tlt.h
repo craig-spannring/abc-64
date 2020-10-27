@@ -20,7 +20,7 @@ typedef struct telita {
 #define Character(v)	((bool) (Type(v) EQ Tex && Tltsize(v) EQ 1))
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

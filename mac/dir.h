@@ -28,7 +28,7 @@ DIR *opendir();
 struct direct *readdir();
 closedir();
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

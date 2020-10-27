@@ -48,7 +48,7 @@ extern "C" {
 #undef TTY_ERRFILE	/* redirect error output from interpreter to /dev/tty */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

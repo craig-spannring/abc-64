@@ -5,6 +5,7 @@
 #include "b.h"
 #include "bobj.h"
 #include "i2stc.h"
+#include "b1grab.h"
 
 /* A polytype is a compound with two fields.
  * The first field is a B text, and holds the typekind.

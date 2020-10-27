@@ -31,7 +31,7 @@ bool allows_colon();
 #define MAXNBUILTIN 50	/* should be calculated by boot/mktable */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

@@ -56,7 +56,7 @@ char *realloc();
 /* and rindex for strrchr */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

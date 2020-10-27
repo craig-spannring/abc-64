@@ -121,7 +121,7 @@ path grab_path();
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

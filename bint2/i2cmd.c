@@ -8,6 +8,7 @@
 #include "i2par.h" 
 #include "i2nod.h"
 #include "i3env.h"
+#include "b1grab.h"
 
 Forward Hidden bool chk_indent();
 Forward Hidden Procedure suite_command();

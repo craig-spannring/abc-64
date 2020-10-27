@@ -8,6 +8,7 @@
 #include "i3scr.h"
 #include "i3sou.h"
 #include "i4bio.h"
+#include "b1grab.h"
 
 /* write_table_of_texts */
 

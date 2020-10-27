@@ -10,6 +10,7 @@
 #include "i2gen.h" /* Must be after i2nod.h */
 #include "i3env.h"
 #include "i3sou.h"
+#include "b1grab.h"
 
 
 Visible int nextvarnumber; /* Counts local targets (including formals) */

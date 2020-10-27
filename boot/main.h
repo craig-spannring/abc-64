@@ -127,7 +127,7 @@ itemptr savearray();
 #define Assert(cond) ((cond) || asserr(__FILE__, __LINE__))
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

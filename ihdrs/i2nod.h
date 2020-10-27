@@ -277,7 +277,7 @@ typenode nodetype();
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

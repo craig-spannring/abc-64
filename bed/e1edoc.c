@@ -12,6 +12,7 @@
 #include "supr.h"
 #include "tabl.h"
 #include "port.h"
+#include "b1grab.h"
 
 extern bool io_exit;
 extern int getoperation();

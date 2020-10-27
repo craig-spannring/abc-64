@@ -128,9 +128,9 @@ extern char *messbuf;
 
 #define CONSOLE (FILE *) NULL
 
-
+    
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

@@ -14,6 +14,7 @@
 #include "supr.h"
 #include "queu.h"
 #include "tabl.h"
+#include "b1grab.h"
 
 extern bool lefttorite;
 

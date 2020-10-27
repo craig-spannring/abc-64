@@ -5,6 +5,7 @@
 #include "bobj.h"
 #include "etex.h"
 #include "bmem.h"
+#include "b1grab.h"
 
 Visible int e_length(v) value v; {
 	return Length(v);

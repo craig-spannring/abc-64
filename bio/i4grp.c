@@ -6,6 +6,7 @@
 #include "i3bws.h"	
 #include "i3sou.h"
 #include "i4bio.h"
+#include "b1grab.h"
 
 Forward Hidden Procedure rec_dirname();
 Forward Hidden bool is_wsname();

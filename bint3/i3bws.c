@@ -12,6 +12,7 @@
 #include "i3scr.h"
 #include "i3sou.h"
 #include "port.h"
+#include "b1grab.h"
 
 Forward Hidden Procedure save_curlast();
 Forward Hidden Procedure only_default();

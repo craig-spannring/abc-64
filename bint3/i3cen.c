@@ -10,6 +10,7 @@
 #include "i3env.h"
 #include "i3sou.h"
 #include "port.h"
+#include "b1grab.h"
 
 /* The central workspace looks like any other workspace.
  * The difference is that you can call the how-to's of the central workspace

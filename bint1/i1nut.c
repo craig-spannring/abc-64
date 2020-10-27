@@ -3,6 +3,7 @@
 #include "b.h"
 #include "bobj.h" /* for relation */
 #include "i1num.h"
+#include "b1grab.h"
 
 /*
  * This file contains routines to speed up some time consuming operations

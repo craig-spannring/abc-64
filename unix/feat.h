@@ -33,7 +33,7 @@ typedef short reftype;	/* type used for reference counts */
 #define CK_WS_WRITABLE  /* give warning if workspace is read-only */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

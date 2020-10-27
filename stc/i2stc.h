@@ -107,7 +107,7 @@ bool equal_vars(); 	/* polytype s, a */
 value conc();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

@@ -1,5 +1,6 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
+#include "i2syn.h"
 #include "b.h"
 #include "bint.h"
 #include "bmem.h"
@@ -8,6 +9,7 @@
 #include "i2par.h"
 #include "i3scr.h"
 #include "i3env.h"
+#include "b1grab.h"
 
 Forward Hidden bool NEXT_keyword();
 Forward Hidden bool spec_firstkeyword();
@@ -138,7 +140,7 @@ Hidden bool search(find_kw, s, q, ftx, ttx) bool find_kw; string s;
 
 /* ********************************************************************	*/
 
-Visible bool find(s, q, ftx, ttx) string s; txptr q, *ftx, *ttx; {
+Visible bool find(string s, txptr q, txptr* ftx, txptr* ttx) {
 	return search(No, s, q, (*ftx= tx, ftx), ttx);
 }
 
@@ -246,7 +248,7 @@ Visible char *keyword() {
 	return kwbuf;
 }
 
-Visible bool is_keyword(kw) char **kw; {
+Visible bool is_keyword(char **kw) {
 	if (!Cap(Char(tx))) return No;
 	*kw= keyword();
 	return Yes;
@@ -302,7 +304,7 @@ Hidden bool spec_firstkeyword(fkw) char *fkw; {
 	return No;
 }
 
-Visible bool findkw(q, ftx) txptr q, *ftx; {
+Visible bool findkw(txptr q, txptr* ftx) {
 	txptr ttx;
 	*ftx= tx;
 	return search(Yes, "", q, ftx, &ttx);

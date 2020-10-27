@@ -250,7 +250,7 @@ extern literal idf_cntxt;
 #endif /* GFX */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

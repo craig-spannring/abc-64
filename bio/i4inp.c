@@ -4,6 +4,7 @@
 #include "bmem.h"
 #include "bobj.h"
 #include "i4bio.h"
+#include "b1grab.h"
 
 /* read_table_of_texts */
 

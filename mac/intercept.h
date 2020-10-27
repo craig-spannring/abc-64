@@ -48,7 +48,7 @@ struct controlblock {
 #define IO_OK 0			/* Return value from dev_write */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

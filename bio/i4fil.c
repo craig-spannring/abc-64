@@ -7,6 +7,7 @@
 #include "i3sou.h"
 #include "port.h"
 #include "dir.h"
+#include "b1grab.h"
 
 /**************************************************************************/
 /* get_names() is used to get at the names of all ABC files/workspaces	  */

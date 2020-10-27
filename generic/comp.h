@@ -55,7 +55,7 @@ char *realloc();
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

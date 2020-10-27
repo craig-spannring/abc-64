@@ -60,7 +60,7 @@ extern int doctype;	/* type of document edited by editdocument() */
 #define D_immcmd 2	/* editing immediate command */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

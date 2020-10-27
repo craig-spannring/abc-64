@@ -15,7 +15,7 @@ Visible Porting char *curdir();
 #define DRIVE_SEP ':'
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

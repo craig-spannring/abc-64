@@ -52,7 +52,7 @@ extern "C" {
 #define SEL_NO_TABLE	MESS(1820, "selection on non-table")
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

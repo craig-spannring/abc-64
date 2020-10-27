@@ -25,7 +25,7 @@ Visible struct direct *readdir();
 Visible Procedure closedir();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

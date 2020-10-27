@@ -9,6 +9,8 @@
 #include "i2nod.h"
 #include "i3env.h"
 #include "i3sou.h"
+#include "i2syn.h"
+#include "b1grab.h"
 
 Forward Hidden parsetree cmd_unit();
 Forward Hidden value cmd_formals();

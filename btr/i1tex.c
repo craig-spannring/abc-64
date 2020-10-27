@@ -7,6 +7,7 @@
 #include "bobj.h"
 #include "i1btr.h"
 #include "i1tlt.h"
+#include "b1grab.h"
 
 Forward Hidden Procedure convbtext();
 

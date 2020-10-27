@@ -20,7 +20,7 @@ extern "C" {
 #define S_IEXEC    0100
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

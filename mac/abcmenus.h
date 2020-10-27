@@ -106,7 +106,7 @@ int do_menu_choice();
 #define NMENUS 7
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

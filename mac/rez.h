@@ -29,7 +29,7 @@ extern "C" {
 #define EDITITEM	3
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

@@ -38,7 +38,7 @@ extern string temp1file;
 char *f_getline();		/* return line from file including \n */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

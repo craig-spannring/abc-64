@@ -10,6 +10,7 @@
 #include "i3env.h"
 #include "i3in2.h"
 #include "i3sou.h"
+#include "b1grab.h"
 
 /* Newlines for WRITE /// */
 

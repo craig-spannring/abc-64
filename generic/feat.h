@@ -89,7 +89,7 @@ typedef unsigned char reftype;
 #define	TYPE_CHECK	/* do static type checking */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

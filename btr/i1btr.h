@@ -236,7 +236,7 @@ btreeptr mknewroot();
 /* Procedure freebtreenode(); */	/* btreeptr pnode; */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

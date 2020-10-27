@@ -18,6 +18,7 @@
 #include "i3env.h"
 #include "i3scr.h"
 #include "i3sou.h"
+#include "b1grab.h"
 
 #ifdef GFX
 #include "bgfx.h"

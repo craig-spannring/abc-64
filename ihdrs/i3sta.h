@@ -15,7 +15,7 @@ extern parsetree next; /* Next parsetree node (changed by jumps) */
 extern bool report; /* 'Condition code register', outcome of last test */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

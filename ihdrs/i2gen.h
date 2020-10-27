@@ -27,7 +27,7 @@ Visible bool modify_tag();
 Visible bool is_name();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

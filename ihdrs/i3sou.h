@@ -71,7 +71,7 @@ Visible value mkabcname();	/* vice versa for recovering target name */
 Visible bool ckws_writable();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

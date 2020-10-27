@@ -20,7 +20,7 @@ value abc_wsname();
 extern char *cur_dir; /* absolute path to current workspace */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

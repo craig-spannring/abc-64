@@ -3,6 +3,9 @@
 #ifndef I2EXP_h_be6d4bd6abb880812f0a598b32e92477
 #define I2EXP_h_be6d4bd6abb880812f0a598b32e92477
 
+#include "b.h"
+#include "i2par.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -56,12 +59,13 @@ struct prio {
 #define dprio(i) pprio(i, P_dya)
 #define mprio(i) pprio(i, P_mon)
 
-struct prio * pprio();
+    struct prio * pprio();
 
+    extern Visible bool tag_operator(txptr q, value *v);
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

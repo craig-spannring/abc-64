@@ -19,7 +19,7 @@ typedef short reftype;		/* type used for reference counts */
 #define Maxrefcnt Maxintlet	/* Maxintlet is calculated in config.h */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

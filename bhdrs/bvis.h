@@ -8,18 +8,7 @@ extern "C" {
 #endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1991. */
 
-/* bvis.h: Public declarations for Visible Procedures */
-
-/* b1grab.c */
-Visible Procedure release();
-Visible Procedure uniql();
-Visible Procedure regrab();
-Visible Procedure rrelease();
-
-/* b1file.c */
-Visible Procedure free_path();
-Visible Procedure endfile();
-
+    
 /* b1memo.c */
 Visible Procedure regetmem();
 Visible Procedure freemem();
@@ -459,7 +448,7 @@ Visible int trmavail();
 Visible int trmsuspend();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

@@ -2,6 +2,7 @@
 
 /* memory handling for ABC values: grabbing, copying and releasing */
 
+#include "b1grab.h"
 #include "b.h"
 #include "bint.h"
 #include "bedi.h"
@@ -92,7 +93,7 @@ Visible value grab(type, len) literal type; intlet len; {
 	return v;
 }
 
-Visible Procedure regrab(v, len) value *v; intlet len; {
+Visible Procedure regrab(value *v, intlet len) {
 	literal type= (*v)->type;
 	unsigned syze= getsyze(type, len, (int*)NULL);
 	Regrabber();
@@ -108,7 +109,7 @@ Visible value copy(v) value v; {
 	return v;
 }
 
-Visible Procedure release(v) value v; {
+Visible Procedure release(value v) {
 	if (v == Vnil || IsSmallInt(v)) return;
 	if (Refcnt(v) == 0)
 		syserr(MESS(1503, "releasing unreferenced value"));
@@ -133,7 +134,7 @@ Hidden value ccopy(v) value v; {
 	return w;
 }
 
-Visible Procedure uniql(ll) value *ll; {
+Visible Procedure uniql(value *ll) {
 	if (*ll != Vnil && !IsSmallInt(*ll) && Refcnt(*ll) > 1) {
 		value c= ccopy(*ll);
 		release(*ll);
@@ -141,7 +142,7 @@ Visible Procedure uniql(ll) value *ll; {
 	}
 }
 
-Visible Procedure rrelease(v) value v; {
+Visible Procedure rrelease(value v) {
 	literal type= v->type; intlet len= Length(v);
 	int nptrs; register value *pp, *pend;
 	VOID getsyze(type, len, &nptrs);

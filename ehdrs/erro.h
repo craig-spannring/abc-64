@@ -25,7 +25,7 @@ extern "C" {
 #define SUSP_BAD	MESS(6011, "Sorry, I failed to suspend ABC")
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

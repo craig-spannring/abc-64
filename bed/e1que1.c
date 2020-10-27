@@ -13,6 +13,7 @@
 #include "queu.h"
 #include "gram.h"
 #include "tabl.h"
+#include "b1grab.h"
 
 Forward Hidden bool rest_is_hollow();
 

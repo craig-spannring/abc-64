@@ -34,7 +34,7 @@ extern Procedure endgetc();
 #endif
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

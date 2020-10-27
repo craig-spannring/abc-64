@@ -54,7 +54,7 @@ extern value curlino;
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

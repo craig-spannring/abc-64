@@ -27,6 +27,7 @@
 #else
 #include <termio.h>
 #endif
+// #include "ncurses.h"
 
 #include "trm.h"
 

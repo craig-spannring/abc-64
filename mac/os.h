@@ -60,7 +60,7 @@ pascal void Debugger() extern 0xA9FF;
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

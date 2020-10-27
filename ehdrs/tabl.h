@@ -157,7 +157,7 @@ extern struct lexinfo *lextab;
 #define NLEX 10
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

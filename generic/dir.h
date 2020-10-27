@@ -32,7 +32,7 @@ Visible Procedure closedir();
 #endif /* !HAS_READDIR */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

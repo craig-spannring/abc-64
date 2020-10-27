@@ -148,7 +148,7 @@ extern "C" {
 #define S_NOTHING	""
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

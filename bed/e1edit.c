@@ -15,6 +15,7 @@
 #include "gram.h"
 #include "supr.h"
 #include "queu.h"
+#include "b1grab.h"
 
 #define TABSIZE 8
 #define MAXLEVEL 128

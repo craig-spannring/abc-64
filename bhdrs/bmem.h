@@ -26,7 +26,7 @@ struct bufadm {char *buf, *pbuf, *end; };
 typedef struct bufadm bufadm;
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

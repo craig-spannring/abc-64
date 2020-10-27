@@ -40,7 +40,7 @@ extern "C" {
 #define UNDERLINE	2	/* underlined */
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

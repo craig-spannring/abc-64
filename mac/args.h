@@ -15,7 +15,7 @@ extern bool dflag;
 #endif
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

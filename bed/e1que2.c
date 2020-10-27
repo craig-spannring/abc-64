@@ -14,6 +14,7 @@
 #include "gram.h"
 #include "tabl.h"
 #include "code.h"
+#include "b1grab.h"
 
 extern bool lefttorite;
 	/* Set by edit() to signal we parse purely left-to-right */

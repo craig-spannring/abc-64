@@ -32,7 +32,7 @@ Visible Procedure qrelease();
 node queuebehead();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

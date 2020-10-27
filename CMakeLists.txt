@@ -27,7 +27,12 @@ target_link_libraries(mkmach
 
 add_executable(abc ${src_main})
 add_dependencies(abc mach_h_AutoGened file_h_AutoGened)
-target_compile_options(abc PRIVATE -Wall) #  -Wno-implicit-int -Wno-return-type)
+target_compile_options(abc PRIVATE
+  -Wall
+  # -Werror=int-to-pointer-cast
+  # -Wno-implicit-int
+  # -Wno-return-type
+  )
 target_link_libraries(abc
   PRIVATE
   m

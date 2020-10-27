@@ -27,7 +27,7 @@ extern int gfx_mode;
 #define SPLIT_MODE 3
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

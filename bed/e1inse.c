@@ -13,6 +13,7 @@
 #include "supr.h"
 #include "tabl.h"
 #include "code.h"
+#include "b1grab.h"
 
 Forward Hidden bool ifmatch();
 

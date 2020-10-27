@@ -20,7 +20,7 @@ Visible Porting Procedure freepath();
 Visible Porting char *curdir();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

@@ -20,7 +20,7 @@ extern Procedure initcodes();
 #define Invcode(code) invcode_array[code]
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

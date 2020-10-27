@@ -10,6 +10,8 @@
 #include "i2gen.h" /* Must be after i2nod.h */
 #include "i2exp.h"
 #include "i3sou.h"
+#include "b1grab.h"
+#include "i2syn.h"
 
 Forward Hidden Procedure st_extend();
 Forward Hidden Procedure push_dya();
@@ -581,7 +583,7 @@ Visible Procedure trim_target(q, v) txptr q; parsetree *v; {
 /*		tag_operator	 					*/
 /* ******************************************************************** */
 
-Visible bool tag_operator(q, v) txptr q; value *v; {
+Visible bool tag_operator(txptr q, value *v) {
 	value w;
 	txptr tx0= tx;
 	if (Text(q) && is_tag(&w)) {

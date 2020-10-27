@@ -10,6 +10,7 @@
 #include "i3scr.h"
 #include "i3sou.h"
 #include "port.h"
+#include "b1grab.h"
 
 #define CANT_OPEN MESS(1700, "can't open input file %s\n")
 

@@ -8,6 +8,7 @@
 #include "i1btr.h"
 #include "i1tlt.h"
 #include "i3typ.h"
+#include "b1grab.h"
 
 /*ARGSUSED*/
 Visible unsigned tltsyze(type, len, nptrs)

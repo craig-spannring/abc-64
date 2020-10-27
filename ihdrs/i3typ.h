@@ -16,7 +16,7 @@ btype loctype();
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

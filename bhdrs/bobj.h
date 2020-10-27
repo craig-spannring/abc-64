@@ -180,7 +180,7 @@ bool empty(); /* whether #v=0: also temporary */
 
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 

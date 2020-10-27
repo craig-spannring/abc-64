@@ -7,6 +7,7 @@
 #include "i2par.h"
 #include "i3env.h"
 #include "i3scr.h"
+#include "b1grab.h"
 
 /* ******************************************************************** */
 /*		immediate command					*/

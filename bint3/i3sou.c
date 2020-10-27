@@ -16,6 +16,7 @@
 #include "i3in2.h"
 #include "i3sou.h"
 #include "port.h"
+#include "b1grab.h"
 
 Forward Hidden bool do_discard();
 Forward Hidden bool smash();

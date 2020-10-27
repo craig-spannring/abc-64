@@ -86,7 +86,7 @@ typedef struct {
 bool ishole();
 
 #ifdef __cplusplus
-extern "C" }
+}
 #endif
 
 
