@@ -108,7 +108,8 @@ Hidden bool search(find_kw, s, q, ftx, ttx) bool find_kw; string s;
 				case C_CLOSE:
 				case C_CURCLOSE:
 				case C_BUS:	
-					if (parcnt > 0) parcnt--; break;
+					if (parcnt > 0) parcnt--;
+					break;
 				case C_APOSTROPHE:
 				case C_QUOTE:
 					if (lctx == Txnil || !Keytagmark(lctx)) {
