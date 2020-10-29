@@ -2,6 +2,7 @@
 
 /* general memory handling */
 
+#include "b1memo.h"
 #include "b.h"
 #include "bmem.h"
 
@@ -14,7 +15,7 @@ Visible ptr getmem(syze) unsigned syze; {
 	return p;
 }
 
-Visible Procedure regetmem(v, syze) ptr *v; unsigned syze; {
+Visible Procedure regetmem(ptr *v, unsigned syze) {
 	ptr p= (ptr) realloc(*v, syze);
 	if (p == Nil) memexh();
 #ifdef MEMTRACE

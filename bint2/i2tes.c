@@ -8,12 +8,13 @@
 #include "i2par.h"
 #include "i2nod.h"
 #include "i2syn.h"
+#include "i2exp.h"
 #include "b1grab.h"
 
 /* Avoid name conflict with standard header files: */
 #define relop b_relop
 
-Forward Hidden bool conjunction();
+Forward Hidden bool conjunction(txptr q, parsetree *v);
 Forward Hidden bool disjunction();
 Forward Hidden bool negation();
 Forward Hidden bool quantification();
@@ -46,7 +47,7 @@ Hidden parsetree right_test(q) txptr q; {
 	return tight_test(q);
 }
 
-Hidden bool conjunction(q, v) txptr q; parsetree *v; {
+Hidden bool conjunction(txptr q, parsetree *v) {
 	txptr ftx, ttx;
 	if (find(K_AND, q, &ftx, &ttx)) {
 		parsetree t;

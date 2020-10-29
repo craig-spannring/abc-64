@@ -3,6 +3,8 @@
 #ifndef NODE_h_1ee37b0ed918bd1fa8741727607bc805
 #define NODE_h_1ee37b0ed918bd1fa8741727607bc805
 
+#include <assert.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -30,7 +32,7 @@ extern "C" {
 #define Assert(cond) 0 /* Dummy expression */
 #else /* NDEBUG */
 #define Abort() asserr(__FILE__, __LINE__)
-#define Assert(cond) ((cond) || (Abort(), 1))
+#define Assert(cond) (assert(cond))
 #endif /* NDEBUG */
 
 node newnode();

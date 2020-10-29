@@ -26,7 +26,7 @@ Hidden char *convint(v) register integer v; {
 	bool neg = No;
 
 	if (IsSmallInt(v)) {
-		sprintf(shortbuffer, "%d", SmallIntVal(v));
+		sprintf(shortbuffer, "%d", (int)SmallIntVal(v));
 		return shortbuffer;
 	}
 

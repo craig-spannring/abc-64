@@ -121,7 +121,7 @@ Visible value size(t) value t; { /* #t */
 	}
 }
 
-Visible value item(v, num) value v, num; { /* v item num */
+Visible value item(value v, value num) {
 	value m= Vnil;
 	if (!Is_tlt(v))
 		interr(ITEM_TLT);

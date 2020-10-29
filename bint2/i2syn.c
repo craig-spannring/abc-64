@@ -187,7 +187,7 @@ Hidden bool relsearch(s, q, ftx) string s; txptr q, *ftx; {
 	return No;
 }
 
-Visible bool findrel(q, ftx) txptr q, *ftx; {
+Visible bool findrel(txptr q, txptr* ftx) {
 	txptr ttx;
 	*ftx= q;
 	if (relsearch(S_LESS, *ftx, &ttx)) *ftx= ttx;
@@ -254,7 +254,7 @@ Visible bool is_keyword(char **kw) {
 	return Yes;
 }
 
-Visible bool is_cmdname(q, name) txptr q; char **name; {
+Visible bool is_cmdname(txptr q, char** name) {
 	static char *cmdbuf;
 	char *kw;
 	int len;
@@ -346,7 +346,7 @@ Hidden  bool o_looked_ahead= No;
 
 Visible intlet cur_ilev;
 
-Visible bool ateol() {
+Visible bool ateol(void) {
 	if ((ifile == sv_ifile && i_looked_ahead)
 	    || (ifile != sv_ifile && o_looked_ahead)) return Yes;
 	skipsp(&tx);
@@ -524,14 +524,14 @@ Visible bool _join_sign() {
 	return No;
 }
 
-Visible bool _less_than_sign() {
+Visible bool _less_than_sign(void) {
 	if (_sign_is(C_LESS))
 		return !_sign_is(C_LESS) && !_sign_is(C_EQUAL)
 			&& !_sign_is(C_GREATER) ? Yes : (tx--, No);
 	return No;
 }
 
-Visible bool _greater_than_sign() {
+Visible bool _greater_than_sign(void) {
 	if (_sign_is(C_GREATER))
 		return !_sign_is(C_LESS) && !_sign_is(C_EQUAL)
 			&& !_sign_is(C_GREATER)  ? Yes : (tx--, No);

@@ -178,7 +178,7 @@ Hidden Procedure show_f_line() {
 
 #define PROBLEM		MESS(3114, "*** The problem is:")
 
-Visible Procedure syserr(m) int m; {
+Visible Procedure syserr(int m) {
 	static bool beenhere= No;
 	if (beenhere) immexit(-1);
 	beenhere= Yes;

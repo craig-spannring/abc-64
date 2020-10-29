@@ -30,6 +30,8 @@ bool allows_colon();
 
 #define MAXNBUILTIN 50	/* should be calculated by boot/mktable */
 
+    extern Visible int fwidth(string str);
+
 #ifdef __cplusplus
 }
 #endif

@@ -361,7 +361,7 @@ Hidden bool constant(q, v) txptr q; parsetree *v; {
 		    (Dig(Char(tx+1)) || !Tagmark(tx+1) )
 		   ) {
 			tx++;
-			if (Text(q) && (plus_sign || minus_sign));
+			if (Text(q) && (plus_sign || minus_sign)) { }
 			if (!digits(q)) pprerr(MESS(2102, "e not followed by exponent"));
 		}
 		text= cr_text(tx0, tx);

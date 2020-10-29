@@ -54,12 +54,12 @@
  */
 
 Visible Procedure
-evalcoord(n, jch, py, px, plevel)
-	node n;
-	int jch;
-	int *py;
-	int *px;
-	int *plevel;
+evalcoord(
+	node n,
+	int jch,
+	int *py,
+	int *px,
+	int *plevel)
 {
 	node nn;
 	int i;
@@ -147,7 +147,6 @@ fwidth(string str)
 
 Visible int
 evalwidth(node n)
-	node n;
 {
 	int w;
 	int i;

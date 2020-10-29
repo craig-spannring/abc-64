@@ -424,7 +424,7 @@ Visible Procedure replace(a, pt, k) value a, *pt, k; {
 #endif
 }
 
-Visible /*bool*/ delete(pt, k) value *pt, k; {
+Visible bool delete(value *pt, value k)  {
 	finger f; fingertip ft= f; intlet it= Itemtype(*pt);
 #ifdef BTRTRACE
 	if (btrfp) check(*pt, " (delete in)");

@@ -10,14 +10,6 @@ extern "C" {
 
     
 /* b1memo.c */
-Visible Procedure regetmem();
-Visible Procedure freemem();
-Visible Procedure bufpush();
-Visible Procedure bufcpy();
-Visible Procedure bufreinit();
-Visible Procedure bufinit();
-Visible Procedure buffree();
-Visible Procedure bufncpy();
 
 /* b1mess.c */
 Visible Procedure putmess();
@@ -38,7 +30,7 @@ Visible Procedure re_interpreter_output();
 Visible Procedure putnewline();
 Visible Procedure putstr();
 Visible Procedure doflush();
-Visible Procedure putchr();
+Visible Procedure putchr(FILE* file, char c);
 
 /* e1cell.c */
 Visible Procedure discard();
@@ -70,7 +62,9 @@ Visible Procedure init_erro();
 Visible Procedure end_erro();
 
 /* e1eval.c*/
-Visible Procedure evalcoord();
+Visible Procedure evalcoord(); 
+Visible int fwidth();
+
 
 /* e1getc.c*/
 Visible Procedure initgetc();
@@ -254,7 +248,7 @@ Visible Procedure bye();
 Visible Procedure immexit();
 Visible Procedure putserr();
 Visible Procedure flusherr();
-Visible Procedure syserr();
+Visible Procedure syserr(int);
 Visible Procedure memexh();
 Visible Procedure pprerrV();
 Visible Procedure pprerr();

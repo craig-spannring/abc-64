@@ -13,9 +13,7 @@ Visible Procedure putstr(file, s)
 	else fputs(s, file);
 }
 
-Visible Procedure putchr(file, c)
-     FILE *file;
-     char c;
+Visible Procedure putchr(FILE* file, char c)
 {
 	if (file == CONSOLE) c_putchr(c);
 	else putc(c, file);

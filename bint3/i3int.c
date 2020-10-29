@@ -44,8 +44,11 @@ Visible bool terminated;
 */
 
 Hidden value
-run(start, wantvalue) parsetree start; bool wantvalue; {
-	value u, v, w; int k, len; bool X, Y; int call_stop= call_level;
+run(parsetree start, bool wantvalue) {
+	value u, v, w;
+  int k, len;
+  bool X, Y;
+  int call_stop= call_level;
 	parsetree old_next= next;
 	/* While run can be used recursively, save some state info */
 

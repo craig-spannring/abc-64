@@ -1140,9 +1140,8 @@ emove(s, d)
 #endif /* !STRUCTASS */
 }
 
-ecopy(s, d)
-	environ *s;
-	environ *d;
+void ecopy(environ *s,
+           environ *d)
 {
 	emove(s, d);
 	VOID pathcopy(d->focus);
@@ -1153,8 +1152,7 @@ ecopy(s, d)
 #endif /* RECORDING */
 }
 
-erelease(ep)
-	environ *ep;
+void erelease(environ* ep)
 {
 	pathrelease(ep->focus);
 	release(ep->copybuffer);
