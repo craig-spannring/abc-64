@@ -242,9 +242,11 @@ Hidden Procedure getspchars() {
 			intr_char= &str[2];
 		}
 #ifdef VSUSP
-		if ((int) sgbuf.c_cc[VSUSP] != 0377) {
-			str[4]= sgbuf.c_cc[VSUSP];
-			susp_char= &str[4];
+		if  (sizeof(sgbuf.c_cc) / sizeof(sgbuf.c_cc[0]) > VSUSP) {
+			if ((int) sgbuf.c_cc[VSUSP] != 0377) {
+				str[4]= sgbuf.c_cc[VSUSP];
+				susp_char= &str[4];
+			}
 		}
 #endif
 	}

@@ -27,7 +27,6 @@
 #else
 #include <termio.h>
 #endif
-// #include "ncurses.h"
 
 #include "trm.h"
 
@@ -632,7 +631,9 @@ Hidden int setttymode() {
 		polltty.c_lflag= newtty.c_lflag;
 		polltty.c_cc[VQUIT]= newtty.c_cc[VQUIT];
 #ifdef VSUSP
-		polltty.c_cc[VSUSP]= newtty.c_cc[VSUSP];
+		if  (sizeof(polltty.c_cc) / sizeof(polltty.c_cc[0]) > VSUSP) {
+			polltty.c_cc[VSUSP]= newtty.c_cc[VSUSP];
+		}
 #endif
 		polltty.c_cc[VMIN]= 0;  /* don't block read() */
 		polltty.c_cc[VTIME]= 0; /* just give 'em chars iff available */
