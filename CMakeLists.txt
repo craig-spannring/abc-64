@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 
-find_package(Curses REQUIRED)
+# find_package(Curses REQUIRED)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -17,6 +17,7 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc)
 
 
+set(MKMACH ${CMAKE_CURRENT_BINARY_DIR}/mkmach)
 add_executable(mkmach mkmach.c)
 target_include_directories(mkmach
   PRIVATE ${mach_inc_dir}
@@ -28,15 +29,23 @@ target_link_libraries(mkmach
 add_executable(abc ${src_main})
 add_dependencies(abc mach_h_AutoGened file_h_AutoGened)
 target_compile_options(abc PRIVATE
+  ${CMAKE_C_FLAGS}
+
+  
   -Wall
+
+  #-Wno-implicit-int
+  #-Wno-implicit-function-declaration
+  #-Wno-return-type
+  -Wno-parentheses
+  
   # -Werror=int-to-pointer-cast
-  # -Wno-implicit-int
-  # -Wno-return-type
   )
 target_link_libraries(abc
   PRIVATE
   m
-  ${CURSES_LIBRARIES}
+  # ${CURSES_LIBRARIES}
+  -lncurses
   )
 target_include_directories(abc
   PRIVATE
@@ -165,7 +174,7 @@ add_custom_target(file_h_AutoGened
 
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
   COMMAND date > /tmp/making_mach_h.out
-  COMMAND mkmach > ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_
+  COMMAND ${MKMACH} > ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_
   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h.tmp_ ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files/inc/mach.h
   DEPENDS mkmach
   DEPENDS ${CMAKE_CURRENT_LIST_FILE}
