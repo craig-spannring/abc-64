@@ -19,6 +19,7 @@ answers
 ex/out
 unix/file.h
 unix/mach.h
+build32
 build/.ninja_deps
 build/.ninja_log
 build/CMakeCache.txt
