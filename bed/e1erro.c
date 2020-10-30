@@ -4,6 +4,7 @@
  * B editor -- Handle error messages.
  */
 
+#include "e1erro.h"
 #include "b.h"
 #include "bedi.h"
 #include "bmem.h"

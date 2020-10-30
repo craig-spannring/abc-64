@@ -1,6 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #include "b.h"
+#include "b1grab.h"
+#include "b1memo.h"
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"
@@ -9,8 +11,8 @@
 #include "i2nod.h"
 #include "i2gen.h" /* Must be after i2nod.h */
 #include "i2exp.h"
+#include "i2syn.h"
 #include "i3sou.h"
-#include "b1grab.h"
 #include "i2syn.h"
 
 Forward Hidden Procedure st_extend();

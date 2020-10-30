@@ -38,14 +38,14 @@ extern bool OPTunpack;
 
 Visible txptr tx, ceol;
 
-Visible Procedure skipsp(tx0) txptr *tx0; {
+Visible Procedure skipsp(txptr *tx0) {
 	while(Space(Char(*tx0))) (*tx0)++;
 }
 
 #define Keyletmark(c) \
 	(Cap(c) || Dig(c) || (c) == C_APOSTROPHE || (c) == C_QUOTE)
 
-Hidden bool keymark(ty) txptr ty; {
+Hidden bool keymark(txptr ty) {
 	if (Keyletmark(Char(ty)))
 		return Yes;
 	else if (Char(ty) == C_POINT &&

@@ -3,12 +3,16 @@
 /* Generic routines for all values */
 
 #include "b.h"
+
+#include "b1grab.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i1btr.h"
 #include "i1tlt.h"
+#include "i3err.h"
 #include "i3typ.h"
-#include "b1grab.h"
+
 
 /*ARGSUSED*/
 Visible unsigned tltsyze(type, len, nptrs)
@@ -95,6 +99,8 @@ Visible relation compare(v, w) value v, w; {
 		syserr(MESS(501, "comparison of unknown types"));
 		/*NOTREACHED*/
 	}
+  // should never get her 
+  return (relation)0; 
 }
 
 /* Used for set'random. Needs to be rewritten so that for small changes in v */

@@ -23,17 +23,7 @@ extern "C" {
 
 /* e1edoc.c */
 
-/* e1erro.c*/
-Visible Procedure ederr();
-Visible Procedure ederrS();
-Visible Procedure ederrC();
-Visible Procedure edmessage();
-Visible Procedure asserr();
-Visible Procedure debug();
-Visible Procedure stsline();
-Visible Procedure enderro();
-Visible Procedure init_erro();
-Visible Procedure end_erro();
+/* e1erro.c */
 
 /* e1eval.c*/
 Visible Procedure evalcoord(); 
