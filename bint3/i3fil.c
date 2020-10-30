@@ -2,6 +2,7 @@
 
 /* Facilities supplied by the file system */
 
+#include "i3fil.h"
 #include "b.h"
 #include "bmem.h"
 #include "bint.h"
@@ -52,7 +53,7 @@ Visible Procedure f_close(usrfile) FILE *usrfile; {
 		interr(MESS(3700, "write error (disk full?)"));
 }
 
-Visible bool f_interactive(file) FILE *file; {
+Visible bool f_interactive(FILE *file) {
 	return isatty(fileno(file));
 }
 

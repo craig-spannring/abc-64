@@ -128,7 +128,7 @@ Visible value* envassoc(t, ke) value t, ke; {
 	return adrassoc(t, ke);
 }
 
-Visible bool in_env(tab, ke, aa) value tab, ke, **aa; {
+Visible bool in_env(value tab, value ke, value **aa) {
 	/* IF ke in keys tab:
 		PUT tab[ke] IN aa
 		SUCCEED

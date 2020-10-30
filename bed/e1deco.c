@@ -4,6 +4,7 @@
  * B editor -- Delete and copy commands.
  */
 
+#include "e1deco.h"
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
@@ -480,8 +481,7 @@ delhole(ep)
  */
 
 Visible Procedure
-delfocus(pp)
-	path *pp;
+delfocus(path *pp)
 {
 	path pa = parent(*pp);
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;

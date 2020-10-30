@@ -11,6 +11,7 @@
 #include "i2par.h"
 #include "i3cen.h"
 #include "i3env.h"
+#include "i3err.h"
 #include "i3int.h"
 #include "i3sou.h"
 #include "b1grab.h"

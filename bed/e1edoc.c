@@ -1,5 +1,6 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
+#include "e1edoc.h"
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
@@ -537,8 +538,7 @@ execute(ep, cmd)
  */
 
 Visible Procedure
-clrenv(ep)
-	environ *ep;
+clrenv(environ *ep)
 {
 	ep->focus = newpath(NilPath, gram(Optional), 1);
 	ep->mode = WHOLE;
@@ -563,8 +563,7 @@ clrenv(ep)
  */
 
 Visible Procedure
-higher(ep)
-	environ *ep;
+higher(environ *ep)
 {
 	path p = ep->focus;
 	int pl = 0;
@@ -586,8 +585,7 @@ higher(ep)
  */
 
 Visible Procedure
-dbmess(ep)
-	environ *ep;
+dbmess(environ *ep)
 {
 #ifndef SMALLSYS
 	char stuff[80];

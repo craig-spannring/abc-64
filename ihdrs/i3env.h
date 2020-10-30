@@ -34,7 +34,7 @@ typedef struct {
 #define Rep '+'
 #define Voi ' '
 
-value* envassoc();
+extern value* envassoc();
 
 extern env curnv; extern value *bndtgs;
 extern literal cntxt, resexp; extern value howtoname;
@@ -52,6 +52,7 @@ extern env prmnv;
 extern parsetree curline;
 extern value curlino;
 
+extern Visible bool in_env(value tab, value ke, value **aa);
 
 #ifdef __cplusplus
 }

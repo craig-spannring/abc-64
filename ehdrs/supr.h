@@ -3,6 +3,8 @@
 #ifndef SUPR_h_8bf2d693af07fb0b54c5195c572af85a
 #define SUPR_h_8bf2d693af07fb0b54c5195c572af85a
 
+#include "bedi.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

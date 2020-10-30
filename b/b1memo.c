@@ -6,7 +6,7 @@
 #include "b.h"
 #include "bmem.h"
 
-Visible ptr getmem(syze) unsigned syze; {
+Visible ptr getmem(unsigned syze) {
 	ptr p= (ptr) malloc(MALLOC_ARG syze);
 	if (p == Nil) memexh();
 #ifdef MEMTRACE
@@ -32,7 +32,7 @@ Visible Procedure freemem(ptr p) {
 	free((char *)p);
 }
 
-Visible ptr savestr(s) char *s; {
+Visible ptr savestr(char *s) {
 	ptr p= (ptr) getmem((unsigned) strlen(s) + 1);
 	strcpy(p, s);
 	return p;
@@ -43,13 +43,13 @@ Visible ptr savestr(s) char *s; {
 /*
  * to fix memory that surely won't be free'd
  */
-Visible Procedure fixmem(p) ptr p; {
+Visible Procedure fixmem(ptr p) {
 	writetrace(F_FREE, p, 0);
 }
 
 extern FILE *memfp;	/* set in ??main.c */
 
-writetrace(flag, p, size) int flag; ptr *p; unsigned size; {
+writetrace(int flag, ptr *p, unsigned size) {
 	address *frameptr;
 	
 	if (memfp == NULL)
@@ -91,7 +91,7 @@ Visible Procedure bufreinit(bufadm *bp) {
 	bufinit(bp);
 }
 
-Visible Procedure bufgrow(bp) bufadm *bp; {
+Visible Procedure bufgrow(bufadm *bp) {
 	int n_ptr= bp->pbuf - bp->buf;
 	int syze= (bp->end - bp->buf) + BUFINCR;
 	

@@ -18,7 +18,9 @@ extern "C" {
 
     extern Visible bool _less_than_sign(void);
     extern Visible bool _greater_than_sign(void);
-    
+
+    extern Visible bool is_cmdname(txptr q, char** name);
+
 #ifdef __cplusplus
 }
 #endif

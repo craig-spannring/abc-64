@@ -393,15 +393,15 @@ default:
 
 /* External interfaces: */
 
-Visible Procedure execthread(start) parsetree start; {
+Visible Procedure execthread(parsetree start) {
 	VOID run(start, No);
 }
 
-Visible value evalthread(start) parsetree start; {
+Visible value evalthread(parsetree start) {
 	return run(start, Yes);
 }
 
-Hidden Procedure jumptoend() {
+Hidden Procedure jumptoend(void) {
 	while (Thread2(pc) != NilTree)
 		pc= Thread2(pc);
 	next= Thread(pc);

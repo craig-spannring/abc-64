@@ -20,13 +20,8 @@ extern "C" {
 /* e1comm.c */
 
 /* e1deco.c*/
-Visible Procedure delfocus();
 
 /* e1edoc.c */
-Visible Procedure dumpev();
-Visible Procedure clrenv();
-Visible Procedure higher();
-Visible Procedure dbmess();
 
 /* e1erro.c*/
 Visible Procedure ederr();
