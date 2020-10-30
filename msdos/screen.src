@@ -200,8 +200,8 @@ int getline(buf, lim)		/* get line into buf of length lim */
 char buf[];			/* return length, including '\n' */
 int lim;			/*  length==0: EOF */
 {				/*  length==lim && buf[lim]!='\n': overflow */
-	register char *s;
-	register int c;
+	char *s;
+	int c;
 
 	s = buf;
 	while (--lim > 0 && (c = getchar()) != EOF && c != '\n') {

@@ -97,7 +97,7 @@ Hidden struct class classes[]= {
 #define NCLASSES (sizeof classes / sizeof classes[0])
 
 Hidden char *filesuffix(type) literal type; {
-	register struct class *cp;
+	struct class *cp;
 
 	for (cp= classes; cp < &classes[NCLASSES]; ++cp) {
 		if (type == cp->type)

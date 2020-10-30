@@ -38,8 +38,8 @@ main(argc, argv)
 	char **argv;
 {
 	char buf[100], *rindex();
-	register char *cp, *rp;
-	register FILE *fp;
+	char *cp, *rp;
+	FILE *fp;
 	int errors = 0;
 	int oflag= 0;
 
@@ -147,9 +147,9 @@ printobjs(argc, argv)
 
 #ifdef MSDOS
 lowercase(s)
-	register char *s;
+	char *s;
 {
-	register char c;
+	char c;
 
 	for (; c= *s; ++s) {
 		if (isupper(c))
@@ -160,7 +160,7 @@ lowercase(s)
 
 int
 is_space(c)
-	register char c;
+	char c;
 {
 	return isspace(c);
 }

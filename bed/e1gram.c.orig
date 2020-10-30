@@ -25,10 +25,10 @@ Forward Hidden Procedure makesugg();
 
 Visible bool
 isinclass(sym, ci)
-	register int sym;
+	int sym;
 	struct classinfo *ci;
 {
-	register classptr cp;
+	classptr cp;
 
 	Assert(ci && ci->c_class);
 	if (sym == Hole)
@@ -53,9 +53,9 @@ isinclass(sym, ci)
 
 Visible string *
 noderepr(n)
-	register node n;
+	node n;
 {
-	register int sym;
+	int sym;
 
 	if (n && Is_etext(n)) {
 		static string buf[2];
@@ -82,7 +82,7 @@ Visible Procedure endnoderepr() { /* hack to free noderepr static store */
 
 Visible node
 gram(sym)
-	register int sym;
+	int sym;
 {
 	Assert(0 <= sym && sym < TABLEN);
 	return table[sym].r_node;
@@ -114,10 +114,10 @@ symname(sym)
 
 Visible int
 nametosym(str)
-	register string str;
+	string str;
 {
-	register int sym;
-	register string name;
+	int sym;
+	string name;
 
 	for (sym = 0; sym < TABLEN; ++sym) {
 		name = table[sym].r_name;
@@ -135,12 +135,12 @@ nametosym(str)
 
 Visible bool
 allowed(p, sym)
-	register path p;
-	register int sym;
+	path p;
+	int sym;
 {
-	register path pa = parent(p);
-	register int ich = ichild(p);
-	register int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
+	path pa = parent(p);
+	int ich = ichild(p);
+	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 
 	Assert(sympa >= 0 && sympa < TABLEN && ich > 0 && ich <= MAXCHILD);
 	return isinclass(sym, table[sympa].r_class[ich-1]);
@@ -155,10 +155,10 @@ allowed(p, sym)
 Visible Procedure
 initgram()
 {
-	register int sym;
-	register int nch;
-	register struct classinfo **cp;
-	register struct classinfo *sp;
+	int sym;
+	int nch;
+	struct classinfo **cp;
+	struct classinfo *sp;
 	node ch[MAXCHILD];
 
 	/* Set the node pointers in the table and check the representations.
@@ -183,7 +183,7 @@ initgram()
 
 Hidden Procedure
 fix_refcnt(n)
-	register node n;
+	node n;
 {
 	Assert(n->refcnt > 0);
 	n->refcnt = Maxrefcnt;
@@ -200,7 +200,7 @@ Visible Procedure
 initclasses()
 {
 #ifdef USERSUGG
-	register struct table *tp;
+	struct table *tp;
 	
 	tp= &table[Rootsymbol];
 	Assert(isinclass(Suggestion, tp->r_class[0]));
@@ -259,7 +259,7 @@ makesugg(cp)
 
 Visible Procedure
 setroot(isym) int isym; {	/* symbols defined in tabl.h */
-	register int ich;
+	int ich;
 
 	table[Rootsymbol].r_name = table[isym].r_name;
 	for (ich = 0; ich < MAXCHILD; ++ich) {
@@ -299,10 +299,10 @@ Hidden struct classinfo sublists[] = {Asublists};
 
 Visible bool
 samelevel(sym, sym1)
-	register int sym;
-	register int sym1;
+	int sym;
+	int sym1;
 {
-	register int zzz;
+	int zzz;
 
 	if (sym1 == sym)
 		return Yes;
@@ -326,10 +326,10 @@ samelevel(sym, sym1)
 
 Visible bool
 issublist(sym)
-	register int sym;
+	int sym;
 {
-	register int i;
-	register string repr;
+	int i;
+	string repr;
 
 	Assert(sym < TABLEN);
 	if (isinclass(sym, sublists))

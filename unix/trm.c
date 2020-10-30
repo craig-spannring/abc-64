@@ -180,10 +180,10 @@ Hidden char strcapnames[] =
 Hidden char flagcaps[NFLAGS];
 Hidden char flagnames[]= "amdadbinmimsxsbshcxn";
 
-Hidden Procedure getcaps(parea) register char **parea; {
-	register char *capname;
-	register char **capvar;
-	register char *flagvar;
+Hidden Procedure getcaps(parea) char **parea; {
+	char *capname;
+	char **capvar;
+	char *flagvar;
 
 	for (capname= flagnames, flagvar= flagcaps;
 			*capname != '\0'; capname += 2, ++flagvar)
@@ -329,7 +329,7 @@ Hidden bool canscroll= Yes;
  * Return 0 if all well, error code if in trouble.
  */
 Visible int trmstart(int *plines, int *pcols, int *pflags) {
-	register int err;
+	int err;
 
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmstart(&li, &co, &fl);\n");
@@ -391,7 +391,7 @@ Visible Procedure trmend() {
  * the screen, so a hard redraw will not be optimised to heaven.
  */
 Visible Procedure trmundefined() {
-	register int y, x;
+	int y, x;
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmundefined();\n");
 #endif
@@ -679,7 +679,7 @@ Hidden Procedure resetttymode() {
 }
 
 Hidden int start_trm() {
-	register int y;
+	int y;
 #ifdef TIOCGWINSZ
 	struct winsize win;
 
@@ -872,7 +872,7 @@ Hidden bool get_pos(format, py, px) string format; int *py, *px; {
  * when rewriting linedata[y] from x_from upto x_to
  */
 Hidden bool rewrite_ok(y, xfrom, xto) int y, xfrom, xto; {
-	register char *plnyx, *pmdyx, *plnyto;
+	char *plnyx, *pmdyx, *plnyto;
 	
 	if (xto > lenline[y])
 		return No;
@@ -1030,7 +1030,7 @@ Hidden Procedure move(y, x) int y, x; {
  */
 Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, string mode)
 {
-	register int y;
+	int y;
 	int x, len, lendata, space;
 
 #ifdef VTRMTRACE
@@ -1110,8 +1110,8 @@ Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, str
  *	d2 maybe less than 0.
  */
 Hidden void put_line(y, xskip, data, mode, len) int y, xskip; string data; string mode; int len; {
-	register char *op, *oq, *mp;
-	register char *np, *nq, *nend, *mo;
+	char *op, *oq, *mp;
+	char *np, *nq, *nend, *mo;
 	char *bp, *bq1, *p, *q;
 	int m1, m2, od, nd, delta, dd, d1, nb, d2;
 	bool skipping;
@@ -1345,8 +1345,8 @@ Hidden Procedure standend() {
 }
 
 Hidden Procedure put_str(data, mode, n, inserting) char *data; char *mode; int n; bool inserting; {
-	register char ch, mo;
-	register short so;
+	char ch, mo;
+	short so;
 	char *ln_y_x, *ln_y_end;
 	
 	so = so_mode;
@@ -1420,7 +1420,7 @@ Hidden Procedure put_c(ch, mo) char ch; char mo; {
 }
 
 Hidden Procedure clear_lines(yfirst, ylast) int yfirst, ylast; {
-	register int y;
+	int y;
 	
 	if (!has_xs && so_mode != Off)
 		standend();
@@ -1465,7 +1465,7 @@ Hidden Procedure clr_to_eol() {
 }
 
 Hidden Procedure set_blanks(y, xfrom, xto) int y, xfrom, xto; {
-	register int x;
+	int x;
 	
 	for (x = xfrom; x < xto; x++) {
 		linedata[y][x] = ' '; 
@@ -1533,7 +1533,7 @@ Visible Procedure trmscrollup(int yfirst, int ylast, int by) {
 }
 
 Hidden Procedure scr_lines(yfrom, yto, n, dy) int yfrom, yto, n, dy; {
-	register int y;
+	int y;
 	char *savedata;
 	char *savemode;
 	
@@ -1575,7 +1575,7 @@ Hidden Procedure scr1down(yfirst, ylast, n) int yfirst, ylast, n; {
 }
 
 
-Hidden Procedure addlines(n) register int n; {
+Hidden Procedure addlines(n) int n; {
 	if (par_al_str && n > 1)
 			Putstr(tgoto(par_al_str, n, n));
 	else {
@@ -1585,7 +1585,7 @@ Hidden Procedure addlines(n) register int n; {
 }
 
 
-Hidden Procedure dellines(n) register int n; {
+Hidden Procedure dellines(n) int n; {
 	if (par_dl_str && n > 1)
 		Putstr(tgoto(par_dl_str, n, n));
 	else {
@@ -1642,7 +1642,7 @@ Hidden Procedure lf_scroll(yto, by)
      int yto;
      int by;
 {
-	register int n = by;
+	int n = by;
 
 	move(lines-1, 0);
 	while (n-- > 0) {

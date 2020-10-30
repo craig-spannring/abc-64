@@ -227,7 +227,7 @@ main(argc, argv)
 Hidden char *StrToLower(s)
      char *s;
 {
-	register char *p;
+	char *p;
 
 	for(p = s; *p; p++) {
 		if (isupper(*p)) *p=_tolower(*p);

@@ -72,7 +72,7 @@ Visible Procedure unhilite() {
 
 Visible int inchar()
 {
-	register int c;
+	int c;
 	menuchar *m;
 	
 	for (;;) {

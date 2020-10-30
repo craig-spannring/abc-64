@@ -86,7 +86,7 @@ Visible rational mk_rat(x, y, len, simplify)
 #define N(u) Numerator(u)
 #define D(u) Denominator(u)
 
-Visible rational rat_sum(u, v) register rational u, v; {
+Visible rational rat_sum(u, v) rational u, v; {
 	integer t1, t2, t3, t4;
 	rational a;
 
@@ -102,7 +102,7 @@ Visible rational rat_sum(u, v) register rational u, v; {
 }
 
 
-Visible rational rat_diff(u, v) register rational u, v; {
+Visible rational rat_diff(u, v) rational u, v; {
 	integer t1, t2, t3, t4;
 	rational a;
 
@@ -118,7 +118,7 @@ Visible rational rat_diff(u, v) register rational u, v; {
 }
 
 
-Visible rational rat_prod(u, v) register rational u, v; {
+Visible rational rat_prod(u, v) rational u, v; {
 	integer t1, t2;
 	rational a;
 
@@ -131,7 +131,7 @@ Visible rational rat_prod(u, v) register rational u, v; {
 }
 
 
-Visible rational rat_quot(u, v) register rational u, v; {
+Visible rational rat_quot(u, v) rational u, v; {
 	integer t1, t2;
 	rational a;
 
@@ -149,8 +149,8 @@ Visible rational rat_quot(u, v) register rational u, v; {
 }
 
 
-Visible rational rat_neg(u) register rational u; {
-	register rational a;
+Visible rational rat_neg(u) rational u; {
+	rational a;
 
 	/* Avoid a real subtraction from zero */
 
@@ -240,7 +240,7 @@ Visible rational rat_power(a, n) rational a; integer n; {
 
 /* Compare two rational numbers */
 
-Visible relation rat_comp(u, v) register rational u, v; {
+Visible relation rat_comp(u, v) rational u, v; {
 	int sd, su, sv;
 	integer nu, nv;
 

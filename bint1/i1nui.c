@@ -50,7 +50,7 @@
  */
 
 Visible integer int_canon(v) integer v; {
-	register int i;
+	int i;
 
 	if (IsSmallInt(v)) return v;
 
@@ -212,7 +212,7 @@ Visible integer int_neg(u) integer u; {
 
 Visible relation int_comp(v, w) integer v, w; {
 	int sv, sw;
-	register int i;
+	int i;
 	struct integer vv, ww;
 
 	/* 1. Compare pointers and equal SmallInts */
@@ -254,9 +254,9 @@ Visible relation int_comp(v, w) integer v, w; {
 #define GRAN 8	/* Granularity used when requesting more storage */
 		/* MOVE TO MEM! */
 Visible integer mk_int(x) double x; {
-	register integer a;
+	integer a;
 	integer b;
-	register int i, j;
+	int i, j;
 	int negate;
 
 	if (MinSmallInt <= x && x <= MaxSmallInt)

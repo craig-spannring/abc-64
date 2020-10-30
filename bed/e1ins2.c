@@ -41,7 +41,7 @@ Hidden bool quot_in_tag(c, ep) int c; environ *ep; {
 
 Visible bool
 ins_char(ep, c, alt_c)
-	register environ *ep;
+	environ *ep;
 	int c;
 	int alt_c;
 {
@@ -122,10 +122,10 @@ ins_char(ep, c, alt_c)
 
 Visible bool
 ins_newline(ep, reading_file)
-	register environ *ep; bool reading_file;
+	environ *ep; bool reading_file;
 {
-	register node n;
-	register int sym;
+	node n;
+	int sym;
 	auto bool mayindent;
 
 	ep->changed = Yes;
@@ -220,11 +220,11 @@ ins_newline(ep, reading_file)
 
 Hidden bool
 fiddle(ep, pmayindent, reading_file)
-	register environ *ep;
+	environ *ep;
 	bool *pmayindent;
 	bool reading_file;
 {
-	register int level;
+	int level;
 	auto string str = "";
 
 	higher(ep);
@@ -307,12 +307,12 @@ hackhack(ep)
 
 Hidden bool
 atdedent(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register path pa;
-	register node npa;
-	register int i;
-	register int sym = symbol(tree(ep->focus));
+	path pa;
+	node npa;
+	int i;
+	int sym = symbol(tree(ep->focus));
 
 	if (sym != Hole && sym != Optional)
 		return No;
@@ -351,11 +351,11 @@ atdedent(ep)
 
 Hidden bool
 nexthole(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register int ich;
-	register string repr;
+	node n;
+	int ich;
+	string repr;
 
 	do {
 		ich = ichild(ep->focus);

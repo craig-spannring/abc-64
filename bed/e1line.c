@@ -32,12 +32,12 @@ eqlines(n1, n2)
 	node n1;
 	node n2;
 {
-	register node nn1;
-	register node nn2;
-	register int w1;
-	register int w2;
-	register int nch;
-	register int i;
+	node nn1;
+	node nn2;
+	int w1;
+	int w2;
+	int nch;
+	int i;
 
 	if (n1 == n2)
 		return Yes;
@@ -76,12 +76,12 @@ Visible int
 linelen(n)
 	node n;
 {
-	register node nn;
-	register string *rp = noderepr(n);
-	register int w;
-	register int nch = nchildren(n);
-	register int i;
-	register int len = fwidth(rp[0]);
+	node nn;
+	string *rp = noderepr(n);
+	int w;
+	int nch = nchildren(n);
+	int i;
+	int len = fwidth(rp[0]);
 
 	if (len < 0)
 		len = 0;
@@ -113,13 +113,13 @@ linelen(n)
 
 Visible bool
 nextline(pp)
-	register path *pp;
+	path *pp;
 {
-	register node n;
-	register node nn;
-	register int w;
-	register int nch;
-	register int i = 0;
+	node n;
+	node nn;
+	int w;
+	int nch;
+	int i = 0;
 
 	for (;;) {
 		n = tree(*pp);
@@ -154,9 +154,9 @@ nextline(pp)
 
 Visible int
 lineno(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int y;
+	int y;
 
 	y = -focoffset(ep);
 	if (y < 0)
@@ -190,14 +190,14 @@ colno(ep)
 
 Visible Procedure
 oneline(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
+	node n;
 	node nn;
-	register string *rp;
-	register int s1;
-	register int s2;
-	register int len;
+	string *rp;
+	int s1;
+	int s2;
+	int len;
 	int ich;
 	int nch;
 

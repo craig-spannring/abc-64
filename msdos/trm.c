@@ -304,7 +304,7 @@ Hidden string skip(s, pat) string s, pat; {
 /* initialise internal administration */
 
 Hidden int start_trm() {
-	register int y;
+	int y;
 
 	if (linedata == NULL) {
 		if ((linedata = (char**) malloc(MALLOC_ARG(lines * sizeof(char*)))) == NULL)
@@ -362,7 +362,7 @@ Visible Procedure trmend() {
  */
 
 Visible Procedure trmundefined() {
-	register int y, x;
+	int y, x;
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmundefined();\n");
 #endif
@@ -431,9 +431,9 @@ Visible Procedure trmsense(py, px) int *py, *px; {
  * STANDOUT must be put in inverse video.
  */
 Visible Procedure trmputdata(yfirst, ylast, indent, data, mode)
-	int yfirst, ylast; register int indent;
-	register string data; string mode; {
-	register int y;
+	int yfirst, ylast; int indent;
+	string data; string mode; {
+	int y;
 	int x, len, lendata, space;
 
 #ifdef VTRMTRACE
@@ -502,7 +502,7 @@ Hidden Procedure put_line(y, xskip, data, mode, len)
      string mode;
      int len;
 {
-	register char *op, *oq, *mp;
+	char *op, *oq, *mp;
 	char *np, *nq, *mo;
 	int m1, od, nd, delta;
 
@@ -553,8 +553,8 @@ Hidden Procedure put_line(y, xskip, data, mode, len)
  * Scrolling (part of) the screen up (or down, dy<0).
  */
 
-Visible Procedure trmscrollup(yfirst, ylast, by) register int yfirst;
-		register int ylast; register int by; {
+Visible Procedure trmscrollup(yfirst, ylast, by) int yfirst;
+		int ylast; register int by; {
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmscrollup(%d, %d, %d);\n", yfirst, ylast, by);
 #endif
@@ -679,7 +679,7 @@ Hidden get_cols() {
  */
 
 Hidden Procedure put_str(data, mode, n) char *data, *mode; int n; {
-	register char c, mo, so;
+	char c, mo, so;
 
 	so = so_mode;
 	if (scr_mode == BIOS) {
@@ -772,7 +772,7 @@ Hidden Procedure standend() {
 }
 
 Hidden Procedure clear_lines(yfirst, ylast) int yfirst, ylast; {
-	register int y;
+	int y;
 
 	if (scr_mode == BIOS) {
 		regs.h.al = 0;	/* scroll with al = 0 means blank window */
@@ -843,7 +843,7 @@ Hidden Procedure biosscrollup(yfirst, ylast, by) int yfirst, ylast, by; {
 /* Reset internal administration accordingly */
 
 Hidden Procedure scr_lines(yfrom, yto, n, dy) int yfrom, yto, n, dy; {
-	register int y, x;
+	int y, x;
 	char *savedata;
 	char *savemode;
 
@@ -866,7 +866,7 @@ Hidden Procedure scr_lines(yfrom, yto, n, dy) int yfrom, yto, n, dy; {
 }
 
 Hidden Procedure lf_scroll(yto, by) int yto, by; {
-	register int n = by;
+	int n = by;
 
 	move(lines-1, 0);
 	while (n-- > 0) {

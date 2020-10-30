@@ -19,13 +19,13 @@
 
 Visible bool
 widen(ep, deleting)
-	register environ *ep;
+	environ *ep;
 	bool deleting;
 {
-	register node n;
-	register node nn;
-	register int sym;
-	register int ich;
+	node n;
+	node nn;
+	int sym;
+	int ich;
 
 	higher(ep);
 	grow(ep, deleting);
@@ -148,12 +148,12 @@ widen(ep, deleting)
 
 Visible bool
 narrow(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register int sym;
-	register int nch;
-	register string repr;
+	node n;
+	int sym;
+	int nch;
+	string repr;
 	
 	higher(ep);
 
@@ -212,12 +212,12 @@ narrow(ep)
 
 Visible bool
 extend(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register int i;
-	register int len;
-	register int s1save;
+	node n;
+	int i;
+	int len;
+	int s1save;
 	int sym;
 
 	grow(ep, No);
@@ -293,12 +293,12 @@ extend(ep)
 
 Visible bool
 rnarrow(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register node nn;
-	register int i;
-	register int sym;
+	node n;
+	node nn;
+	int i;
+	int sym;
 	
 	higher(ep);
 

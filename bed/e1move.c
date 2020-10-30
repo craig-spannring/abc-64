@@ -244,14 +244,14 @@ ritearrow(ep)
 
 Hidden bool
 nextchar(ep, direction)
-	register environ *ep;
-	register int direction;
+	environ *ep;
+	int direction;
 {
-	register int ich;
-	register int nch;
-	register node n;
+	int ich;
+	int nch;
+	node n;
 	node n1;
-	register int len;
+	int len;
 	string *rp;
 
 	Assert(ep->mode == SUBSET);
@@ -343,9 +343,9 @@ downarrow(ep)
 
 Visible bool
 upline(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int y;
+	int y;
 
 	y = lineno(ep);
 	if (y <= 0)
@@ -358,9 +358,9 @@ upline(ep)
 
 Visible bool
 downline(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int w;
+	int w;
 
 	if (!parent(ep->focus) && ep->mode == ATEND)
 		return No; /* Superfluous? */

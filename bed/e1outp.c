@@ -42,10 +42,10 @@ Forward Hidden bool chismash();
 
 Visible Procedure
 savefocus(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int sym;
-	register int w;
+	int sym;
+	int w;
 
 	realvhole = No;
 	thefocus = Nnil;
@@ -107,10 +107,10 @@ savefocus(ep)
 
 Visible Procedure
 setfocus(tops)
-	register cell *tops;
+	cell *tops;
 {
-	register cell *p;
-	register int i;
+	cell *p;
+	int i;
 
 	for (p = tops, i = 0; i < yfocus; ++i, p = p->c_link) {
 		if (!p) {
@@ -160,19 +160,19 @@ endactupdate()
 
 Visible Procedure
 outline(p, lineno)
-	register cell *p;
-	register int lineno;
+	cell *p;
+	int lineno;
 {
-	register node n = p->c_data;
-	register int w = nodewidth(n);
-	register int len=  p->c_newindent + 4 + (w < 0 ? linelen(n) : w);
+	node n = p->c_data;
+	int w = nodewidth(n);
+	int len=  p->c_newindent + 4 + (w < 0 ? linelen(n) : w);
 			/* some 4 extra for spflag and vhole */
-	register string buf;
+	string buf;
 	auto string bp;
-	register string mode;
+	string mode;
 	auto string mp;
-	register int i;
-	register int endarea = lineno+Space(p)-1;
+	int i;
+	int endarea = lineno+Space(p)-1;
 
 	buf= (string) getmem((unsigned) len);
 	bp= buf;
@@ -242,12 +242,12 @@ focsmash(pbuf, pmod, n)
 {
 	value v;
 	string str;
-	register string *rp;
-	register int maxs2;
-	register int i;
-	register bool ok;
-	register int j;
-	register int mask;
+	string *rp;
+	int maxs2;
+	int i;
+	bool ok;
+	int j;
+	int mask;
 
 	switch (where->mode) {
 
@@ -370,14 +370,14 @@ focsmash(pbuf, pmod, n)
 
 Hidden Procedure
 smash(pbuf, pmod, n, mask)
-	register string *pbuf;
-	register string *pmod;
-	register node n;
-	register int mask;
+	string *pbuf;
+	string *pmod;
+	node n;
+	int mask;
 {
-	register string *rp;
-	register int i;
-	register int nch;
+	string *rp;
+	int i;
+	int nch;
 
 	rp = noderepr(n);
 	strsmash(pbuf, pmod, rp[0], mask);
@@ -391,10 +391,10 @@ smash(pbuf, pmod, n, mask)
 
 Hidden Procedure
 strsmash(pbuf, pmod, str, mask)
-	register string *pbuf;
-	register string *pmod;
-	register string str;
-	register int mask;
+	string *pbuf;
+	string *pmod;
+	string str;
+	int mask;
 {
 	if (!str)
 		return;
@@ -408,11 +408,11 @@ strsmash(pbuf, pmod, str, mask)
 
 Hidden Procedure
 subsmash(pbuf, pmod, str, len, mask)
-	register string *pbuf;
-	register string *pmod;
-	register string str;
-	register int len;
-	register int mask;
+	string *pbuf;
+	string *pmod;
+	string str;
+	int len;
+	int mask;
 {
 	if (!str)
 		return;
@@ -432,13 +432,13 @@ subsmash(pbuf, pmod, str, len, mask)
 
 Hidden bool
 chismash(pbuf, pmod, n, i, mask)
-	register string *pbuf;
-	register string *pmod;
-	register node n;
-	register int i;
+	string *pbuf;
+	string *pmod;
+	node n;
+	int i;
 {
-	register node nn = child(n, i);
-	register int w;
+	node nn = child(n, i);
+	int w;
 
 	if (Is_etext(nn)) {
 		strsmash(pbuf, pmod, e_strval((value)nn), mask);

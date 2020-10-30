@@ -18,11 +18,11 @@
    The character string is overwritten on each next call.
    It assumes BASE is a power of 10. */
 
-Hidden char *convint(v) register integer v; {
+Hidden char *convint(v)  integer v; {
 	static char *buffer, shortbuffer[tenlogBASE+3];
 	static char fmt[10];
-	register char *cp;
-	register int i;
+	char *cp;
+	int i;
 	bool neg = No;
 
 	if (IsSmallInt(v)) {
@@ -112,16 +112,16 @@ Hidden int digits_in(v) value v; {
  * and does not normalize a rational result sometimes.
  */
 
-Visible string convnum(v) register value v; {
+Visible string convnum(v)  value v; {
 	value r, re, rre;
 	int rndsize= 0;
 	int num;
 	int ndigits;
 	int precision= MAXDIGITS;
-	register string txt;
+	string txt;
 	int txtlen;
 	static char *numbuf;
-	register char *str;
+	char *str;
 	bool rem; /* remainder */
 	bool rndflag;
 	int buflen= MAXNUMSIZE;
@@ -249,12 +249,12 @@ Visible string convnum(v) register value v; {
    approximate.
 */
 
-Visible value numconst(v) register value v; {
+Visible value numconst(v)  value v; {
 	string txt, txt0;
-	register string tp;
-	register int numdigs, fraclen;
+	string tp;
+	int numdigs, fraclen;
 	integer a;
-	register digit accu;
+	digit accu;
 	value c;
 
 	txt= sstrval(v);

@@ -48,7 +48,7 @@ stsline(totlines, topline, scrlines, copybuffer, recording)
 	value copybuffer;
 	bool recording;
 {
-	register string bp;
+	string bp;
 	char *msg_mode= NULL;
 
 	if (ringbell)
@@ -106,7 +106,7 @@ addscrollbar(totlines, topline, scrlines)
 	int scrlines;
 {
 	int endline;
-	register int i;
+	int i;
 
 	if (winstart > 0 || scrlines > totlines)
 		return 0; /* Nothing outside screen */
@@ -245,7 +245,7 @@ enderro()
 }
 
 Visible Procedure init_erro() {
-	register int i;
+	int i;
 
 	msgbuffer= (char*) getmem(MAXMSG);
 	msgbuffer[0]= '\0';

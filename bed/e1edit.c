@@ -36,15 +36,15 @@ Forward Hidden bool editindentation();
 
 Visible bool
 readfile(ep, filename, line, creating)
-	register environ *ep;
+	environ *ep;
 	string filename;
 	int line;
 	bool creating;
 {
 
 	int lines = 0;
-	register FILE *fp = fopen(filename, "r");
-	register int c;
+	FILE *fp = fopen(filename, "r");
+	int c;
 	string buf;
 	auto string cp;
 	auto queue q = Qnil;
@@ -113,11 +113,11 @@ readfile(ep, filename, line, creating)
 
 Hidden bool
 editindentation(ep, fp)
-	register environ *ep;
-	register FILE *fp;
+	environ *ep;
+	FILE *fp;
 {
-	register int ind= 0;
-	register int c;
+	int ind= 0;
+	int c;
 	
 	for (;;) {
 		c= getc(fp);
@@ -179,9 +179,9 @@ editindentation(ep, fp)
 
 Hidden int
 skipspace(fp)
-	register FILE *fp;
+	FILE *fp;
 {
-	register int c;
+	int c;
 
 	do {
 		c = getc(fp);
@@ -197,13 +197,13 @@ skipspace(fp)
 
 Hidden value
 readtext(fp, quote)
-	register FILE *fp;
-	register char quote;
+	FILE *fp;
+	char quote;
 {
 	auto value v = Vnil;
 	char buf[BUFSIZ];
-	register string cp = buf;
-	register int c;
+	string cp = buf;
+	int c;
 	auto int i;
 	value w;
 
@@ -279,11 +279,11 @@ readtext(fp, quote)
 
 Hidden int
 readsym(fp)
-	register FILE *fp;
+	FILE *fp;
 {
-	register int c;
+	int c;
 	char buf[100];
-	register string bufp;
+	string bufp;
 
 	for (bufp = buf; ; ++bufp) {
 		c = getc(fp);
@@ -386,9 +386,9 @@ Visible value
 editqueue(filename)
 	string filename;
 {
-	register FILE *fp = fopen(filename, "r");
+	FILE *fp = fopen(filename, "r");
 	auto queue q = Qnil;
-	register node n;
+	node n;
 
 	if (!fp)
 		return Vnil;

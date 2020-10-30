@@ -21,7 +21,7 @@
 
 Hidden unsigned getsyze(type, len, pnptrs) literal type; intlet len;
 		int *pnptrs; {
-	register unsigned syze= 0;
+	unsigned syze= 0;
 	int nptrs= 0;
 	switch (type) {
 		case Tex:
@@ -119,8 +119,8 @@ Visible Procedure release(value v) {
 
 Hidden value ccopy(v) value v; {
 	literal type= v->type; intlet len; value w;
-	int nptrs; unsigned syze; register string from, to, end;
-	register value *pp, *pend;
+	int nptrs; unsigned syze; string from, to, end;
+	value *pp, *pend;
 	len= Length(v);
 	syze= getsyze(type, len, &nptrs);
 	Grabber();
@@ -144,7 +144,7 @@ Visible Procedure uniql(value *ll) {
 
 Visible Procedure rrelease(value v) {
 	literal type= v->type; intlet len= Length(v);
-	int nptrs; register value *pp, *pend;
+	int nptrs; value *pp, *pend;
 	VOID getsyze(type, len, &nptrs);
 	pp= (value*) ((char*)Ats(v) + Offset(type));
 	pend= pp+nptrs;

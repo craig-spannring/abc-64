@@ -51,14 +51,14 @@ replist(tops, rep, oldlno, oldlcnt)
 	cell *tops;
 	cell *rep;
 	int oldlno;
-	register int oldlcnt;
+	int oldlcnt;
 {
 	cell head;
-	register cell *p;
-	register cell *q;
-	register cell *old;
-	register cell *end;
-	register int i;
+	cell *p;
+	cell *q;
+	cell *old;
+	cell *end;
+	int i;
 	int replcnt;
 
 	if (!tops) /* Start with empty list */
@@ -102,7 +102,7 @@ replist(tops, rep, oldlno, oldlcnt)
 Hidden cell *
 newcell()
 {
-	register cell *p;
+	cell *p;
 
 	if (!freelist)
 		feedfreelist();
@@ -122,8 +122,8 @@ newcell()
 Hidden Procedure
 feedfreelist()
 {
-	register int n = (PAGESIZE-MALLOCLOSS) / CELLSIZE;
-	register cell *p = (cell*) getmem((unsigned)(n*CELLSIZE));
+	int n = (PAGESIZE-MALLOCLOSS) / CELLSIZE;
+	cell *p = (cell*) getmem((unsigned)(n*CELLSIZE));
 #ifdef MEMTRACE
 	fixmem((ptr) p);
 #endif
@@ -141,9 +141,9 @@ feedfreelist()
 
 Visible Procedure
 discard(p)
-	register cell *p;
+	cell *p;
 {
-	register cell *savefreelist;
+	cell *savefreelist;
 
 	if (!p)
 		return;
@@ -167,12 +167,12 @@ discard(p)
 
 Hidden Procedure
 dupmatch(old, rep, oldcnt, repcnt)
-	register cell *old;
-	register cell *rep;
+	cell *old;
+	cell *rep;
 	int oldcnt;
 	int repcnt;
 {
-	register int delta = repcnt - oldcnt;
+	int delta = repcnt - oldcnt;
 
 #ifndef NDEBUG
 	if (dflag)
@@ -211,10 +211,10 @@ dupmatch(old, rep, oldcnt, repcnt)
 Visible cell *
 build(p, lcnt)
 	/*auto*/ path p;
-	register int lcnt;
+	int lcnt;
 {
 	cell head;
-	register cell *q = &head;
+	cell *q = &head;
 
 	p = pathcopy(p);
 	for (;;) {
@@ -260,13 +260,13 @@ Visible cell *
 gettop(tops)
 	cell *tops;
 {
-	register cell *pfwa = tops; /* First line of sliding window */
-	register cell *plwa = tops; /* Last+1 line of sliding window */
-	register cell *pffocus = Cnil; /* First line of focus */
+	cell *pfwa = tops; /* First line of sliding window */
+	cell *plwa = tops; /* Last+1 line of sliding window */
+	cell *pffocus = Cnil; /* First line of focus */
 	cell *pscreen = Cnil; /* First line still on screen */
-	register int nfwa = 0; /* Corresponding line numbers in parse tree */
-	register int nlwa = 0;
-	register int nffocus;
+	int nfwa = 0; /* Corresponding line numbers in parse tree */
+	int nlwa = 0;
+	int nffocus;
 	int nlfocus;
 	int nscreen;
 	int syz;

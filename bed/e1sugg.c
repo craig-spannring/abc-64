@@ -82,7 +82,7 @@ initsugg()
 
 Hidden Procedure getsugg(sgfile) char *sgfile; {
 	char *line;
-	register FILE *fp;
+	FILE *fp;
 
 	fp = fopen(sgfile, "r");
 	if (!fp)

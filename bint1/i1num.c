@@ -32,7 +32,7 @@
 
 Hidden double ival(u) integer u; {
 	double x = 0;
-	register int i;
+	int i;
 
 	if (IsSmallInt(u)) return SmallIntVal(u);
 	for (i = Length(u)-1; i >= 0; --i) {
@@ -294,7 +294,7 @@ Hidden double inthash(v) double v; {
 Visible double numhash(v) value v; {
 	if (Integral(v)) {
 		double d = 0;
-		register int i;
+		int i;
 
 		if (IsSmallInt(v)) return inthash((double)SmallIntVal(v));
 		
@@ -388,9 +388,9 @@ Visible Procedure endnum() {
 }
 
 
-Visible value grab_num(len) register int len; {
+Visible value grab_num(len) int len; {
 	integer v;
-	register int i;
+	int i;
 
 	if (len > Maxintlet) {
 		interr(MESS(1306, "exceptionally large number"));
@@ -402,14 +402,14 @@ Visible value grab_num(len) register int len; {
 	return (value) v;
 }
 
-Visible value grab_rat(len) register int len; {
+Visible value grab_rat(len) int len; {
 	if (len > 0 && len+2 <= Maxintlet);
 	else len= 0;
 		
 	return grab(Num, -2 - len);
 }
 
-Visible value regrab_num(v, len) value v; register int len; {
+Visible value regrab_num(v, len) value v; int len; {
 	uniql(&v);
 	regrab(&v, len);
 	return v;
@@ -419,7 +419,7 @@ Visible unsigned numsyze(len, nptrs)
 	intlet len;
 	int *nptrs;
 {
-	register unsigned syze= 0;
+	unsigned syze= 0;
 	*nptrs= 0;
 	if (len >= 0) syze= len*sizeof(digit);	   /* Integral */
 	else if (len == -1) {

@@ -713,7 +713,7 @@ Hidden string savedef(def, len) string def; int len; {
 }
 
 Hidden bool equdef(len1, def1, len2, def2) int len1, len2; string def1, def2; {
-	register int i;
+	int i;
 	
 	if (len1 != len2)
 		return No;
@@ -1521,7 +1521,7 @@ Hidden Procedure prcnt2toprcnt3() {
 	/* change each occurrence of "0%2" into "0%3",
 	 * and of "0%r%2" into "%r%3".
 	 */
-	register int i, j, len;
+	int i, j, len;
 
 	len= pfmt-fmt;
 	for (i=0; i<len; i++) {

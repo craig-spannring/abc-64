@@ -165,8 +165,8 @@ Visible bool maystart(c, ilex) char c; item ilex; {
  */
 
 Hidden int fwidth(str) string str; {
-	register int c;
-	register int n = 0;
+	int c;
+	int n = 0;
 
 	if (!str)
 		return 0;

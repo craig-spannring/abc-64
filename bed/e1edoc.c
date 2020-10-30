@@ -344,11 +344,11 @@ extern bool justgoon;
 
 Hidden bool
 execute(ep, cmd)
-	register environ *ep;
-	register int cmd;
+	environ *ep;
+	int cmd;
 {
-	register bool spflag = ep->spflag;
-	register int i;
+	bool spflag = ep->spflag;
+	int i;
 	environ ev;
 	char buf[2];
 	char ch;
@@ -564,11 +564,11 @@ clrenv(ep)
 
 Visible Procedure
 higher(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register path p = ep->focus;
-	register int pl = 0;
-	register int max = ep->highest;
+	path p = ep->focus;
+	int pl = 0;
+	int max = ep->highest;
 
 	while (p) {
 		++pl;
@@ -587,11 +587,11 @@ higher(ep)
 
 Visible Procedure
 dbmess(ep)
-	register environ *ep;
+	environ *ep;
 {
 #ifndef SMALLSYS
 	char stuff[80];
-	register string str = stuff;
+	string str = stuff;
 
 	switch (ep->mode) {
 	case VHOLE:
@@ -669,9 +669,9 @@ canexit(ep)
 
 Hidden bool
 findhole(pp)
-	register path *pp;
+	path *pp;
 {
-	register node n = tree(*pp);
+	node n = tree(*pp);
 
 	if (Is_etext(n))
 		return No;
@@ -760,11 +760,11 @@ savequeue(v, filename)
 	value v;
 	string filename;
 {
-	register FILE *fp;
+	FILE *fp;
 	auto queue q = (queue)v;
-	register node n;
-	register bool ok;
-	register int lines = 0;
+	node n;
+	bool ok;
+	int lines = 0;
 
 	fp = fopen(filename, "w");
 	if (!fp)
@@ -788,10 +788,10 @@ savequeue(v, filename)
 #ifdef EDITRACE
 extern FILE *dumpfp;
 
-Visible Procedure dumpev(ep, m) register environ *ep; string m;
+Visible Procedure dumpev(ep, m) environ *ep; string m;
 {
 	char stuff[80];
-	register string str = stuff;
+	string str = stuff;
 	path pa;
 	node n;
 	int ich;

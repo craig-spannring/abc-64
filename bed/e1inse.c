@@ -99,17 +99,17 @@ mayinsert(n, ich, s2, c)
 	node n;
 	int ich;
 	int s2;
-	register char c;
+	char c;
 {
 	int sympa = symbol(n);
 	struct classinfo *ci;
-	register classptr cp;
-	register value v = (value) child(n, ich);
-	register char c1;
+	classptr cp;
+	value v = (value) child(n, ich);
+	char c1;
 	bool maycontinue();
 	bool maystart();
-	register bool (*fun1)() = s2 > 0 ? /*&*/maystart : /*&*/maycontinue;
-	register bool (*fun2)() = s2 > 0 ? /*&*/maycontinue : /*&*/maystart;
+	bool (*fun1)() = s2 > 0 ? /*&*/maystart : /*&*/maycontinue;
+	bool (*fun2)() = s2 > 0 ? /*&*/maycontinue : /*&*/maystart;
 
 	Assert(v && v->type == Etex);
 	Assert(sympa > 0 && sympa < TABLEN);
@@ -145,10 +145,10 @@ soften(ep, pstr, alt_c)
 	node n;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 	struct classinfo *ci;
-	register classptr cp;
-	register int code;
+	classptr cp;
+	int code;
 	string repr;
-	register struct table *tp;
+	struct table *tp;
 	char buf[1024];
 
 	if (ep->mode == VHOLE && (ep->s1&1))
@@ -224,16 +224,16 @@ resuggest(ep, pstr, alt_c)
 	path pa;
 	node nn;
 	node n = tree(ep->focus);
-	register string *oldrp = noderepr(n);
-	register int ich = ep->s1/2;
-	register string str = oldrp[ich];
+	string *oldrp = noderepr(n);
+	int ich = ep->s1/2;
+	string str = oldrp[ich];
 	int oldsym = symbol(n);
 	int childsym[MAXCHILD];
 	string *newrp;
 	int sympa;
-	register int sym;
+	int sym;
 	int symfound = -1;
-	register int i;
+	int i;
 	int code;
 	char buf[15]; /* Should be sufficient for all fixed texts */
 	bool ok;
@@ -337,12 +337,12 @@ resuggest(ep, pstr, alt_c)
 
 Hidden bool
 ifmatch(ep, pstr, str, alt_c)
-	register environ *ep;
-	register string *pstr;
-	register string str;
-	register int alt_c;
+	environ *ep;
+	string *pstr;
+	string str;
+	int alt_c;
 {
-	register int c = str[ep->s2];
+	int c = str[ep->s2];
 
 	if (c != **pstr && (!alt_c || c != alt_c))
 		return No;

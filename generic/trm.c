@@ -137,7 +137,7 @@ Hidden int start_trm()
 
 Hidden int init_trm()
 {
-	register int y;
+	int y;
 
 	if (linedata == NULL) {
 		if ((linedata = (char**) malloc(MALLOC_ARG(lines * sizeof(char*)))) == NULL)
@@ -187,7 +187,7 @@ Visible Procedure trmend()
 
 Visible Procedure trmundefined()
 {
-	register int y, x;
+	int y, x;
 
 	cur_y = cur_x = Undefined;
 	so_mode = Undefined;
@@ -345,11 +345,11 @@ Hidden bool get_pos(format, py, px)
  */
 Visible Procedure trmputdata(yfirst, ylast, indent, data, mode)
 	int yfirst, ylast;
-	register int indent;
-	register string data;
-	register string mode;
+	int indent;
+	string data;
+	string mode;
 {
-	register int y;
+	int y;
 	int x, len, lendata, space;
 
 	if (yfirst < 0)
@@ -414,8 +414,8 @@ Hidden int put_line(y, xskip, data, mode, len)
 	string mode;
 	int len;
 {
-	register char *op, *oq, *mp;
-	register char *np, *nq, *mo;
+	char *op, *oq, *mp;
+	char *np, *nq, *mo;
 	int m1, od, nd, delta;
 
 	/* Bugfix GvR 19-June-87: */
@@ -466,9 +466,9 @@ Hidden int put_line(y, xskip, data, mode, len)
  */
 
 Visible Procedure trmscrollup(yfirst, ylast, by)
-     register int yfirst;
-     register int ylast;
-     register int by;
+     int yfirst;
+     int ylast;
+     int by;
 {
 	if (by == 0)
 		return;
@@ -541,7 +541,7 @@ Hidden Procedure put_str(data, mode, n)
 	char *data, *mode;
 	int n;
 {
-	register char c, mo, so;
+	char c, mo, so;
 
 	hidemouse();
 
@@ -565,7 +565,7 @@ Hidden Procedure clear_lines(yfirst, ylast)
      int yfirst;
      int ylast;
 {
-	register int y;
+	int y;
 
 	hidemouse();
 	if (yfirst == 0 && ylast == lines-1) {
@@ -602,7 +602,7 @@ Hidden Procedure scr_lines(yfrom, yto, n, dy)
      int n;
      int dy;
 {
-	register int y, x;
+	int y, x;
 	char *savedata;
 	char *savemode;
 
@@ -628,7 +628,7 @@ Hidden Procedure lf_scroll(yto, by)
      int yto;
      int by;
 {
-	register int n = by;
+	int n = by;
 
 	move(lines-1, 0);
 	while (n-- > 0) {

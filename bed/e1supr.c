@@ -28,10 +28,10 @@ Forward Hidden Procedure lastnnitem();
 
 Visible int
 lenitem(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n = tree(ep->focus);
-	register node nn;
+	node n = tree(ep->focus);
+	node nn;
 
 	if (ep->s1&1) { /* Fixed text */
 		string *nr= noderepr(n);
@@ -62,15 +62,15 @@ grow(ep, deleting)
 
 Visible Procedure
 subgrow(ep, ignorespaces, deleting)
-	register environ *ep;
+	environ *ep;
 	bool ignorespaces;
 	bool deleting;
 {
-	register node n;
-	register int sym;
-	register int i;
-	register int len;
-	register string repr;
+	node n;
+	int sym;
+	int i;
+	int len;
+	string repr;
 
 	switch (ep->mode) {
 	case ATBEGIN:
@@ -204,10 +204,10 @@ subgrow(ep, ignorespaces, deleting)
 
 Visible Procedure
 shrink(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register int sym;
+	node n;
+	int sym;
 
 	for (;;) {
 		n = tree(ep->focus);
@@ -311,13 +311,13 @@ growsubset(ep)
 
 Visible Procedure
 subgrsubset(ep, ignorespaces)
-	register environ *ep;
+	environ *ep;
 	bool ignorespaces;
 {
-	register node n = tree(ep->focus);
-	register string *rp = noderepr(n);
-	register nch21 = nchildren(n)*2 + 1;
-	register int i;
+	node n = tree(ep->focus);
+	string *rp = noderepr(n);
+	int nch21 = nchildren(n)*2 + 1;
+	int i;
 
 	Assert(ep->mode == SUBSET);
 	for (i = ep->s1; i > 1 && subisnull(n, rp, i-1, ignorespaces); --i)
@@ -335,12 +335,12 @@ subgrsubset(ep, ignorespaces)
 
 Visible Procedure /* Ought to be Hidden */
 shrsubset(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n = tree(ep->focus);
-	register string *rp = noderepr(n);
-	register int s1 = ep->s1;
-	register int s2 = ep->s2;
+	node n = tree(ep->focus);
+	string *rp = noderepr(n);
+	int s1 = ep->s1;
+	int s2 = ep->s2;
 
 	for (; s1 < s2 && isnull(n, rp, s1); ++s1)
 		;
@@ -357,13 +357,13 @@ shrsubset(ep)
 
 Hidden bool
 subisnull(n, rp, i, ignorespaces)
-	register node n;
-	register string *rp;
-	register int i;
+	node n;
+	string *rp;
+	int i;
 	bool ignorespaces;
 {
-	register string repr;
-	register node nn;
+	string repr;
+	node nn;
 
 	if (i&1) { /* Fixed text */
 		repr = rp[i/2];
@@ -389,12 +389,12 @@ isnull(n, rp, i)
 
 Visible Procedure
 ritevhole(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register int ich;
-	register int len;
-	register int s1save;
+	node n;
+	int ich;
+	int len;
+	int s1save;
 
 	for (;;) {
 		n = tree(ep->focus);
@@ -475,9 +475,9 @@ ritevhole(ep)
 
 Visible Procedure
 leftvhole(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int ich;
+	int ich;
 
 	for (;;) {
 		switch (ep->mode) {
@@ -556,7 +556,7 @@ leftvhole(ep)
 
 Visible Procedure
 s_up(ep)
-	register environ *ep;
+	environ *ep;
 {
 	if (!up(&ep->focus))
 		syserr(MESS(7100, "s_up failed"));
@@ -565,8 +565,8 @@ s_up(ep)
 
 Visible Procedure
 s_downi(ep, i)
-	register environ *ep;
-	register int i;
+	environ *ep;
+	int i;
 {
 	if (!downi(&ep->focus, i))
 		syserr(MESS(7101, "s_downi failed"));
@@ -574,7 +574,7 @@ s_downi(ep, i)
 
 Visible Procedure
 s_down(ep)
-	register environ *ep;
+	environ *ep;
 {
 	if (!down(&ep->focus))
 		syserr(MESS(7102, "s_down failed"));
@@ -582,7 +582,7 @@ s_down(ep)
 
 Visible Procedure
 s_downrite(ep)
-	register environ *ep;
+	environ *ep;
 {
 	if (!downrite(&ep->focus))
 		syserr(MESS(7103, "s_downrite failed"));
@@ -591,9 +591,9 @@ s_downrite(ep)
 #ifdef NOT_USED
 Visible Procedure
 s_left(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int ich = ichild(ep->focus);
+	int ich = ichild(ep->focus);
 
 	s_up(ep);
 	s_downi(ep, ich-1);
@@ -603,9 +603,9 @@ s_left(ep)
 #ifdef NOT_USED
 Visible Procedure
 s_rite(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int ich = ichild(ep->focus);
+	int ich = ichild(ep->focus);
 
 	s_up(ep);
 	s_downi(ep, ich+1);
@@ -620,7 +620,7 @@ s_rite(ep)
 
 Hidden bool
 nextitem(ep)
-	register environ *ep;
+	environ *ep;
 {
 	if (ep->s1 >= 2*nchildren(tree(ep->focus)) + 1)
 		return No; /* Already at last item */
@@ -635,7 +635,7 @@ nextitem(ep)
 
 Hidden bool
 previtem(ep)
-	register environ *ep;
+	environ *ep;
 {
 	if (ep->s1 <= 1
 		|| ep->s1 == 2 && fwidth(noderepr(tree(ep->focus))[0]) < 0)
@@ -652,7 +652,7 @@ previtem(ep)
 
 Hidden bool
 isunititem(ep)
-	register environ *ep;
+	environ *ep;
 {
 	if (ep->s1&1)
 		return Yes;
@@ -666,7 +666,7 @@ isunititem(ep)
 
 Visible bool
 checkep(ep)
-	register environ *ep;
+	environ *ep;
 {
 	switch (ep->mode) {
 
@@ -709,9 +709,9 @@ checkep(ep)
 
 Visible bool
 nextnnitem(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int s1save = ep->s1;
+	int s1save = ep->s1;
 
 	while (nextitem(ep)) {
 		if (lenitem(ep) != 0)
@@ -723,10 +723,10 @@ nextnnitem(ep)
 
 Visible bool
 prevnnitem(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int s1save = ep->s1;
-	register int len;
+	int s1save = ep->s1;
+	int len;
 
 	while (previtem(ep)) {
 		len = lenitem(ep);
@@ -740,7 +740,7 @@ prevnnitem(ep)
 #ifdef NOT_USED
 Visible Procedure
 firstnnitem(ep)
-	register environ *ep;
+	environ *ep;
 {
 	ep->s1 = fwidth(noderepr(tree(ep->focus))[0]) < 0 ? 2 : 1;
 	while (lenitem(ep) == 0) {
@@ -753,7 +753,7 @@ firstnnitem(ep)
 
 Hidden Procedure
 lastnnitem(ep)
-	register environ *ep;
+	environ *ep;
 {
 	ep->s1 = 2*nchildren(tree(ep->focus)) + 1;
 	while (lenitem(ep) == 0) {
@@ -774,7 +774,7 @@ lastnnitem(ep)
 
 Visible Procedure
 fixit(ep)
-	register environ *ep;
+	environ *ep;
 {
 	/* First, make a hole if it's not already a hole. */
 
@@ -841,7 +841,7 @@ fixit(ep)
 
 Visible bool
 allspaces(str)
-	register string str;
+	string str;
 {
 	Assert(str);
 	for (; *str; ++str) {
@@ -858,13 +858,13 @@ allspaces(str)
 
 Visible int
 focwidth(ep)
-	register environ *ep;
+	environ *ep;
 {
 	node nn;
-	register node n = tree(ep->focus);
-	register string *rp = noderepr(n);
-	register int i;
-	register int w;
+	node n = tree(ep->focus);
+	string *rp = noderepr(n);
+	int i;
+	int w;
 	int len = 0;
 
 	switch (ep->mode) {
@@ -923,14 +923,14 @@ focwidth(ep)
 
 Visible int
 focoffset(ep)
-	register environ *ep;
+	environ *ep;
 {
 	node nn;
-	register node n;
-	register string *rp;
-	register int w;
-	register int len;
-	register int i;
+	node n;
+	string *rp;
+	int w;
+	int len;
+	int i;
 
 	switch (ep->mode) {
 

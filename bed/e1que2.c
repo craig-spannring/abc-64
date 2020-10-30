@@ -36,13 +36,13 @@ Forward Hidden bool canfitchar();
 
 Visible bool
 ins_queue(ep, pq, pq2)
-	register environ *ep;
-	register queue *pq;
-	register queue *pq2;
+	environ *ep;
+	queue *pq;
+	queue *pq2;
 {
-	register bool ok = Yes;
-	register node n;
-	register queue oldq2;
+	bool ok = Yes;
+	node n;
+	queue oldq2;
 	environ saveenv;
 	int oldindentation = focindent(ep);
 	int indentation = oldindentation;
@@ -141,12 +141,12 @@ app_queue(ep, pq)
 
 Visible bool
 move_on(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register string *rp;
-	register int sym;
-	register int ich = ichild(ep->focus);
+	node n;
+	string *rp;
+	int sym;
+	int ich = ichild(ep->focus);
 
 	if (!up(&ep->focus))
 		return No;
@@ -192,12 +192,12 @@ move_on(ep)
 
 Visible bool
 fix_move(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int ich;
-	register int i;
-	register string *rp;
-	register string cp;
+	int ich;
+	int i;
+	string *rp;
+	string cp;
 
 	Assert(ep->mode == FHOLE);
 
@@ -244,13 +244,13 @@ fix_move(ep)
 
 Hidden bool
 ins_node(ep, n, pq)
-	register environ *ep;
-	register node n;
-	register queue *pq;
+	environ *ep;
+	node n;
+	queue *pq;
 {
-	register int sym;
-	register node nn;
-	register markbits x;
+	int sym;
+	node nn;
+	markbits x;
 	string *rp;
 	node fc;
 
@@ -400,7 +400,7 @@ Hidden bool fits_kwchar(n, i, ch) node n; int i; int ch; {
 }
 
 Hidden bool fits_nextkwstart(n, ch) node n; int ch; {
-	register int sym= symbol(n);
+	int sym= symbol(n);
 	
 	if (sym == Keyword)
 		return fits_kwchar(n, 0, ch);
@@ -419,9 +419,9 @@ Hidden bool fits_nextkwstart(n, ch) node n; int ch; {
  */
 
 Hidden bool is_varsuggrest(n, exphole_seen) node n; bool exphole_seen; {
-	register int sym= symbol(n);
-	register node n2;
-	register int sym2;
+	int sym= symbol(n);
+	node n2;
+	int sym2;
 	
 	if (sym == Kw_plus) {
 		n2= child(n, 2);
@@ -490,7 +490,7 @@ Hidden bool ack_or_kill_varsuggrest(ep, pstr) environ *ep; string *pstr; {
  * userinput ')
  */
 
-Hidden bool range_hack(ep) register environ *ep; {
+Hidden bool range_hack(ep) environ *ep; {
 	path pa;
 	int sympa;
 	string str;
@@ -541,18 +541,18 @@ Visible bool justgoon = No;
 
 Visible bool
 ins_string(ep, str, pq, alt_c)
-	register environ *ep;
+	environ *ep;
 	/*auto*/ string str;
-	register queue *pq;
+	queue *pq;
 	int alt_c;
 {
-	register node nn;
+	node nn;
 	auto value v;
 	char buf[1024];
-	register string repr;
+	string repr;
 	string oldstr;
-	register int sym;
-	register int len;
+	int sym;
+	int len;
 	bool inter_active = alt_c != 0;
 	path pa;
 
@@ -926,19 +926,19 @@ joinnodes(pp, n1, n2, spflag)
 Visible int
 joinstring(pp, str, spflag, alt_c, mayindent)
 	path *pp;
-	register string str;
-	register bool spflag;
+	string str;
+	bool spflag;
 	int alt_c;
 	bool mayindent;
 {
-	register struct table *tp;
+	struct table *tp;
 	path pa = parent(*pp);
 	node n1;
 	struct classinfo *ci;
-	register classptr cp;
+	classptr cp;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
-	register int sym1;
-	register int symcp;
+	int sym1;
+	int symcp;
 	int symfound;
 	int len;
 	char buf[2];
@@ -1006,15 +1006,15 @@ add_string(ep, pstr)
 	environ *ep;
 	string *pstr;
 {
-	register struct table *tp;
+	struct table *tp;
 	path pa = parent(ep->focus);
 	node n1;
 	struct classinfo *ci;
-	register classptr cp;
+	classptr cp;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
-	register int sym1;
-	register int symcp;
-	register int c;
+	int sym1;
+	int symcp;
+	int c;
 
 	ci = table[sympa].r_class[ichild(ep->focus) - 1];
 	Assert(ci);
@@ -1061,8 +1061,8 @@ canfitchar(c, ci)
 	int c;
 	struct classinfo *ci;
 {
-	register classptr cp;
-	register int code = Code(c);
+	classptr cp;
+	int code = Code(c);
 
 	Assert(ci);
 	cp = ci->c_insert;

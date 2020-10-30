@@ -37,8 +37,8 @@ Visible Procedure qrelease(q)
 
 Visible Procedure
 joinqueues(pq, q)
-	register queue *pq;
-	register queue q;
+	queue *pq;
+	queue q;
 {
 	if (emptyqueue(q))
 		return;
@@ -59,9 +59,9 @@ joinqueues(pq, q)
 Visible Procedure
 preptoqueue(n, pq)
 	node n;
-	register queue *pq;
+	queue *pq;
 {
-	register queue q;
+	queue q;
 
 	if (Is_etext(n)) {
 		if (e_length((value) n) == 0)
@@ -86,8 +86,8 @@ preptoqueue(n, pq)
 
 Visible Procedure
 addtoqueue(pq, n)
-	register queue *pq;
-	register node n;
+	queue *pq;
+	node n;
 {
 	auto queue q = Qnil;
 
@@ -102,10 +102,10 @@ addtoqueue(pq, n)
 
 Visible Procedure
 stringtoqueue(str, pq)
-	register string str;
-	register queue *pq;
+	string str;
+	queue *pq;
 {
-	register value  v;
+	value  v;
 
 	if (str == NULL)
 		return;
@@ -122,10 +122,10 @@ stringtoqueue(str, pq)
 
 Visible Procedure
 addstringtoqueue(pq, str)
-	register queue *pq;
-	register string str;
+	queue *pq;
+	string str;
 {
-	register value v = mk_etext(str);
+	value v = mk_etext(str);
 
 	addtoqueue(pq, (node) v);
 	release(v);
@@ -139,10 +139,10 @@ addstringtoqueue(pq, str)
 
 Visible node
 queuebehead(pq)
-	register queue *pq;
+	queue *pq;
 {
-	register node n;
-	register queue q = *pq;
+	node n;
+	queue q = *pq;
 
 	Assert(q);
 
@@ -161,13 +161,13 @@ queuebehead(pq)
 
 Visible Procedure
 splitnode(n, pq)
-	register node n;
-	register queue *pq;
+	node n;
+	queue *pq;
 {
-	register node nn;
-	register string *rp;
-	register int i;
-	register int sym;
+	node nn;
+	string *rp;
+	int i;
+	int sym;
 
 	if (Is_etext(n)) {
 		preptoqueue(n, pq);
@@ -208,14 +208,14 @@ splitnode(n, pq)
 
 Visible bool
 resttoqueue(pp, pq)
-	register path *pp;
-	register queue *pq;
+	path *pp;
+	queue *pq;
 {
 	auto queue q = Qnil;
-	register path pa = parent(*pp);
-	register node n = tree(*pp);
-	register int sym = symbol(n);
-	/* register markbits x; */
+	path pa = parent(*pp);
+	node n = tree(*pp);
+	int sym = symbol(n);
+	/* markbits x; */
 
 	if (!pa || ichild(*pp) != 1
 		|| fwidth(noderepr(tree(pa))[0]) != 0 || !allowed(pa, sym))
@@ -237,10 +237,10 @@ resttoqueue(pp, pq)
 }
 
 Hidden bool rest_is_hollow(n) node n; {
-	register node nn;
-	register string *rp;
-	register int i;
-	register int sym;
+	node nn;
+	string *rp;
+	int i;
+	int sym;
 
 	Assert(!Is_etext(n));
 	
@@ -270,15 +270,15 @@ Hidden bool rest_is_hollow(n) node n; {
 
 Visible Procedure
 nosuggtoqueue(ep, pq)
-	register environ *ep;
+	environ *ep;
 	queue *pq;
 {
 	auto queue q = Qnil;
-	register int i;
-	register string *rp;
-	register node n;
-	register node nn;
-	register int sym;
+	int i;
+	string *rp;
+	node n;
+	node nn;
+	int sym;
 	string str;
 
 	if (issuggestion(ep))
@@ -314,12 +314,12 @@ nosuggtoqueue(ep, pq)
 
 Visible bool
 issuggestion(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register int nch;
-	register int sym;
-	register int i;
+	node n;
+	int nch;
+	int sym;
+	int i;
 
 	if (ep->mode != VHOLE && ep->mode != FHOLE || !(ep->s1&1))
 		return No; /* Actually wrong call? */
@@ -341,8 +341,8 @@ issuggestion(ep)
 
 Visible bool
 fitnode(pp, n)
-	register path *pp;
-	register node n;
+	path *pp;
+	node n;
 {
 	if (!allowed(*pp, symbol(n)))
 		return No;
@@ -361,15 +361,15 @@ fitnode(pp, n)
 
 Visible int
 fitstring(pp, str, alt_c)
-	register path *pp;
-	register string str;
+	path *pp;
+	string str;
 	int alt_c;
 {
 	environ dummyenv;
-	register node n;
-	register int ich;
-	register int len;
-	register string cp;
+	node n;
+	int ich;
+	int len;
+	string cp;
 	int sym;
 	char buf[1024];
 
@@ -441,15 +441,15 @@ fitstring(pp, str, alt_c)
 
 Visible Procedure
 fixfocus(ep, len)
-	register environ *ep;
-	register int len;
+	environ *ep;
+	int len;
 {
 	node nn;
-	register node n = tree(ep->focus);
-	register string *rp;
-	register int i = 0;
-	register int nch;
-	register int w;
+	node n = tree(ep->focus);
+	string *rp;
+	int i = 0;
+	int nch;
+	int w;
 
 	if (Is_etext(n)) {
 		w = e_length((value)n);
@@ -548,12 +548,12 @@ spacefix(ep)
 
 Visible Procedure
 subsettoqueue(n, s1, s2, pq)
-	register node n;
-	register int s1;
-	register int s2;
-	register queue *pq;
+	node n;
+	int s1;
+	int s2;
+	queue *pq;
 {
-	register string *rp = noderepr(n);
+	string *rp = noderepr(n);
 
 	for (; s2 >= s1; --s2) {
 		if (s2&1)
@@ -647,7 +647,7 @@ querepr(qv)
 #ifdef UNUSED
 Visible Procedure dumpqueue(pq, m) queue *pq; string m; {
 	char stuff[80];
-	register string str = stuff;
+	string str = stuff;
 	FILE *fp;
 	static int qdump;
 	queue q= *pq;

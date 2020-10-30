@@ -35,10 +35,11 @@ target_compile_options(abc PRIVATE
   -Wall
 
   #-Wno-implicit-int
-  #-Wno-implicit-function-declaration
+  # -Wno-implicit-function-declaration
   #-Wno-return-type
   -Wno-parentheses
-  
+
+  -Wno-int-to-pointer-cast
   # -Werror=int-to-pointer-cast
   )
 target_link_libraries(abc

@@ -132,14 +132,14 @@ gotoscrollbar(ep, x)
 
 Visible bool
 gotoyx(ep, y, x)
-	register environ *ep;
-	register int y;
-	register int x;
+	environ *ep;
+	int y;
+	int x;
 {
-	register node n;
-	register string *rp;
-	register int i;
-	register int pc;
+	node n;
+	string *rp;
+	int i;
+	int pc;
 
 	ep->mode = WHOLE;
 	while ((pc = poscomp(ep->focus, y, x)) != INSIDE) {
@@ -214,15 +214,15 @@ gotoyx(ep, y, x)
 
 Hidden int
 poscomp(p, y, x)
-	register path p;
-	register int y;
-	register int x;
+	path p;
+	int y;
+	int x;
 {
-	register int ly;
-	register int lx;
-	register int w;
-	register string *rp;
-	register node n;
+	int ly;
+	int lx;
+	int w;
+	string *rp;
+	node n;
 
 	ly = Ycoord(p);
 	lx = Xcoord(p);

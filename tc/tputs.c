@@ -20,12 +20,12 @@ char	PC;
  * used to output one character is outc.
  */
 tputs(cp, affcnt, outc)
-	register char *cp;
+	char *cp;
 	int affcnt;
 	int (*outc)();
 {
-	register int i = 0;
-	register int mspc10;
+	int i = 0;
+	int mspc10;
 
 	if (cp == 0)
 		return;

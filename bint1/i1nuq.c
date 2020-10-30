@@ -12,7 +12,7 @@ Visible integer int1mul(v, n1) integer v; digit n1; {
 	integer a;
 	digit save, bigcarry, carry = 0;
 	twodigit z, zz, n = n1;
-	register int i;
+	int i;
 	struct integer vv;
 
 	FreezeSmallInt(v, vv);
@@ -39,7 +39,7 @@ Visible integer int1mul(v, n1) integer v; digit n1; {
 Hidden integer int1div(v, n1, prem) integer v; digit n1, *prem; {
 	integer q;
 	twodigit r_over_n, r = 0, n = n1;
-	register int i;
+	int i;
 	struct integer vv;
 
 	FreezeSmallInt(v, vv);
@@ -107,7 +107,7 @@ Visible digit int_ldiv(v1, w1, pquot, prem) integer v1, w1, *pquot, *prem; {
 		twodigit z, zz;
 		digit carry, save, bigcarry;
 		twodigit q, d = ABCBASE/(Digit(w1, Length(w1)-1)+1);
-		register int i, j, k;
+		int i, j, k;
 		integer v, w;
 		digit vj;
 

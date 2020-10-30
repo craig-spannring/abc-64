@@ -53,11 +53,11 @@ actupdate(copybuffer, recording, lasttime)
 	bool recording;
 	bool lasttime; /* Yes if called from final screen update */
 {
-	register cell *p;
+	cell *p;
 	cell *ptop = tops;
-	register int delta;
-	register int curlno;
-	register int delcnt = 0; /* Lines deleted during the process. */
+	int delta;
+	int curlno;
+	int delcnt = 0; /* Lines deleted during the process. */
 		/* Used as offset for lines that are on the screen. */
 	int totlines = 0;
 	int topline = 0;
@@ -139,9 +139,9 @@ actupdate(copybuffer, recording, lasttime)
 Hidden Procedure
 growwin()
 {
-	register int winsize;
-	register int growth;
-	register cell *p;
+	int winsize;
+	int growth;
+	cell *p;
 
 	winsize = 0;
 	for (p = tops; p; p = p->c_link)
@@ -169,13 +169,13 @@ growwin()
 
 Hidden int
 makeroom(p, curlno, delcnt)
-	register cell *p;
-	register int curlno;
-	register int delcnt;
+	cell *p;
+	int curlno;
+	int delcnt;
 {
-	register int here = 0;
-	register int needed = Space(p);
-	register int amiss;
+	int here = 0;
+	int needed = Space(p);
+	int amiss;
 	int avail;
 	int delta;
 
@@ -271,11 +271,11 @@ virtupdate(oldep, newep, highest)
 {
 	environ old;
 	environ new;
-	register int oldlno;
-	register int newlno;
-	register int oldlcnt;
-	register int newlcnt;
-	register int i;
+	int oldlno;
+	int newlno;
+	int oldlcnt;
+	int newlcnt;
+	int i;
 
 	if (!oldep) {
 		highest = 1;
@@ -326,7 +326,7 @@ Hidden bool
 atlinestart(ep)
 	environ *ep;
 {
-	register string repr = noderepr(tree(ep->focus))[0];
+	string repr = noderepr(tree(ep->focus))[0];
 
 	return Fw_negative(repr);
 }
@@ -340,14 +340,14 @@ atlinestart(ep)
 
 Hidden int
 fixlevels(oldep, newep, highest)
-	register environ *oldep;
-	register environ *newep;
-	register int highest;
+	environ *oldep;
+	environ *newep;
+	int highest;
 {
-	register int oldpl = pathlength(oldep->focus);
-	register int newpl = pathlength(newep->focus);
-	register bool intraline = No;
-	register int w;
+	int oldpl = pathlength(oldep->focus);
+	int newpl = pathlength(newep->focus);
+	bool intraline = No;
+	int w;
 
 	if (oldpl < highest)
 		highest = oldpl;
@@ -451,8 +451,8 @@ endterm()
 Visible Procedure
 endshow()
 {
-	register cell *p;
-	register int last = winheight;
+	cell *p;
+	int last = winheight;
 
 	for (p = tops; p; p = p->c_link) {
 		if (p->c_onscreen != Nowhere)

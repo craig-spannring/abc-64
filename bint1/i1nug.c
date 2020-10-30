@@ -16,9 +16,9 @@
 
 /* Single-precision gcd for integers > 0 */
 
-Hidden digit dig_gcd(u, v) register digit u, v; {
-	register digit temp;
-	register int k = 0;
+Hidden digit dig_gcd(u, v)  digit u, v; {
+	digit temp;
+	int k = 0;
 
 	if (u <= 0 || v <= 0) syserr(MESS(900, "dig_gcd of number(s) <= 0"));
 
@@ -45,8 +45,8 @@ Hidden digit dig_gcd(u, v) register digit u, v; {
 }
 
 Visible integer int_half(v) integer v; {
-	register int i;
-	register long carry;
+	int i;
+	long carry;
 
 	if (IsSmallInt(v))
 		return (integer) MkSmallInt(SmallIntVal(v) / 2);

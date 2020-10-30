@@ -54,7 +54,7 @@ Forward value copyout();
 
 Visible bool
 deltext(ep)
-	register environ *ep;
+	environ *ep;
 {
 	higher(ep);
 	shrink(ep);
@@ -74,7 +74,7 @@ deltext(ep)
 
 Visible bool
 delbody(ep)
-	register environ *ep;
+	environ *ep;
 {
 	ep->changed = Yes;
 
@@ -108,10 +108,10 @@ delbody(ep)
 
 Hidden bool
 delvarying(ep)
-	register environ *ep;
+	environ *ep;
 {
 	auto queue q = Qnil;
-	register node n = tree(ep->focus);
+	node n = tree(ep->focus);
 	auto value v;
 	value t1, t2;
 
@@ -152,13 +152,13 @@ delvarying(ep)
 
 Hidden bool
 delfixed(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n = tree(ep->focus);
+	node n = tree(ep->focus);
 	char buf[15]; /* Long enough for all fixed texts */
 	string *nr= noderepr(n);
-	register string repr = nr[ep->s1/2];
-	register int len;
+	string repr = nr[ep->s1/2];
+	int len;
 	queue q = Qnil;
 	bool ok;
 
@@ -202,7 +202,7 @@ delfixed(ep)
  */
 
 Hidden bool hole_ify_keywords(ep, qq)
-	register environ *ep;
+	environ *ep;
 	queue *qq;
 {
 	treereplace(&ep->focus, gram(Kw_plus));
@@ -224,16 +224,16 @@ Hidden bool hole_ify_keywords(ep, qq)
 
 Hidden bool
 delsubset(ep, hack)
-	register environ *ep;
+	environ *ep;
 	bool hack;
 {
 	auto queue q = Qnil;
 	auto queue q2 = Qnil;
-	register node n = tree(ep->focus);
-	register node nn;
-	register string *rp = noderepr(n);
-	register int nch = nchildren(n);
-	register int i;
+	node n = tree(ep->focus);
+	node nn;
+	string *rp = noderepr(n);
+	int nch = nchildren(n);
+	int i;
 	bool res;
 	int sym= symbol(n);
 	
@@ -311,11 +311,11 @@ delsubset(ep, hack)
  */
 
 delsublist(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register node n;
-	register int i;
-	register int sym;
+	node n;
+	int i;
+	int sym;
 	queue q = Qnil;
 	bool flag;
 
@@ -371,9 +371,9 @@ delsublist(ep)
 
 Hidden bool
 delwhole(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int sym = symbol(tree(ep->focus));
+	int sym = symbol(tree(ep->focus));
 
 	Assert(ep->mode == WHOLE);
 	if (sym == Optional || sym == Hole)
@@ -390,7 +390,7 @@ delwhole(ep)
 
 Hidden bool
 delhole(ep)
-	register environ *ep;
+	environ *ep;
 {
 	node n;
 	int sym;
@@ -481,10 +481,10 @@ delhole(ep)
 
 Visible Procedure
 delfocus(pp)
-	register path *pp;
+	path *pp;
 {
-	register path pa = parent(*pp);
-	register int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
+	path pa = parent(*pp);
+	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 
 	treereplace(pp, child(gram(sympa), ichild(*pp)));
 }
@@ -498,7 +498,7 @@ delfocus(pp)
 
 Visible bool
 copyinout(ep)
-	register environ *ep;
+	environ *ep;
 {
 	shrink(ep);
 	if (!ishole(ep)) {
@@ -523,15 +523,15 @@ copyinout(ep)
 
 Visible value
 copyout(ep)
-	register environ *ep;
+	environ *ep;
 {
 	auto queue q = Qnil;
 	auto path p;
-	register node n;
-	register value v;
+	node n;
+	value v;
 	char buf[15];
-	register string *rp;
-	register int i;
+	string *rp;
+	int i;
 	value w;
 
 	switch (ep->mode) {
@@ -588,10 +588,10 @@ copyout(ep)
 
 Hidden Procedure
 nonewline(pq)
-	register queue *pq;
+	queue *pq;
 {
-	register node n;
-	register int c;
+	node n;
+	int c;
 
 	if (!emptyqueue(*pq)) {
 		for (;;) {
@@ -651,7 +651,7 @@ balance(ep)
 
 Hidden bool
 copyin(ep, q)
-	register environ *ep;
+	environ *ep;
 	/*auto*/ queue q;
 {
 	auto queue q2 = Qnil;
@@ -687,9 +687,9 @@ copyin(ep, q)
 
 Visible bool
 ishole(ep)
-	register environ *ep;
+	environ *ep;
 {
-	register int sym;
+	int sym;
 
 	switch (ep->mode) {
 	

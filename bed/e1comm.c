@@ -42,7 +42,7 @@ Visible Procedure initbed() {
 }
 
 Visible Procedure endbed() {
-	register environ *ep = tobesaved;
+	environ *ep = tobesaved;
 
 	tobesaved = (environ*)NULL;
 		/* To avoid loops if saving is cancelled. */

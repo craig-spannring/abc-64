@@ -106,7 +106,7 @@ Visible int movnptrs(to, from, n) btreeptr *to, *from; int n; {
    Also, the latter may be slower. */
 
 Visible Procedure movnitms(to, from, n, iw) itemptr to, from; intlet n, iw; {
-	register char *t= (char *)to, *f= (char *)from;
+	char *t= (char *)to, *f= (char *)from;
 	n *= iw;
 	while (--n >= 0) *t++ = *f++;
 }

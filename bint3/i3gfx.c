@@ -286,12 +286,12 @@ bool inview2d(x0,y0, x1,y1) register x0,y0, x1,y1; {
 
 /*-------------------------------- clip2d -----------------------------------*/
 bool clip2d(x0p, y0p, x1p, y1p) int *x0p, *y0p, *x1p, *y1p; {
-	register int	x0 = *x0p,
+	int	x0 = *x0p,
 			y0 = *y0p,
 			x1 = *x1p,
 			y1 = *y1p;
 
-	register int	dx, dy;
+	int	dx, dy;
 		 double t0, t1;
 
 	t0 = 0.0, t1 = 1.0;			 /* init parametic equations */
@@ -316,9 +316,9 @@ bool clip2d(x0p, y0p, x1p, y1p) int *x0p, *y0p, *x1p, *y1p; {
 }
 
 /*-------------------------------- clipt ------------------------------------*/
-static bool clipt(p, q, t0p, t1p) register int p, q;
-		register double *t0p, *t1p; {
-	register double r;
+static bool clipt(p, q, t0p, t1p) int p, q;
+		double *t0p, *t1p; {
+	double r;
 
 	if ( p < 0 ) {
 	    r = (double)q / p;
