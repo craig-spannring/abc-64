@@ -8,7 +8,9 @@
 #include "b0lan.h"
 #include "i2par.h" 
 #include "i2nod.h"
+#include "i2syn.h"
 #include "i3env.h"
+#include "i3err.h"
 #include "b1grab.h"
 
 Forward Hidden bool chk_indent();

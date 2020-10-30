@@ -4,6 +4,7 @@
 
 #include "b.h"
 #include "b1memo.h"
+#include "b1outp.h"
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"

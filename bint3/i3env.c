@@ -3,6 +3,7 @@
 /* Environments */
 
 #include "b.h"
+#include "b1outp.h"
 #include "bint.h"
 #include "bobj.h"
 #include "i3err.h"
