@@ -4,6 +4,7 @@
  * B editor -- Lexical elements (identifiers, keywords, numbers etc.)
  */
 
+#include "e1lexi.h"
 #include "b.h"
 #include "bedi.h"
 #include "bobj.h"
@@ -22,7 +23,7 @@
  * symbolic name `lex'.
  */
 
-Visible bool maystart(c, ilex) char c; int ilex; {
+Visible bool maystart(char c, int ilex) {
 	string cp;
 
 	ilex-= LEXICAL;
@@ -41,7 +42,7 @@ Visible bool maystart(c, ilex) char c; int ilex; {
  * symbolic name `ilex'.
  */
 
-Visible bool maycontinue(c, ilex) char c; int ilex; {
+Visible bool maycontinue(char c, int ilex) {
 	string cp;
 
 	ilex-= LEXICAL;

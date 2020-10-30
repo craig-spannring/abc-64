@@ -8,6 +8,7 @@
 #include "bedi.h"
 #include "etex.h"
 #include "bobj.h"
+#include "e1lexi.h"
 #include "node.h"
 #include "gram.h"
 #include "supr.h"
@@ -106,8 +107,6 @@ mayinsert(n, ich, s2, c)
 	classptr cp;
 	value v = (value) child(n, ich);
 	char c1;
-	bool maycontinue();
-	bool maystart();
 	bool (*fun1)() = s2 > 0 ? /*&*/maystart : /*&*/maycontinue;
 	bool (*fun2)() = s2 > 0 ? /*&*/maycontinue : /*&*/maystart;
 

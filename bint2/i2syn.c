@@ -39,7 +39,8 @@ extern bool OPTunpack;
 		     lay-out on the screen may look a bit garbled
 		     when the file is printed.  Sorry.  */
 
-Visible txptr tx, ceol;
+Visible txptr tx;
+Visible txptr ceol;
 
 Visible Procedure skipsp(txptr *tx0) {
 	while(Space(Char(*tx0))) (*tx0)++;
@@ -485,56 +486,56 @@ Hidden bool la_denum(txptr tx0) {
 	return Yes;
 }
 
-Visible bool _nwl_sign(void) {
+Visible bool nwl_sign_(void) {
 	if (_sign_is(C_NEWLINE))
 		return !la_denum(tx-2) ? Yes : (tx--, No);
 	return No;
 }
 
-Visible bool _times_sign(void) {
+Visible bool times_sign_(void) {
 	if (_sign_is(C_TIMES))
 		return la_denum(tx-1) ? Yes : (tx--, No);
 	return No;
 }
 
-Visible bool _over_sign(void) {
+Visible bool over_sign_(void) {
 	if (_sign_is(C_OVER))
 		return la_denum(tx-1) ? Yes : (tx--, No);
 	return No;
 }
 
-Visible bool _power_sign(void) {
+Visible bool power_sign_(void) {
 	if (_sign2_is(S_POWER))
 		return la_denum(tx-1) ? Yes : (tx-= 2, No);
 	return No;
 }
 
-Visible bool _numtor_sign(void) {
+Visible bool numtor_sign_(void) {
 	if (_sign2_is(S_NUMERATOR))
 		return la_denum(tx-1) ? Yes : (tx-= 2, No);
 	return No;
 }
 
-Visible bool _denomtor_sign(void) {
+Visible bool denomtor_sign_(void) {
 	if (_sign2_is(S_DENOMINATOR))
 		return la_denum(tx-1) ? Yes : (tx-= 2, No);
 	return No;
 }
 
-Visible bool _join_sign(void) {
+Visible bool join_sign_(void) {
 	if (_sign_is(C_JOIN))
 		return !_sign_is(C_JOIN) ? Yes : (tx-= 2, No);
 	return No;
 }
 
-Visible bool _less_than_sign(void) {
+Visible bool less_than_sign_(void) {
 	if (_sign_is(C_LESS))
 		return !_sign_is(C_LESS) && !_sign_is(C_EQUAL)
 			&& !_sign_is(C_GREATER) ? Yes : (tx--, No);
 	return No;
 }
 
-Visible bool _greater_than_sign(void) {
+Visible bool greater_than_sign_(void) {
 	if (_sign_is(C_GREATER))
 		return !_sign_is(C_LESS) && !_sign_is(C_EQUAL)
 			&& !_sign_is(C_GREATER)  ? Yes : (tx--, No);

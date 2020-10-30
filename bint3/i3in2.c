@@ -14,7 +14,7 @@
 
 /* Newlines for WRITE /// */
 
-Visible Procedure nl(n) value n; {
+Visible Procedure newl(value n) {
 	value l= size(n); int c= intval(l); release(l);
 	while (c--) writnewline();
 }

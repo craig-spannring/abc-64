@@ -23,10 +23,7 @@ Forward Hidden Procedure makesugg();
  * Test whether sym is in the given class.
  */
 
-Visible bool
-isinclass(sym, ci)
-	int sym;
-	struct classinfo *ci;
+Visible bool isinclass(int sym, struct classinfo *ci)
 {
 	classptr cp;
 
@@ -51,9 +48,7 @@ isinclass(sym, ci)
  * In practical use this is no problem at all, however.
  */
 
-Visible string *
-noderepr(n)
-	node n;
+Visible string *noderepr(node n)
 {
 	int sym;
 
@@ -67,7 +62,7 @@ noderepr(n)
 	return table[sym].r_repr;
 }
 
-Visible Procedure endnoderepr() { /* hack to free noderepr static store */
+Visible Procedure endnoderepr(void) { /* hack to free noderepr static store */
 #ifdef MEMTRACE
 	value v= mk_etext("dummy");
 	string *s= noderepr((node)v);
@@ -80,9 +75,7 @@ Visible Procedure endnoderepr() { /* hack to free noderepr static store */
  * Deliver the prototype node for the given symbol.
  */
 
-Visible node
-gram(sym)
-	int sym;
+Visible node gram(int sym)
 {
 	Assert(0 <= sym && sym < TABLEN);
 	return table[sym].r_node;
@@ -94,9 +87,7 @@ gram(sym)
  * Deliver the name of a symbol.
  */
 
-Visible string
-symname(sym)
-	int sym;
+Visible string symname(int sym)
 {
 	static char buf[20];
 
@@ -112,9 +103,7 @@ symname(sym)
  * Return -1 if not found.
  */
 
-Visible int
-nametosym(str)
-	string str;
+Visible int nametosym(string str)
 {
 	int sym;
 	string name;
@@ -133,10 +122,7 @@ nametosym(str)
  * Test whether `sym' may replace the node in the path `p'.
  */
 
-Visible bool
-allowed(p, sym)
-	path p;
-	int sym;
+Visible bool allowed(path p, int sym)
 {
 	path pa = parent(p);
 	int ich = ichild(p);
@@ -152,8 +138,7 @@ allowed(p, sym)
  * (sets refcnt to infinity)
  */
 
-Visible Procedure
-initgram()
+Visible Procedure initgram(void)
 {
 	int sym;
 	int nch;
@@ -181,9 +166,7 @@ initgram()
  * Set a node's refcnt to infinity, so it will never be released.
  */
 
-Hidden Procedure
-fix_refcnt(n)
-	node n;
+Hidden Procedure fix_refcnt(node n)
 {
 	Assert(n->refcnt > 0);
 	n->refcnt = Maxrefcnt;
@@ -196,8 +179,7 @@ fix_refcnt(n)
  * Add built-in commands to the suggestion tables.
  */
 
-Visible Procedure
-initclasses()
+Visible Procedure initclasses(void)
 {
 #ifdef USERSUGG
 	struct table *tp;
@@ -214,7 +196,7 @@ initclasses()
  * Extract suggestions from class list.
  */
 
-Hidden Procedure makesugg(cp) classptr cp; {
+Hidden Procedure makesugg(classptr cp) {
 	struct table *tp;
 	string *rp;
 	char buffer[1000];
@@ -254,8 +236,7 @@ Hidden Procedure makesugg(cp) classptr cp; {
  * Set the root of the grammar to the given symbol.  It must exist.
  */
 
-Visible Procedure
-setroot(isym) int isym; {	/* symbols defined in tabl.h */
+Visible Procedure setroot(int isym) {	/* symbols defined in tabl.h */
 	int ich;
 
 	table[Rootsymbol].r_name = table[isym].r_name;
@@ -294,10 +275,7 @@ Hidden struct classinfo sublists[] = {{Asublists, 0, 0, 0}};
  * of the symbols would have to be made public.
  */
 
-Visible bool
-samelevel(sym, sym1)
-	int sym;
-	int sym1;
+Visible bool samelevel(int sym, int sym1)
 {
 	int zzz;
 
@@ -321,9 +299,7 @@ samelevel(sym, sym1)
  * such as KW expr KW ...).
  */
 
-Visible bool
-issublist(sym)
-	int sym;
+Visible bool issublist(int sym)
 {
 	int i;
 	string repr;
@@ -349,7 +325,7 @@ issublist(sym)
  * following a colon.
  * sym == symbol(tree(parent(ep->focus)))
  */
-Visible bool allows_colon(sym) int sym; {
+Visible bool allows_colon(int sym) {
 	switch (sym) {
 	case Short_comp:
 	case Test_suite:

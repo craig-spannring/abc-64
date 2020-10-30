@@ -234,7 +234,6 @@ Visible Procedure execthread();
 
 /* i3in2.c */
 Visible Procedure load_global();
-Visible Procedure nl();
 
 /* i3loc.c */
 Visible Procedure check_location();

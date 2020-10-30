@@ -201,15 +201,15 @@ extern literal idf_cntxt;
 #define _sign2_is(s) \
 	(Char(tx) == (s[0]) && Char(tx+1) == (s[1]) ? (tx+= 2, Yes) : No)
 
-#define nwl_sign	_nwl_sign()
-#define times_sign	_times_sign()
-#define over_sign	_over_sign()
-#define power_sign	_power_sign()
-#define numtor_sign	_numtor_sign()
-#define denomtor_sign	_denomtor_sign()
-#define join_sign	_join_sign()
-#define less_than_sign	_less_than_sign()
-#define greater_than_sign _greater_than_sign()
+#define nwl_sign	nwl_sign_()
+#define times_sign	times_sign_()
+#define over_sign	over_sign_()
+#define power_sign	power_sign_()
+#define numtor_sign	numtor_sign_()
+#define denomtor_sign	denomtor_sign_()
+#define join_sign	join_sign_()
+#define less_than_sign	less_than_sign_()
+#define greater_than_sign greater_than_sign_()
 
 /* keywords */
 

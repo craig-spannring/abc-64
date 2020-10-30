@@ -1,6 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #include "i2cmd.h"
+#include "i2par.h"
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"

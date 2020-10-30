@@ -22,6 +22,8 @@
 
 #include "b.h"
 
+#include <stdlib.h>
+
 #ifndef TERMIO
 #include <sgtty.h>
 #else
@@ -34,7 +36,7 @@
 #include <signal.h>
 #endif
 
-char *getenv();
+
 int tgetent();
 int tgetnum();
 int tgetflag();

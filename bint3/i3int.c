@@ -18,6 +18,8 @@
 
 Forward Hidden Procedure jumptoend();
 
+Forward Visible Procedure newl(value n);
+
 /* Relics from old system: */
 
 Visible value resval;
@@ -166,18 +168,18 @@ case DELETE: Pop1(l_delete); break;
 case CHECK: if (!report) checkerr(); break;
 
 case WRITE:	/* collateral expression */
-	nl(F(WRT_L_LINES));
+	newl(F(WRT_L_LINES));
 	v = pop();
 	len = Nfields(v);
 	for (k= 0; k < len && still_ok; ++k)
 		writ(*Field(v, k));
 	release(v);
-	nl(F(WRT_R_LINES));
+	newl(F(WRT_R_LINES));
 	break;
 case WRITE1:	/* single expression */
-	nl(F(WRT_L_LINES));
+	newl(F(WRT_L_LINES));
 	if (F(WRT_EXPR) != Vnil) { v = pop(); writ(v); release(v); }
-	nl(F(WRT_R_LINES));
+	newl(F(WRT_R_LINES));
 	break;
 
 case READ: Pop2(read_eg); break;

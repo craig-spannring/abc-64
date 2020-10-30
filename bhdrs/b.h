@@ -12,7 +12,9 @@ extern "C" {
 /* The following are not intended as pseudo-encapsulation, */
 /* but to emphasize intention. */
 
+#ifndef __cplusplus
 typedef int bool;
+#endif
 typedef char *string; /* Strings are always terminated with a char '\0'. */
 
 #define Yes ((bool) 1)
