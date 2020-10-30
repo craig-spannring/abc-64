@@ -27,6 +27,8 @@ target_link_libraries(mkmach
   )
 
 add_executable(abc ${src_main})
+set_property(TARGET abc PROPERTY C_STANDARD 11)
+
 add_dependencies(abc mach_h_AutoGened file_h_AutoGened)
 target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
