@@ -2,7 +2,9 @@
 
 #include "b1outp.h"
 #include "b.h"
+#include "b1memo.h"
 #include "bmem.h"
+#include "trm.h"
 
 
 Forward Hidden Procedure c_putchr(char c);

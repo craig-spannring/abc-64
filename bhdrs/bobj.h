@@ -156,7 +156,7 @@ value* key();
 value* assoc();
 
 /****************************** Texts, Lists, and Tables *******************/
-value mk_elt();
+value mk_elt(void);
 
 bool in();
 

@@ -3,6 +3,7 @@
 #include "b.h"
 #include "bint.h"
 #include "bfil.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i3bws.h"

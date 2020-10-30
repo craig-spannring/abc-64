@@ -5,6 +5,7 @@
 #include "bobj.h"
 #include "b0lan.h"
 #include "i2par.h"
+#include "i3err.h"
 #include "i3env.h"
 #include "i3scr.h"
 #include "b1grab.h"

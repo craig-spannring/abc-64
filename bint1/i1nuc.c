@@ -1,9 +1,11 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i1num.h"
+#include "i3err.h"
 
 #define MAXDIGITS (MAXNUMDIG)
 	/* Max precision for non-integral, non-rounded numbers */

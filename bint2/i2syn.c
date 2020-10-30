@@ -1,18 +1,21 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #include "i2syn.h"
+
 #include "b.h"
+#include "b1memo.h"
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "b0lan.h"
 #include "i2par.h"
+#include "i3err.h"
 #include "i3scr.h"
 #include "i3env.h"
 #include "b1grab.h"
 
-Forward Hidden bool NEXT_keyword();
-Forward Hidden bool spec_firstkeyword();
+Forward Hidden bool NEXT_keyword(txptr q, char **kw);
+Forward Hidden bool spec_firstkeyword(char *fkw);
 
 extern bool OPTunpack;
 
@@ -58,7 +61,7 @@ Hidden bool keymark(txptr ty) {
 /*		cr_text							*/
 /* ******************************************************************** */
 
-Visible value cr_text(p, q) txptr p, q; {
+Visible value cr_text(txptr p, txptr q) {
 	/* Messes with the input line, which is a bit nasty,
 	   but considered preferable to copying to a separate buffer */
 	value t;
@@ -75,8 +78,7 @@ Visible value cr_text(p, q) txptr p, q; {
 
 #define Txnil	((txptr) NULL)
 
-Hidden bool search(find_kw, s, q, ftx, ttx) bool find_kw; string s;
-		txptr q, *ftx, *ttx; {
+Hidden bool search(bool find_kw, string s, txptr q, txptr *ftx, txptr *ttx) {
 	intlet parcnt= 0; bool outs= Yes, kw= No; char aq;
 	txptr lctx= Txnil;
 	
@@ -147,12 +149,12 @@ Visible bool find(string s, txptr q, txptr* ftx, txptr* ttx) {
 
 Forward Hidden txptr lcol();
 
-Visible Procedure findceol() {
+Visible Procedure findceol(void) {
 	txptr q= lcol(), ttx;
 	if (!find(S_COMMENT, q, &ceol, &ttx)) ceol= q;
 }
 
-Visible Procedure req(s, q, ftx, ttx) string s; txptr q, *ftx, *ttx; {
+Visible Procedure req(string s, txptr q, txptr *ftx, txptr *ttx) {
 	if (!find(s, q, ftx, ttx)) {
 		value v= mk_text(s);
 		parerrV(MESS(2400, "cannot find expected %s"), v);
@@ -161,7 +163,7 @@ Visible Procedure req(s, q, ftx, ttx) string s; txptr q, *ftx, *ttx; {
 	}
 }
 
-Hidden bool relsearch(s, q, ftx) string s; txptr q, *ftx; {
+Hidden bool relsearch(string s, txptr q, txptr *ftx) {
 	txptr ttx;
 	*ftx= tx;
 	while (search(No, s, q, ftx, &ttx))
@@ -197,7 +199,7 @@ Visible bool findrel(txptr q, txptr* ftx) {
 	return *ftx < q;
 }
 
-Visible bool findtrim(q, first) txptr q, *first; {
+Visible bool findtrim(txptr q, txptr *first) {
 	txptr ftx, ttx;
 	*first= q;
 	if (find(S_BEHEAD, *first, &ftx, &ttx)) *first= ftx;
@@ -209,20 +211,20 @@ Visible bool findtrim(q, first) txptr q, *first; {
 /*		tag, keyword, findkw					*/
 /* ******************************************************************** */
 
-Hidden value tag() {
+Hidden value tag(void) {
 	txptr tx0= tx;
 	if (!Letter(Char(tx))) parerr(MESS(2401, "no name where expected"));
 	else while (Tagmark(tx)) tx++;
 	return cr_text(tx0, tx);
 }
 
-Visible bool is_tag(v) value *v; {
+Visible bool is_tag(value *v) {
 	if (!Letter(Char(tx))) return No;
 	*v= tag();
 	return Yes;
 }
 
-Visible bool is_abcname(name) value name; {
+Visible bool is_abcname(value name) {
 	string s= strval(name);
 	
 	if (!Letter(*s))
@@ -234,7 +236,7 @@ Visible bool is_abcname(name) value name; {
 	return Yes;
 }
 
-Visible char *keyword() {
+Visible char *keyword(void) {
 	txptr tx0= tx;
 	static char *kwbuf;
 	int len;
@@ -277,7 +279,7 @@ Visible bool is_cmdname(txptr q, char** name) {
 
 /* only those immediately following the FIRST keyword */
 
-Hidden bool NEXT_keyword(q, kw) txptr q; char **kw; {
+Hidden bool NEXT_keyword(txptr q, char **kw) {
 	txptr ftx;
 	skipsp(&tx);
 	if (!findkw(q, &ftx))
@@ -296,7 +298,7 @@ Hidden char *firstkw[] = {
 	""
 };
 
-Hidden bool spec_firstkeyword(fkw) char *fkw; {
+Hidden bool spec_firstkeyword(char *fkw) {
 	char **kw;
 	for (kw= firstkw; **kw != '\0'; kw++) {
 		if (strcmp(fkw, *kw) == 0)
@@ -315,7 +317,7 @@ Visible bool findkw(txptr q, txptr* ftx) {
 /*		upto, nothing, ateol, need				*/
 /* ******************************************************************** */
 
-Visible Procedure upto(q, s) txptr q; string s; {
+Visible Procedure upto(txptr q, string s) {
 	skipsp(&tx);
 	if (Text(q)) {
 		value v= mk_text(s);
@@ -325,7 +327,7 @@ Visible Procedure upto(q, s) txptr q; string s; {
 	}
 }
 
-Visible Procedure upto1(q, m) txptr q; int m; {
+Visible Procedure upto1(txptr q, int m) {
 	skipsp(&tx);
 	if (Text(q)) {
 		parerr(m);
@@ -354,7 +356,7 @@ Visible bool ateol(void) {
 	return Eol(tx);
 }
 
-Visible Procedure need(s) string s; {
+Visible Procedure need(string s) {
 	string t= s;
 	skipsp(&tx);
 	while (*t)
@@ -373,17 +375,17 @@ Visible Procedure need(s) string s; {
 
 Visible txptr first_col;
 
-Visible txptr fcol() { /* the first position of the current line */
+Visible txptr fcol(void) { /* the first position of the current line */
 	return first_col;
 }
 
-Hidden txptr lcol() { /* the position beyond the last character of the line */
+Hidden txptr lcol(void) { /* the position beyond the last character of the line */
 	txptr ax= tx;
 	while (!Eol(ax)) ax++;
 	return ax;
 }
 
-Visible intlet ilev() {
+Visible intlet ilev(void) {
 	intlet i;
 	if (ifile == sv_ifile && i_looked_ahead) {
 		if (!interactive && ifile == sv_ifile) 
@@ -417,7 +419,7 @@ Visible intlet ilev() {
 	}
 }
 
-Visible Procedure veli() { /* After a look-ahead call of ilev */
+Visible Procedure veli(void) { /* After a look-ahead call of ilev */
 	if (!interactive && ifile == sv_ifile || OPTunpack)
 		f_lino--;
 	if (ifile == sv_ifile)
@@ -426,7 +428,7 @@ Visible Procedure veli() { /* After a look-ahead call of ilev */
 		o_looked_ahead= Yes;
 }
 
-Visible Procedure first_ilev() { /* initialise read buffer for new input */
+Visible Procedure first_ilev(void) { /* initialise read buffer for new input */
 	o_looked_ahead= No;
 	VOID ilev();
 	findceol();
@@ -451,7 +453,7 @@ Hidden string reserved[] = {
 	""
 };
 
-Visible Procedure initsyn() {
+Visible Procedure initsyn(void) {
 	value v;
 	string *kw;
 	
@@ -462,7 +464,7 @@ Visible Procedure initsyn() {
 	}
 }
 
-Visible Procedure endsyn() {
+Visible Procedure endsyn(void) {
 #ifdef MEMTRACE
 	release(res_cmdnames); res_cmdnames= Vnil;
 #endif
@@ -472,7 +474,7 @@ Visible Procedure endsyn() {
 /*		signs							*/
 /* ********************************************************************	*/
 
-Hidden bool la_denum(tx0) txptr tx0; {
+Hidden bool la_denum(txptr tx0) {
 	char l, r;
 	switch (l= Char(++tx0)) {
 		case C_OVER:	r= C_TIMES; break;
@@ -483,43 +485,43 @@ Hidden bool la_denum(tx0) txptr tx0; {
 	return Yes;
 }
 
-Visible bool _nwl_sign() {
+Visible bool _nwl_sign(void) {
 	if (_sign_is(C_NEWLINE))
 		return !la_denum(tx-2) ? Yes : (tx--, No);
 	return No;
 }
 
-Visible bool _times_sign() {
+Visible bool _times_sign(void) {
 	if (_sign_is(C_TIMES))
 		return la_denum(tx-1) ? Yes : (tx--, No);
 	return No;
 }
 
-Visible bool _over_sign() {
+Visible bool _over_sign(void) {
 	if (_sign_is(C_OVER))
 		return la_denum(tx-1) ? Yes : (tx--, No);
 	return No;
 }
 
-Visible bool _power_sign() {
+Visible bool _power_sign(void) {
 	if (_sign2_is(S_POWER))
 		return la_denum(tx-1) ? Yes : (tx-= 2, No);
 	return No;
 }
 
-Visible bool _numtor_sign() {
+Visible bool _numtor_sign(void) {
 	if (_sign2_is(S_NUMERATOR))
 		return la_denum(tx-1) ? Yes : (tx-= 2, No);
 	return No;
 }
 
-Visible bool _denomtor_sign() {
+Visible bool _denomtor_sign(void) {
 	if (_sign2_is(S_DENOMINATOR))
 		return la_denum(tx-1) ? Yes : (tx-= 2, No);
 	return No;
 }
 
-Visible bool _join_sign() {
+Visible bool _join_sign(void) {
 	if (_sign_is(C_JOIN))
 		return !_sign_is(C_JOIN) ? Yes : (tx-= 2, No);
 	return No;
@@ -539,7 +541,7 @@ Visible bool _greater_than_sign(void) {
 	return No;
 }
 
-Visible bool dyamon_sign(v) value *v; {
+Visible bool dyamon_sign(value *v) {
 	string s;
 	if (plus_sign) s= S_PLUS;
 	else if (minus_sign) s= S_MINUS;
@@ -549,7 +551,7 @@ Visible bool dyamon_sign(v) value *v; {
 	return Yes;
 }
 
-Visible bool dya_sign(v) value *v; {
+Visible bool dya_sign(value *v) {
 	string s;
 	if (times_sign) s= S_TIMES;
 	else if (over_sign) s= S_OVER;
@@ -566,7 +568,7 @@ Visible bool dya_sign(v) value *v; {
 	return Yes;
 }
 
-Visible bool mon_sign(v) value *v; {
+Visible bool mon_sign(value *v) {
 	string s;
 	if (about_sign) s= S_ABOUT;
 	else if (numtor_sign) s= S_NUMERATOR;
@@ -576,7 +578,7 @@ Visible bool mon_sign(v) value *v; {
 	return Yes;
 }
 
-Visible bool texdis_sign(v) value *v; {
+Visible bool texdis_sign(value *v) {
 	string s;
 	if (apostrophe_sign) s= S_APOSTROPHE;
 	else if (quote_sign) s= S_QUOTE;

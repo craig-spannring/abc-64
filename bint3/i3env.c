@@ -5,6 +5,7 @@
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"
+#include "i3err.h"
 #include "i3env.h" 	/* for curline, curlino  */
 #include "b1grab.h"
 

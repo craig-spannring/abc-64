@@ -3,8 +3,10 @@
 /* B editor -- read key definitions from file */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "i3err.h"
 #include "oper.h"
 #include "getc.h"
 #include "port.h"

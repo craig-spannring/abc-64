@@ -10,6 +10,7 @@
 #include "i1num.h"
 #include "i2par.h"
 #include "i3cen.h"
+#include "i3err.h"
 #include "i3sou.h"
 #include "port.h"
 

@@ -5,6 +5,7 @@
 #include "bint.h"
 #include "bobj.h"
 #include "i0err.h"
+#include "i3err.h"
 #include "i3env.h" /* for bndtgs */
 #include "i3in2.h"
 #include "b1grab.h"

@@ -3,6 +3,7 @@
 /* Sources: maintaining units and values on external files */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"
@@ -11,6 +12,7 @@
 #include "i2nod.h"
 #include "i3bws.h"
 #include "i3cen.h"
+#include "i3err.h"
 #include "i3env.h"
 #include "i3scr.h"
 #include "i3in2.h"

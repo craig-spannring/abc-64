@@ -3,11 +3,13 @@
 /* B texts */
 
 #include "b.h"
+#include "b1memo.h"
+#include "b1grab.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i1btr.h"
 #include "i1tlt.h"
-#include "b1grab.h"
+#include "i3err.h"
 
 Forward Hidden Procedure convbtext();
 

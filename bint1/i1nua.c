@@ -6,6 +6,7 @@
 #include "bobj.h"
 #include "i0err.h"
 #include "i1num.h"
+#include "i3err.h"
 
 /*
  * For various reasons, on some machines (notably the VAX), the range

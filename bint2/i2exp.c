@@ -13,7 +13,7 @@
 #include "i2exp.h"
 #include "i2syn.h"
 #include "i3sou.h"
-#include "i2syn.h"
+#include "i3err.h"
 
 Forward Hidden Procedure st_extend();
 Forward Hidden Procedure push_dya();

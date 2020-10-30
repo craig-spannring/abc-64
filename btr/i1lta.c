@@ -5,6 +5,7 @@
 #include "b.h"
 #include "bobj.h"
 #include "i1btr.h"
+#include "i3err.h"
 #include "i3scr.h" /* For at_nwl */
 #include "i1tlt.h"
 #include "b1grab.h"

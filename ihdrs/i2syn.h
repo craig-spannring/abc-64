@@ -21,6 +21,12 @@ extern "C" {
 
     extern Visible bool is_cmdname(txptr q, char** name);
 
+    extern Visible bool dyamon_sign(value *v);
+    extern Visible bool dya_sign(value *v);
+    extern Visible bool findtrim(txptr q, txptr *first);
+    extern Visible bool texdis_sign(value *v);
+        
+
 #ifdef __cplusplus
 }
 #endif

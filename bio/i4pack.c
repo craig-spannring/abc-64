@@ -2,6 +2,7 @@
 
 #include "b.h"
 #include "b0lan.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i3cen.h"

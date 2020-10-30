@@ -8,6 +8,7 @@
 #include "bobj.h"
 #include "i0err.h"
 #include "i2nod.h"
+#include "i3err.h"
 #include "i3env.h"
 #include "i3int.h"
 #include "i3in2.h"

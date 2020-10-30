@@ -1,9 +1,10 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
+#include "i1nug.h"
 #include "b.h"
 #include "bobj.h"
 #include "i1num.h"
-
+#include "i3err.h"
 
 /*
  * Routines for greatest common divisor calculation
@@ -16,7 +17,7 @@
 
 /* Single-precision gcd for integers > 0 */
 
-Hidden digit dig_gcd(u, v)  digit u, v; {
+Hidden digit dig_gcd(digit u, digit v) {
 	digit temp;
 	int k = 0;
 
@@ -44,7 +45,7 @@ Hidden digit dig_gcd(u, v)  digit u, v; {
 	return u * (1<<k);
 }
 
-Visible integer int_half(v) integer v; {
+Visible integer int_half(integer v) {
 	int i;
 	long carry;
 
@@ -82,7 +83,7 @@ Visible integer int_half(v) integer v; {
  * multiply with twopow
  */
  
-Hidden integer gcd_small(u, v, twopow) integer u, v, twopow; {
+Hidden integer gcd_small(integer u, integer v, integer twopow) {
 	integer g;
 
 	if (!IsSmallInt(u) && !IsSmallInt(v))
@@ -119,7 +120,7 @@ Hidden int lwb_lendiff = (3 / tenlogBASE) + 1;
 
 /* Multi-precision gcd of integers > 0 */
 
-Visible integer int_gcd(u1, v1) integer u1, v1; {
+Visible integer int_gcd(integer u1, integer v1) {
 	integer t, u, v;
 	integer twopow= int_1;
 	long k = 0;

@@ -8,6 +8,7 @@
 
 #ifdef SAVEPOS
 
+#include "b1memo.h"
 #include "bedi.h"
 #include "bobj.h"
 #include "bfil.h"

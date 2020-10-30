@@ -11,6 +11,7 @@
 #include "i3err.h"
 #include "b.h"
 #include "b1mess.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bint.h"
 #include "bobj.h"

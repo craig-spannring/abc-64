@@ -8,6 +8,7 @@
 #include "bedi.h"
 #include "etex.h"
 #include "bobj.h"
+#include "e1edoc.h"
 #include "node.h"
 #include "supr.h"
 #include "gram.h"

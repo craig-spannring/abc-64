@@ -1,10 +1,12 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #include "b.h"
+#include "b1grab.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "i1btr.h"
 #include "i1tlt.h"
-#include "b1grab.h"
+#include "i3err.h"
 
 /*********************************************************************/
 /* grab, copy, release of btree(node)s                               */

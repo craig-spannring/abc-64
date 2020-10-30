@@ -2,6 +2,7 @@
 
 #include "b1file.h"
 #include "b.h"
+#include "b1memo.h"
 #include "bfil.h"
 #include "bmem.h"
 #include "port.h"

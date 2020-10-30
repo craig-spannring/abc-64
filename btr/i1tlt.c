@@ -6,6 +6,7 @@
 #include "bobj.h"
 #include "i1btr.h"
 #include "i1tlt.h"
+#include "i3err.h"
 #include "b1grab.h"
 
 #define SIZE_TLT	MESS(300, "in #t, t is not a text list or table")
@@ -51,7 +52,7 @@
 int l2size();
 value l2min(), l2max();
 
-Visible value mk_elt() { /* {}, internal only */
+Visible value mk_elt(void) { /* {}, internal only */
 	value e = grab(ELT, Lt);
 	Root(e) = Bnil;
 	return e;

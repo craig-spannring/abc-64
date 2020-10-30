@@ -5,7 +5,10 @@
 #include "b.h"
 #include "bobj.h"
 #include "i0err.h"
+#include "i1nug.h"
+#include "i1nui.h"
 #include "i1num.h"
+#include "i3err.h"
 
 /* Length calculations used for fraction sizes: */
 

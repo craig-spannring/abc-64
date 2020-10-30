@@ -5,6 +5,7 @@
  */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bedi.h"
 #include "etex.h"
 #include "bobj.h"

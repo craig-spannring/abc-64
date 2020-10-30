@@ -1,6 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "bfil.h"

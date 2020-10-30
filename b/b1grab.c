@@ -4,10 +4,12 @@
 
 #include "b1grab.h"
 #include "b.h"
+#include "b1memo.h"
 #include "bint.h"
 #include "bedi.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "i3err.h"
 
 #define Adj(s) (unsigned) (Hdrsize+(s))
 #define Unadj(s) (unsigned) ((s)-Hdrsize)

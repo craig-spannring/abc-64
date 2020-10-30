@@ -9,6 +9,7 @@
 #ifdef USERSUGG
 
 #include "b0lan.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bedi.h"
 #include "etex.h"

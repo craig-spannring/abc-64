@@ -3,9 +3,10 @@
 /* B numbers, basic external interface */
 
 #include "b.h"
+#include "b1grab.h"
 #include "bobj.h"
 #include "i1num.h"
-#include "b1grab.h"
+#include "i3err.h"
 
 /*
  * This file contains operations on numbers that are not predefined

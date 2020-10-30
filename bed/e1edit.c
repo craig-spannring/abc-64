@@ -5,11 +5,13 @@
  */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bedi.h"
 #include "etex.h"
 #include "bmem.h"
 #include "erro.h"
 #include "bobj.h"
+#include "i3err.h"
 #include "node.h"
 #include "tabl.h"
 #include "gram.h"

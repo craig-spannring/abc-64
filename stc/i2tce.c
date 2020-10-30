@@ -3,6 +3,7 @@
 /* process type unification errors */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i2stc.h"

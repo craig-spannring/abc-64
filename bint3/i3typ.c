@@ -5,6 +5,7 @@
 #include "bint.h"
 #include "bobj.h"
 #include "i3env.h"
+#include "i3err.h"
 #include "i3typ.h"
 #include "b1grab.h"
 

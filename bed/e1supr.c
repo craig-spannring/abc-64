@@ -9,6 +9,7 @@
 #include "etex.h"
 #include "bobj.h"
 #include "erro.h"
+#include "i3err.h"
 #include "node.h"
 #include "supr.h"
 #include "gram.h"
@@ -26,9 +27,7 @@ Forward Hidden Procedure lastnnitem();
  * Compute the length of the ep->s1'th item of node tree(ep->focus).
  */
 
-Visible int
-lenitem(ep)
-	environ *ep;
+Visible int lenitem(environ *ep)
 {
 	node n = tree(ep->focus);
 	node nn;
@@ -52,19 +51,12 @@ lenitem(ep)
  * This process is repeated until no more improvements can be made.
  */
 
-Visible Procedure
-grow(ep, deleting)
-	environ *ep;
-	bool deleting;
+Visible Procedure grow(environ *ep, bool deleting)
 {
 	subgrow(ep, Yes, deleting);
 }
 
-Visible Procedure
-subgrow(ep, ignorespaces, deleting)
-	environ *ep;
-	bool ignorespaces;
-	bool deleting;
+Visible Procedure subgrow(environ *ep, bool ignorespaces, bool deleting)
 {
 	node n;
 	int sym;
@@ -202,9 +194,7 @@ subgrow(ep, ignorespaces, deleting)
  * Ditto to find smallest possible representation.
  */
 
-Visible Procedure
-shrink(ep)
-	environ *ep;
+Visible Procedure shrink(environ *ep)
 {
 	node n;
 	int sym;
@@ -301,18 +291,13 @@ shrink(ep)
  */
 
 #ifdef NOT_USED
-Visible Procedure
-growsubset(ep)
-	environ *ep;
+Visible Procedure growsubset(environ *ep)
 {
 	subgrsubset(ep, Yes);
 }
 #endif
 
-Visible Procedure
-subgrsubset(ep, ignorespaces)
-	environ *ep;
-	bool ignorespaces;
+Visible Procedure subgrsubset(environ *ep, bool ignorespaces)
 {
 	node n = tree(ep->focus);
 	string *rp = noderepr(n);
@@ -334,8 +319,7 @@ subgrsubset(ep, ignorespaces)
  */
 
 Visible Procedure /* Ought to be Hidden */
-shrsubset(ep)
-	environ *ep;
+shrsubset(environ *ep)
 {
 	node n = tree(ep->focus);
 	string *rp = noderepr(n);
@@ -355,12 +339,7 @@ shrsubset(ep)
  * Subroutine for grow/shrink to see whether item i is (almost) invisible.
  */
 
-Hidden bool
-subisnull(n, rp, i, ignorespaces)
-	node n;
-	string *rp;
-	int i;
-	bool ignorespaces;
+Hidden bool subisnull(node n, string *rp, int i, bool ignorespaces)
 {
 	string repr;
 	node nn;
@@ -374,11 +353,7 @@ subisnull(n, rp, i, ignorespaces)
 }
 
 
-Hidden bool
-isnull(n, rp, i)
-	node n;
-	string *rp;
-	int i;
+Hidden bool isnull(node n, string *rp, int i)
 {
 	return subisnull(n, rp, i, Yes);
 }
@@ -387,9 +362,7 @@ isnull(n, rp, i)
  * Find the rightmost VHOLE which would look the same as the current one.
  */
 
-Visible Procedure
-ritevhole(ep)
-	environ *ep;
+Visible Procedure ritevhole(environ *ep)
 {
 	node n;
 	int ich;
@@ -473,9 +446,7 @@ ritevhole(ep)
  * Ditto to the left.
  */
 
-Visible Procedure
-leftvhole(ep)
-	environ *ep;
+Visible Procedure leftvhole(environ *ep)
 {
 	int ich;
 
@@ -554,44 +525,33 @@ leftvhole(ep)
  * 2) Update ep->highest properly.
  */
 
-Visible Procedure
-s_up(ep)
-	environ *ep;
+Visible Procedure s_up(environ *ep)
 {
 	if (!up(&ep->focus))
 		syserr(MESS(7100, "s_up failed"));
 	higher(ep);
 }
 
-Visible Procedure
-s_downi(ep, i)
-	environ *ep;
-	int i;
+Visible Procedure s_downi(environ *ep, int i)
 {
 	if (!downi(&ep->focus, i))
 		syserr(MESS(7101, "s_downi failed"));
 }
 
-Visible Procedure
-s_down(ep)
-	environ *ep;
+Visible Procedure s_down(environ *ep)
 {
 	if (!down(&ep->focus))
 		syserr(MESS(7102, "s_down failed"));
 }
 
-Visible Procedure
-s_downrite(ep)
-	environ *ep;
+Visible Procedure s_downrite(environ *ep)
 {
 	if (!downrite(&ep->focus))
 		syserr(MESS(7103, "s_downrite failed"));
 }
 
 #ifdef NOT_USED
-Visible Procedure
-s_left(ep)
-	environ *ep;
+Visible Procedure s_left(environ *ep)
 {
 	int ich = ichild(ep->focus);
 
@@ -601,9 +561,7 @@ s_left(ep)
 #endif
 
 #ifdef NOT_USED
-Visible Procedure
-s_rite(ep)
-	environ *ep;
+Visible Procedure s_rite(environ *ep)
 {
 	int ich = ichild(ep->focus);
 
@@ -618,9 +576,7 @@ s_rite(ep)
  * coded in-line or as a macro.)
  */
 
-Hidden bool
-nextitem(ep)
-	environ *ep;
+Hidden bool nextitem(environ *ep)
 {
 	if (ep->s1 >= 2*nchildren(tree(ep->focus)) + 1)
 		return No; /* Already at last item */
@@ -633,9 +589,7 @@ nextitem(ep)
  * Ditto for previous.
  */
 
-Hidden bool
-previtem(ep)
-	environ *ep;
+Hidden bool previtem(environ *ep)
 {
 	if (ep->s1 <= 1
 		|| ep->s1 == 2 && fwidth(noderepr(tree(ep->focus))[0]) < 0)
@@ -650,9 +604,7 @@ previtem(ep)
  * but not a whole subtree.
  */
 
-Hidden bool
-isunititem(ep)
-	environ *ep;
+Hidden bool isunititem(environ *ep)
 {
 	if (ep->s1&1)
 		return Yes;
@@ -664,9 +616,7 @@ isunititem(ep)
  * Check for consistent mode information.
  */
 
-Visible bool
-checkep(ep)
-	environ *ep;
+Visible bool checkep(environ *ep)
 {
 	switch (ep->mode) {
 
@@ -707,9 +657,7 @@ checkep(ep)
  * (i.e., those with length <= 0).
  */
 
-Visible bool
-nextnnitem(ep)
-	environ *ep;
+Visible bool nextnnitem(environ *ep)
 {
 	int s1save = ep->s1;
 
@@ -721,9 +669,7 @@ nextnnitem(ep)
 	return No;
 }
 
-Visible bool
-prevnnitem(ep)
-	environ *ep;
+Visible bool prevnnitem(environ *ep)
 {
 	int s1save = ep->s1;
 	int len;
@@ -738,9 +684,7 @@ prevnnitem(ep)
 }
 
 #ifdef NOT_USED
-Visible Procedure
-firstnnitem(ep)
-	environ *ep;
+Visible Procedure firstnnitem(environ *ep)
 {
 	ep->s1 = fwidth(noderepr(tree(ep->focus))[0]) < 0 ? 2 : 1;
 	while (lenitem(ep) == 0) {
@@ -751,9 +695,7 @@ firstnnitem(ep)
 }
 #endif
 
-Hidden Procedure
-lastnnitem(ep)
-	environ *ep;
+Hidden Procedure lastnnitem(environ *ep)
 {
 	ep->s1 = 2*nchildren(tree(ep->focus)) + 1;
 	while (lenitem(ep) == 0) {
@@ -772,9 +714,7 @@ lastnnitem(ep)
  * to insert a character.
  */
 
-Visible Procedure
-fixit(ep)
-	environ *ep;
+Visible Procedure fixit(environ *ep)
 {
 	/* First, make a hole if it's not already a hole. */
 
@@ -839,9 +779,7 @@ fixit(ep)
  * The string pointer must not be null!
  */
 
-Visible bool
-allspaces(str)
-	string str;
+Visible bool allspaces(string str)
 {
 	Assert(str);
 	for (; *str; ++str) {
@@ -856,9 +794,7 @@ allspaces(str)
  * Function to compute the actual width of the focus.
  */
 
-Visible int
-focwidth(ep)
-	environ *ep;
+Visible int focwidth(environ *ep)
 {
 	node nn;
 	node n = tree(ep->focus);
@@ -921,9 +857,7 @@ focwidth(ep)
  * This may be input again to fixfocus to allow restoration of this position.
  */
 
-Visible int
-focoffset(ep)
-	environ *ep;
+Visible int focoffset(environ *ep)
 {
 	node nn;
 	node n;
@@ -984,9 +918,7 @@ focoffset(ep)
  * Return the first character of the focus (maybe '\n'; 0 if zero-width).
  */
 
-Visible int
-focchar(ep)
-	environ *ep;
+Visible int focchar(environ *ep)
 {
 	node n = tree(ep->focus);
 	string *rp;
@@ -1042,9 +974,7 @@ focchar(ep)
  * Subroutine to return first character of node.
  */
 
-Visible int
-nodechar(n)
-	node n;
+Visible int nodechar(node n)
 {
 	string *rp;
 	int nch;
@@ -1073,9 +1003,7 @@ nodechar(n)
  * Function to compute the actual indentation level at the focus.
  */
 
-Visible int
-focindent(ep)
-	environ *ep;
+Visible int focindent(environ *ep)
 {
 	int y = Ycoord(ep->focus);
 	int x = Xcoord(ep->focus);
@@ -1110,9 +1038,7 @@ focindent(ep)
  * Routines to move 'environ' structures.
  */
 
-emove(s, d)
-	environ *s;
-	environ *d;
+Procedure emove(environ *s,	environ *d)
 {
 #ifdef STRUCTASS
 	*d = *s;
@@ -1140,8 +1066,7 @@ emove(s, d)
 #endif /* !STRUCTASS */
 }
 
-void ecopy(environ *s,
-           environ *d)
+void ecopy(environ *s, environ *d)
 {
 	emove(s, d);
 	VOID pathcopy(d->focus);
@@ -1166,9 +1091,7 @@ void erelease(environ* ep)
  * Routines to move 'environ' structures.
  */
 
-Visible bool ev_eq(l, r)
-	environ *l;
-	environ *r;
+Visible bool ev_eq(environ *l, environ *r)
 {
 	if (l->focus == r->focus
 	    && l->mode == r->mode

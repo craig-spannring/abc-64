@@ -3,6 +3,7 @@
 /* ABC type check */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bfil.h"
 #include "bint.h"
@@ -13,6 +14,7 @@
 #include "i2stc.h"
 #include "i3bws.h"
 #include "i3cen.h"
+#include "i3err.h"
 #include "i3env.h"	/* for curline and curlino */
 #include "i3sou.h"
 #include "port.h"

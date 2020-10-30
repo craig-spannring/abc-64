@@ -8,9 +8,9 @@ extern "C" {
 #endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
-Visible Porting long filemodtime();
-Visible Porting Procedure freepath();
-Visible Porting char *curdir();
+extern Visible Porting long filemodtime();
+extern Visible Porting Procedure freepath(char *path);
+extern Visible Porting char *curdir();
 
 #ifdef __cplusplus
 }

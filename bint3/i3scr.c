@@ -13,6 +13,7 @@
 #include "i3env.h"
 #include "i3in2.h"
 #include "i3scr.h"
+#include "i3err.h"
 #include "b1grab.h"
 
 Visible bool interactive;

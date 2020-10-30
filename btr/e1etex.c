@@ -4,6 +4,7 @@
 #include "bedi.h"
 #include "bobj.h"
 #include "etex.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "b1grab.h"
 

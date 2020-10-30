@@ -5,11 +5,13 @@
 #include "i3sou.h"
 #include "i3fil.h"
 #include "b.h"
+#include "b1memo.h"
 #include "bmem.h"
 #include "bint.h"
 #include "bobj.h"
 #include "i2nod.h"
 #include "i2par.h"
+#include "i3err.h"
 #include "i3scr.h"
 #include "i3sou.h"
 

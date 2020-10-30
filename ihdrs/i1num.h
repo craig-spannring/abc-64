@@ -46,20 +46,12 @@ typedef struct integer {
 #define Freeze2(v, vv) \
 	((vv).len= (v) != 0, (vv).dig[0]= SmallIntVal(v), (v)= &(vv))
 
-integer int_gadd();
-integer int_canon();
-integer int_sum();
-integer int_prod();
-integer int_diff();
-integer int_quot();
-integer int_neg();
-integer int_gcd();
-integer mk_int();
-integer int1mul();
-integer int_tento();
-integer int_half();
-integer int_mod();
-digit int_ldiv();
+integer int_gadd(integer v, integer w, intlet factor);
+integer int_canon(integer v);
+integer int_sum(integer v, integer w);
+integer int_prod(integer v, integer w);
+integer int_diff(integer v, integer w);
+integer int_quot(integer v, integer w);
 
 #define int_0 ((integer) MkSmallInt(0))
 #define int_1 ((integer) MkSmallInt(1))

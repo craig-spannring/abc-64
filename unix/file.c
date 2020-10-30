@@ -1,6 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 #include "b.h"
+#include "b1memo.h"
 #include "bmem.h"  /* for getmem(), etc */
 #include "file.h"  /* for ABCLIB */
 #include "main.h"  /* for curdir() */
@@ -52,8 +53,7 @@ Hidden char *savepath(path)
 	return savestr(path);
 }
 
-Visible Porting Procedure freepath(path)
-     char *path;
+Visible Porting Procedure freepath(char *path)
 {
 	if (path != NULL) freestr(path);
 }
