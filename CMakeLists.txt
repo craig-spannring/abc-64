@@ -34,10 +34,10 @@ target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
 
   
-  -Wall
+  # -Wall
 
   #-Wno-implicit-int
-  # -Wno-implicit-function-declaration
+  -Wimplicit-function-declaration
   #-Wno-return-type
   -Wno-parentheses
 
