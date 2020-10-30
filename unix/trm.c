@@ -36,11 +36,7 @@
 #include <signal.h>
 #endif
 
-
-int tgetent();
-int tgetnum();
-int tgetflag();
-char *tgetstr();
+#include <term.h>
 
 #define Min(a,b) ((a) <= (b) ? (a) : (b))
 
@@ -102,15 +98,18 @@ char *BC;
 char *UP;
 short ospeed;
 
+extern int tputs(const char *str, int affcnt, int (*putc)(int));
+
 Hidden FILE *fp= NULL;
-Forward Hidden int outchar(); 		/* procedure for termcap's tputs */
+Forward Hidden int outchar(int); 		/* procedure for termcap's tputs */
 #define Putstr(str)	tputs((str), 1, outchar)
-extern char *tgoto();
+// extern char *tgoto();
 
 /* termcap terminal capabilities */
+static int g_lines;
+static int g_cols;
 
-Hidden int lines;
-Hidden int cols;
+
 
 /*
  * String-valued capabilities are saved in one big array.
@@ -353,13 +352,13 @@ Visible int trmstart(int *plines, int *pcols, int *pflags) {
 		return err;
 	}
 
-	*plines = lines;
-	*pcols = cols;
+	*plines = g_lines;
+	*pcols = g_cols;
 	*pflags = flags;
 
 	started = Yes;
 	
-	trmsync(lines-1, 0);
+	trmsync(g_lines-1, 0);
 		/* position for >ws message from initbws()
 		 * on vt100's, and for alternate screen buffers
 		 */
@@ -401,8 +400,8 @@ Visible Procedure trmundefined() {
 	cur_y = cur_x = Undefined;
 	mode = so_mode = Undefined;
 	
-	for (y = 0; y < lines; y++) {
-		for (x = 0; x <= cols; x++) {
+	for (y = 0; y < g_lines; y++) {
+		for (x = 0; x <= g_cols; x++) {
 			linedata[y][x] = UNKNOWN; /* impossible char */
 			linemode[y][x] = NOCOOK;  /* no so bits */
 		}
@@ -438,7 +437,7 @@ Hidden int getttyfp() {
 Hidden int ccc;
 
 /*ARGSUSED*/
-Hidden Procedure countchar(ch) char ch; {
+Hidden int countchar(int ch) {
 	ccc++;
 }
 
@@ -521,10 +520,10 @@ Hidden int gettermcaps() {
 		}
 	}
 		
-	lines = tgetnum("li");
-	cols = tgetnum("co");
-	if (lines <= 0) lines = 24;
-	if (cols <= 0) cols = 80;
+	g_lines = tgetnum("li");
+	g_cols = tgetnum("co");
+	if (g_lines <= 0) g_lines = 24;
+	if (g_cols <= 0) g_cols = 80;
 	
 	if (!ce_str)
 		return TE_DUMB;
@@ -686,20 +685,20 @@ Hidden int start_trm() {
 	struct winsize win;
 
 	if (ioctl(0, TIOCGWINSZ, (char*)&win) == 0) {
-		if (win.ws_col > 0 && ((int) win.ws_col) != cols
+		if (win.ws_col > 0 && ((int) win.ws_col) != g_cols
 		    ||
-		    win.ws_row > 0 && ((int) win.ws_row) != lines) {
+		    win.ws_row > 0 && ((int) win.ws_row) != g_lines) {
 			/* Window size has changed.
 			   Release previously allocated buffers. */
 			if (linedata != NULL) {
-				for (y= 0; y < lines; ++y) {
+				for (y= 0; y < g_lines; ++y) {
 					free((char *) linedata[y]);
 				}
 				free((char *) linedata);
 				linedata= NULL;
 			}
 			if (linemode != NULL) {
-				for (y= 0; y < lines; ++y) {
+				for (y= 0; y < g_lines; ++y) {
 					free((char *) linemode[y]);
 				}
 				free((char *) linemode);
@@ -711,29 +710,29 @@ Hidden int start_trm() {
 			}
 		}
 		if (((int)win.ws_col) > 0)
-			cols = win.ws_col;
+			g_cols = win.ws_col;
 		if (((int)win.ws_row) > 0)
-			lines = win.ws_row;
+			g_lines = win.ws_row;
 	}
 #endif
 	if (linedata == NULL) {
-		if ((linedata = (char**) malloc(MALLOC_ARG(lines * sizeof(char*)))) == NULL)
+		if ((linedata = (char**) malloc(MALLOC_ARG(g_lines * sizeof(char*)))) == NULL)
 			return TE_NOMEM;
-		for (y = 0; y < lines; y++) {
-			if ((linedata[y] = (char*) malloc(MALLOC_ARG((cols+1) * sizeof(char)))) == NULL)
+		for (y = 0; y < g_lines; y++) {
+			if ((linedata[y] = (char*) malloc(MALLOC_ARG((g_cols+1) * sizeof(char)))) == NULL)
 				return TE_NOMEM;
 		}
 	}
 	if (linemode == NULL) {
-		if ((linemode = (char**) malloc(MALLOC_ARG(lines * sizeof(char*)))) == NULL)
+		if ((linemode = (char**) malloc(MALLOC_ARG(g_lines * sizeof(char*)))) == NULL)
 			return TE_NOMEM;
-		for (y = 0; y < lines; y++) {
-			if ((linemode[y] = (char*) malloc(MALLOC_ARG((cols+1) * sizeof(char)))) == NULL)
+		for (y = 0; y < g_lines; y++) {
+			if ((linemode[y] = (char*) malloc(MALLOC_ARG((g_cols+1) * sizeof(char)))) == NULL)
 				return TE_NOMEM;
 		}
 	}
 	if (lenline == NULL) {
-		if ((lenline = (intlet*) malloc(MALLOC_ARG(lines * sizeof(intlet)))) == NULL)
+		if ((lenline = (intlet*) malloc(MALLOC_ARG(g_lines * sizeof(intlet)))) == NULL)
 			return TE_NOMEM;
 	}
 
@@ -742,9 +741,9 @@ Hidden int start_trm() {
 	Putstr(ti_str);
 	Putstr(ks_str);
 	if (cs_str)
-		Putstr(tgoto(cs_str, lines-1, 0));
+		Putstr(tgoto(cs_str, g_lines-1, 0));
 	if (mustclear)
-		clear_lines(0, lines-1);
+		clear_lines(0, g_lines-1);
 	VOID fflush(fp);
 	
 	return TE_OK;
@@ -788,7 +787,7 @@ Visible Procedure trmsense(string sense, string format, int* py, int* px)
 		standend();
 	
 	if (format != NULL && get_pos(format, py, px)) {
-		if (*py < 0 || lines <= *py || *px < 0 || cols <= *px)
+		if (*py < 0 || g_lines <= *py || *px < 0 || g_cols <= *px)
 			*py = *px = Undefined;
 	}
 	cur_y = Undefined;
@@ -1042,21 +1041,21 @@ Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, str
 	
 	if (yfirst < 0)
 		yfirst = 0;
-	if (ylast >= lines)
-		ylast = lines-1;
-	space = cols*(ylast-yfirst+1) - indent;
+	if (ylast >= g_lines)
+		ylast = g_lines-1;
+	space = g_cols*(ylast-yfirst+1) - indent;
 	if (space <= 0)
 		return;
-	yfirst += indent/cols;
-	indent %= cols;
+	yfirst += indent/g_cols;
+	indent %= g_cols;
 	y= yfirst;
 	if (!data)
 		data= ""; /* Safety net */
 	x = indent;
 	lendata = strlen(data);
-	if (ylast == lines-1 && lendata >= space)
+	if (ylast == g_lines-1 && lendata >= space)
 		lendata = space - 1;
-	len = Min(lendata, cols-x);
+	len = Min(lendata, g_cols-x);
 	while (y <= ylast) {
 		put_line(y, x, data, mode, len);
 		y++;
@@ -1066,7 +1065,7 @@ Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, str
 			data += len;
 			if (mode != NULL)
 				mode += len;
-			len = Min(lendata, cols);
+			len = Min(lendata, g_cols);
 		}
 		else
 			break;
@@ -1268,7 +1267,7 @@ Hidden void put_line(y, xskip, data, mode, len) int y, xskip; string data; strin
 	}
 	
 	lenline[y] = xskip + len;
-	if (cur_x == cols) {
+	if (cur_x == g_cols) {
 		if (!has_mi)
 			set_mode(Normal);
 		if (!has_ms)
@@ -1426,10 +1425,10 @@ Hidden Procedure clear_lines(yfirst, ylast) int yfirst, ylast; {
 	
 	if (!has_xs && so_mode != Off)
 		standend();
-	if (cl_str && yfirst == 0 && ylast == lines-1) {
+	if (cl_str && yfirst == 0 && ylast == g_lines-1) {
 		Putstr(cl_str);
 		cur_y = cur_x = 0;
-		for (y = 0; y < lines; ++y) {
+		for (y = 0; y < g_lines; ++y) {
 			lenline[y] = 0;
 			if (has_xs) linemode[y][0] = NOCOOK;
 		}
@@ -1438,7 +1437,7 @@ Hidden Procedure clear_lines(yfirst, ylast) int yfirst, ylast; {
 	for (y = yfirst; y <= ylast; y++) {
 		if (lenline[y] > 0) {
 			move(y, 0);
-			if (ylast == lines-1 && cd_str) {
+			if (ylast == g_lines-1 && cd_str) {
 				Putstr(cd_str);
 				while (y <= ylast) {
 					if (has_xs) linemode[y][0] = NOCOOK;
@@ -1481,7 +1480,7 @@ Hidden Procedure set_blanks(y, xfrom, xto) int y, xfrom, xto; {
 /* 
  * outchar() is used by termcap's tputs.
  */
-Hidden int outchar(ch) char ch; {
+Hidden int outchar(int ch) {
 	fputc(ch, fp);
 }
 
@@ -1500,8 +1499,8 @@ Visible Procedure trmscrollup(int yfirst, int ylast, int by) {
 
 	if (yfirst < 0)
 		yfirst = 0;
-	if (ylast >= lines)
-		ylast = lines-1;
+	if (ylast >= g_lines)
+		ylast = g_lines-1;
 
 	if (yfirst > ylast)
 		return;
@@ -1557,7 +1556,7 @@ Hidden Procedure scr_lines(yfrom, yto, n, dy) int yfrom, yto, n, dy; {
 Hidden Procedure scr1up(yfirst, ylast, n) int yfirst, ylast, n; {
 	move(yfirst, 0);
 	dellines(n);
-	if (ylast < lines-1) {
+	if (ylast < g_lines-1) {
 		move(ylast-n+1, 0);
 		addlines(n);
 	}
@@ -1565,7 +1564,7 @@ Hidden Procedure scr1up(yfirst, ylast, n) int yfirst, ylast, n; {
 
 
 Hidden Procedure scr1down(yfirst, ylast, n) int yfirst, ylast, n; {
-	if (ylast == lines-1) {
+	if (ylast == g_lines-1) {
 		clear_lines(ylast-n+1, ylast);
 	}
 	else {
@@ -1603,10 +1602,10 @@ Hidden Procedure scr2up(yfirst, ylast, n) int yfirst, ylast, n; {
 	move(ylast, 0);
 	while (n-- > 0) {
 		Putstr(sf_str);
-		if (has_db && ylast == lines-1)
+		if (has_db && ylast == g_lines-1)
 			clr_to_eol();
 	}
-	Putstr(tgoto(cs_str, lines-1, 0));
+	Putstr(tgoto(cs_str, g_lines-1, 0));
 	cur_y = cur_x = Undefined;
 }
 
@@ -1620,7 +1619,7 @@ Hidden Procedure scr2down(yfirst, ylast, n) int yfirst, ylast, n; {
 		if (has_da && yfirst == 0)
 			clr_to_eol();
 	}
-	Putstr(tgoto(cs_str, lines-1, 0));
+	Putstr(tgoto(cs_str, g_lines-1, 0));
 	cur_y = cur_x = Undefined;
 }
 
@@ -1646,12 +1645,12 @@ Hidden Procedure lf_scroll(yto, by)
 {
 	int n = by;
 
-	move(lines-1, 0);
+	move(g_lines-1, 0);
 	while (n-- > 0) {
 		fputc('\n', fp);
 	}
-	scr_lines(0, lines-1, by, 1);
-	move_lines(lines-1-by, lines-1, lines-1-yto, -1);
+	scr_lines(0, g_lines-1, by, 1);
+	move_lines(g_lines-1-by, g_lines-1, g_lines-1-yto, -1);
 	clear_lines(yto-by+1, yto);
 }
 
@@ -1678,7 +1677,7 @@ Visible Procedure trmsync(int y, int x) {
 #endif
 	check_started("trmsync");
 	
-	if (0 <= y && y < lines && 0 <= x && x < cols) {
+	if (0 <= y && y < g_lines && 0 <= x && x < g_cols) {
 		move(y, x);
 		if (no_cursor) {
 			Putstr(ve_str);
