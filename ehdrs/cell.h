@@ -3,6 +3,8 @@
 #ifndef CELL_h_13c44f041497ddbfb1693d9ca8eee844
 #define CELL_h_13c44f041497ddbfb1693d9ca8eee844
 
+#include "bedi.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

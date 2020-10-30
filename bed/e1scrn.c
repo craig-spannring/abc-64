@@ -15,6 +15,7 @@
 #include "cell.h"
 #include "trm.h"
 #include "port.h"
+#include "e1cell.h"
 
 #ifndef NDEBUG
 extern bool dflag;

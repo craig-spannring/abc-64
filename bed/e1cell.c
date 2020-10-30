@@ -4,6 +4,7 @@
  * B editor -- Screen management package, cell list manipulation routines.
  */
 
+#include "e1cell.h"
 #include "b.h"
 #include "b0lan.h"
 #include "bedi.h"
@@ -140,8 +141,7 @@ feedfreelist()
  */
 
 Visible Procedure
-discard(p)
-	cell *p;
+discard(cell *p)
 {
 	cell *savefreelist;
 
