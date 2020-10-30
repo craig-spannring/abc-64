@@ -3,17 +3,21 @@
 #ifndef I3SOU_h_fd9c7492ed650ce1c146dea84efff0ff
 #define I3SOU_h_fd9c7492ed650ce1c146dea84efff0ff
 
+#include "b.h"
+#include "bint.h"
+#include "i3cen.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1987. */
 
-Visible bool is_zerfun();
-Visible bool is_monfun();
-Visible bool is_dyafun();
-Visible bool is_zerprd();
-Visible bool is_monprd();
-Visible bool is_dyaprd();
+Visible bool is_zerfun(value t, value *f);
+Visible bool is_monfun(value t, value *f);
+Visible bool is_dyafun(value t, value *f);
+Visible bool is_zerprd(value t, value *p);
+Visible bool is_monprd(value t, value *p);
+Visible bool is_dyaprd(value t, value *p);
 Visible bool is_loaded();
 Visible bool u_exists();
 Visible bool p_exists();
@@ -58,17 +62,34 @@ extern bool need_rec_suggestions;
 #define Cts_ext ".cts"
 #define Wsp_ext ""
 
-Visible value permkey();
-Visible value get_pname();
-Visible value getval();
-Visible value gettarval();
+Visible value permkey(value name, literal type);
+Visible value get_pname(parsetree v);
+Visible value getval(value fname, literal ct);
+Visible value gettarval(value fname, value name);
 
-Visible value new_fname();	/* devise a filename for a unit or target */
-Visible value mkabcname();	/* vice versa for recovering target name */
+Visible value new_fname(value name, literal type);	/* devise a filename for a unit or target */
+Visible value mkabcname(char *name);	/* vice versa for recovering target name */
 #define CONVP_SIGN '_'		/* to map point */
 #define CONVDQ_SIGN '@'		/* to map double quote */
 
-Visible bool ckws_writable();
+Visible bool ckws_writable(int m);
+
+    extern Visible Procedure del_target(value name);
+    
+    extern Visible Procedure putval(value v, char *dir, char *name, literal ct, bool silently);
+    extern Visible Procedure puttarval(value v, char *dir, value fname, value tname, bool silently);
+    extern Visible Procedure put_perm(void);
+    extern Visible Procedure create_unit(void);
+    extern Visible Procedure edit_unit(void);
+    extern Visible Procedure edit_target(void);
+    extern Visible Procedure initperm(void);
+    extern Visible Procedure endperm(void);
+    extern Visible Procedure initsou(void);
+    extern Visible Procedure endsou(void);
+    extern Visible Procedure lst_uhds(void);
+    extern Visible Procedure rem_unit(parsetree u, wsenvptr wse);
+    extern Visible Procedure def_target(value name, value t);
+    extern Visible Procedure clear_perm(void);
 
 #ifdef __cplusplus
 }

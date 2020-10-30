@@ -564,7 +564,7 @@ Hidden bool wsp_writable() {
 	return D_writable(wsp) ? Yes : No;
 }
 
-Visible bool ckws_writable(m) int m; {
+Visible bool ckws_writable(int m) {
 	/* check if the workspace is writable and
 	 * if it isn't give a warning, once a workspace (change)
 	 */

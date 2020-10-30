@@ -2,6 +2,7 @@
 
 /* Facilities supplied by the file system */
 
+#include "i3sou.h"
 #include "i3fil.h"
 #include "b.h"
 #include "bmem.h"
@@ -115,7 +116,7 @@ Hidden char *filesuffix(type) literal type; {
 #define FNMLEN 8
 #define SUFFIXLEN 4
 
-Visible value new_fname(name, type) value name; literal type; {
+Visible value new_fname(value name, literal type) {
 	char fname[FNMLEN + SUFFIXLEN + 1];
 	char *suffix= filesuffix(type);
 	string sname= strval(name);
@@ -212,7 +213,7 @@ Hidden Procedure conv_fname(fname, suffix) char *fname, *suffix; {
 
 /* recover location or workspace name from filename */
 
-Visible value mkabcname(name) char *name; {
+Visible value mkabcname(char *name) {
 	char *p;
 	
 	for (p= name; *p != '\0'; ++p) {

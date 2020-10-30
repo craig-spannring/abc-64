@@ -271,23 +271,6 @@ Visible Procedure end_scr();
 Visible Procedure re_outfile();
 Visible Procedure vs_ifile();
 
-/* i3sou.c */
-Visible Procedure del_target();
-Visible Procedure putval();
-Visible Procedure puttarval();
-Visible Procedure put_perm();
-Visible Procedure create_unit();
-Visible Procedure edit_unit();
-Visible Procedure edit_target();
-Visible Procedure initperm();
-Visible Procedure endperm();
-Visible Procedure initsou();
-Visible Procedure endsou();
-Visible Procedure lst_uhds();
-Visible Procedure rem_unit();
-Visible Procedure def_target();
-Visible Procedure clear_perm();
-
 /* i3sta.c */
 Visible Procedure push();
 Visible Procedure ret();
