@@ -1,13 +1,13 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
+#include "b1outp.h"
 #include "b.h"
 #include "bmem.h"
 
-Forward Hidden Procedure c_putchr();
 
-Visible Procedure putstr(file, s)
-     FILE *file;
-     string s;
+Forward Hidden Procedure c_putchr(char c);
+
+Visible Procedure putstr(FILE *file, string s)
 {
 	if (file == CONSOLE) c_putstr(s);
 	else fputs(s, file);
@@ -19,15 +19,13 @@ Visible Procedure putchr(FILE* file, char c)
 	else putc(c, file);
 }
 
-Visible Procedure putnewline(file)
-     FILE *file;
+Visible Procedure putnewline(FILE* file)
 {
 	if (file == CONSOLE) c_putnewline();
 	else putc('\n', file);
 }
 
-Visible Procedure doflush(file)
-     FILE *file;
+Visible Procedure doflush(FILE *file)
 {
 	if (file == CONSOLE) c_flush();
 	else VOID fflush(file);
@@ -50,9 +48,7 @@ Hidden int wincol = 0;      /* number of chars already on the line;
 			     * 0 <= wincol <= winwidth
 			      */
 
-Visible Procedure init_interpreter_output(height, width)
-     int height;
-     int width;
+Visible Procedure init_interpreter_output(int height, int width)
 {
 	winlength = height;
 	winwidth  = width;
@@ -79,8 +75,7 @@ Visible int getwincol()
 
 #define LINELENGTH 200
 
-Visible Procedure c_putstr(s)
-     string s;
+Visible Procedure c_putstr(string s)
 {
 	char buf[LINELENGTH];
 	char *pnl;
@@ -108,8 +103,7 @@ Visible Procedure c_putstr(s)
 	}
 }
 
-Visible Procedure c_putdata(data)
-	string data;
+Visible Procedure c_putdata(string data)
 {
 	int lendata;    /* total data length */
 	int nlines;     /* number of lines needed */
@@ -150,8 +144,7 @@ Visible Procedure c_putdata(data)
 		wincol = winwidth;
 }
 
-Hidden Procedure c_putchr(c)
-     char c;
+Hidden Procedure c_putchr(char c)
 {
 	if (c == '\n') {
 		c_putnewline();
@@ -163,7 +156,7 @@ Hidden Procedure c_putchr(c)
 	}
 }
 
-Visible Procedure c_putnewline() {
+Visible Procedure c_putnewline(void) {
 	trmscrollup(0, winlength, 1);
 	wincol = 0;
 }

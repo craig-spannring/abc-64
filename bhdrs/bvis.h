@@ -14,16 +14,6 @@ extern "C" {
 /* b1mess.c */
 
 /* b1outp.c */
-Visible Procedure c_putstr();
-Visible Procedure c_putdata();
-Visible Procedure c_putnewline();
-Visible Procedure c_flush();
-Visible Procedure init_interpreter_output();
-Visible Procedure re_interpreter_output();
-Visible Procedure putnewline();
-Visible Procedure putstr();
-Visible Procedure doflush();
-Visible Procedure putchr(FILE* file, char c);
 
 /* e1cell.c */
 Visible Procedure discard();
