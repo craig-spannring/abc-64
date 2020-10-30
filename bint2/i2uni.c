@@ -11,6 +11,7 @@
 #include "i3sou.h"
 #include "i2syn.h"
 #include "i2cmd.h"
+#include "i3err.h"
 #include "b1grab.h"
 
 Forward Hidden parsetree cmd_unit();

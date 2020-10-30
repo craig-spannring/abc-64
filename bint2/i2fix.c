@@ -12,6 +12,7 @@
 #include "i2par.h"
 #include "i3env.h"
 #include "i3sou.h"
+#include "i3err.h"
 #include "b1grab.h"
 
 #define S_elmt '1'

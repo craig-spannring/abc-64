@@ -39,6 +39,20 @@ extern "C" {
 #define STANDOUT	1	/* in inverse video */
 #define UNDERLINE	2	/* underlined */
 
+    Visible int trmstart(int *plines, int *pcols, int *pflags);
+    Visible Procedure trmend(void);
+    Visible Procedure trmundefined(void);
+    Visible Procedure trmsense(string sense, string format, int* py, int* px);
+    Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, string mode);
+    Visible Procedure trmscrollup(int yfirst, int ylast, int by);
+    Visible Procedure trmsync(int y, int x);
+    Visible Procedure trmbell(void);
+    Visible Procedure trmshow(char *s);
+    Visible int trminput(void);
+    Visible int trmavail(void);
+    Visible int trmsuspend(void);
+
+    
 #ifdef __cplusplus
 }
 #endif

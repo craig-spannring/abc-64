@@ -6,6 +6,7 @@
 #include "i2par.h"
 #include "i2nod.h"
 #include "i2syn.h"
+#include "i3err.h"
 
 
 Forward Hidden parsetree singtarg();

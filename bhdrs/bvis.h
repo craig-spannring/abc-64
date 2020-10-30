@@ -12,13 +12,6 @@ extern "C" {
 /* b1memo.c */
 
 /* b1mess.c */
-Visible Procedure putmess();
-Visible Procedure freemem();
-Visible Procedure putSmess();
-Visible Procedure putDSmess();
-Visible Procedure initmess();
-Visible Procedure endmess();
-Visible Procedure put2Cmess();
 
 /* b1outp.c */
 Visible Procedure c_putstr();
@@ -244,30 +237,6 @@ Visible Procedure extbnd_tags();
 Visible Procedure sethowtoname();
 
 /* i3err.c */
-Visible Procedure bye();
-Visible Procedure immexit();
-Visible Procedure putserr();
-Visible Procedure flusherr();
-Visible Procedure syserr(int);
-Visible Procedure memexh();
-Visible Procedure pprerrV();
-Visible Procedure pprerr();
-Visible Procedure parerrV();
-Visible Procedure parerr();
-Visible Procedure fixerrV();
-Visible Procedure fixerr();
-Visible Procedure interr();
-Visible Procedure int_signal();
-Visible Procedure putsSerr();
-Visible Procedure putsDSerr();
-Visible Procedure puts2Cerr();
-Visible Procedure putsCerr();
-Visible Procedure interrV();
-Visible Procedure initfmt();
-Visible Procedure initerr();
-Visible Procedure re_errfile();
-Visible Procedure checkerr();
-Visible Procedure typerrV();
 
 /* i3fil.c */
 Visible Procedure f_delete();
@@ -428,18 +397,6 @@ Visible Procedure rec_workspace();
 Visible Procedure rec_suggestions();
 
 /* trm.c */
-Visible int trmstart();
-Visible Procedure trmend();
-Visible Procedure trmundefined();
-Visible Procedure trmsense();
-Visible Procedure trmputdata();
-Visible Procedure trmscrollup();
-Visible Procedure trmsync();
-Visible Procedure trmbell();
-Visible Procedure trmshow();
-Visible int trminput();
-Visible int trmavail();
-Visible int trmsuspend();
 
 #ifdef __cplusplus
 }

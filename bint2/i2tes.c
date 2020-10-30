@@ -9,6 +9,7 @@
 #include "i2nod.h"
 #include "i2syn.h"
 #include "i2exp.h"
+#include "i3err.h"
 #include "b1grab.h"
 
 /* Avoid name conflict with standard header files: */

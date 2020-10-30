@@ -14,6 +14,7 @@
    at runtime.
 */
 
+#include "b1mess.h"
 #include "b.h"
 #include "bmem.h"
 #include "bobj.h"
@@ -110,11 +111,11 @@ Visible string getmess(nr) int nr;  {
 	return buf;
 }
 
-Visible Procedure initmess() {
+Visible Procedure initmess(void) {
 	messbuf= (char*) getmem(MESSBUFSIZE);
 }
 
-Visible Procedure endmess() {
+Visible Procedure endmess(void) {
 #ifdef MEMTRACE
 	freemem((ptr) messbuf);
 #endif
@@ -122,8 +123,7 @@ Visible Procedure endmess() {
 
 /***************************************************************************/
 
-Visible Procedure putmess(m)
-     int m;
+Visible Procedure putmess(int m)
 {
 	putserr(getmess(m));
 	flusherr();
@@ -131,27 +131,19 @@ Visible Procedure putmess(m)
 
 #ifndef KEYS
 
-Visible Procedure putSmess(m, s)
-     int m;
-     string s;
+Visible Procedure putSmess(int m, string s)
 {
 	putsSerr(getmess(m), s);
 	flusherr();
 }
 
-Visible Procedure putDSmess(m, d, s)
-     int m;
-     int d;
-     string s;
+Visible Procedure putDSmess(int m, int d, string s)
 {
 	putsDSerr(getmess(m), d, s);
 	flusherr();
 }
 
-Visible Procedure put2Cmess(m, c1, c2)
-     int m;
-     char c1;
-     char c2;
+Visible Procedure put2Cmess(int m, char c1, char c2)
 {
 	puts2Cerr(getmess(m), c1, c2);
 	flusherr();

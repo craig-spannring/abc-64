@@ -8,14 +8,14 @@
 extern "C" {
 #endif
 
-extern Procedure regetmem(ptr *, unsigned syze);
-extern Procedure freemem();
-extern Procedure bufpush();
-extern Procedure bufcpy();
-extern Procedure bufreinit();
-extern Procedure bufinit();
-extern Procedure buffree();
-extern Procedure bufncpy();
+    extern Procedure regetmem(ptr *, unsigned syze);
+    extern Procedure freemem(ptr p);
+    extern Procedure bufpush(bufadm *bp, char c);
+    extern Procedure bufcpy(bufadm *bp, char *s);
+    extern Procedure bufreinit(bufadm *bp);
+    extern Procedure bufinit(bufadm *bp);
+    extern Procedure buffree(bufadm *bp);
+    extern Procedure bufncpy(bufadm *bp, char *s, int len);
 
 #ifdef __cplusplus
 }

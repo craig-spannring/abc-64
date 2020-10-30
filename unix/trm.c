@@ -328,7 +328,7 @@ Hidden bool canscroll= Yes;
  * Start up terminal and internal administration.
  * Return 0 if all well, error code if in trouble.
  */
-Visible int trmstart(plines, pcols, pflags) int *plines, *pcols, *pflags; {
+Visible int trmstart(int *plines, int *pcols, int *pflags) {
 	register int err;
 
 #ifdef VTRMTRACE
@@ -767,8 +767,7 @@ Hidden int start_trm() {
  * send the cursor position; the sense string can normally be empty.
  */
 
-Visible Procedure trmsense(sense, format, py, px)
-	string sense, format; int *py, *px;
+Visible Procedure trmsense(string sense, string format, int* py, int* px)
 {
 	bool get_pos();
 
@@ -1029,9 +1028,7 @@ Hidden Procedure move(y, x) int y, x; {
  * Characters for which the corresponding char in "mode" have the value
  * STANDOUT must be put in inverse video.
  */
-Visible Procedure trmputdata(yfirst, ylast, indent, data, mode)
-	int yfirst, ylast; register int indent;
-	register string data; register string mode;
+Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, string mode)
 {
 	register int y;
 	int x, len, lendata, space;
@@ -1490,8 +1487,7 @@ Hidden int outchar(ch) char ch; {
  * Scrolling (part of) the screen up (or down, by<0).
  */
 
-Visible Procedure trmscrollup(yfirst, ylast, by) register int yfirst;
-		register int ylast; register int by; {
+Visible Procedure trmscrollup(int yfirst, int ylast, int by) {
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmscrollup(%d, %d, %d);\n", yfirst, ylast, by);
 #endif
@@ -1674,7 +1670,7 @@ Hidden Procedure move_lines(yfrom, yto, n, dy)
  * Synchronization, move cursor to given position (or previous if < 0).
  */
 
-Visible Procedure trmsync(y, x) int y, x; {
+Visible Procedure trmsync(int y, int x) {
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmsync(%d, %d);\n", y, x);
 #endif
@@ -1717,7 +1713,7 @@ Visible Procedure trmbell() {
  * For debugging only.
  */
 
-Visible Procedure trmshow(s) char *s; {
+Visible Procedure trmshow(char* s) {
 	int y, x;
 	
 	if (!vtrmfp)
