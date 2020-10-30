@@ -39,7 +39,7 @@ target_compile_options(abc PRIVATE
   #-Wno-return-type
   -Wno-parentheses
 
-  -Wno-int-to-pointer-cast
+  # -Wno-int-to-pointer-cast
   # -Werror=int-to-pointer-cast
   )
 target_link_libraries(abc
