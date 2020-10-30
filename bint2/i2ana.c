@@ -9,6 +9,7 @@
 #include "i2nod.h"
 #include "i2gen.h" /* Must be after i2nod.h */
 #include "i3env.h"
+#include "i3err.h"
 #include "i3sou.h"
 #include "b1grab.h"
 

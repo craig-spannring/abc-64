@@ -4,6 +4,7 @@
  * B editor -- Editor command processor.
  */
 
+#include "e1comm.h"
 #include "b.h"
 #include "bedi.h"
 #include "bcom.h"
@@ -28,7 +29,7 @@ Visible string savewhere;
 
 environ top_env, *top_ep;
 
-Visible Procedure initbed() {
+Visible Procedure initbed(void) {
 	top_ep= &top_env;
 
 	savewhere = (string)NULL;
@@ -41,7 +42,7 @@ Visible Procedure initbed() {
 #endif /* SAVEBUF */
 }
 
-Visible Procedure endbed() {
+Visible Procedure endbed(void) {
 	environ *ep = tobesaved;
 
 	tobesaved = (environ*)NULL;
@@ -72,12 +73,7 @@ Visible Procedure endbed() {
 	Erelease(*top_ep);
 }
 
-Visible Procedure abced_file(filename, errline, kind, creating, changed)
-     string filename;
-     intlet errline;
-     literal kind;
-     bool creating;
-     bool *changed;
+Visible Procedure abced_file(string filename, intlet errline, literal kind, bool creating, bool *changed)
 {
 	environ *ep= top_ep;
 

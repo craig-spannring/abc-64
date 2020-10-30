@@ -16,12 +16,8 @@ extern "C" {
 /* b1outp.c */
 
 /* e1cell.c */
-Visible Procedure discard();
 
 /* e1comm.c */
-Visible Procedure abced_file();
-Visible Procedure initbed();
-Visible Procedure endbed();
 
 /* e1deco.c*/
 Visible Procedure delfocus();
