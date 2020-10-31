@@ -2,6 +2,7 @@
 
 /* Fix unparsed expr/test */
 
+#include "i2fix.h"
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"

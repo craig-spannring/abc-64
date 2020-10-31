@@ -152,9 +152,6 @@ Visible Procedure push_item();
 Visible Procedure trim_target();
 
 /* i2fix.c */
-Visible Procedure f_eunparsed();
-Visible Procedure f_cunparsed();
-Visible Procedure f_trim_target();
 
 /* i2gen.c */
 Visible Procedure jumpto();
