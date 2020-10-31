@@ -1,7 +1,5 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
-#define lenline len_line /* Avoid name conflict with lenline in tex.c */
-
 /*
  * Virtual TeRMinal package.
  * (For a description see at the end of this file.)
@@ -20,6 +18,7 @@
  * Includes and data definitions.
  */
 
+#include "trm.h"
 #include "b.h"
 
 #include <stdlib.h>
@@ -248,7 +247,7 @@ Hidden short cur_y = Undefined, cur_x = Undefined;
  * (Partially) empty lines are distinghuished by "lenline[y] < cols".
  */
 Hidden char **linedata = NULL, **linemode = NULL;
-Hidden intlet *lenline = NULL;
+Hidden intlet *lengthline = NULL;
 
 /* To compare the mode part of the line when the
  * mode parameter of trmputdata == NULL, we use the following:
@@ -372,7 +371,7 @@ Visible int trmstart(int *plines, int *pcols, int *pflags) {
  * Beware that it might be called by a caught interrupt even in the middle
  * of trmstart()!
  */
-Visible Procedure trmend() {
+Visible Procedure trmend(void) {
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmend();\n");
 #endif
@@ -391,7 +390,7 @@ Visible Procedure trmend() {
  * Set all internal statuses to undefined, especially the contents of
  * the screen, so a hard redraw will not be optimised to heaven.
  */
-Visible Procedure trmundefined() {
+Visible Procedure trmundefined(void) {
 	int y, x;
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmundefined();\n");
@@ -405,7 +404,7 @@ Visible Procedure trmundefined() {
 			linedata[y][x] = UNKNOWN; /* impossible char */
 			linemode[y][x] = NOCOOK;  /* no so bits */
 		}
-		lenline[y] = 0;
+		lengthline[y] = 0;
 	}
 }
 
@@ -425,7 +424,7 @@ Hidden Procedure check_started(m) char *m; {
 
 #endif /* NDEBUG */
 
-Hidden int getttyfp() {
+Hidden int getttyfp(void) {
 	if (fp != NULL)	/* already initialised */
 		return TE_OK;
 	fp= fopen("/dev/tty", "w");
@@ -458,7 +457,7 @@ Hidden int str0cost(str) char *str; {
  * properties.  Return TE_OK if all well, error code otherwise.
  */
 
-Hidden int gettermcaps() {
+Hidden int gettermcaps(void) {
 	string trmname;
 	char tc_buf[1024];
 	static char strbuf[1024];
@@ -597,7 +596,7 @@ Hidden SIGTYPE trmintrhandler(sig) int sig; {
 
 #endif /* CATCHINTR */
 
-Hidden int setttymode() {
+Hidden int setttymode(void) {
 	if (!know_ttys) {
 		if (gtty(0, &oldtty) != 0
 		    || gtty(0, &newtty) != 0
@@ -664,7 +663,7 @@ Hidden int setttymode() {
 	return TE_OK;
 }
 
-Hidden Procedure resetttymode() {
+Hidden Procedure resetttymode(void) {
 	if (know_ttys) {
 		stty(0, &oldtty);
 #ifndef TERMIO
@@ -679,7 +678,7 @@ Hidden Procedure resetttymode() {
 	}
 }
 
-Hidden int start_trm() {
+Hidden int start_trm(void) {
 	int y;
 #ifdef TIOCGWINSZ
 	struct winsize win;
@@ -704,9 +703,9 @@ Hidden int start_trm() {
 				free((char *) linemode);
 				linemode= NULL;
 			}
-			if (lenline != NULL) {
-				free((char *) lenline);
-				lenline= NULL;
+			if (lengthline != NULL) {
+				free((char *) lengthline);
+				lengthline= NULL;
 			}
 		}
 		if (((int)win.ws_col) > 0)
@@ -731,8 +730,8 @@ Hidden int start_trm() {
 				return TE_NOMEM;
 		}
 	}
-	if (lenline == NULL) {
-		if ((lenline = (intlet*) malloc(MALLOC_ARG(g_lines * sizeof(intlet)))) == NULL)
+	if (lengthline == NULL) {
+		if ((lengthline = (intlet*) malloc(MALLOC_ARG(g_lines * sizeof(intlet)))) == NULL)
 			return TE_NOMEM;
 	}
 
@@ -875,7 +874,7 @@ Hidden bool get_pos(format, py, px) string format; int *py, *px; {
 Hidden bool rewrite_ok(y, xfrom, xto) int y, xfrom, xto; {
 	char *plnyx, *pmdyx, *plnyto;
 	
-	if (xto > lenline[y])
+	if (xto > lengthline[y])
 		return No;
 
 	plnyto = &linedata[y][xto];
@@ -1119,15 +1118,15 @@ Hidden void put_line(y, xskip, data, mode, len) int y, xskip; string data; strin
 	int cost, o_cost; 	/* normal and optimising cost */
 	
 	/* Bugfix GvR 19-June-87: */
-	while (lenline[y] < xskip) {
-		linedata[y][lenline[y]] = ' ';
-		linemode[y][lenline[y]] = PLAIN;
-		lenline[y]++;
+	while (lengthline[y] < xskip) {
+		linedata[y][lengthline[y]] = ' ';
+		linemode[y][lengthline[y]] = PLAIN;
+		lengthline[y]++;
 	}
 	
 	/* calculate the magic parameters */
 	op = &linedata[y][xskip];
-	oq = &linedata[y][lenline[y]-1];
+	oq = &linedata[y][lengthline[y]-1];
 	mp = &linemode[y][xskip];
 	np = data;
 	nq = nend = data + len - 1;
@@ -1140,7 +1139,7 @@ Hidden void put_line(y, xskip, data, mode, len) int y, xskip; string data; strin
 	/* calculate m2, iff we can optimise or line keeps same length: */
 	if (flags & CAN_OPTIMISE || (oq-op) == (nq-np)) {
 		if (mode != NULL) mo = mode + len - 1;
-		mp = &linemode[y][lenline[y]-1];
+		mp = &linemode[y][lengthline[y]-1];
 		while (op <= oq && np <= nq
 		       && *oq == *nq && ((*mp)&SOBIT) == *mo) {
 			oq--, nq--, mp--, m2++;
@@ -1266,7 +1265,7 @@ Hidden void put_line(y, xskip, data, mode, len) int y, xskip; string data; strin
 		}
 	}
 	
-	lenline[y] = xskip + len;
+	lengthline[y] = xskip + len;
 	if (cur_x == g_cols) {
 		if (!has_mi)
 			set_mode(Normal);
@@ -1324,21 +1323,21 @@ Hidden Procedure set_mode(m) int m; {
 	mode = m;
 }
 
-Hidden Procedure get_so_mode() {
-	if (cur_x >= lenline[cur_y] || linemode[cur_y][cur_x] == NOCOOK)
+Hidden Procedure get_so_mode(void) {
+	if (cur_x >= lengthline[cur_y] || linemode[cur_y][cur_x] == NOCOOK)
 		so_mode = Off;
 	else
 		so_mode = linemode[cur_y][cur_x] & SOBIT;
 }
 
-Hidden Procedure standout() {
+Hidden Procedure standout(void) {
 	Putstr(so_str);
 	so_mode = On;
 	if (has_xs)
 		linemode[cur_y][cur_x] = SOCOOK;
 }
 
-Hidden Procedure standend() {
+Hidden Procedure standend(void) {
 	Putstr(se_str);
 	so_mode = Off;
 	if (has_xs)
@@ -1353,7 +1352,7 @@ Hidden Procedure put_str(data, mode, n, inserting) char *data; char *mode; int n
 	so = so_mode;
 	if (has_xs) {
 		ln_y_x = &linemode[cur_y][cur_x];
-		ln_y_end = &linemode[cur_y][lenline[cur_y]];
+		ln_y_end = &linemode[cur_y][lengthline[cur_y]];
 	}
 	while (n-- > 0) {
 		if (has_xs && ln_y_x <= ln_y_end && ((*ln_y_x)&XSBIT))
@@ -1379,7 +1378,7 @@ Hidden Procedure ins_str(data, mode, n) char *data, *mode; int n; {
 	int x;
 	
 	/* x will start AFTER the line, because there might be a cookie */
-	for (x = lenline[cur_y]; x >= cur_x; x--) {
+	for (x = lengthline[cur_y]; x >= cur_x; x--) {
 		linedata[cur_y][x+n] = linedata[cur_y][x];
 		linemode[cur_y][x+n] = linemode[cur_y][x];
 	}
@@ -1389,7 +1388,7 @@ Hidden Procedure ins_str(data, mode, n) char *data, *mode; int n; {
 Hidden Procedure del_str(n) int n; {
 	int x, xto;
 	
-	xto = lenline[cur_y] - n; /* again one too far because of cookie */
+	xto = lengthline[cur_y] - n; /* again one too far because of cookie */
 	if (has_xs) {
 		for (x = cur_x + n; x >= cur_x; x--) {
 			if (linemode[cur_y][x] & XSBIT)
@@ -1429,19 +1428,19 @@ Hidden Procedure clear_lines(yfirst, ylast) int yfirst, ylast; {
 		Putstr(cl_str);
 		cur_y = cur_x = 0;
 		for (y = 0; y < g_lines; ++y) {
-			lenline[y] = 0;
+			lengthline[y] = 0;
 			if (has_xs) linemode[y][0] = NOCOOK;
 		}
 		return;
 	}
 	for (y = yfirst; y <= ylast; y++) {
-		if (lenline[y] > 0) {
+		if (lengthline[y] > 0) {
 			move(y, 0);
 			if (ylast == g_lines-1 && cd_str) {
 				Putstr(cd_str);
 				while (y <= ylast) {
 					if (has_xs) linemode[y][0] = NOCOOK;
-					lenline[y++] = 0;
+					lengthline[y++] = 0;
 				}
 				break;
 			}
@@ -1452,8 +1451,8 @@ Hidden Procedure clear_lines(yfirst, ylast) int yfirst, ylast; {
 	}
 }
 
-Hidden Procedure clr_to_eol() {
-	lenline[cur_y] = cur_x;
+Hidden Procedure clr_to_eol(void) {
+	lengthline[cur_y] = cur_x;
 	if (!has_xs && so_mode != Off)
 		standend();
 	Putstr(ce_str);
@@ -1470,7 +1469,7 @@ Hidden Procedure set_blanks(y, xfrom, xto) int y, xfrom, xto; {
 	
 	for (x = xfrom; x < xto; x++) {
 		linedata[y][x] = ' '; 
-		if (has_xs && lenline[y] >= x && linemode[y][x]&XSBIT)
+		if (has_xs && lengthline[y] >= x && linemode[y][x]&XSBIT)
 			linemode[y][x]= SECOOK; 
 		else
 			linemode[y][x]= NOCOOK;
@@ -1544,11 +1543,11 @@ Hidden Procedure scr_lines(yfrom, yto, n, dy) int yfrom, yto, n, dy; {
 		for (y = yfrom; y != yto; y += dy) {
 			linedata[y] = linedata[y+dy];
 			linemode[y] = linemode[y+dy];
-			lenline[y] = lenline[y+dy];
+			lengthline[y] = lengthline[y+dy];
 		}
 		linedata[yto] = savedata;
 		linemode[yto] = savemode;
-		lenline[yto] = 0;
+		lengthline[yto] = 0;
 		if (has_xs) linemode[yto][0] = NOCOOK;
 	}
 }
@@ -1661,7 +1660,7 @@ Hidden Procedure move_lines(yfrom, yto, n, dy)
      int dy;
 {
 	while (n-- > 0) {
-		put_line(yto, 0, linedata[yfrom], linemode[yfrom], lenline[yfrom]);
+		put_line(yto, 0, linedata[yfrom], linemode[yfrom], lengthline[yfrom]);
 		yfrom += dy;
 		yto += dy;
 	}
@@ -1696,7 +1695,7 @@ Visible Procedure trmsync(int y, int x) {
  * Send a bell, visible if possible.
  */
 
-Visible Procedure trmbell() {
+Visible Procedure trmbell(void) {
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmbell();\n");
 #endif
@@ -1758,7 +1757,7 @@ Visible Procedure trmshow(char* s) {
 
 Hidden int pushback= -1;
 
-Visible int trminput() {
+Visible int trminput(void) {
 	char c;
 	int n;
 
@@ -1813,7 +1812,7 @@ Hidden Procedure trmpushback(c) int c; {
 
 #ifdef HAS_SELECT
 
-Hidden int dep_trmavail() {
+Hidden int dep_trmavail(void) {
 	int nfound, nfds;
 	fd_set readfds;
 	static struct timeval timeout= {0, 0};
@@ -1832,7 +1831,7 @@ Hidden int dep_trmavail() {
 
 #ifdef TERMIO
 
-Hidden int dep_trmavail() {
+Hidden int dep_trmavail(void) {
 	int n;
 	char c;
 	
@@ -1852,13 +1851,13 @@ Hidden int dep_trmavail() {
 
 #ifndef TRMAVAIL_DEFINED
 
-Hidden int dep_trmavail() {
+Hidden int dep_trmavail(void) {
 	return -1;
 }
 
 #endif
 
-Visible int trmavail() {
+Visible int trmavail(void) {
 #ifdef CATCHINTR
 	if (trmintrptd) return 1;
 #endif
@@ -1876,7 +1875,7 @@ Visible int trmavail() {
  * Should be called only after trmend and before trmstart!
  */
 
-Visible int trmsuspend() {
+Visible int trmsuspend(void) {
 #ifdef SIGTSTP
 	SIGTYPE (*oldsig)();
 	
@@ -1892,7 +1891,7 @@ Visible int trmsuspend() {
 #endif /*SIGTSTP*/
 }
 
-Hidden int subshell() {
+Hidden int subshell(void) {
 	int r;
 
 	r= system("exec ${SHELL-/bin/sh}");

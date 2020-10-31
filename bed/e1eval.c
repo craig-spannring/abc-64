@@ -4,6 +4,7 @@
  * B editor -- Width attribute evaluation.
  */
 
+#include "e1eval.h"
 #include "b.h"
 #include "b0lan.h"
 #include "bedi.h"
@@ -53,13 +54,7 @@
  * at the initial values of (y, x) and level.
  */
 
-Visible Procedure
-evalcoord(
-	node n,
-	int jch,
-	int *py,
-	int *px,
-	int *plevel)
+Visible Procedure evalcoord(node n, int jch, int *py, int *px, int *plevel)
 {
 	node nn;
 	int i;
@@ -118,8 +113,7 @@ evalcoord(
  * character, and \b or \t only as last.
  */
 
-Visible int
-fwidth(string str)
+Visible int fwidth(string str)
 {
 	int c;
 	int n = 0;

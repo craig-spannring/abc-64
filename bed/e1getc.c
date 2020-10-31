@@ -2,8 +2,10 @@
 
 /* B editor -- read key definitions from file */
 
+#include "e1getc.h"
 #include "b.h"
 #include "b1memo.h"
+#include "b1mess.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i3err.h"
@@ -138,10 +140,7 @@ Hidden int lookup(name)
  * an initial subsequence of another, or vice versa.
  * String definitions (code < 0) are not undefined.
  */
-Visible Procedure undefine(code, deflen, def)
-	int code;
-	int deflen;
-	string def;
+Visible Procedure undefine(int code, int deflen, string def)
 {
 	struct tabent *d, *last= deftab+ndefs;
 	string p, q;

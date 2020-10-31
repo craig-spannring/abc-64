@@ -26,17 +26,9 @@ extern "C" {
 /* e1erro.c */
 
 /* e1eval.c*/
-Visible Procedure evalcoord(); 
-Visible int fwidth();
-
 
 /* e1getc.c*/
-Visible Procedure initgetc();
-Visible Procedure endgetc();
-Visible Procedure pollinterrupt();
-Visible Procedure initkeys();
-Visible Procedure initoperations();
-Visible Procedure undefine();
+Visible Procedure undefine(int code, int deflen, string def);
 
 
 /* e1goto.c*/

@@ -3,6 +3,8 @@
 #ifndef TRM_h_b36e05a639a4c1d1dc8de08e1a0e9fdd
 #define TRM_h_b36e05a639a4c1d1dc8de08e1a0e9fdd
 
+#include "b.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -39,18 +41,18 @@ extern "C" {
 #define STANDOUT	1	/* in inverse video */
 #define UNDERLINE	2	/* underlined */
 
-    Visible int trmstart(int *plines, int *pcols, int *pflags);
-    Visible Procedure trmend(void);
-    Visible Procedure trmundefined(void);
-    Visible Procedure trmsense(string sense, string format, int* py, int* px);
-    Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, string mode);
-    Visible Procedure trmscrollup(int yfirst, int ylast, int by);
-    Visible Procedure trmsync(int y, int x);
-    Visible Procedure trmbell(void);
-    Visible Procedure trmshow(char *s);
-    Visible int trminput(void);
-    Visible int trmavail(void);
-    Visible int trmsuspend(void);
+    extern Visible int trmstart(int *plines, int *pcols, int *pflags);
+    extern Visible Procedure trmend(void);
+    extern Visible Procedure trmundefined(void);
+    extern Visible Procedure trmsense(string sense, string format, int* py, int* px);
+    extern Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, string mode);
+    extern Visible Procedure trmscrollup(int yfirst, int ylast, int by);
+    extern Visible Procedure trmsync(int y, int x);
+    extern Visible Procedure trmbell(void);
+    extern Visible Procedure trmshow(char *s);
+    extern Visible int trminput(void);
+    extern Visible int trmavail(void);
+    extern Visible int trmsuspend(void);
 
     
 #ifdef __cplusplus
