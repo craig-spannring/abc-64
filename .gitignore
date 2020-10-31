@@ -1,3 +1,4 @@
+*.c.save
 *~
 b/*.o
 bed/*.o
