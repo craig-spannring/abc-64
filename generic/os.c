@@ -56,7 +56,7 @@ Visible int rmdir(dir)
 
 /* getseed () - initialise the random generator with a random number */
 
-Visible int getseed()
+Visible int getseed(void)
 {
 	return (int) getpid();   /* or for instance a time() call */
 }
@@ -112,11 +112,11 @@ Visible Procedure getdatetime(year, month, day, hour, minute,
 
 /* curdir() - return the current directory */
 
-Visible Porting char *curdir()
+Visible Porting char *curdir(void)
 {
 	static char buffer[1024];
 #ifdef HAS_GETCWD
-	char *getcwd();
+	char *getcwd(char *, size_t);
 	return getcwd(buffer, 1024);
 #else
 	char *getwd();
@@ -160,8 +160,7 @@ Hidden char *getwd(buf)
 #define SEPARATOR '/'
 #define Issep(c) ((c) == SEPARATOR)
 
-Visible bool is_path(path)
-     char *path;
+Visible bool is_path(char *path)
 {
 	if (path == NULL)
 	  return No;
@@ -178,8 +177,7 @@ Visible bool is_path(path)
  *                the current directory.
  */
 
-Visible bool is_abspath(path)
-     char *path;
+Visible bool is_abspath(char *path)
 {
 	if (path == NULL) return No;
 	else return Issep(*path);
@@ -187,9 +185,7 @@ Visible bool is_abspath(path)
 
 /**************************************************************************/
 
-Visible bool is_directory(dir, name)
-     char *dir;
-     char *name;
+Visible bool is_directory(char *dir, char *name)
 {
 	struct stat statbuf;
 	char *path;
@@ -214,8 +210,7 @@ Visible bool is_directory(dir, name)
  *                 only used inside this directory (edit.c)
  */
 
-Visible Porting long filemodtime(filename)
-     char *filename;
+Visible Porting long filemodtime(char *filename)
 {
 	struct stat statbuf;
 	

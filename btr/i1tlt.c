@@ -58,7 +58,7 @@ Visible value mk_elt(void) { /* {}, internal only */
 	return e;
 }
 
-Visible bool empty(v) value v; { /* #v=0, internal only */
+Visible bool empty(value v) { /* #v=0, internal only */
 	switch (Type(v)) {
 	case ELT:
 	case Lis:
@@ -75,7 +75,7 @@ Visible bool empty(v) value v; { /* #v=0, internal only */
 
 /* return size of (number of items in) dependent tree */
 
-Hidden value treesize(pnode) btreeptr pnode; {
+Hidden value treesize(btreeptr pnode) {
     int psize;
     value vsize, childsize, u;
     intlet l;
@@ -106,7 +106,7 @@ Hidden value treesize(pnode) btreeptr pnode; {
     return mk_integer(psize);
 }
 
-Visible value size(t) value t; { /* #t */
+Visible value size(value t) { /* #t */
 	int tsize;
 	switch (Type(t)) {
 	case ELT:
@@ -215,7 +215,7 @@ Hidden value m_val;		/* result for min/max on tables */
 #define Lowchar (-Maxintlet)	/* -infinity for characters */
 #define Highchar (Maxintlet)	/* +infinity */
 
-Hidden bool walktree(p, visit) btreeptr p; bool (*visit)(); {
+Hidden bool walktree(btreeptr p, bool (*visit) (/* ??? */)) {
 	intlet l;
 	
 	if (p EQ Bnil) return Yes; /* i.e., not found (used by in() !) */
@@ -242,10 +242,10 @@ Hidden int tlterr;
 #define T_EMPTY 2
 #define T_CHAR 3
 
-Hidden int tlt_func(e, t, li_func, te_visit, ta_visit)
-	value e, t; 			/* [e] func t */
-	value (*li_func)(); 		/* func for lists */
-	bool (*te_visit)(), (*ta_visit)(); /* 'visit' for walktree */
+Hidden int tlt_func(value e, value t, value (*li_func) (/* ??? */), bool (*te_visit) (/* ??? */), bool (*ta_visit) (/* ??? */))
+	            			/* [e] func t */
+	                    		/* func for lists */
+	                                   /* 'visit' for walktree */
 {
 	m_val = Vnil;
 	if (empty(t)) {
@@ -282,24 +282,24 @@ Hidden int tlt_func(e, t, li_func, te_visit, ta_visit)
 	return 0;
 }
 
-Hidden value li2size(e, t) value e, t; {
+Hidden value li2size(value e, value t) {
 	count = l2size(e, t);
 	return Vnil;
 }
 
-Hidden bool te2size(pitm) itemptr pitm; {
+Hidden bool te2size(itemptr pitm) {
 	if (ce EQ Charval(pitm))
 		count++;
 	return Yes;
 }
 
-Hidden bool ta2size(pitm) itemptr pitm; {
+Hidden bool ta2size(itemptr pitm) {
 	if (compare(ve, Ascval(pitm)) EQ 0)
 		count++;
 	return Yes;
 }
 
-Visible value size2(e, t) value e, t; { /* e#t */
+Visible value size2(value e, value t) { /* e#t */
 	m_char = Lowchar;
 	count = 0;
 	if (tlt_func(e, t, li2size, te2size, ta2size) == -1) {
@@ -312,20 +312,20 @@ Visible value size2(e, t) value e, t; { /* e#t */
 	return mk_integer(count);
 }
 
-Hidden value li_in(e, t) value e, t; {
+Hidden value li_in(value e, value t) {
 	found = in_keys(e, t);
 	return Vnil;
 }
 	
-Hidden bool te_in(pitm) itemptr pitm; {
+Hidden bool te_in(itemptr pitm) {
 	return Charval(pitm) NE ce;
 }
 
-Hidden bool ta_in(pitm) itemptr pitm; {
+Hidden bool ta_in(itemptr pitm) {
 	return compare(ve, Ascval(pitm)) NE 0;
 }
 
-Visible bool in(e, t) value e, t; {
+Visible bool in(value e, value t) {
 	m_char = Lowchar;
 	found = No;
 	if (tlt_func(e, t, li_in, te_in, ta_in) == -1) {
@@ -337,17 +337,17 @@ Visible bool in(e, t) value e, t; {
 }
 
 /*ARGSUSED*/
-Hidden value li_min(e, t) value e, t; {
+Hidden value li_min(value e, value t) {
 	return item(t, one);
 }
 
-Hidden bool te_min(pitm) itemptr pitm; {
+Hidden bool te_min(itemptr pitm) {
 	if (m_char > Charval(pitm))
 		m_char = Charval(pitm);
 	return Yes;
 }
 
-Hidden bool ta_min(pitm) itemptr pitm; {
+Hidden bool ta_min(itemptr pitm) {
 	if (m_val EQ Vnil || compare(m_val, Ascval(pitm)) > 0) {
 		release(m_val);
 		m_val = copy(Ascval(pitm));
@@ -355,7 +355,7 @@ Hidden bool ta_min(pitm) itemptr pitm; {
 	return Yes;
 }
 
-Visible value min1(t) value t; {
+Visible value min1(value t) {
 	m_char = Highchar;
 	if (tlt_func(Vnil, t, li_min, te_min, ta_min) == -1) {
 		switch (tlterr) {
@@ -367,20 +367,20 @@ Visible value min1(t) value t; {
 }
 
 /*ARGSUSED*/
-Hidden value li_max(e, t) value e, t; {
+Hidden value li_max(value e, value t) {
 	value v= size(t);
 	m_val = item(t, v);
 	release(v);
 	return m_val;
 }
 
-Hidden bool te_max(pitm) itemptr pitm; {
+Hidden bool te_max(itemptr pitm) {
 	if (m_char < Charval(pitm))
 		m_char = Charval(pitm);
 	return Yes;
 }
 
-Hidden bool ta_max(pitm) itemptr pitm; {
+Hidden bool ta_max(itemptr pitm) {
 	if (m_val EQ Vnil || compare(Ascval(pitm), m_val) > 0) {
 		release(m_val);
 		m_val = copy(Ascval(pitm));
@@ -388,7 +388,7 @@ Hidden bool ta_max(pitm) itemptr pitm; {
 	return Yes;
 }
 
-Visible value max1(t) value t; {
+Visible value max1(value t) {
 	m_char = Lowchar;
 	if (tlt_func(Vnil, t, li_max, te_max, ta_max) == -1) {
 		switch (tlterr) {
@@ -399,14 +399,14 @@ Visible value max1(t) value t; {
 	return m_val;
 }
 
-Hidden bool te2min(pitm) itemptr pitm; {
+Hidden bool te2min(itemptr pitm) {
 	if (m_char > Charval(pitm) && Charval(pitm) > ce) {
 		m_char = Charval(pitm);
 	}
 	return Yes;
 }
 
-Hidden bool ta2min(pitm) itemptr pitm; {
+Hidden bool ta2min(itemptr pitm) {
 	if (compare(Ascval(pitm), ve) > 0
 	    &&
 	    (m_val EQ Vnil || compare(m_val, Ascval(pitm)) > 0)) {
@@ -416,7 +416,7 @@ Hidden bool ta2min(pitm) itemptr pitm; {
 	return Yes;
 }
 
-Visible value min2(e, t) value e, t; {
+Visible value min2(value e, value t) {
 	m_char = Highchar;
 	if (tlt_func(e, t, l2min, te2min, ta2min) == -1) {
 		switch (tlterr) {
@@ -433,14 +433,14 @@ Visible value min2(e, t) value e, t; {
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-Hidden bool te2max(pitm) itemptr pitm; {
+Hidden bool te2max(itemptr pitm) {
 	if (ce > Charval(pitm) && Charval(pitm) > m_char) {
 		m_char = Charval(pitm);
 	}
 	return Yes;
 }
 
-Hidden bool ta2max(pitm) itemptr pitm; {
+Hidden bool ta2max(itemptr pitm) {
 	if (compare(ve, Ascval(pitm)) > 0
 	    &&
 	    (m_val EQ Vnil || compare(Ascval(pitm), m_val) > 0)) {
@@ -450,7 +450,7 @@ Hidden bool ta2max(pitm) itemptr pitm; {
 	return Yes;
 }
 
-Visible value max2(e, t) value e, t; {
+Visible value max2(value e, value t) {
 	m_char = Lowchar;
 	if (tlt_func(e, t, l2max, te2max, ta2max) == -1) {
 		switch (tlterr) {

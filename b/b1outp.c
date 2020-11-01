@@ -57,7 +57,7 @@ Visible Procedure init_interpreter_output(int height, int width)
 	wincol    = 0;
 }
 
-Visible Procedure re_interpreter_output()
+Visible Procedure re_interpreter_output(void)
 {
 	/* reinitialize after an edit session */
 	trmputdata(winlength, winlength, 0, "", (string)0);
@@ -65,11 +65,11 @@ Visible Procedure re_interpreter_output()
 	trmsync(winlength-1, wincol = 0);
 }
 
-Visible int getwinwidth() {
+Visible int getwinwidth(void) {
 	return winwidth;
 }
 
-Visible int getwincol()
+Visible int getwincol(void)
 {
 	/* returns current output column */
 	return wincol; /* 0 <= wincol <= winwidth */
@@ -163,7 +163,7 @@ Visible Procedure c_putnewline(void) {
 	wincol = 0;
 }
 
-Visible Procedure c_flush()
+Visible Procedure c_flush(void)
 {
 	trmsync(winlength-1, wincol);
 }

@@ -38,11 +38,11 @@ Hidden int nbuiltin= 0;
 Hidden int ncentral= 0;
 Hidden bool suggchanges= No;
 
-Forward Hidden Procedure getsugg();
-Forward Hidden Procedure savsugg();
-Forward Hidden bool getpattern();
-Forward Hidden Procedure addnode();
-Forward Hidden Procedure addstr();
+Forward Hidden Procedure getsugg(char *sgfile);
+Forward Hidden Procedure savsugg(void);
+Forward Hidden bool getpattern(node n);
+Forward Hidden Procedure addnode(node n);
+Forward Hidden Procedure addstr(string s);
 
 /*
  * sugg[0..nbuiltin-1]:
@@ -57,7 +57,7 @@ Forward Hidden Procedure addstr();
  *   added by initsugg();
  */
  
-Visible Procedure initcensugg() {
+Visible Procedure initcensugg(void) {
 	char *censuggfile;
 
 	censuggfile= makepath(cen_dir, SUGGFILE);
@@ -67,7 +67,7 @@ Visible Procedure initcensugg() {
 }
 
 Visible Procedure
-initsugg()
+initsugg(void)
 {
 	if (incentralws)
 		ncentral= nbuiltin;
@@ -81,7 +81,7 @@ initsugg()
  * Read the suggestion table from (central or current workspace) file.
  */
 
-Hidden Procedure getsugg(sgfile) char *sgfile; {
+Hidden Procedure getsugg(char *sgfile) {
 	char *line;
 	FILE *fp;
 
@@ -94,7 +94,7 @@ Hidden Procedure getsugg(sgfile) char *sgfile; {
 	fclose(fp);
 }
 
-Visible Procedure endsugg() {
+Visible Procedure endsugg(void) {
 	int i;
 
 	savsugg();
@@ -123,8 +123,7 @@ Visible Procedure endsugg() {
  */
 
 Hidden bool
-checksugg(bp)
-	string bp;
+checksugg(string bp)
 {
 	if (!isascii(*bp))
 		return No;
@@ -160,7 +159,7 @@ Hidden char *firstkw[] = {
 	NULL
 };
 
-Hidden bool res_firstkeyword(str) string str; {
+Hidden bool res_firstkeyword(string str) {
 	char *fkw;
 	char *fkwend;
 	string *kw;
@@ -189,7 +188,7 @@ Hidden bool res_firstkeyword(str) string str; {
  *                suggestion file (already sorted!).
  */
 
-Visible Procedure addsugg(str, builtin) string str; int builtin; {
+Visible Procedure addsugg(string str, int builtin) {
 	int i;
 	int j;
 	int len;
@@ -262,8 +261,7 @@ Visible Procedure addsugg(str, builtin) string str; int builtin; {
  */
 
 Hidden Procedure
-delsugg(str)
-	string str;
+delsugg(string str)
 {
 	int i;
 
@@ -284,7 +282,7 @@ delsugg(str)
  * Procedure to save the suggestion file if it has been changed.
  */
 
-Hidden Procedure savsugg() {
+Hidden Procedure savsugg(void) {
 	FILE *fp;
 	int i;
 
@@ -315,8 +313,7 @@ Hidden Procedure savsugg() {
 static int lastisugg= -1; /* keep track of last suggestion */
                           /* initialised by firstsugg() */
 
-Hidden node nextsugg(str, len, new_c, in_sugghowname, colon_allowed)
-string str; int len; int new_c; bool in_sugghowname; bool colon_allowed;
+Hidden node nextsugg(string str, int len, int new_c, bool in_sugghowname, bool colon_allowed)
 {
 	string sg;
 	int i;
@@ -355,8 +352,7 @@ string str; int len; int new_c; bool in_sugghowname; bool colon_allowed;
  * Place an initial suggestion in a node.
  */
 
-Hidden node firstsugg(s, startsugg, colon_allowed)
-string s; int startsugg; bool colon_allowed;
+Hidden node firstsugg(string s, int startsugg, bool colon_allowed)
 {
 	int i;
 	string sugg_i;
@@ -374,11 +370,7 @@ string s; int startsugg; bool colon_allowed;
 }
 
 Visible bool
-setsugg(pp, c, ep, colon_allowed)
-	path *pp;
-	char c;
-	environ *ep;
-	bool colon_allowed;
+setsugg(path *pp, char c, environ *ep, bool colon_allowed)
 {
 	char buf[2];
 	node n;
@@ -427,8 +419,7 @@ setsugg(pp, c, ep, colon_allowed)
 	return Yes;
 }
 
-Hidden bool fits_how_to(str, pstr, alt_c)
-string str; string *pstr; int alt_c;
+Hidden bool fits_how_to(string str, string *pstr, int alt_c)
 {
 	if (strcmp(str, S_HOW_TO) == 0) {
 		if (alt_c)
@@ -443,7 +434,7 @@ string str; string *pstr; int alt_c;
  * Interface styled like resuggest: string pointer is advanced here.
  */
 
-Visible bool newsugg(ep, pstr, alt_c) environ *ep; string *pstr; int alt_c; {
+Visible bool newsugg(environ *ep, string *pstr, int alt_c) {
 	string str;
 	node n = tree(ep->focus);
 	node nn;
@@ -505,7 +496,7 @@ Visible bool newsugg(ep, pstr, alt_c) environ *ep; string *pstr; int alt_c; {
  * Kill suggestion -- only the part to the left of the focus is kept.
  */
 
-Visible Procedure killsugg(ep, pstr) environ *ep; string *pstr;
+Visible Procedure killsugg(environ *ep, string *pstr)
 {
 	node n = tree(ep->focus);
 	node nc;
@@ -534,7 +525,7 @@ Visible Procedure killsugg(ep, pstr) environ *ep; string *pstr;
  * Acknowledge a suggestion -- turn it into real nodes.
  */
 
-Visible Procedure acksugg(ep) environ *ep; {
+Visible Procedure acksugg(environ *ep) {
 	node n = tree(ep->focus);
 	int s2 = ep->s2;
 	int isugg;
@@ -599,9 +590,9 @@ Visible Procedure acksugg(ep) environ *ep; {
  * ackhowsugg is only used for [newline] and [accept].
  */
 
-Forward Hidden node adv_howsugg();
+Forward Hidden node adv_howsugg(environ *ep, char prev_c, char new_c);
 
-Visible bool newhowsugg(ep, pstr, alt_c) environ *ep; string *pstr; int alt_c; {
+Visible bool newhowsugg(environ *ep, string *pstr, int alt_c) {
 	string str;
 	string qm;
 	node n = tree(ep->focus);
@@ -663,8 +654,7 @@ Visible bool newhowsugg(ep, pstr, alt_c) environ *ep; string *pstr; int alt_c; {
 	return Yes;
 }
 
-Hidden node adv_howsugg(ep, prev_c, new_c)
-environ *ep; char prev_c; char new_c;
+Hidden node adv_howsugg(environ *ep, char prev_c, char new_c)
 {
 	int s2= ep->s2;
 	char buf[2];
@@ -694,7 +684,7 @@ environ *ep; char prev_c; char new_c;
  * Acknowledge a how-to name suggestion -- but do NOT turn it into real nodes.
  */
 
-Visible Procedure ackhowsugg(ep) environ *ep; {
+Visible Procedure ackhowsugg(environ *ep) {
 	ep->mode= VHOLE;
 	ep->s1= 2;
 	ep->s2= strlen(e_strval((value) firstchild(tree(ep->focus))));
@@ -704,7 +694,7 @@ Visible Procedure ackhowsugg(ep) environ *ep; {
  * Kill a how-to name suggestion -- but do NOT turn it into real nodes.
  */
 
-Visible Procedure killhowsugg(ep) environ *ep; {
+Visible Procedure killhowsugg(environ *ep) {
 	int s2= ep->s2;
 	value hd;
 	
@@ -722,7 +712,7 @@ Visible Procedure killhowsugg(ep) environ *ep; {
  * this is done to avoid the which_funpred dialog in the interpreter.
  */
 
-Visible Procedure check_last_unit(ep, curr) environ *ep; int curr; {
+Visible Procedure check_last_unit(environ *ep, int curr) {
 	if (curr != 1 
 	    || symbol(tree(ep->focus)) != Edit_unit
 	    || symbol(firstchild(tree(ep->focus))) != Sugghowname)
@@ -746,8 +736,7 @@ Hidden char *pbuf;
 Hidden int buflen= 0;
 
 Visible Procedure
-readsugg(p)
-	path p;
+readsugg(path p)
 {
 	p = pathcopy(p);
 	top(&p);
@@ -769,8 +758,7 @@ readsugg(p)
  */
 
 Visible Procedure
-writesugg(p)
-	path p;
+writesugg(path p)
 {
 	p = pathcopy(p);
 	top(&p);
@@ -799,8 +787,7 @@ writesugg(p)
  */
 
 Hidden bool
-getpattern(n)
-	node n;
+getpattern(node n)
 {
 	string *rp = noderepr(n);
 	int sym;
@@ -881,7 +868,7 @@ getpattern(n)
 	/*NOTREACHED*/
 }
 
-Hidden Procedure addnode(n) node n; {
+Hidden Procedure addnode(node n) {
 	string s;
 	
 	Assert(symbol(n) == Keyword || symbol(n) == Name);
@@ -890,7 +877,7 @@ Hidden Procedure addnode(n) node n; {
 	addstr(s);
 }
 
-Hidden Procedure addstr(s) string s; {
+Hidden Procedure addstr(string s) {
 	while (*s) {
 		*pbuf++ = *s++;
 		if (pbuf >= lastsugg + buflen) {
@@ -903,7 +890,7 @@ Hidden Procedure addstr(s) string s; {
 }
 
 Visible Procedure
-endclasses()
+endclasses(void)
 {
 #ifdef MEMTRACE
 	int i;

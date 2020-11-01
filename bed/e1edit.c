@@ -25,7 +25,7 @@
 static short *indent;
 static int level;
 
-Forward Hidden bool editindentation();
+Forward Hidden bool editindentation(environ *ep, FILE *fp);
 
 /*
  * Read (edit) parse tree from file into the focus.
@@ -37,11 +37,7 @@ Forward Hidden bool editindentation();
  */
 
 Visible bool
-readfile(ep, filename, line, creating)
-	environ *ep;
-	string filename;
-	int line;
-	bool creating;
+readfile(environ *ep, string filename, int line, bool creating)
 {
 
 	int lines = 0;
@@ -114,9 +110,7 @@ readfile(ep, filename, line, creating)
  */
 
 Hidden bool
-editindentation(ep, fp)
-	environ *ep;
-	FILE *fp;
+editindentation(environ *ep, FILE *fp)
 {
 	int ind= 0;
 	int c;
@@ -180,8 +174,7 @@ editindentation(ep, fp)
  */
 
 Hidden int
-skipspace(fp)
-	FILE *fp;
+skipspace(FILE *fp)
 {
 	int c;
 
@@ -198,9 +191,7 @@ skipspace(fp)
  */
 
 Hidden value
-readtext(fp, quote)
-	FILE *fp;
-	char quote;
+readtext(FILE *fp, char quote)
 {
 	auto value v = Vnil;
 	char buf[BUFSIZ];
@@ -280,8 +271,7 @@ readtext(fp, quote)
 
 
 Hidden int
-readsym(fp)
-	FILE *fp;
+readsym(FILE *fp)
 {
 	int c;
 	char buf[100];
@@ -313,8 +303,7 @@ readsym(fp)
  */
 
 Hidden node
-readnode(fp)
-	FILE *fp;
+readnode(FILE *fp)
 {
 	int c;
 	int nch;
@@ -385,8 +374,7 @@ readnode(fp)
  */
 
 Visible value
-editqueue(filename)
-	string filename;
+editqueue(string filename)
 {
 	FILE *fp = fopen(filename, "r");
 	auto queue q = Qnil;

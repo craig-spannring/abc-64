@@ -33,7 +33,7 @@ static int priority;
 static char *mrecbuf;
 static char *mcopybuf;
 
-Forward Hidden int addscrollbar();
+Forward Hidden int addscrollbar(int totlines, int topline, int scrlines);
 
 /*
  * Status line.  A combination of scroll bar, error message etc.
@@ -42,12 +42,7 @@ Forward Hidden int addscrollbar();
  */
 
 Visible Procedure
-stsline(totlines, topline, scrlines, copybuffer, recording)
-	int totlines;
-	int topline;
-	int scrlines;
-	value copybuffer;
-	bool recording;
+stsline(int totlines, int topline, int scrlines, value copybuffer, bool recording)
 {
 	string bp;
 	char *msg_mode= NULL;
@@ -101,10 +96,7 @@ stsline(totlines, topline, scrlines, copybuffer, recording)
  */
 
 Hidden int
-addscrollbar(totlines, topline, scrlines)
-	int totlines;
-	int topline;
-	int scrlines;
+addscrollbar(int totlines, int topline, int scrlines)
 {
 	int endline;
 	int i;
@@ -139,8 +131,7 @@ addscrollbar(totlines, topline, scrlines)
  */
 
 Hidden Procedure
-ederr1(s)
-	string s;
+ederr1(string s)
 {
 	ringbell = Yes;
 	if (s && priority < 3) {
@@ -150,26 +141,21 @@ ederr1(s)
 }
 
 Visible Procedure
-ederr(m)
-	int m;
+ederr(int m)
 {
 	if (m == 0) ringbell= Yes;
 	else ederr1(getmess(m));
 }
 
 Visible Procedure
-ederrS(m, s)
-	int m;
-	string s;
+ederrS(int m, string s)
 {
 	sprintf(messbuf, getmess(m), s);
 	ederr1(messbuf);	
 }
 
 Visible Procedure
-ederrC(m, c)
-	int m;
-	char c;
+ederrC(int m, char c)
 {
 	sprintf(messbuf, getmess(m), c);
 	ederr1(messbuf);
@@ -181,8 +167,7 @@ ederrC(m, c)
  */
 
 Visible Procedure
-edmessage(s)
-	string s;
+edmessage(string s)
 {
 	if (s && priority <= 2) {
 		priority = 2;
@@ -194,9 +179,7 @@ edmessage(s)
 
 /* Assertion error */
 
-Visible Procedure asserr(file, line)
-     string file;
-     int line;
+Visible Procedure asserr(string file, int line)
 {
 	char mess[255];
 	sprintf(mess, "Assertion botched in file %s, line %d.", file, line);
@@ -217,8 +200,7 @@ Visible bool dflag = No;
 
 /* VARARGS 1 */
 Visible Procedure
-debug(fmt, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10)
-	string fmt;
+debug(string fmt, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10)
 {
 	if (fmt && priority <= 1) {
 		priority = 1;
@@ -234,7 +216,7 @@ debug(fmt, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10)
  */
 
 Visible Procedure
-enderro()
+enderro(void)
 {
 	if (!msgbuffer)
 		return;
@@ -245,7 +227,7 @@ enderro()
 	ringbell = No;
 }
 
-Visible Procedure init_erro() {
+Visible Procedure init_erro(void) {
 	int i;
 
 	msgbuffer= (char*) getmem(MAXMSG);
@@ -259,7 +241,7 @@ Visible Procedure init_erro() {
 	mcopybuf[0]= '\0';
 }
 
-Visible Procedure end_erro() {
+Visible Procedure end_erro(void) {
 #ifdef MEMTRACE
 	freemem((ptr) msgbuffer);
 	freemem((ptr) mrecbuf);

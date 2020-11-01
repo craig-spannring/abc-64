@@ -23,7 +23,7 @@
 #define USE18 MESS(7218, "   -x           Recover the index of a group of workspaces\n")
 #define USE19 MESS(7219, "\nUse 'abckeys' to change key bindings\n")
 
-Visible Procedure abc_usage()
+Visible Procedure abc_usage(void)
 {
 	putmess(USE00);
 	putmess(USE01);

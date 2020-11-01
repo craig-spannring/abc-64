@@ -30,16 +30,15 @@ extern "C" {
 /* e1getc.c*/
 Visible Procedure undefine(int code, int deflen, string def);
 
-
 /* e1goto.c*/
-Visible Procedure gotofix();
+// Visible Procedure gotofix(environ *ep, int y, int x);
 
 /* e1gram.c*/
-Visible Procedure setroot();
-Visible Procedure initgram();
-Visible Procedure initkeys();
-Visible Procedure initclasses();
-Visible Procedure endnoderepr();
+Visible Procedure setroot(int isym);
+Visible Procedure initgram(void);
+Visible Procedure initkeys(void);
+Visible Procedure initclasses(void);
+Visible Procedure endnoderepr(void);
 
 /* e1line.c*/
 Visible Procedure oneline();
@@ -146,7 +145,7 @@ Visible Procedure display();
 Visible Procedure do_dya();
 Visible Procedure reduce();
 Visible Procedure selection();
-Visible Procedure initexp();
+// Visible Procedure initexp(expadm *adm, int n, char level);
 Visible Procedure endstack();
 Visible Procedure push_item();
 Visible Procedure trim_target();
@@ -155,7 +154,7 @@ Visible Procedure trim_target();
 
 /* i2gen.c */
 Visible Procedure jumpto();
-Visible Procedure fix();
+// Visible Procedure fix(parsetree *pt, char flag);
 Visible Procedure hold();
 Visible Procedure let_go();
 Visible Procedure fix_nodes();
@@ -264,8 +263,8 @@ Visible Procedure e_fstrval();
 Visible Procedure e_concto();
 
 /* i1btr.c */
-Visible Procedure relbtree();
-Visible Procedure uniqlbtreenode();
+// Visible Procedure relbtree(btreeptr pnode, literal it);
+// Visible Procedure uniqlbtreenode(btreeptr *pptr, literal it);
 
 /* i1obj.c */
 Visible Procedure rel_subvalues();
@@ -274,12 +273,9 @@ Visible Procedure rel_subvalues();
 Visible Procedure endstrval();
 Visible Procedure fstrval();
 Visible Procedure concato();
-Visible Procedure convtext();
+// Visible Procedure convtext();
 
 /* i1lta.c */
-Visible Procedure cpynptrs();
-Visible Procedure movnitms();
-Visible Procedure cpynitms();
 
 /* i2tca.c */
 Visible Procedure type_check();
@@ -302,7 +298,7 @@ Visible Procedure delreprtable();
 Visible Procedure adderrvar();
 
 /* i2tcp.c */
-Visible Procedure putsubtype();
+// Visible Procedure putsubtype(polytype sub, polytype u, intlet isub);
 Visible Procedure new_externals();
 Visible Procedure p_release();
 Visible Procedure repl_type_of();

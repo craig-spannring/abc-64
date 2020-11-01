@@ -21,8 +21,8 @@
 
 /******************************* Grabbing **********************************/
 
-Hidden unsigned getsyze(type, len, pnptrs) literal type; intlet len;
-		int *pnptrs; {
+Hidden unsigned getsyze(literal type, intlet len, int *pnptrs)
+{
 	unsigned syze= 0;
 	int nptrs= 0;
 	switch (type) {
@@ -86,7 +86,7 @@ Hidden unsigned getsyze(type, len, pnptrs) literal type; intlet len;
 	return syze;
 }
 
-Visible value grab(type, len) literal type; intlet len; {
+Visible value grab(literal type, intlet len) {
 	unsigned syze= getsyze(type, len, (int*)NULL);
 	value v;
 	Grabber();
@@ -105,7 +105,7 @@ Visible Procedure regrab(value *v, intlet len) {
 
 /******************************* Copying and releasing *********************/
 
-Visible value copy(v) value v; {
+Visible value copy(value v) {
 	if (v != Vnil && !IsSmallInt(v) && Refcnt(v) < Maxrefcnt) 
 		++Refcnt(v);
 	return v;
@@ -119,7 +119,7 @@ Visible Procedure release(value v) {
 		rel_subvalues(v);
 }
 
-Hidden value ccopy(v) value v; {
+Hidden value ccopy(value v) {
 	literal type= v->type; intlet len; value w;
 	int nptrs; unsigned syze; string from, to, end;
 	value *pp, *pend;

@@ -15,11 +15,11 @@
 #include "tabl.h"
 #include "b1grab.h"
 
-Forward Hidden bool fiddle();
-Forward Hidden bool hackhack();
-Forward Hidden bool atdedent();
-Forward Hidden bool nexthole();
-Forward Hidden bool atrealhole();
+Forward Hidden bool fiddle(environ *ep, bool *pmayindent, bool reading_file);
+Forward Hidden bool hackhack(environ *ep);
+Forward Hidden bool atdedent(environ *ep);
+Forward Hidden bool nexthole(environ *ep);
+Forward Hidden bool atrealhole(environ *ep);
 
 /*
  * Insert a character.
@@ -27,7 +27,7 @@ Forward Hidden bool atrealhole();
 
 extern bool justgoon;
 
-Hidden bool quot_in_tag(c, ep) int c; environ *ep; {
+Hidden bool quot_in_tag(int c, environ *ep) {
 	/* hack to not surround part of name or keyword;
 	 * fixes bug 890417
 	 */
@@ -40,10 +40,7 @@ Hidden bool quot_in_tag(c, ep) int c; environ *ep; {
 }
 
 Visible bool
-ins_char(ep, c, alt_c)
-	environ *ep;
-	int c;
-	int alt_c;
+ins_char(environ *ep, int c, int alt_c)
 {
 	auto queue q = Qnil;
 	auto queue qf = Qnil;
@@ -121,8 +118,7 @@ ins_char(ep, c, alt_c)
  */
 
 Visible bool
-ins_newline(ep, reading_file)
-	environ *ep; bool reading_file;
+ins_newline(environ *ep, bool reading_file)
 {
 	node n;
 	int sym;
@@ -219,10 +215,7 @@ ins_newline(ep, reading_file)
  */
 
 Hidden bool
-fiddle(ep, pmayindent, reading_file)
-	environ *ep;
-	bool *pmayindent;
-	bool reading_file;
+fiddle(environ *ep, bool *pmayindent, bool reading_file)
 {
 	int level;
 	auto string str = "";
@@ -277,8 +270,7 @@ fiddle(ep, pmayindent, reading_file)
  */
 
 Hidden bool
-hackhack(ep)
-	environ *ep;
+hackhack(environ *ep)
 {
 	node n;
 	int ich = ichild(ep->focus);
@@ -306,8 +298,7 @@ hackhack(ep)
  */
 
 Hidden bool
-atdedent(ep)
-	environ *ep;
+atdedent(environ *ep)
 {
 	path pa;
 	node npa;
@@ -350,8 +341,7 @@ atdedent(ep)
  */
 
 Hidden bool
-nexthole(ep)
-	environ *ep;
+nexthole(environ *ep)
 {
 	node n;
 	int ich;
@@ -371,7 +361,7 @@ nexthole(ep)
 	return Yes;
 }
 
-Hidden bool atrealhole(ep) environ *ep; {
+Hidden bool atrealhole(environ *ep) {
 	node n;
 	int i;
 	

@@ -130,15 +130,15 @@ typedef intlet typenode;
 #define NTYPES			74
 	/* number of nodetypes */
 
-value node1();
-value node2();
-value node3();
-value node4();
-value node5();
-value node6();
-value node8();
-value node9();
-typenode nodetype();
+value node1(typenode type);
+value node2(typenode type, value a1);
+value node3(typenode type, value a1, value a2);
+value node4(typenode type, value a1, value a2, value a3);
+value node5(typenode type, value a1, value a2, value a3, value a4);
+value node6(typenode type, value a1, value a2, value a3, value a4, value a5);
+value node8(typenode type, value a1, value a2, value a3, value a4, value a5, value a6, value a7);
+value node9(typenode type, value a1, value a2, value a3, value a4, value a5, value a6, value a7, value a8);
+typenode nodetype(parsetree v);
 /* Procedure display(); */
 /* Procedure fix_nodes(); */
 

@@ -37,12 +37,12 @@ Visible string gotoformat;
 Visible string mousesense;
 Visible string mouseformat;
 
-Forward Hidden bool dosense();
-Forward Hidden bool gotoscrollbar();
-Forward Hidden int poscomp();
-Forward Hidden Procedure fixsublist();
+Forward Hidden bool dosense(environ *ep, string sense, string format);
+Forward Hidden bool gotoscrollbar(environ *ep, int x);
+Forward Hidden int poscomp(path p, int y, int x);
+Forward Hidden Procedure fixsublist(environ *ep);
 
-Visible bool gotocursor(ep) environ *ep; {
+Visible bool gotocursor(environ *ep) {
 	int y;
 	int x;
 	
@@ -62,11 +62,11 @@ Visible bool gotocursor(ep) environ *ep; {
 	return dosense(ep, gotosense, gotoformat);
 }
 
-Visible bool gotomouse(ep) environ *ep; {
+Visible bool gotomouse(environ *ep) {
 	return dosense(ep, mousesense, mouseformat);
 }
 
-Hidden bool dosense(ep, sense, format) environ *ep; string sense, format; {
+Hidden bool dosense(environ *ep, string sense, string format) {
 	int y;
 	int x;
 	
@@ -97,9 +97,7 @@ Hidden bool dosense(ep, sense, format) environ *ep; string sense, format; {
  */
 
 Hidden bool
-gotoscrollbar(ep, x)
-	environ *ep;
-	int x;
+gotoscrollbar(environ *ep, int x)
 {
 	int w;
 
@@ -131,10 +129,7 @@ gotoscrollbar(ep, x)
  */
 
 Visible bool
-gotoyx(ep, y, x)
-	environ *ep;
-	int y;
-	int x;
+gotoyx(environ *ep, int y, int x)
 {
 	node n;
 	string *rp;
@@ -213,10 +208,7 @@ gotoyx(ep, y, x)
  */
 
 Hidden int
-poscomp(p, y, x)
-	path p;
-	int y;
-	int x;
+poscomp(path p, int y, int x)
 {
 	int ly;
 	int lx;
@@ -256,10 +248,7 @@ poscomp(p, y, x)
  */
 
 Visible Procedure
-gotofix(ep, y, x)
-	environ *ep;
-	int y;
-	int x;
+gotofix(environ *ep, int y, int x)
 {
 	int fx;
 	int fy;
@@ -344,8 +333,7 @@ gotofix(ep, y, x)
  */
 
 Hidden Procedure
-fixsublist(ep)
-	environ *ep;
+fixsublist(environ *ep)
 {
 	path pa = parent(ep->focus);
 	node n;

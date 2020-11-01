@@ -14,13 +14,13 @@
 /*		immediate command					*/
 /* ******************************************************************** */
 
-Forward Hidden Procedure special();
+Forward Hidden Procedure special(void);
 
 #define TERM_COMMAND	MESS(3300, "terminating commands only allowed in how-to's and refinements")
 #define SHARE_COMMAND	MESS(3301, "share-command only allowed in a how-to")
 #define NO_COMMAND	MESS(3302, "I don't recognise this as a command")
 
-Hidden Procedure imm_command() {
+Hidden Procedure imm_command(void) {
 	parsetree codeseq= NilTree;
 	parsetree c= NilTree, d= NilTree; 
 	int level;
@@ -67,7 +67,7 @@ Hidden Procedure imm_command() {
 	else parerr(NO_COMMAND);
 }
 
-Visible Procedure process() {
+Visible Procedure process(void) {
 	re_screen();
 	re_env();
 	f_lino= 0;
@@ -78,7 +78,7 @@ Visible Procedure process() {
 	}
 }
 
-Hidden Procedure special() {
+Hidden Procedure special(void) {
 	switch(Char(tx++)) {
 		case ':':       skipsp(&tx);
 				if (Char(tx) == C_COLON) {

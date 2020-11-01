@@ -22,7 +22,7 @@ Visible Procedure free_path(char* path) {
 		freestr(path);
 }
 
-Visible Procedure endfile()
+Visible Procedure endfile(void)
 {
 #ifdef MEMTRACE
 	free_path(startdir);

@@ -14,7 +14,7 @@
 
 #define CANT_OPEN MESS(1700, "can't open input file %s\n")
 
-Visible Procedure checkfileargs(argc, argv) int argc; char **argv; {
+Visible Procedure checkfileargs(int argc, char **argv) {
 	bool filearg= No;
 	
 	/* check call: */
@@ -33,7 +33,7 @@ Visible Procedure checkfileargs(argc, argv) int argc; char **argv; {
 
 Visible bool been_interactive= No;
 
-Visible Procedure abc(argc, argv) int argc; char **argv; {
+Visible Procedure abc(int argc, char **argv) {
 	bool filearg= argc > 0;
 	
 	i_lino= 0;
@@ -77,7 +77,7 @@ Visible Procedure abc(argc, argv) int argc; char **argv; {
 	}
 }
 
-Visible Procedure pre_init() {
+Visible Procedure pre_init(void) {
 	initmess();	/* set messbuf */
 	initfmt();	/* set fmtbuf */
 	initfile();	/* locate files (messages, keydefs, copybuffer, etc) */
@@ -87,7 +87,7 @@ Visible Procedure pre_init() {
 
 extern bool vtrmactive;
 
-Hidden Procedure print_heading() {
+Hidden Procedure print_heading(void) {
 	FILE *fp;
 	char *fmt, *str;
 
@@ -106,7 +106,7 @@ Visible bool in_init= Yes;
 
 Visible bool use_bed = Yes;
 
-Visible Procedure init()
+Visible Procedure init(void)
 {
 	bool prompt_help;
 
@@ -148,7 +148,7 @@ Visible Procedure init()
 	in_init= No;
 }
 
-Visible Procedure endall() {
+Visible Procedure endall(void) {
 	/* real tasks: */
 	endbws();
 	if (use_bed) {
@@ -175,7 +175,7 @@ Visible Procedure endall() {
 	endmess();
 }
 
-Visible Procedure crashend() {
+Visible Procedure crashend(void) {
 	if (cntxt != In_wsgroup && cntxt != In_prmnv)
 		endbws();
 }

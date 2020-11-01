@@ -22,9 +22,9 @@
  * workspace.
  */
 
-Forward Hidden value getcentralinfo();
-Forward Hidden bool unitinenv();
-Forward Hidden char *mkfilepath();
+Forward Hidden value getcentralinfo(string file);
+Forward Hidden bool unitinenv(value pname, value **howto, wsenvptr wse);
+Forward Hidden char *mkfilepath(value fname, wsenvptr wse);
 
 Hidden wsenv useenv = {Vnil, Vnil, Vnil, No, No, 0}; /* using workspace env */
 Hidden wsenv cenenv = {Vnil, Vnil, Vnil, No, No, 0}; /* central workspace env */
@@ -43,7 +43,7 @@ Visible char *cen_dir;        /* absolute path to central workspace */
  * Initialize global variable 'cur_env'
  */
 
-Visible Procedure initcurenv()
+Visible Procedure initcurenv(void)
 {
 	cur_env = use_env;
 }
@@ -52,8 +52,7 @@ Visible Procedure initcurenv()
  * Set 'cur_env' and returns the old value
  */
 
-Visible wsenvptr setcurenv(wse)
-     wsenvptr wse;
+Visible wsenvptr setcurenv(wsenvptr wse)
 {
 	wsenvptr old = cur_env;
 	cur_env = wse;
@@ -64,8 +63,7 @@ Visible wsenvptr setcurenv(wse)
  * Reset 'cur_env'
  */
 
-Visible Procedure resetcurenv(wse)
-     wsenvptr wse;
+Visible Procedure resetcurenv(wsenvptr wse)
 {
 	cur_env = wse;
 }
@@ -76,8 +74,7 @@ Visible Procedure resetcurenv(wse)
  * Initialize central workspace adm at startup or after a workspace change.
  */
 
-Visible Procedure initcentralworkspace(startup)
-     bool startup;
+Visible Procedure initcentralworkspace(bool startup)
 {
 	iscentralws = (cen_dir != (char *)0 && D_exists(cen_dir));
 	incentralws = (iscentralws && strcmp(cen_dir, cur_dir) == 0);
@@ -106,8 +103,7 @@ Visible Procedure initcentralworkspace(startup)
  * Finish central workspace adm before a workspace change or at QUITing.
  */
 
-Visible Procedure endcentralworkspace(last)
-     bool last;
+Visible Procedure endcentralworkspace(bool last)
 {
 	if (!incentralws && iscentralws) {
 		/* write central perm/types info to disk */
@@ -146,8 +142,7 @@ Visible Procedure endcentralworkspace(last)
  * Read the filename/typecode mapping of the central workspace.
  */
 
-Hidden value getcentralinfo(file)
-     string file;
+Hidden value getcentralinfo(string file)
 {
 	char *cenfile;
 	value v = Vnil;
@@ -178,11 +173,11 @@ Hidden value getcentralinfo(file)
  * Returns current env in 'wse', if 'wse' isn't nil
  */
 
-Visible bool is_unit(name, type, howto, wse)
-     value name;
-     literal type;
-     value **howto;   /* if non-NULL set to root of loaded unit */
-     wsenvptr *wse;   /* if non-NULL set to workspace env of unit */
+Visible bool is_unit(value name, literal type, value **howto, wsenvptr *wse)
+                
+                  
+                      /* if non-NULL set to root of loaded unit */
+                      /* if non-NULL set to workspace env of unit */
 {
 	value pname = permkey(name, type);
 	bool is = Yes;
@@ -211,10 +206,10 @@ Visible bool is_unit(name, type, howto, wse)
  * Returns pointer to unit in 'howto', if 'howto' isn't nil.
  */
 
-Hidden bool unitinenv(pname, howto, wse)
-     value pname;
-     value **howto; /* if non-NULL set to root of loaded unit */
-     wsenvptr wse;
+Hidden bool unitinenv(value pname, value **howto, wsenvptr wse)
+                 
+                    /* if non-NULL set to root of loaded unit */
+                  
 {
 	value *h;
 	value *fname;
@@ -252,9 +247,7 @@ Hidden bool unitinenv(pname, howto, wse)
 
 /*****************************************************************************/
 
-Hidden char *mkfilepath(fname, wse)
-     value fname;
-     wsenvptr wse;
+Hidden char *mkfilepath(value fname, wsenvptr wse)
 {
 	if (IsCentralEnv(wse)) return makepath(cen_dir, strval(fname));
 	else return (char *) savestr(strval(fname));
@@ -266,7 +259,7 @@ Hidden char *mkfilepath(fname, wse)
  * Initialize the env of the standard functions/predicates
  */
 
-Visible Procedure initstdenv() 
+Visible Procedure initstdenv(void)
 {
 	std_env->units = mk_elt();
 }
@@ -275,7 +268,7 @@ Visible Procedure initstdenv()
  * Finish the env of the standard functions/predicates
  */
 
-Visible Procedure endstdenv()
+Visible Procedure endstdenv(void)
 {
 #ifdef MEMTRACE
 	release(std_env->units);

@@ -10,13 +10,12 @@
 #include "i4bio.h"
 #include "b1grab.h"
 
-Forward Hidden char *getlocname();
-Forward Hidden char *getlocval();
+Forward Hidden char *getlocname(value pname);
+Forward Hidden char *getlocval(value fname);
 
 /* list how-to's and locations on the file 'ofp' */
 
-Visible Procedure abcpack(ofp)
-     FILE *ofp;
+Visible Procedure abcpack(FILE *ofp)
 {
 	intlet k, len;
 	char *locname;
@@ -40,8 +39,7 @@ Visible Procedure abcpack(ofp)
 	}
 }
 
-Hidden char *getlocname(pname)
-     value pname;
+Hidden char *getlocname(value pname)
 {
 	value name;
 	char *locname;
@@ -53,8 +51,7 @@ Hidden char *getlocname(pname)
 	return locname;
 }
 
-Hidden char *getlocval(fname)
-     value fname;
+Hidden char *getlocval(value fname)
 {
 	FILE *fp;
 	char *buffer, *pbuf;

@@ -8,11 +8,11 @@
 extern "C" {
 #endif
 
-    extern Visible Procedure initgetc();
-    extern Visible Procedure endgetc();
-    extern Visible Procedure pollinterrupt();
-    extern Visible Procedure initkeys();
-    extern Visible Procedure initoperations();
+    extern Visible Procedure initgetc(void);
+    extern Visible Procedure endgetc(void);
+    extern Visible Procedure pollinterrupt(void);
+    extern Visible Procedure initkeys(void);
+    extern Visible Procedure initoperations(void);
     
 #ifdef __cplusplus
 }

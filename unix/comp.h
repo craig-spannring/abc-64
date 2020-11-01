@@ -43,8 +43,8 @@ typedef int expint;	/*The 2nd argument of frexp points to this */
 #ifdef __STDC__
 #include <stddef.h>
 #define MALLOC_ARG (size_t)
-void *malloc();
-void *realloc();
+void *malloc(size_t);
+void *realloc(void *, size_t);
 #else
 #define MALLOC_ARG (unsigned)
 char *malloc();

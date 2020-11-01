@@ -44,7 +44,7 @@ polytype t_n_type;
 
 /* Making, setting and accessing (the fields of) polytypes */
 
-Visible polytype mkt_polytype(k, nsub) typekind k; intlet nsub; {
+Visible polytype mkt_polytype(typekind k, intlet nsub) {
 	value u;
 	
 	u = mk_compound(2);
@@ -53,53 +53,53 @@ Visible polytype mkt_polytype(k, nsub) typekind k; intlet nsub; {
 	return (polytype) u;
 }
 
-Visible Procedure putsubtype(sub, u, isub) polytype sub, u; intlet isub; {
+Visible Procedure putsubtype(polytype sub, polytype u, intlet isub) {
 	*Field(*Psubtypes(u), isub)= (value) sub;
 }
 
-typekind kind(u) polytype u; {
+typekind kind(polytype u) {
 	return Kind(u);
 }
 
-intlet nsubtypes(u) polytype u; {
+intlet nsubtypes(polytype u) {
 	return Nfields(*Psubtypes(u));
 }
 
-polytype subtype(u, i) polytype u; intlet i; {
+polytype subtype(polytype u, intlet i) {
 	return (polytype) *Field(*Psubtypes(u), i);
 }
 
-polytype asctype(u) polytype u; {
+polytype asctype(polytype u) {
 	return subtype(u, Asc);
 }
 
-polytype keytype(u) polytype u; {
+polytype keytype(polytype u) {
 	return subtype(u, Key);
 }
 
-value ident(u) polytype u; {
+value ident(polytype u) {
 	return Ident(u);
 }
 
 /* making new polytypes */
 
-polytype mkt_number() {
+polytype mkt_number(void) {
 	return p_copy(num_type);
 }
 
-polytype mkt_text() {
+polytype mkt_text(void) {
 	return p_copy(tex_type);
 }
 
-polytype mkt_tn() {
+polytype mkt_tn(void) {
 	return p_copy(t_n_type);
 }
 
-polytype mkt_error() {
+polytype mkt_error(void) {
 	return p_copy(err_type);
 }
 
-polytype mkt_list(s) polytype s; {
+polytype mkt_list(polytype s) {
 	polytype u;
 	
 	u = mkt_polytype(lis_kind, 1);
@@ -107,7 +107,7 @@ polytype mkt_list(s) polytype s; {
 	return u;
 }
 
-polytype mkt_table(k, a) polytype k, a; {
+polytype mkt_table(polytype k, polytype a) {
 	polytype u;
 	
 	u = mkt_polytype(tab_kind, 2);
@@ -116,7 +116,7 @@ polytype mkt_table(k, a) polytype k, a; {
 	return u;
 }
 
-polytype mkt_lt(s) polytype s; {
+polytype mkt_lt(polytype s) {
 	polytype u;
 	
 	u = mkt_polytype(l_t_kind, 1);
@@ -124,7 +124,7 @@ polytype mkt_lt(s) polytype s; {
 	return u;
 }
 
-polytype mkt_tlt(s) polytype s; {
+polytype mkt_tlt(polytype s) {
 	polytype u;
 	
 	u = mkt_polytype(tlt_kind, 1);
@@ -132,11 +132,11 @@ polytype mkt_tlt(s) polytype s; {
 	return u;
 }
 
-polytype mkt_compound(nsub) intlet nsub; {
+polytype mkt_compound(intlet nsub) {
 	return mkt_polytype(com_kind, nsub);
 }
 
-polytype mkt_var(id) value id; {
+polytype mkt_var(value id) {
 	polytype u;
 	
 	u = mk_compound(2);
@@ -147,7 +147,7 @@ polytype mkt_var(id) value id; {
 
 Hidden value nnewvar;
 
-polytype mkt_newvar() {
+polytype mkt_newvar(void) {
 	value v;
 	v = sum(nnewvar, one);
 	release(nnewvar);
@@ -157,11 +157,11 @@ polytype mkt_newvar() {
 
 Hidden value n_external;  /* external variable types used by how-to's */
 
-Visible Procedure new_externals() {
+Visible Procedure new_externals(void) {
 	n_external= zero;
 }
 
-Visible polytype mkt_ext() {
+Visible polytype mkt_ext(void) {
 	polytype u;
 	value v;
 	
@@ -176,17 +176,17 @@ Visible polytype mkt_ext() {
 	return u;
 }
 
-polytype p_copy(u) polytype u; {
+polytype p_copy(polytype u) {
 	return (polytype) copy((polytype) u);
 }
 
-Visible Procedure p_release(u) polytype u; {
+Visible Procedure p_release(polytype u) {
 	release((polytype) u);
 }
 
 /* predicates */
 
-bool are_same_types(u, v) polytype u, v; {
+bool are_same_types(polytype u, polytype v) {
 	if (compare((value) Kind(u), (value) Kind(v)) != 0)
 		return No;
 	else if (t_is_var(Kind(u)))
@@ -199,7 +199,7 @@ bool are_same_types(u, v) polytype u, v; {
 		);
 }
 
-bool have_same_structure(u, v) polytype u, v; {
+bool have_same_structure(polytype u, polytype v) {
 	return(
 		(compare((value) Kind(u), (value) Kind(v)) == 0)
 		&&
@@ -207,65 +207,65 @@ bool have_same_structure(u, v) polytype u, v; {
 	);
 }
 
-bool t_is_number(knd) typekind knd; {
+bool t_is_number(typekind knd) {
 	return (compare((value) knd, (value) num_kind) == 0 ? Yes : No);
 }
 
-bool t_is_text(knd) typekind knd; {
+bool t_is_text(typekind knd) {
 	return (compare((value) knd, (value) tex_kind) == 0 ? Yes : No);
 }
 
-bool t_is_tn(knd) typekind knd; {
+bool t_is_tn(typekind knd) {
 	return (compare((value) knd, (value) t_n_kind) == 0 ? Yes : No);
 }
 
-bool t_is_error(knd) typekind knd; {
+bool t_is_error(typekind knd) {
 	return (compare((value) knd, (value) err_kind) == 0 ? Yes : No);
 }
 
-bool t_is_list(knd) typekind knd; {
+bool t_is_list(typekind knd) {
 	return (compare((value) knd, (value) lis_kind) == 0 ? Yes : No);
 }
 
-bool t_is_table(knd) typekind knd; {
+bool t_is_table(typekind knd) {
 	return (compare((value) knd, (value) tab_kind) == 0 ? Yes : No);
 }
 
-bool t_is_lt(knd) typekind knd; {
+bool t_is_lt(typekind knd) {
 	return (compare((value) knd, (value) l_t_kind) == 0 ? Yes : No);
 }
 
-bool t_is_tlt(knd) typekind knd; {
+bool t_is_tlt(typekind knd) {
 	return (compare((value) knd, (value) tlt_kind) == 0 ? Yes : No);
 }
 
-bool t_is_compound(knd) typekind knd; {
+bool t_is_compound(typekind knd) {
 	return (compare((value) knd, (value) com_kind) == 0 ? Yes : No);
 }
 
-bool t_is_var(knd) typekind knd; {
+bool t_is_var(typekind knd) {
 	return (compare((value) knd, (value) var_kind) == 0 ? Yes : No);
 }
 
-bool t_is_ext(knd) typekind knd; {
+bool t_is_ext(typekind knd) {
 	return (compare((value) knd, (value) ext_kind) == 0 ? Yes : No);
 }
 
-bool has_number(knd) typekind knd; {
+bool has_number(typekind knd) {
 	if (compare(knd, num_kind) == 0 || compare(knd, t_n_kind) == 0)
 		return Yes;
 	else
 		return No;
 }
 
-bool has_text(knd) typekind knd; {
+bool has_text(typekind knd) {
 	if (compare(knd, tex_kind) == 0 || compare(knd, t_n_kind) == 0)
 		return Yes;
 	else
 		return No;
 }
 
-bool has_lt(knd) typekind knd; {
+bool has_lt(typekind knd) {
 	if (compare(knd, l_t_kind) == 0 || compare(knd, tlt_kind) == 0)
 		return Yes;
 	else
@@ -278,24 +278,24 @@ bool has_lt(knd) typekind knd; {
  
 value ptype_of;
 
-Visible Procedure repl_type_of(u, p) polytype u, p; {
+Visible Procedure repl_type_of(polytype u, polytype p) {
 	replace((value) p, &ptype_of, Ident(u));
 }
 
-bool table_has_type_of(u) polytype u; {
+bool table_has_type_of(polytype u) {
 	return in_keys(Ident(u), ptype_of);
 }
 
 #define	Table_type_of(u) ((polytype) *adrassoc(ptype_of, Ident(u)))
 
-Visible polytype bottomtype(u) polytype u; {
+Visible polytype bottomtype(polytype u) {
 	while (t_is_var(Kind(u)) && table_has_type_of(u)) {
 		u = Table_type_of(u);
 	}
 	return u;
 }
 
-polytype bottomvar(u) polytype u; {
+polytype bottomvar(polytype u) {
 	polytype b;
 
 	if (!t_is_var(Kind(u)))
@@ -313,17 +313,17 @@ polytype bottomvar(u) polytype u; {
 	return u;
 }
 
-Visible Procedure usetypetable(t) value t; {
+Visible Procedure usetypetable(value t) {
 	ptype_of = t;
 }
 
-Visible Procedure deltypetable() {
+Visible Procedure deltypetable(void) {
 	release(ptype_of);
 }
 
 /* init */
 
-Visible Procedure initpol() {
+Visible Procedure initpol(void) {
 	num_kind = mk_text("Number");
 	num_type = mkt_polytype(num_kind, 0);
 	tex_kind = mk_text("Text");
@@ -344,7 +344,7 @@ Visible Procedure initpol() {
 	nnewvar = zero;
 }
 
-Visible Procedure endpol() {
+Visible Procedure endpol(void) {
 #ifdef MEMTRACE
 	release((value) num_kind);
 	release((value) num_type);

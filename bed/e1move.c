@@ -16,16 +16,15 @@
 #define Left (-1)
 #define Rite 1
 
-Forward Hidden bool nextchar();
-Forward Hidden bool tabstop();
+Forward Hidden bool nextchar(environ *ep, int direction);
+Forward Hidden bool tabstop(environ *ep, int i);
 
 /*
  * Common code for PREVIOUS and NEXT commands.
  */
 
 Hidden bool
-prevnext(ep, direction)
-	environ *ep;
+prevnext(environ *ep, int direction)
 {
 	node n;
 	node n1;
@@ -174,8 +173,7 @@ prevnext(ep, direction)
 
 
 Visible bool
-previous(ep)
-	environ *ep;
+previous(environ *ep)
 {
 	if (!prevnext(ep, Left))
 		return No;
@@ -184,8 +182,7 @@ previous(ep)
 
 
 Visible bool
-nextarrow(ep)
-	environ *ep;
+nextarrow(environ *ep)
 {
 	if (!prevnext(ep, Rite))
 		return No;
@@ -193,8 +190,7 @@ nextarrow(ep)
 }
 
 Visible bool
-leftarrow(ep)
-	environ *ep;
+leftarrow(environ *ep)
 {
 	int w;
 	bool hole;
@@ -225,8 +221,7 @@ leftarrow(ep)
 }
 
 Visible bool
-ritearrow(ep)
-	environ *ep;
+ritearrow(environ *ep)
 {
 	while (narrow(ep))
 		;
@@ -243,9 +238,7 @@ ritearrow(ep)
  */
 
 Hidden bool
-nextchar(ep, direction)
-	environ *ep;
-	int direction;
+nextchar(environ *ep, int direction)
 {
 	int ich;
 	int nch;
@@ -309,9 +302,7 @@ nextchar(ep, direction)
  */
 
 Hidden bool
-updownarrow(ep, yincr)
-	environ *ep;
-	int yincr;
+updownarrow(environ *ep, int yincr)
 {
 	int y, x;
 
@@ -328,22 +319,19 @@ updownarrow(ep, yincr)
 }
 
 Visible bool
-uparrow(ep)
-	environ *ep;
+uparrow(environ *ep)
 {
 	return updownarrow(ep, -1);
 }
 
 Visible bool
-downarrow(ep)
-	environ *ep;
+downarrow(environ *ep)
 {
 	return updownarrow(ep, 1);
 }
 
 Visible bool
-upline(ep)
-	environ *ep;
+upline(environ *ep)
 {
 	int y;
 
@@ -357,8 +345,7 @@ upline(ep)
 }
 
 Visible bool
-downline(ep)
-	environ *ep;
+downline(environ *ep)
 {
 	int w;
 
@@ -381,8 +368,7 @@ downline(ep)
 
 
 Visible bool
-acceptcommand(ep)
-	environ *ep;
+acceptcommand(environ *ep)
 {
 	int i;
 	string repr;
@@ -449,9 +435,7 @@ acceptcommand(ep)
  */
 
 Hidden bool
-tabstop(ep, i)
-	environ *ep;
-	int i;
+tabstop(environ *ep, int i)
 {
 	node n = tree(ep->focus);
 	int nch;

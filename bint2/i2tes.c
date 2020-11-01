@@ -16,25 +16,25 @@
 #define relop b_relop
 
 Forward Hidden bool conjunction(txptr q, parsetree *v);
-Forward Hidden bool disjunction();
-Forward Hidden bool negation();
-Forward Hidden bool quantification();
-Forward Hidden bool cl_test();
-Forward Hidden bool order_test();
-Forward Hidden Procedure upto_test();
-Forward Hidden parsetree right_test();
-Forward Hidden parsetree tight_test();
-Forward Hidden parsetree ref_or_prop();
+Forward Hidden bool disjunction(txptr q, parsetree *v);
+Forward Hidden bool negation(char *kw, txptr q, parsetree *v);
+Forward Hidden bool quantification(char *kw, txptr q, parsetree *v);
+Forward Hidden bool cl_test(txptr q, parsetree *v);
+Forward Hidden bool order_test(txptr q, parsetree *v);
+Forward Hidden Procedure upto_test(txptr q);
+Forward Hidden parsetree right_test(txptr q);
+Forward Hidden parsetree tight_test(txptr q);
+Forward Hidden parsetree ref_or_prop(txptr q);
 Forward Hidden typenode relop(void);
 
-Visible parsetree test(q) txptr q; {
+Visible parsetree test(txptr q) {
 	parsetree v;
 	skipsp(&tx);
 	if (!(conjunction(q, &v) || disjunction(q, &v))) v= right_test(q);
 	return v;
 }
 
-Hidden parsetree right_test(q) txptr q; {
+Hidden parsetree right_test(txptr q) {
 	parsetree v;
 	char *kw;
 	txptr tx0= tx;
@@ -60,7 +60,7 @@ Hidden bool conjunction(txptr q, parsetree *v) {
 	return No;
 }
 
-Hidden bool disjunction(q, v) txptr q; parsetree *v; {
+Hidden bool disjunction(txptr q, parsetree *v) {
 	txptr ftx, ttx;
 	if (find(K_OR, q, &ftx, &ttx)) {
 		parsetree t;
@@ -72,7 +72,7 @@ Hidden bool disjunction(q, v) txptr q; parsetree *v; {
 	return No;
 }
 
-Hidden bool negation(kw, q, v) char *kw; txptr q; parsetree *v; {
+Hidden bool negation(char *kw, txptr q, parsetree *v) {
 	if (not_keyword(kw)) {
 		*v= node2(NOT, right_test(q));
 		return Yes;
@@ -80,7 +80,7 @@ Hidden bool negation(kw, q, v) char *kw; txptr q; parsetree *v; {
 	return No;
 }
 
-Hidden bool quantification(kw, q, v) char *kw; txptr q; parsetree *v; {
+Hidden bool quantification(char *kw, txptr q, parsetree *v) {
 	bool some, each;
 	if ((some= some_keyword(kw)) || (each= each_keyword(kw)) || 
 			no_keyword(kw)) {
@@ -105,7 +105,7 @@ Hidden bool quantification(kw, q, v) char *kw; txptr q; parsetree *v; {
 	return No;
 }
 
-Hidden parsetree tight_test(q) txptr q; {
+Hidden parsetree tight_test(txptr q) {
 	parsetree v;
 	skipsp(&tx);
 	if (nothing(q, MESS(2701, "nothing instead of expected test"))) 
@@ -121,7 +121,7 @@ Hidden parsetree tight_test(q) txptr q; {
 	return v;
 }
 
-Hidden bool cl_test(q, v) txptr q; parsetree *v; {
+Hidden bool cl_test(txptr q, parsetree *v) {
 	txptr tx0= tx;
 	if (open_sign) { /* (expr) or (test) */
 		txptr ftx, ttx, tx1;
@@ -138,7 +138,7 @@ Hidden bool cl_test(q, v) txptr q; parsetree *v; {
 	return No;
 }
 
-Hidden bool order_test(q, v) txptr q; parsetree *v; {
+Hidden bool order_test(txptr q, parsetree *v) {
 	txptr ftx;
 	if (findrel(q, &ftx)) {
 		typenode r;
@@ -168,7 +168,7 @@ Hidden typenode relop(void) {
 
 /* refined_test or proposition */
 
-Hidden parsetree ref_or_prop(q) txptr q; {
+Hidden parsetree ref_or_prop(txptr q) {
 	value t1, t2;
 	txptr tx0= tx;
 	
@@ -188,7 +188,7 @@ Hidden parsetree ref_or_prop(q) txptr q; {
 	return unp_test(q);
 } 
 
-Hidden Procedure upto_test(q) txptr q; {
+Hidden Procedure upto_test(txptr q) {
 	skipsp(&tx);
 	if (Text(q)) {
 		txptr ftx, ttx;

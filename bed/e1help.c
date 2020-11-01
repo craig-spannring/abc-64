@@ -61,11 +61,11 @@ Hidden char modebuffer[MAXBUFFER];
 #define NO_MORE MESS(6701, "Press [SPACE] or [RETURN] to exit help")
 #define NO_HELPFILE MESS(6702, "*** Cannot find or read help file [%s]")
 
-Forward bool ask_for();
-Forward Hidden Procedure start_help();
-Forward Hidden Procedure getentryfor();
-Forward Hidden char *addstr();
-Forward Hidden Procedure more_help();
+Forward bool ask_for(int nr);
+Forward Hidden Procedure start_help(void);
+Forward Hidden Procedure getentryfor(int code);
+Forward Hidden char *addstr(char *bp, string s, int minw);
+Forward Hidden Procedure more_help(void);
 
 /*
  * Print help blurb.
@@ -74,7 +74,7 @@ Forward Hidden Procedure more_help();
  */
 
 Visible bool
-help()
+help(void)
 {
 	int len = sizeof buffer;
 	bool two_columns;
@@ -115,7 +115,7 @@ help()
 	return Yes;
 }
 
-Visible bool ask_for(nr) int nr; {
+Visible bool ask_for(int nr) {
 	int c;
 
 	trmputdata(winheight, winheight, 0, "", (string)0);
@@ -136,7 +136,7 @@ Visible bool ask_for(nr) int nr; {
 	return c == ' ' ? Yes : No;
 }
 
-Hidden Procedure start_help()
+Hidden Procedure start_help(void)
 {
 	int h;
 	int code;
@@ -157,7 +157,7 @@ Hidden Procedure start_help()
 	}
 }
 
-Hidden Procedure getentryfor(code) int code; {
+Hidden Procedure getentryfor(int code) {
 	int d;
 	char *bufp= buffer;
 	bool first= Yes;
@@ -182,7 +182,7 @@ Hidden Procedure getentryfor(code) int code; {
 		bufp= addstr(bufp, "", 0);
 }
 
-Hidden char *addstr(bp, s, minw) char * bp; string s; int minw; {
+Hidden char *addstr(char *bp, string s, int minw) {
 	while (*s && bp < buffer+MAXBUFFER) {
 		*bp++= *s++;
 		minw--;
@@ -199,7 +199,7 @@ Hidden char *addstr(bp, s, minw) char * bp; string s; int minw; {
 
 Hidden FILE *helpfp= NULL;
 
-Hidden Procedure more_help() {
+Hidden Procedure more_help(void) {
 	string cp;
 	int nprinted= 0;
 	bool more= Yes;

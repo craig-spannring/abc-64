@@ -22,12 +22,12 @@ extern bool dflag;
 #endif
 
 Forward cell *gettop();
-Forward Hidden Procedure growwin();
-Forward Hidden int makeroom();
-Forward Hidden int make2room();
-Forward Hidden bool atlinestart();
-Forward Hidden int fixlevels();
-Forward Hidden Procedure initvtrm();
+Forward Hidden Procedure growwin(void);
+Forward Hidden int makeroom(cell *p, int curlno, int delcnt);
+Forward Hidden int make2room(cell *p, int curlno, int delcnt);
+Forward Hidden bool atlinestart(environ *ep);
+Forward Hidden int fixlevels(environ *oldep, environ *newep, int highest);
+Forward Hidden Procedure initvtrm(void);
 
 
 extern int focy;
@@ -49,10 +49,10 @@ Hidden cell *tops;
  */
 
 Visible Procedure
-actupdate(copybuffer, recording, lasttime)
-	value copybuffer;
-	bool recording;
-	bool lasttime; /* Yes if called from final screen update */
+actupdate(value copybuffer, bool recording, bool lasttime)
+	                 
+	               
+	               /* Yes if called from final screen update */
 {
 	cell *p;
 	cell *ptop = tops;
@@ -138,7 +138,7 @@ actupdate(copybuffer, recording, lasttime)
  */
 
 Hidden Procedure
-growwin()
+growwin(void)
 {
 	int winsize;
 	int growth;
@@ -169,10 +169,7 @@ growwin()
  */
 
 Hidden int
-makeroom(p, curlno, delcnt)
-	cell *p;
-	int curlno;
-	int delcnt;
+makeroom(cell *p, int curlno, int delcnt)
 {
 	int here = 0;
 	int needed = Space(p);
@@ -233,10 +230,7 @@ makeroom(p, curlno, delcnt)
  */
 
 Hidden int
-make2room(p, curlno, delcnt)
-	cell *p;
-	int curlno;
-	int delcnt;
+make2room(cell *p, int curlno, int delcnt)
 {
 	int nextline = curlno + Space(p);
 	int sline = winheight - delcnt;
@@ -265,10 +259,7 @@ make2room(p, curlno, delcnt)
  */
 
 Visible Procedure
-virtupdate(oldep, newep, highest)
-	environ *oldep;
-	environ *newep;
-	int highest;
+virtupdate(environ *oldep, environ *newep, int highest)
 {
 	environ old;
 	environ new;
@@ -324,8 +315,7 @@ virtupdate(oldep, newep, highest)
 
 
 Hidden bool
-atlinestart(ep)
-	environ *ep;
+atlinestart(environ *ep)
 {
 	string repr = noderepr(tree(ep->focus))[0];
 
@@ -340,10 +330,7 @@ atlinestart(ep)
  */
 
 Hidden int
-fixlevels(oldep, newep, highest)
-	environ *oldep;
-	environ *newep;
-	int highest;
+fixlevels(environ *oldep, environ *newep, int highest)
 {
 	int oldpl = pathlength(oldep->focus);
 	int newpl = pathlength(newep->focus);
@@ -392,7 +379,7 @@ fixlevels(oldep, newep, highest)
  */
  
 Visible Procedure
-initterm()
+initterm(void)
 {
 	initvtrm(); /* init virtual terminal package */
 	initgetc(); /* term-init string */
@@ -403,7 +390,7 @@ Visible bool vtrmactive= No;
 extern bool in_init;
 
 Hidden Procedure
-initvtrm() 
+initvtrm(void)
 {
 	int flags = 0;
 	int err;
@@ -432,7 +419,7 @@ initvtrm()
 }
 
 Visible Procedure
-endterm()
+endterm(void)
 {
 	trmsync(winheight, 0);	/* needed for buggy vt100's, that
 				 * may leave cusor at top of screen
@@ -450,7 +437,7 @@ endterm()
  */
 
 Visible Procedure
-endshow()
+endshow(void)
 {
 	cell *p;
 	int last = winheight;
@@ -479,9 +466,7 @@ endshow()
  */
 
 Visible bool
-backtranslate(py, px)
-	int *py;
-	int *px;
+backtranslate(int *py, int *px)
 {
 	cell *p;
 	int y = *py;
@@ -510,8 +495,7 @@ backtranslate(py, px)
  */
 
 Visible Procedure
-setindent(x)
-	int x;
+setindent(int x)
 {
 	winstart= winheight-1;
 	/* the following is a hack; should change when
@@ -533,8 +517,7 @@ setindent(x)
  * Show the command prompt.
  */
 
-Visible Procedure cmdprompt(prompt)
-	string prompt;
+Visible Procedure cmdprompt(string prompt)
 {
 	setindent(strlen(prompt));
 	trmputdata(winstart, winstart, 0, prompt, (string)0);

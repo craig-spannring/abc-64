@@ -14,14 +14,14 @@
 
 Visible bool intrptd = No;
 
-Hidden SIGTYPE intsig(sig)
-     int sig;                     /* sig == SIGINT */
+Hidden SIGTYPE intsig(int sig)
+                                  /* sig == SIGINT */
 {
 	intrptd = Yes;
 	signal(sig, intsig);
 }
 
-Visible Procedure initsig()
+Visible Procedure initsig(void)
 {
 	signal(SIGINT, intsig);  /* interrupt */
 }

@@ -7,7 +7,7 @@
 #include "main.h"  /* for curdir() */
 #include "port.h"  /* for MESSFILE, HELPFILE, etc */
 
-extern char *getenv();
+extern char *getenv(const char *);
 
 /* the directory delimiter in filename paths */
 #define DELIM '/'
@@ -19,11 +19,9 @@ Visible char *helpfile;  /* the help file */
 Visible char *keysfile;  /* the keys definition file */
 Visible char *buffile;   /* the file for storing the copy buffer between sessions */
 
-Forward Hidden char *savepath();
+Forward Hidden char *savepath(char *path);
 
-Visible char *makepath(path1, path2)
-     char *path1;
-     char *path2;
+Visible char *makepath(char *path1, char *path2)
 {
 	if (path1 == NULL || *path1 == '\0')
 		return savepath(path2);
@@ -46,8 +44,7 @@ Visible char *makepath(path1, path2)
 	}
 }
 
-Hidden char *savepath(path)
-     char *path;
+Hidden char *savepath(char *path)
 {
 	if (path == NULL) return (char *) NULL;
 	return savestr(path);
@@ -58,7 +55,7 @@ Visible Porting Procedure freepath(char *path)
 	if (path != NULL) freestr(path);
 }
 
-Hidden string searchfile(base, abclib) char *base, *abclib; {
+Hidden string searchfile(char *base, char *abclib) {
 	char *file;
 	
 	/* search first in startup directory */
@@ -85,7 +82,7 @@ Hidden string searchfile(base, abclib) char *base, *abclib; {
 	return (string) NULL;
 }
 
-Visible Procedure initfile()
+Visible Procedure initfile(void)
 {
 	char *homedir= getenv("HOME");
 	char *termname;
@@ -120,6 +117,6 @@ Visible Procedure initfile()
 	
 }
 
-Visible int Chdir (path) char *path; {
+Visible int Chdir (char *path) {
 	return chdir(path);
 }

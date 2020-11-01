@@ -16,8 +16,8 @@
 #include "code.h"	/* not strictly necessary, only for initcodes() */
 #include "port.h"
 
-Forward Hidden Procedure fix_refcnt();
-Forward Hidden Procedure makesugg();
+Forward Hidden Procedure fix_refcnt(node n);
+Forward Hidden Procedure makesugg(classptr cp);
 
 /*
  * Test whether sym is in the given class.

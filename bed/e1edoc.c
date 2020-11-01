@@ -32,22 +32,16 @@ Hidden int highwatmark = Maxintlet;
 Visible bool lefttorite;
 	/* Saves some time in nosuggtoqueue() for read from file */
 
-Forward Hidden bool execute();
-Forward Hidden bool canexit();
-Forward Hidden bool findhole();
-Forward Hidden Procedure writetext();
+Forward Hidden bool execute(environ *ep, int cmd);
+Forward Hidden bool canexit(environ *ep);
+Forward Hidden bool findhole(path *pp);
+Forward Hidden Procedure writetext(value v, FILE *fp);
 
 /*
  * Edit a unit or target, using the environment offered as a parameter.
  */
 
-Visible bool dofile(ep, filename, linenumber, kind, creating, changed)
-     environ *ep;
-     string filename;
-     int linenumber;
-     literal kind;
-     bool creating;
-     bool *changed;
+Visible bool dofile(environ *ep, string filename, int linenumber, literal kind, bool creating, bool *changed)
 {
 	bool read_bad= No;
 	bool readfile();
@@ -99,7 +93,7 @@ Visible bool dofile(ep, filename, linenumber, kind, creating, changed)
 
 Visible bool canceled= No;
 
-Visible bool suspendabc() {
+Visible bool suspendabc(void) {
 	int r;
 	
 	endshow();
@@ -110,9 +104,7 @@ Visible bool suspendabc() {
 }
 
 Visible bool
-editdocument(ep, bad_file)
-	environ *ep;
-	bool bad_file;
+editdocument(environ *ep, bool bad_file)
 {
 	int k;
 	int first = 0;
@@ -344,9 +336,7 @@ editdocument(ep, bad_file)
 extern bool justgoon;
 
 Hidden bool
-execute(ep, cmd)
-	environ *ep;
-	int cmd;
+execute(environ *ep, int cmd)
 {
 	bool spflag = ep->spflag;
 	int i;
@@ -640,8 +630,7 @@ dbmess(environ *ep)
 #ifndef SMALLSYS
 
 Hidden bool
-canexit(ep)
-	environ *ep;
+canexit(environ *ep)
 {
 	environ ev;
 
@@ -666,8 +655,7 @@ canexit(ep)
 
 
 Hidden bool
-findhole(pp)
-	path *pp;
+findhole(path *pp)
 {
 	node n = tree(*pp);
 
@@ -703,9 +691,7 @@ Visible Procedure
 #else
 Hidden Procedure
 #endif
-writenode(n, fp)
-	node n;
-	FILE *fp;
+writenode(node n, FILE *fp)
 {
 	int nch;
 	int i;
@@ -729,9 +715,7 @@ writenode(n, fp)
 
 
 Hidden Procedure
-writetext(v, fp)
-	value v;
-	FILE *fp;
+writetext(value v, FILE *fp)
 {
 	intlet k, len;
 	int c;
@@ -754,9 +738,7 @@ writetext(v, fp)
 
 
 Visible bool
-savequeue(v, filename)
-	value v;
-	string filename;
+savequeue(value v, string filename)
 {
 	FILE *fp;
 	auto queue q = (queue)v;

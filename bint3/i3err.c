@@ -40,15 +40,15 @@ Visible value curlino;
 Hidden FILE *errfile;	        /* may be changed in re_errfile() */
 Hidden bool err_interactive;
 
-Forward Hidden Procedure show_line();
-Forward Hidden Procedure show_howto();
-Forward Hidden bool unit_file();
-Forward Hidden Procedure show_f_line();
-Forward Hidden Procedure putcerr();
+Forward Hidden Procedure show_line(bool in_node, bool at, parsetree node, int line_no);
+Forward Hidden Procedure show_howto(int line_no);
+Forward Hidden bool unit_file(void);
+Forward Hidden Procedure show_f_line(void);
+Forward Hidden Procedure putcerr(char c);
 
 /*********************************************************************/
 
-Hidden Procedure nline() {
+Hidden Procedure nline(void) {
 	flushout();
 	/* should be i3scr.c's ofile, but doesnot matter */
 	if (cntxt == In_read && rd_interactive)
@@ -58,7 +58,7 @@ Hidden Procedure nline() {
 	at_nwl= Yes;
 }
 
-Hidden Procedure pr_line(at) bool at; {
+Hidden Procedure pr_line(bool at) {
 	/*prints the line that tx is in, with an arrow pointing to the column
 	  that tx is at.
 	*/
@@ -94,8 +94,8 @@ Hidden Procedure pr_line(at) bool at; {
 #define IN_FILE		MESS(3112, "*** (detected after reading 1 line of your input file %s)\n")
 #define IN_FILE_LINE	MESS(3113, "*** (detected after reading %d lines of your input file %s)\n")
 
-Hidden Procedure show_where(in_node, at, node)
-	bool in_node, at; parsetree node; {
+Hidden Procedure show_where(bool in_node, bool at, parsetree node)
+{
 
 	int line_no= in_node ? intval(curlino) : lino;
 	show_line(in_node, at, node, line_no);
@@ -104,8 +104,8 @@ Hidden Procedure show_where(in_node, at, node)
 		show_f_line();
 }
 
-Hidden Procedure show_line(in_node, at, node, line_no)
-	bool in_node, at; parsetree node; int line_no; {
+Hidden Procedure show_line(bool in_node, bool at, parsetree node, int line_no)
+{
 	
 	switch (cntxt) {
 		case In_command: putmess(IN_COMMAND); break;
@@ -126,8 +126,7 @@ Hidden Procedure show_line(in_node, at, node, line_no)
 	else pr_line(at);
 }
 
-Hidden value unitname(line_no)
-     int line_no;
+Hidden value unitname(int line_no)
 {
 	if (Valid(howtoname) && Is_text(howtoname)) {
 		def_perm(last_unit, howtoname);
@@ -141,7 +140,7 @@ Hidden value unitname(line_no)
 	}
 }
 
-Hidden Procedure show_howto(line_no) int line_no; {
+Hidden Procedure show_howto(int line_no) {
 	value name= unitname(line_no);
 	int m;
 
@@ -156,13 +155,13 @@ Hidden Procedure show_howto(line_no) int line_no; {
 	release(name);
 }
 
-Hidden bool unit_file() {
+Hidden bool unit_file(void) {
 	value *aa;
 	return cntxt == In_unit &&
 		Valid(howtoname) && Is_text(howtoname) && p_exists(howtoname, &aa);
 }
 
-Hidden Procedure show_f_line() {
+Hidden Procedure show_f_line(void) {
 	if (f_lino == 1 && iname == Vnil) 
 		putmess(IN_INPUT);
 	else if (f_lino == 1)
@@ -202,7 +201,7 @@ Visible Procedure syserr(int m) {
 #ifndef MEMEXH_ALERT
 /* MacABC uses an alert to make sure the user gets the message */
 
-Visible Procedure memexh() {
+Visible Procedure memexh(void) {
 	static bool beenhere= No;
 	if (beenhere) immexit(-1);
 	beenhere= Yes;
@@ -215,10 +214,7 @@ Visible Procedure memexh() {
 
 #endif /* MEMEXH_ALERT */
 
-Hidden Procedure message(m1, m2, in_node, at, arg)
-	int m1, m2;
-	bool in_node, at; 
-	value arg;
+Hidden Procedure message(int m1, int m2, bool in_node, bool at, value arg)
 {
 	still_ok= No;
 	if (!mess_ok)
@@ -287,7 +283,7 @@ Visible Procedure interr(int m) {
 		message(COPE, m, Yes, No, Vnil);
 }
 
-Visible Procedure checkerr() {
+Visible Procedure checkerr(void) {
 	still_ok= No;
 	nline();
 	putmess(MESS(3121, "*** Your check failed"));
@@ -296,7 +292,7 @@ Visible Procedure checkerr() {
 	at_nwl= Yes;
 }
 
-Visible Procedure int_signal() {
+Visible Procedure int_signal(void) {
 	if (can_interrupt) {
 		interrupted= Yes; still_ok= No;
 		if (cntxt == In_wsgroup || cntxt == In_prmnv)
@@ -318,7 +314,7 @@ Visible Procedure int_signal() {
 	at_nwl= Yes;
 }
 
-Visible Procedure fpe_signal() {
+Visible Procedure fpe_signal(void) {
 	interr(MESS(3123, "unexpected arithmetic overflow"));
 }
 
@@ -343,7 +339,7 @@ Visible Procedure immexit(int status) {
 	exit(status);
 }
 
-Visible Procedure initerr() {
+Visible Procedure initerr(void) {
 	errfile= stderr; /* sp 20010221 */
 	still_ok= Yes; interrupted= No; curline= Vnil; curlino= zero;
 	err_interactive = f_interactive(stderr);
@@ -353,7 +349,7 @@ extern bool vtrmactive;
 
 /* error messages to console (via vtrm) if stderr tty and vtrmactive */
 
-Visible Procedure re_errfile() {
+Visible Procedure re_errfile(void) {
 	if (err_interactive && vtrmactive)
 	  errfile = CONSOLE;
 }
@@ -364,16 +360,14 @@ Visible Procedure re_errfile() {
 
 Hidden char *fmtbuf;
 
-Visible Procedure initfmt()
+Visible Procedure initfmt(void)
 {
 	fmtbuf= (char *) getmem(FMTLENGTH);
 }
 
 #define FMTINTLEN 100 /* space allocated for int's in formats */
 
-Visible char *getfmtbuf(fmt, n)
-     string fmt;
-     int n;
+Visible char *getfmtbuf(string fmt, int n)
 {
 	static char *fmtstr= NULL;
 
@@ -392,13 +386,12 @@ Visible Procedure putserr(string s)
 	putstr(errfile, s);
 }
 
-Hidden Procedure putcerr(c)
-     char c;
+Hidden Procedure putcerr(char c)
 {
 	putchr(errfile, c);
 }
 
-Visible Procedure flusherr()
+Visible Procedure flusherr(void)
 {
 	doflush(errfile);
 }

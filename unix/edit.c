@@ -7,12 +7,9 @@
 Hidden char com_line[COML];
 #define At_eos(s) ((s)+= strlen(s))
 
-Forward Hidden Procedure app_fname();
+Forward Hidden Procedure app_fname(string ceos, string fname);
 
-Visible bool ed_file(editor, fname, line)
-     char *editor;
-     char *fname;
-     int line;
+Visible bool ed_file(char *editor, char *fname, int line)
 {
 	/* return Yes if file has been modified */
 	string cl= com_line;
@@ -37,9 +34,7 @@ Visible bool ed_file(editor, fname, line)
 	  return No;
 }
 
-Hidden Procedure app_fname(ceos, fname)
-     string ceos;
-     string fname;
+Hidden Procedure app_fname(string ceos, string fname)
 {
 	intlet k, len= strlen(fname);
 	*ceos++= ' ';

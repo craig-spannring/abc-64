@@ -62,8 +62,7 @@ Visible struct tabent deftab[MAXDEFS] = {
  * mouse in TERMINIT and TERMDONE, see trmsense() in trm.c.
  */
 
-Visible string reprchar(c)
-     int c;
+Visible string reprchar(int c)
 {
 	static char str[20];
 
@@ -106,7 +105,7 @@ Visible string reprchar(c)
 Visible char intrchar;
 #endif
 
-Visible Procedure addspeckeys()
+Visible Procedure addspeckeys(void)
 {
 	/* First, if you can't lookahead in the input queue,
 	 * set the variable 'intrchar' to the keyboard interrupt character

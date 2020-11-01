@@ -16,12 +16,12 @@
 #include "tabl.h"
 #include "b1grab.h"
 
-Forward Hidden bool subisnull();
-Forward Hidden bool isnull();
-Forward Hidden bool nextitem();
-Forward Hidden bool previtem();
-Forward Hidden bool isunititem();
-Forward Hidden Procedure lastnnitem();
+Forward Hidden bool subisnull(node n, string *rp, int i, bool ignorespaces);
+Forward Hidden bool isnull(node n, string *rp, int i);
+Forward Hidden bool nextitem(environ *ep);
+Forward Hidden bool previtem(environ *ep);
+Forward Hidden bool isunititem(environ *ep);
+Forward Hidden Procedure lastnnitem(environ *ep);
 
 /*
  * Compute the length of the ep->s1'th item of node tree(ep->focus).

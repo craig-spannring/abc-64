@@ -74,9 +74,9 @@ typedef struct {
 typedef value fun;
 typedef value prd;
 
-fun mk_fun();
-prd mk_prd();
-value mk_how();
+fun mk_fun(literal adic, intlet pre, parsetree unit, bool filed);
+prd mk_prd(literal adic, intlet pre, parsetree unit, bool filed);
+value mk_how(parsetree unit, bool filed);
 
 #define Is_howto(v) (Type(v) == How)
 #define Is_function(v) (Type(v) == Fun)

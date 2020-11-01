@@ -3,14 +3,15 @@
 
 
 #include "b.h"
+#include "bint.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-    extern Visible Procedure f_eunparsed();
-    extern Visible Procedure f_cunparsed();
-    extern Visible Procedure f_trim_target();
+    extern Visible Procedure f_eunparsed(parsetree *pt);
+    extern Visible Procedure f_cunparsed(parsetree *pt);
+    extern Visible Procedure f_trim_target(parsetree v, char trim);
 
 
 

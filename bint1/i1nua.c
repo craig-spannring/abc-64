@@ -41,9 +41,7 @@ Hidden double twologBASE;
  * So here is our own version.
  */
 
-Hidden double b_frexp(frac, ep)
-     double frac;
-     expint *ep;
+Hidden double b_frexp(double frac, expint *ep)
 {
 	if (frac == 0.0) {
 		*ep = 0;
@@ -58,7 +56,7 @@ Hidden double b_frexp(frac, ep)
 
 #define TOO_LARGE MESS(700, "approximate number too large")
 
-Visible real mk_approx(frac, expo) double frac, expo; {
+Visible real mk_approx(double frac, double expo) {
 	real u;
 #ifdef EXT_RANGE
 	expint v;
@@ -89,7 +87,7 @@ Hidden value twotodblbits; /* 2**DBLBITS */
 Hidden value twoto_dblbitsmin1; /* 2**(DBLBITS-1) */
 	/* stored as an unnormalized rational */
 	
-Hidden double getexponent(v) value v; {
+Hidden double getexponent(value v) {
 	integer p, q;
 	struct integer pp, qq;
 	double x;
@@ -113,7 +111,7 @@ Hidden double getexponent(v) value v; {
 	return floor(x) + 1;
 }
 
-Visible value app_frexp(v) value v; {
+Visible value app_frexp(value v) {
 	integer w;
 	struct integer ww;
 	value s, t;
@@ -164,7 +162,7 @@ Visible value app_frexp(v) value v; {
  * Approximate arithmetic.
  */
 
-Visible real app_sum(u, v) real u, v; {
+Visible real app_sum(real u, real v) {
 #ifdef EXT_RANGE
 	real w;
 	if (Expo(u) < Expo(v)) w = u, u = v, v = w;
@@ -176,7 +174,7 @@ Visible real app_sum(u, v) real u, v; {
 #endif /* !EXT_RANGE */
 }
 
-Visible real app_diff(u, v) real u, v; {
+Visible real app_diff(real u, real v) {
 #ifdef EXT_RANGE
 	real w;
 	int sign = 1;
@@ -191,15 +189,15 @@ Visible real app_diff(u, v) real u, v; {
 #endif /* !EXT_RANGE */
 }
 
-Visible real app_neg(u) real u; {
+Visible real app_neg(real u) {
 	return mk_approx(-Frac(u), Expo(u));
 }
 
-Visible real app_prod(u, v) real u, v; {
+Visible real app_prod(real u, real v) {
 	return mk_approx(Frac(u) * Frac(v), Expo(u) + Expo(v));
 }
 
-Visible real app_quot(u, v) real u, v; {
+Visible real app_quot(real u, real v) {
 	if (Frac(v) == 0.0) {
 		interr(ZERO_DIVIDE);
 		return (real) Copy(u);
@@ -213,7 +211,7 @@ Visible real app_quot(u, v) real u, v; {
 		RETURN normalize"(expo*logtwo + log(frac), 0)
 */
 
-Visible real app_log(v) real v; {
+Visible real app_log(real v) {
 	double frac, expo;
 
 	if (!still_ok) return (real) Copy(app_0);
@@ -233,7 +231,7 @@ Visible real app_log(v) real v; {
 		RETURN f, e
 */
 
-Visible real app_exp(v) real v; {
+Visible real app_exp(real v) {
 #ifdef EXT_RANGE
 	expint ei;
 	double frac = Frac(v), vexpo = Expo(v), new_expo;
@@ -277,7 +275,7 @@ Visible real app_exp(v) real v; {
 #endif /* !EXT_RANGE */
 }
 
-Visible real app_power(u, v) real u, v; {
+Visible real app_power(real u, real v) {
 	double ufrac = Frac(u);
 	if (ufrac <= 0) {
 		if (ufrac < 0) interr(NEG_EXACT);
@@ -303,7 +301,7 @@ Visible real app_power(u, v) real u, v; {
  * app_power().
  */
 
-Visible bool about2_to_integral(ru, v, rv) value v; real ru, *rv; {
+Visible bool about2_to_integral(real ru, value v, real *rv) {
 	double expo;
 	integer w;
 	struct integer ww;
@@ -336,7 +334,7 @@ Visible bool about2_to_integral(ru, v, rv) value v; real ru, *rv; {
 	return Yes;
 }
 
-Visible int app_comp(u, v) real u, v; {
+Visible int app_comp(real u, real v) {
 	double xu, xv;
 #ifdef EXT_RANGE
 	double eu, ev;
@@ -355,7 +353,7 @@ Visible int app_comp(u, v) real u, v; {
 	return 0;
 }
 
-Visible integer app_floor(u) real u; {
+Visible integer app_floor(real u) {
 	double frac, expo;
 	expint ei;
 	integer v, w;
@@ -382,7 +380,7 @@ Visible integer app_floor(u) real u; {
 
 Hidden value twotolongbits;
 
-Visible value app_exactly(u) real u; {
+Visible value app_exactly(real u) {
 	value w;
 	integer v, n, t1, t2;
 	double frac, expo, rest, p;
@@ -435,7 +433,7 @@ Visible value app_exactly(u) real u; {
  * routine power().
  */
 
-Visible Procedure app_print(fp, v) FILE *fp; real v; {
+Visible Procedure app_print(FILE *fp, real v) {
 	double frac= Frac(v);
 	double expo= Expo(v);
 	expint ei;
@@ -464,7 +462,7 @@ Visible Procedure app_print(fp, v) FILE *fp; real v; {
 	}
 }
 
-Hidden Procedure initlog() {
+Hidden Procedure initlog(void) {
 	double logBASE, invlogtwo;
 
 	logtwo= log(2.0);
@@ -474,7 +472,7 @@ Hidden Procedure initlog() {
 	twologBASE= logBASE * invlogtwo;
 }
 
-Visible Procedure initapp() {
+Visible Procedure initapp(void) {
 	value v;
 	rational r;
 
@@ -495,7 +493,7 @@ Visible Procedure initapp() {
 	twoto_dblbitsmin1= (value) r;
 }
 
-Visible Procedure endapp() {
+Visible Procedure endapp(void) {
 #ifdef MEMTRACE
 	release(twoto_dblbitsmin1);
 	release(twotodblbits);

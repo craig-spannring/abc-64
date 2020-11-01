@@ -8,11 +8,11 @@
 #include "i4bio.h"
 #include "b1grab.h"
 
-Forward Hidden Procedure rec_dirname();
-Forward Hidden bool is_wsname();
-Forward Hidden Procedure mk_groupentry();
-Forward Hidden Procedure rec_curlast();
-Forward Hidden Procedure grperrV();
+Forward Hidden Procedure rec_dirname(value dname);
+Forward Hidden bool is_wsname(value name);
+Forward Hidden Procedure mk_groupentry(value name, value dname);
+Forward Hidden Procedure rec_curlast(void);
+Forward Hidden Procedure grperrV(int m, value v);
 
 /* code to recover the index of a group of workspaces */
 
@@ -22,7 +22,7 @@ Hidden bool rec_ok= Yes;
 
 Hidden value newgroup;
 
-Visible Procedure rec_wsgroup() {
+Visible Procedure rec_wsgroup(void) {
 	value lis, dname;
 	value k, len, m;
 
@@ -52,7 +52,7 @@ Visible Procedure rec_wsgroup() {
 	gr_recovered= Yes;
 }
 
-Hidden Procedure rec_dirname(dname) value dname; {
+Hidden Procedure rec_dirname(value dname) {
 	value name;
 	intlet k, len;
 	
@@ -81,7 +81,7 @@ Hidden Procedure rec_dirname(dname) value dname; {
 	release(name);
 }
 
-Hidden bool is_wsname(name) value name; {
+Hidden bool is_wsname(value name) {
 	if (!is_abcname(name))
 		return No;
 	if (compare(name, curwskey) == 0 || compare(name, lastwskey) == 0)
@@ -89,7 +89,7 @@ Hidden bool is_wsname(name) value name; {
 	return Yes;
 }
 
-Hidden Procedure mk_groupentry(name, dname) value name, dname; {
+Hidden Procedure mk_groupentry(value name, value dname) {
 	if (in_keys(name, newgroup)) {
 		grperrV(G_EXIST, dname);
 		return;
@@ -97,7 +97,7 @@ Hidden Procedure mk_groupentry(name, dname) value name, dname; {
 	replace(dname, &newgroup, name);
 }
 
-Hidden Procedure rec_curlast() {
+Hidden Procedure rec_curlast(void) {
 	value *aa;
 	if (!Valid(ws_group))
 		return;
@@ -107,7 +107,7 @@ Hidden Procedure rec_curlast() {
 		replace(*aa, &newgroup, lastwskey);
 }
 
-Hidden Procedure grperrV(m, v) int m; value v; {
+Hidden Procedure grperrV(int m, value v) {
 	if (rec_ok) {
 		bioerr(G_ERROR);
 		rec_ok= No;

@@ -28,9 +28,7 @@
  */
 
 Visible bool
-eqlines(n1, n2)
-	node n1;
-	node n2;
+eqlines(node n1, node n2)
 {
 	node nn1;
 	node nn2;
@@ -73,8 +71,7 @@ eqlines(n1, n2)
  */
 
 Visible int
-linelen(n)
-	node n;
+linelen(node n)
 {
 	node nn;
 	string *rp = noderepr(n);
@@ -112,8 +109,7 @@ linelen(n)
  */
 
 Visible bool
-nextline(pp)
-	path *pp;
+nextline(path *pp)
 {
 	node n;
 	node nn;
@@ -153,8 +149,7 @@ nextline(pp)
  */
 
 Visible int
-lineno(ep)
-	environ *ep;
+lineno(environ *ep)
 {
 	int y;
 
@@ -173,8 +168,7 @@ lineno(ep)
  */
 
 Visible int
-colno(ep)
-	environ *ep;
+colno(environ *ep)
 {
 	int x= focoffset(ep);
 
@@ -189,8 +183,7 @@ colno(ep)
  */
 
 Visible Procedure
-oneline(ep)
-	environ *ep;
+oneline(environ *ep)
 {
 	node n;
 	node nn;

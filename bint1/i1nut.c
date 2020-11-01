@@ -22,7 +22,7 @@
  * q if n>0 or p if n<0
  */
 
-Visible value prod2n(v, n, simplify) value v, n; bool simplify; {
+Visible value prod2n(value v, value n, bool simplify) {
 	relation n1 = numcomp(n, zero);
 	integer p, q;
 	integer t1, t2;
@@ -67,7 +67,7 @@ Visible value prod2n(v, n, simplify) value v, n; bool simplify; {
 
 /* v is shifted n "digits" to the left */
 
-Hidden integer int10shift(v, n) integer v; intlet n; {
+Hidden integer int10shift(integer v, intlet n) {
 	struct integer vv;
 	integer w;
 	int i;
@@ -83,7 +83,7 @@ Hidden integer int10shift(v, n) integer v; intlet n; {
 
 /* returns u * 10**|n| */
 
-Hidden integer int10mul(u, n) integer u; int n; {
+Hidden integer int10mul(integer u, int n) {
 	integer v, w;
 
 	if (n<0) n = -n;
@@ -100,7 +100,7 @@ Hidden integer int10mul(u, n) integer u; int n; {
  * |n|/tenlogBASE "digits"
  */
 
-Visible value prod10n(v, n, simplify) value v; int n; bool simplify; {
+Visible value prod10n(value v, int n, bool simplify) {
 	integer p, q, t;
 
 	v = Approximate(v) ? exactly(v) : copy(v);
@@ -134,7 +134,7 @@ Visible value prod10n(v, n, simplify) value v; int n; bool simplify; {
 
 /* returns u+0.5 not simplified */
 
-Visible rational ratsumhalf(u) rational u; {
+Visible rational ratsumhalf(rational u) {
 	integer p, q;
 	rational s;
 

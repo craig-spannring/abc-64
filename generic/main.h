@@ -15,9 +15,9 @@ extern "C" {
 /* In this file you can put your external definitions of functions,
    which are only used inside this directory */
 
-Visible Porting long filemodtime();
+Visible Porting long filemodtime(char *filename);
 Visible Porting Procedure freepath();
-Visible Porting char *curdir();
+Visible Porting char *curdir(void);
 
 #ifdef __cplusplus
 }

@@ -31,19 +31,18 @@ Hidden int yfocus;
 Visible int focy; /* Where the cursor must go */
 Visible int focx;
 
-Forward Hidden Procedure focsmash();
-Forward Hidden Procedure smash();
-Forward Hidden Procedure strsmash();
-Forward Hidden Procedure subsmash();
-Forward Hidden bool chismash();
+Forward Hidden Procedure focsmash(string *pbuf, string *pmod, node n);
+Forward Hidden Procedure smash(string *pbuf, string *pmod, node n, int mask);
+Forward Hidden Procedure strsmash(string *pbuf, string *pmod, string str, int mask);
+Forward Hidden Procedure subsmash(string *pbuf, string *pmod, string str, int len, int mask);
+Forward Hidden bool chismash(string *pbuf, string *pmod, node n, int i, int mask);
 
 /*
  * Save position of the focus for use by outnode/outfocus.
  */
 
 Visible Procedure
-savefocus(ep)
-	environ *ep;
+savefocus(environ *ep)
 {
 	int sym;
 	int w;
@@ -107,8 +106,7 @@ savefocus(ep)
  */
 
 Visible Procedure
-setfocus(tops)
-	cell *tops;
+setfocus(cell *tops)
 {
 	cell *p;
 	int i;
@@ -135,8 +133,7 @@ setfocus(tops)
  */
 
 Visible Procedure
-startactupdate(nofocus)
-	bool nofocus;
+startactupdate(bool nofocus)
 {
 	if (nofocus) {
 		multiline = 0;
@@ -150,7 +147,7 @@ startactupdate(nofocus)
  */
 
 Visible Procedure
-endactupdate()
+endactupdate(void)
 {
 }
 
@@ -160,9 +157,7 @@ endactupdate()
  */
 
 Visible Procedure
-outline(p, lineno)
-	cell *p;
-	int lineno;
+outline(cell *p, int lineno)
 {
 	node n = p->c_data;
 	int w = nodewidth(n);
@@ -236,10 +231,7 @@ outline(p, lineno)
 	strsmash(pbuf, pmod, "?", STANDOUT)
 
 Hidden Procedure
-focsmash(pbuf, pmod, n)
-	string *pbuf;
-	string *pmod;
-	node n;
+focsmash(string *pbuf, string *pmod, node n)
 {
 	value v;
 	string str;
@@ -370,11 +362,7 @@ focsmash(pbuf, pmod, n)
 }
 
 Hidden Procedure
-smash(pbuf, pmod, n, mask)
-	string *pbuf;
-	string *pmod;
-	node n;
-	int mask;
+smash(string *pbuf, string *pmod, node n, int mask)
 {
 	string *rp;
 	int i;
@@ -391,11 +379,7 @@ smash(pbuf, pmod, n, mask)
 }
 
 Hidden Procedure
-strsmash(pbuf, pmod, str, mask)
-	string *pbuf;
-	string *pmod;
-	string str;
-	int mask;
+strsmash(string *pbuf, string *pmod, string str, int mask)
 {
 	if (!str)
 		return;
@@ -408,12 +392,7 @@ strsmash(pbuf, pmod, str, mask)
 }
 
 Hidden Procedure
-subsmash(pbuf, pmod, str, len, mask)
-	string *pbuf;
-	string *pmod;
-	string str;
-	int len;
-	int mask;
+subsmash(string *pbuf, string *pmod, string str, int len, int mask)
 {
 	if (!str)
 		return;
@@ -432,11 +411,7 @@ subsmash(pbuf, pmod, str, len, mask)
  */
 
 Hidden bool
-chismash(pbuf, pmod, n, i, mask)
-	string *pbuf;
-	string *pmod;
-	node n;
-	int i;
+chismash(string *pbuf, string *pmod, node n, int i, int mask)
 {
 	node nn = child(n, i);
 	int w;

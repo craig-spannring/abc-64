@@ -15,7 +15,7 @@
 #include "tabl.h"
 #include "b1grab.h"
 
-Forward Hidden bool rest_is_hollow();
+Forward Hidden bool rest_is_hollow(node n);
 
 #ifdef lint
 Visible queue qcopy(q)
@@ -36,9 +36,7 @@ Visible Procedure qrelease(q)
  */
 
 Visible Procedure
-joinqueues(pq, q)
-	queue *pq;
-	queue q;
+joinqueues(queue *pq, queue q)
 {
 	if (emptyqueue(q))
 		return;
@@ -57,9 +55,7 @@ joinqueues(pq, q)
  */
 
 Visible Procedure
-preptoqueue(n, pq)
-	node n;
-	queue *pq;
+preptoqueue(node n, queue *pq)
 {
 	queue q;
 
@@ -85,9 +81,7 @@ preptoqueue(n, pq)
  */
 
 Visible Procedure
-addtoqueue(pq, n)
-	queue *pq;
-	node n;
+addtoqueue(queue *pq, node n)
 {
 	auto queue q = Qnil;
 
@@ -101,9 +95,7 @@ addtoqueue(pq, n)
  */
 
 Visible Procedure
-stringtoqueue(str, pq)
-	string str;
-	queue *pq;
+stringtoqueue(string str, queue *pq)
 {
 	value  v;
 
@@ -138,8 +130,7 @@ addstringtoqueue(pq, str)
  */
 
 Visible node
-queuebehead(pq)
-	queue *pq;
+queuebehead(queue *pq)
 {
 	node n;
 	queue q = *pq;
@@ -160,9 +151,7 @@ queuebehead(pq)
  */
 
 Visible Procedure
-splitnode(n, pq)
-	node n;
-	queue *pq;
+splitnode(node n, queue *pq)
 {
 	node nn;
 	string *rp;
@@ -207,9 +196,7 @@ splitnode(n, pq)
  */
 
 Visible bool
-resttoqueue(pp, pq)
-	path *pp;
-	queue *pq;
+resttoqueue(path *pp, queue *pq)
 {
 	auto queue q = Qnil;
 	path pa = parent(*pp);
@@ -236,7 +223,7 @@ resttoqueue(pp, pq)
 	return Yes;
 }
 
-Hidden bool rest_is_hollow(n) node n; {
+Hidden bool rest_is_hollow(node n) {
 	node nn;
 	string *rp;
 	int i;
@@ -269,9 +256,7 @@ Hidden bool rest_is_hollow(n) node n; {
  */
 
 Visible Procedure
-nosuggtoqueue(ep, pq)
-	environ *ep;
-	queue *pq;
+nosuggtoqueue(environ *ep, queue *pq)
 {
 	auto queue q = Qnil;
 	int i;
@@ -313,8 +298,7 @@ nosuggtoqueue(ep, pq)
  */
 
 Visible bool
-issuggestion(ep)
-	environ *ep;
+issuggestion(environ *ep)
 {
 	node n;
 	int nch;
@@ -340,9 +324,7 @@ issuggestion(ep)
  */
 
 Visible bool
-fitnode(pp, n)
-	path *pp;
-	node n;
+fitnode(path *pp, node n)
 {
 	if (!allowed(*pp, symbol(n)))
 		return No;
@@ -360,10 +342,7 @@ fitnode(pp, n)
  */
 
 Visible int
-fitstring(pp, str, alt_c)
-	path *pp;
-	string str;
-	int alt_c;
+fitstring(path *pp, string str, int alt_c)
 {
 	environ dummyenv;
 	node n;
@@ -440,9 +419,7 @@ fitstring(pp, str, alt_c)
  */
 
 Visible Procedure
-fixfocus(ep, len)
-	environ *ep;
-	int len;
+fixfocus(environ *ep, int len)
 {
 	node nn;
 	node n = tree(ep->focus);
@@ -517,8 +494,7 @@ fixfocus(ep, len)
  */
 
 Visible bool
-spacefix(ep)
-	environ *ep;
+spacefix(environ *ep)
 {
 	path pa;
 	node n;
@@ -547,11 +523,7 @@ spacefix(ep)
  */
 
 Visible Procedure
-subsettoqueue(n, s1, s2, pq)
-	node n;
-	int s1;
-	int s2;
-	queue *pq;
+subsettoqueue(node n, int s1, int s2, queue *pq)
 {
 	string *rp = noderepr(n);
 
@@ -570,8 +542,7 @@ subsettoqueue(n, s1, s2, pq)
  */
 
 Visible string
-querepr(qv)
-	value qv;
+querepr(value qv)
 {
 	queue q = (queue)qv;
 	node n;

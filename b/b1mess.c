@@ -37,9 +37,9 @@ Hidden FILE *messfp= NOT_OPENED;
 char *messbuf; /* used for messages with arguments */
 Hidden char buf[MESSBUFSIZE];
 
-Visible string getmess(nr) int nr;  {
+Visible string getmess(int nr) {
 	int last, c; char *cp= NULL;
-	bool new; int block; long ftell();
+	bool new; int block; long ftell(FILE *);
 	static int last_nr= 0;
 
 	if (nr <= 0) 

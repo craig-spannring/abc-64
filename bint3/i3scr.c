@@ -30,11 +30,11 @@ Visible bool Eof;
 Visible FILE *ifile;	 	/* input file */
 Visible FILE *sv_ifile;		/* copy of ifile for restoring after reading unit */
 
-Forward Hidden Procedure dowri();
-Forward Hidden bool fileline();
-Forward Hidden Procedure q_mess();
+Forward Hidden Procedure dowri(value v, int flags);
+Forward Hidden bool fileline(FILE *fp, bufadm *bp);
+Forward Hidden Procedure q_mess(int m, char c1, char c2);
 
-Hidden int intsize(v) value v; {
+Hidden int intsize(value v) {
 	value s= size(v); int len=0;
 	if (large(s)) interr(MESS(3800, "value too big to output"));
 	else len= intval(s);
@@ -44,27 +44,27 @@ Hidden int intsize(v) value v; {
 
 /******************************* Output *******************************/
 
-Visible Procedure newline() {
+Visible Procedure newline(void) {
 	putchr(outfile, '\n');
 	flushout();
 	at_nwl= Yes;
 }
 
-Visible Procedure flushout() {
+Visible Procedure flushout(void) {
 	doflush(outfile);
 }
 
-Visible Procedure oline() {
+Visible Procedure oline(void) {
 	if (!at_nwl) newline();
 }
 
 /************ interpreter execution output *******************************/
 
-Visible Procedure writ(v) value v; {
+Visible Procedure writ(value v) {
 	wri(outfile, v, No, Yes, No);
 }
 
-Visible Procedure writnewline() {
+Visible Procedure writnewline(void) {
 	newline();
 	pollinterrupt();
 }
@@ -72,7 +72,7 @@ Visible Procedure writnewline() {
 Hidden char *outbuf= (char*)NULL;
 Hidden char *p_outbuf, *q_outbuf;
 
-Hidden Procedure initoutbuf() {
+Hidden Procedure initoutbuf(void) {
 	if (outbuf == NULL) {
 		int lenbuf = getwinwidth() * 5;
 		/* interrupt checking is done at least after 5 full lines */
@@ -82,7 +82,7 @@ Hidden Procedure initoutbuf() {
 	p_outbuf= outbuf;
 }
 
-Hidden Procedure writoutbuf() {
+Hidden Procedure writoutbuf(void) {
 	if (still_ok) {
 		*p_outbuf= '\0';
 		c_putstr(outbuf);
@@ -92,7 +92,7 @@ Hidden Procedure writoutbuf() {
 	p_outbuf= outbuf;
 }
 
-Hidden Procedure push_ch(c) char c; {
+Hidden Procedure push_ch(char c) {
 	*p_outbuf++= c;
 	if (p_outbuf == q_outbuf) {
 		writoutbuf();
@@ -103,7 +103,7 @@ Hidden Procedure push_ch(c) char c; {
 
 Hidden FILE *ofile; 
 
-Hidden Procedure put_ch(c) char c; {
+Hidden Procedure put_ch(char c) {
 	putc(c, ofile);
 }
 
@@ -120,10 +120,7 @@ Hidden Procedure (*outproc)();
 
 #define Push_sp(perm) {if (!perm) (*outproc)(' ');}
 
-Visible Procedure wri(fp, v, coll, outer, perm)
-     FILE *fp;
-     value v;
-     bool coll, outer, perm;
+Visible Procedure wri(FILE *fp, value v, bool coll, bool outer, bool perm)
 {
 	int flags = 0;
 
@@ -155,9 +152,7 @@ Visible Procedure wri(fp, v, coll, outer, perm)
 
 Hidden bool lwt;
 
-Hidden Procedure dowri(v, flags)
-     value v; 
-     int flags;
+Hidden Procedure dowri(value v, int flags)
 {
 	int perm;
 
@@ -338,9 +333,7 @@ Hidden Procedure dowri_vals(l, u)
 Hidden bufadm i_buf, o_buf;
 extern bool i_looked_ahead;
 
-Hidden char *read_line(kind, should_prompt, eof)
-	literal kind;
-	bool should_prompt, *eof;
+Hidden char *read_line(literal kind, bool should_prompt, bool *eof)
 {
 	bufadm *bp= (kind == R_cmd && ifile == sv_ifile) ? &i_buf : &o_buf;
 	FILE *fp= (kind == R_cmd || kind == R_ioraw) ? ifile : stdin;
@@ -369,7 +362,7 @@ Hidden char *read_line(kind, should_prompt, eof)
 
 #define LINESIZE 200
 
-Hidden bool fileline(fp, bp) FILE *fp; bufadm *bp; {
+Hidden bool fileline(FILE *fp, bufadm *bp) {
 	char line[LINESIZE];
 	char *pline;
 
@@ -388,7 +381,7 @@ Hidden bool fileline(fp, bp) FILE *fp; bufadm *bp; {
 	}
 }
 
-Hidden Procedure init_read() {
+Hidden Procedure init_read(void) {
 	bufinit(&i_buf);
 	bufinit(&o_buf);
 	bufcpy(&o_buf, "\n");
@@ -412,7 +405,7 @@ Hidden Procedure end_read() {
 /* Rather over-fancy routine to ask the user a question */
 /* Will anybody discover that you're only given 4 chances? */
 
-Visible char q_answer(m, c1, c2, c3) int m; char c1, c2, c3; {
+Visible char q_answer(int m, char c1, char c2, char c3) {
 	char answer; intlet try; txptr tp; bool eof;
 	
 	if (!interactive)
@@ -454,12 +447,12 @@ Visible char q_answer(m, c1, c2, c3) int m; char c1, c2, c3; {
 	return c2;
 }
 
-Hidden Procedure q_mess(m, c1, c2) int m; char c1, c2; {
+Hidden Procedure q_mess(int m, char c1, char c2) {
 	put2Cmess(m, c1, c2);
 	flusherr();
 }
 
-Visible bool is_intended(m) int m; {
+Visible bool is_intended(int m) {
 	char c1, c2;
 
 #ifdef FRENCH
@@ -478,7 +471,7 @@ Visible bool is_intended(m) int m; {
 /* Read_eg uses evaluation but it shouldn't.
    Wait for a more general mechanism. */
 
-Visible Procedure read_eg(l, t) loc l; btype t; {
+Visible Procedure read_eg(loc l, btype t) {
 	context c; parsetree code;
 	parsetree r= NilTree; value rv= Vnil; btype rt= Vnil;
 	envtab svprmnvtab= Vnil;
@@ -526,7 +519,7 @@ Visible Procedure read_eg(l, t) loc l; btype t; {
 	release(rv);
 }
 
-Visible Procedure read_raw(l) loc l; {
+Visible Procedure read_raw(loc l) {
 	value r; bool eof;
 	txptr text= (txptr) read_line(R_raw, rd_interactive, &eof);
 	if (still_ok && eof)
@@ -549,7 +542,7 @@ Visible Procedure read_raw(l) loc l; {
 
 Visible bool io_exit;
 
-Visible bool read_ioraw(v) value *v; { /* returns Yes if end of input */
+Visible bool read_ioraw(value *v) { /* returns Yes if end of input */
 	txptr text, rp;
 	bool eof;
 	
@@ -567,7 +560,7 @@ Visible bool read_ioraw(v) value *v; { /* returns Yes if end of input */
 	return io_exit;
 }
 
-Visible char *get_line() {
+Visible char *get_line(void) {
 	bool should_prompt=
 		interactive && ifile == sv_ifile;
 	return read_line(R_cmd, should_prompt, &Eof);
@@ -575,7 +568,7 @@ Visible char *get_line() {
 
 /******************************* Files ******************************/
 
-Visible Procedure redirect(of) FILE *of; {
+Visible Procedure redirect(FILE *of) {
 	static bool woa= No, wnwl= No;	/*was outeractive, was at_nwl */
 	ofile= of;
 	if (of == stdout) {
@@ -587,25 +580,25 @@ Visible Procedure redirect(of) FILE *of; {
 	}
 }
 
-Visible Procedure vs_ifile() {
+Visible Procedure vs_ifile(void) {
 	ifile= sv_ifile;
 }
 
-Visible Procedure re_screen() {
+Visible Procedure re_screen(void) {
 	sv_ifile= ifile;
 	interactive= f_interactive(ifile);
 	Eof= No;
 }
 
 /* initscr is a reserved name of CURSES */
-Visible Procedure init_scr() {
+Visible Procedure init_scr(void) {
 	outeractive= f_interactive(stdout);
 	outfile=(stdout); /* sp 20010221 */
 	rd_interactive= f_interactive(stdin);
 	init_read();
 }
 
-Visible Procedure end_scr() {
+Visible Procedure end_scr(void) {
 #ifdef MEMTRACE
 	end_read();
 	if (outbuf != NULL) freemem((ptr) outbuf);
@@ -618,7 +611,7 @@ extern bool vtrmactive;
 
 /* interpeter output to console (via vtrm) if stdout tty and vtrmactive */
 
-Visible Procedure re_outfile() {
+Visible Procedure re_outfile(void) {
 	if (outeractive && vtrmactive)
 	  outfile = CONSOLE;
 }

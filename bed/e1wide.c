@@ -19,9 +19,7 @@
  */
 
 Visible bool
-widen(ep, deleting)
-	environ *ep;
-	bool deleting;
+widen(environ *ep, bool deleting)
 {
 	node n;
 	node nn;
@@ -148,8 +146,7 @@ widen(ep, deleting)
  */
 
 Visible bool
-narrow(ep)
-	environ *ep;
+narrow(environ *ep)
 {
 	node n;
 	int sym;
@@ -212,8 +209,7 @@ narrow(ep)
 
 
 Visible bool
-extend(ep)
-	environ *ep;
+extend(environ *ep)
 {
 	node n;
 	int i;
@@ -293,8 +289,7 @@ extend(ep)
  */
 
 Visible bool
-rnarrow(ep)
-	environ *ep;
+rnarrow(environ *ep)
 {
 	node n;
 	node nn;

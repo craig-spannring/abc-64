@@ -3,6 +3,8 @@
 #ifndef BOBJ_h_945555dcedb9ec8701ff4cfb11761611
 #define BOBJ_h_945555dcedb9ec8701ff4cfb11761611
 
+#include "i1num.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -26,47 +28,47 @@ relation compare();
 
 /*************************************************************************/
 
-value grab();
-unsigned tltsyze();
-unsigned numsyze();
-unsigned ptnsyze();
+value grab(literal type, intlet len);
+unsigned tltsyze(literal type, intlet len, int *nptrs);
+unsigned numsyze(intlet len, int *nptrs);
+unsigned ptnsyze(intlet len, int *nptrs);
 
-double hash();
+double hash(value v);
 
-bool is_abcname();
+bool is_abcname(value name);
 
 /****************************** Texts ******************************/
 
-bool character();
+bool character(value v);
 
-value mkchar();
-value mk_text();
-char charval();
-char ncharval();
-string strval();
-string sstrval();
+value mkchar(char c);
+value mk_text(string s);
+char charval(value v);
+char ncharval(int n, value v);
+string strval(value v);
+string sstrval(value v);
 
-value concat();
-value behead();
-value curtail();
-value repeat();
+value concat(value tleft, value tright);
+value behead(value t, value before);
+value curtail(value t, value after);
+value repeat(value t, value n);
 
-value stripped();
-value split();
-value upper();
-value lower();
+value stripped(value t);
+value split(value t);
+value upper(value t);
+value lower(value t);
 
-value adjleft();
-value centre();
-value adjright();
+value adjleft(value v, value w);
+value centre(value v, value w);
+value adjright(value v, value w);
 
-value convert();
+value convert(value v, bool coll, bool outer);
 
 /****************************** Numbers ******************************/
 
 /* Predicates */
-bool integral();	    /* is the value an integer? */
-bool large();	    /* can a number be represented by a C int? */
+bool integral(value v);	    /* is the value an integer? */
+bool large(value v);	    /* can a number be represented by a C int? */
 #ifdef RANGEPRINT
 bool is_increment();	/* a = b+1 ? */
 #endif
@@ -76,20 +78,20 @@ bool is_increment();	/* a = b+1 ? */
 #define one MkSmallInt(1)
 
 /* Conversion of abstract values to concrete objects */
-double numval();     /* numeric value of any number */
-int intval();        /* numeric value of integral number */
-int propintlet();    /* checks int for fitting in intlet */
-string convnum();    /* character string approximation of any number */
-relation numcomp();  /* comparison of two numbers: yields -1, 0 or 1 */
-double numhash();    /* hashes any abstract number to a 'double' */
+double numval(value v);     /* numeric value of any number */
+int intval(value v);        /* numeric value of integral number */
+int propintlet(int i);    /* checks int for fitting in intlet */
+string convnum(value v);    /* character string approximation of any number */
+relation numcomp(value u, value v);  /* comparison of two numbers: yields -1, 0 or 1 */
+double numhash(value v);    /* hashes any abstract number to a 'double' */
 
 /* Conversion of concrete objects to abstract numbers */
-value numconst();    /* string argument */
-value mk_integer();  /* int argument */
+value numconst(value v);    /* string argument */
+value mk_integer(int i);  /* int argument */
 
 /* Functions on numbers */
-value sum();
-value diff();
+value sum(value u, value v);
+value diff(value u, value v);
 value negated();
 value prod();
 value quot();
@@ -152,8 +154,8 @@ Visible Procedure replace();
 /* Procedure delete(); */
 
 value* adrassoc();
-value* key();
-value* assoc();
+value* key(value v, intlet k);
+value* assoc(value v, intlet k);
 
 /****************************** Texts, Lists, and Tables *******************/
 value mk_elt(void);

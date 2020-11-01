@@ -27,8 +27,8 @@ rational rat_half;
 
 /* Make a normalized rational from two integers */
 
-Visible rational mk_rat(x, y, len, simplify)
-		integer x, y; int len; bool simplify; {
+Visible rational mk_rat(integer x, integer y, int len, bool simplify)
+{
 	rational a;
 	integer u,v;
 
@@ -89,7 +89,7 @@ Visible rational mk_rat(x, y, len, simplify)
 #define N(u) Numerator(u)
 #define D(u) Denominator(u)
 
-Visible rational rat_sum(u, v) rational u, v; {
+Visible rational rat_sum(rational u, rational v) {
 	integer t1, t2, t3, t4;
 	rational a;
 
@@ -105,7 +105,7 @@ Visible rational rat_sum(u, v) rational u, v; {
 }
 
 
-Visible rational rat_diff(u, v) rational u, v; {
+Visible rational rat_diff(rational u, rational v) {
 	integer t1, t2, t3, t4;
 	rational a;
 
@@ -121,7 +121,7 @@ Visible rational rat_diff(u, v) rational u, v; {
 }
 
 
-Visible rational rat_prod(u, v) rational u, v; {
+Visible rational rat_prod(rational u, rational v) {
 	integer t1, t2;
 	rational a;
 
@@ -134,7 +134,7 @@ Visible rational rat_prod(u, v) rational u, v; {
 }
 
 
-Visible rational rat_quot(u, v) rational u, v; {
+Visible rational rat_quot(rational u, rational v) {
 	integer t1, t2;
 	rational a;
 
@@ -152,7 +152,7 @@ Visible rational rat_quot(u, v) rational u, v; {
 }
 
 
-Visible rational rat_neg(u) rational u; {
+Visible rational rat_neg(rational u) {
 	rational a;
 
 	/* Avoid a real subtraction from zero */
@@ -169,7 +169,7 @@ Visible rational rat_neg(u) rational u; {
 
 /* Rational number to the integral power */
 
-Visible rational rat_power(a, n) rational a; integer n; {
+Visible rational rat_power(rational a, integer n) {
 	integer u, v, tu, tv, temp;
 
 	if (n == int_0) return mk_rat(int_1, int_1, 0, Yes);
@@ -243,7 +243,7 @@ Visible rational rat_power(a, n) rational a; integer n; {
 
 /* Compare two rational numbers */
 
-Visible relation rat_comp(u, v) rational u, v; {
+Visible relation rat_comp(rational u, rational v) {
 	int sd, su, sv;
 	integer nu, nv;
 
@@ -269,20 +269,20 @@ Visible relation rat_comp(u, v) rational u, v; {
 	return sd;
 }
 
-Visible rational rat_zero() {
+Visible rational rat_zero(void) {
 	rational r= (rational) grab_rat(0);
 	N(r) = int_0;
 	D(r) = int_1;
 	return r;
 }
 
-Visible Procedure rat_init() {
+Visible Procedure rat_init(void) {
 	rat_half = (rational) grab_rat(0);
 	N(rat_half) = int_1;
 	D(rat_half) = int_2;
 }
 
-Visible Procedure endrat() {
+Visible Procedure endrat(void) {
 #ifdef MEMTRACE
 	Release(rat_half);
 #endif

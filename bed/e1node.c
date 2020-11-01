@@ -12,7 +12,7 @@
 #include "bmem.h"
 #include "b1grab.h"
 
-Forward Hidden Procedure repwidth();
+Forward Hidden Procedure repwidth(node *pn, node old, node new);
 
 #define Register ??? register ???
 	/* Used for registers 4-6.  Define as empty macro on PDP */
@@ -61,8 +61,7 @@ Visible Procedure nodeuniql(pn)
  */
 
 Hidden node
-mk_node(nch)
-	int nch;
+mk_node(int nch)
 {
 	node n = (node) grab(Nod, nch);
 	int i;
@@ -76,10 +75,7 @@ mk_node(nch)
 }
 
 Visible node
-newnode(nch, sym, children)
-	int nch;
-	int sym;
-	node children[];
+newnode(int nch, int sym, node *children)
 {
 	node n = (node) mk_node(nch); /* Must preset with zeros! */
 
@@ -90,7 +86,7 @@ newnode(nch, sym, children)
 	return n;
 }
 
-Visible int nodewidth(n) node n; {
+Visible int nodewidth(node n) {
 	if (Is_etext(n))
 		return e_length((value) n);
 	else
@@ -115,10 +111,7 @@ Visible int nodewidth(n) node n; {
  */
 
 Visible Procedure
-setchild(pn, i, n)
-	node *pn;
-	int i;
-	node n;
+setchild(node *pn, int i, node n)
 {
 	node *pch;
 	node oldchild;
@@ -176,7 +169,7 @@ pathuniql(pp)
  */
 
 Hidden path
-mk_path()
+mk_path(void)
 {
 	path p = (path) grab(Pat, 0);
 
@@ -192,10 +185,7 @@ mk_path()
 }
 
 Visible path
-newpath(pa, n, i)
-	path pa;
-	node n;
-	int i;
+newpath(path pa, node n, int i)
 {
 	path p = (path) mk_path();
 
@@ -234,10 +224,7 @@ newpath(pa, n, i)
  */
 
 Hidden Procedure
-repwidth(pn, old, new)
-	node *pn;
-	node old;
-	node new;
+repwidth(node *pn, node old, node new)
 {
 	int w = Width(*pn);
 	int oldwidth = nodewidth(old);
@@ -268,9 +255,7 @@ repwidth(pn, old, new)
 
 
 Visible Procedure
-markpath(pp, new)
-	path *pp;
-	markbits new;
+markpath(path *pp, markbits new)
 {
 	node *pn;
 	markbits old;
@@ -287,9 +272,7 @@ markpath(pp, new)
 
 
 Visible Procedure
-unmkpath(pp, del)
-	path *pp;
-	int del;
+unmkpath(path *pp, int del)
 {
 	node *pn;
 	markbits old;
@@ -306,8 +289,7 @@ unmkpath(pp, del)
 
 
 Hidden Procedure
-clearmarks(pn)
-	node *pn;
+clearmarks(node *pn)
 {
 	int i;
 
@@ -329,9 +311,7 @@ clearmarks(pn)
  */
 
 Visible Procedure
-treereplace(pp, n)
-	path *pp;
-	node n;
+treereplace(path *pp, node n)
 {
 	node *pn;
 	markbits old;
@@ -354,8 +334,7 @@ treereplace(pp, n)
 
 
 Visible bool
-up(pp)
-	path *pp;
+up(path *pp)
 {
 	path p = *pp;
 	path pa = Parent(p);
@@ -412,9 +391,7 @@ up(pp)
 
 
 Visible bool
-downi(pp, i)
-	path *pp;
-	int i;
+downi(path *pp, int i)
 {
 	node n;
 	auto int y;
@@ -436,8 +413,7 @@ downi(pp, i)
 
 
 Visible bool
-downrite(pp)
-	path *pp;
+downrite(path *pp)
 {
 	if (!Isnode(Tree(*pp)))
 		return No;
@@ -446,8 +422,7 @@ downrite(pp)
 
 
 Visible bool
-left(pp)
-	path *pp;
+left(path *pp)
 {
 	int i;
 
@@ -461,8 +436,7 @@ left(pp)
 
 
 Visible bool
-rite(pp)
-	path *pp;
+rite(path *pp)
 {
 	int i;
 	path pa = Parent(*pp);
@@ -488,8 +462,7 @@ rite(pp)
  */
 
 Visible Procedure
-top(pp)
-	path *pp;
+top(path *pp)
 {
 	while (up(pp))
 		;
@@ -588,9 +561,7 @@ nextmarked(pp, x)
 #endif
 
 Visible bool
-firstmarked(pp, x)
-	path *pp;
-	markbits x;
+firstmarked(path *pp, markbits x)
 {
 	while (!marked(*pp, x)) {
 		if (!up(pp))
@@ -635,8 +606,7 @@ prevmarked(pp, x)
 
 
 Visible int
-pathlength(p)
-	path p;
+pathlength(path p)
 {
 	int n;
 
@@ -646,11 +616,7 @@ pathlength(p)
 }
 
 Visible Procedure
-putintrim(pn, head, tail, str)
-	value *pn;
-	int head;
-	int tail;
-	string str;
+putintrim(value *pn, int head, int tail, string str)
 {
 	value v = *pn; 
 	value t1, t2, t3;
@@ -673,8 +639,7 @@ putintrim(pn, head, tail, str)
  */
 
 Visible Procedure
-touchpath(pp)
-	path *pp;
+touchpath(path *pp)
 {
 	nodeuniql(Loctree(pp));
 }

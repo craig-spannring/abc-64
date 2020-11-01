@@ -32,23 +32,22 @@ typedef struct {
 #define Dstop(da)    (da->stop)
 #define Dquote(da)   (da->quote)
 
-Forward Hidden Procedure d_linetofile();
-Forward Hidden Procedure displ();
-Forward Hidden Procedure d_special();
-Forward Hidden Procedure indent();
-Forward Hidden Procedure d_comment();
-Forward Hidden Procedure d_textdis();
-Forward Hidden Procedure d_textlit();
-Forward Hidden Procedure d_tabdis();
-Forward Hidden Procedure d_collateral();
-Forward Hidden Procedure d_listdis();
-Forward Hidden Procedure d_actfor_compound();
-Forward Hidden Procedure d_write();
-Forward Hidden Procedure d_dyaf();
-Forward Hidden Procedure d_monf();
+Forward Hidden Procedure d_linetofile(displadm *da);
+Forward Hidden Procedure displ(value v, displadm *da);
+Forward Hidden Procedure d_special(parsetree v, string *t, displadm *da);
+Forward Hidden Procedure indent(value v, displadm *da);
+Forward Hidden Procedure d_comment(value v, displadm *da);
+Forward Hidden Procedure d_textdis(parsetree v, displadm *da);
+Forward Hidden Procedure d_textlit(parsetree v, displadm *da);
+Forward Hidden Procedure d_tabdis(value v, displadm *da);
+Forward Hidden Procedure d_collateral(value v, displadm *da);
+Forward Hidden Procedure d_listdis(value v, displadm *da);
+Forward Hidden Procedure d_actfor_compound(parsetree v, displadm *da);
+Forward Hidden Procedure d_write(parsetree v, displadm *da);
+Forward Hidden Procedure d_dyaf(parsetree v, displadm *da);
+Forward Hidden Procedure d_monf(parsetree v, displadm *da);
 
-Hidden Procedure set_ilevel(da)
-     displadm *da;
+Hidden Procedure set_ilevel(displadm *da)
 {
 	intlet i;
 	intlet ilevel = Dilevel(da);
@@ -58,18 +57,14 @@ Hidden Procedure set_ilevel(da)
 	}
 }
 
-Hidden Procedure d_string(s, da)
-     string s;
-     displadm *da;
+Hidden Procedure d_string(string s, displadm *da)
 {
 	if (Datnwl(da) && !Dcomment(da)) set_ilevel(da);
 	bufcpy(&Dline(da), s);
 	Datnwl(da) = No;
 }
 
-Hidden Procedure d_char(c, da)
-     char c;
-     displadm *da;
+Hidden Procedure d_char(char c, displadm *da)
 {
 	if (Datnwl(da) && !Dcomment(da)) set_ilevel(da);
 	bufpush(&Dline(da), c);
@@ -78,16 +73,14 @@ Hidden Procedure d_char(c, da)
 
 #define d_space(da)	d_char(' ', da)
 
-Hidden Procedure d_newline(da)
-     displadm *da;
+Hidden Procedure d_newline(displadm *da)
 {
 	d_linetofile(da);
 	putnewline(Dfile(da));
 	Datnwl(da) = Yes;
 }
 
-Hidden Procedure d_linetofile(da)
-     displadm *da;
+Hidden Procedure d_linetofile(displadm *da)
 {
 	bufadm *bp = &Dline(da);
 
@@ -99,10 +92,7 @@ Hidden Procedure d_linetofile(da)
 
 /* ******************************************************************** */
 
-Visible Procedure display(file, v, one_line)
-     FILE *file;
-     parsetree v;
-     bool one_line;
+Visible Procedure display(FILE *file, parsetree v, bool one_line)
 {
 	displadm d, *da;
 
@@ -221,9 +211,7 @@ Hidden char *text[NTYPES] = {
 
 #define Fld(v, t)     ((value) *Branch(v, (*(t) - '0') + First_fieldnr))
 
-Hidden Procedure displ(v, da)
-     value v;
-     displadm *da;
+Hidden Procedure displ(value v, displadm *da)
 {
 	string t;
 	
@@ -253,10 +241,7 @@ Hidden Procedure displ(v, da)
 	}
 }
 
-Hidden Procedure d_special(v, t, da)
-     parsetree v;
-     string *t;
-     displadm *da;
+Hidden Procedure d_special(parsetree v, string *t, displadm *da)
 {
 	(*t)++;
 	switch (**t) {
@@ -312,9 +297,7 @@ Hidden Procedure d_special(v, t, da)
 	}
 }
 
-Hidden Procedure indent(v, da)
-     value v;
-     displadm *da;
+Hidden Procedure indent(value v, displadm *da)
 {
 	if (Doneline(da)) {
 		Dstop(da) = Yes;
@@ -325,16 +308,13 @@ Hidden Procedure indent(v, da)
 	Dilevel(da)--;
 }
 
-Hidden bool no_space_before_comment(v)
-     value v;
+Hidden bool no_space_before_comment(value v)
 {
 	return ncharval(1, v) == '\\';
 }
 
 
-Hidden Procedure d_comment(v, da)
-     value v;
-     displadm *da;
+Hidden Procedure d_comment(value v, displadm *da)
 {
 	if (Valid(v)) {
 		Dcomment(da) = Yes;
@@ -347,9 +327,7 @@ Hidden Procedure d_comment(v, da)
 	if (!Datnwl(da)) d_newline(da);
 }
 
-Hidden Procedure d_textdis(v, da)
-     parsetree v;
-     displadm *da;
+Hidden Procedure d_textdis(parsetree v, displadm *da)
 {
 	value old_quote = Dquote(da);
 
@@ -360,9 +338,7 @@ Hidden Procedure d_textdis(v, da)
 	Dquote(da) = old_quote;
 }
 
-Hidden Procedure d_textlit(v, da)
-     parsetree v;
-     displadm *da;
+Hidden Procedure d_textlit(parsetree v, displadm *da)
 {
 	value w = (value) *Branch(v, XLIT_TEXT);
 
@@ -378,9 +354,7 @@ Hidden Procedure d_textlit(v, da)
 	displ((value) *Branch(v, XLIT_NEXT), da);
 }
 
-Hidden Procedure d_tabdis(v, da)
-     value v;
-     displadm *da;
+Hidden Procedure d_tabdis(value v, displadm *da)
 {
 	intlet k, len= Nfields(v);
 
@@ -393,9 +367,7 @@ Hidden Procedure d_tabdis(v, da)
 	}
 }
 
-Hidden Procedure d_collateral(v, da)
-     value v;
-     displadm *da; 
+Hidden Procedure d_collateral(value v, displadm *da)
 {
 	intlet k, len= Nfields(v);
 
@@ -405,9 +377,7 @@ Hidden Procedure d_collateral(v, da)
 	}
 }
 
-Hidden Procedure d_listdis(v, da)
-     value v;
-     displadm *da;
+Hidden Procedure d_listdis(value v, displadm *da)
 {
 	intlet k, len= Nfields(v);
 
@@ -417,9 +387,7 @@ Hidden Procedure d_listdis(v, da)
 	}
 }
 
-Hidden Procedure d_actfor_compound(v, da)
-     parsetree v;
-     displadm *da;
+Hidden Procedure d_actfor_compound(parsetree v, displadm *da)
 {
 	while (v != NilTree) {
 		displ((value) *Branch(v, ACT_KEYW), da);
@@ -432,9 +400,7 @@ Hidden Procedure d_actfor_compound(v, da)
 	}
 }
 
-Hidden Procedure d_write(v, da)
-     parsetree v;
-     displadm *da;
+Hidden Procedure d_write(parsetree v, displadm *da)
 {
 	value l_lines = (value) *Branch(v, WRT_L_LINES);
 	value w = (value) *Branch(v, WRT_EXPR);
@@ -455,9 +421,7 @@ Hidden Procedure d_write(v, da)
 
 #define is_b_tag(v) (Valid(v) && Letter(ncharval(1, v)))
 
-Hidden Procedure d_dyaf(v, da)
-     parsetree v;
-     displadm *da;
+Hidden Procedure d_dyaf(parsetree v, displadm *da)
 {
 	parsetree l = *Branch(v, DYA_LEFT);
 	parsetree r = *Branch(v, DYA_RIGHT);
@@ -473,9 +437,7 @@ Hidden Procedure d_dyaf(v, da)
 	displ((value) r, da);
 }
 
-Hidden Procedure d_monf(v, da)
-     parsetree v;
-     displadm *da;
+Hidden Procedure d_monf(parsetree v, displadm *da)
 {
 	parsetree r = *Branch(v, MON_RIGHT);
 	value name = (value) *Branch(v, MON_NAME);

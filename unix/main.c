@@ -278,7 +278,7 @@ int main(int argc, char** argv)
 	}
 	
 	if (flags & O_e) {
-		char *getenv();
+		char *getenv(const char *);
 		OPTeditor= getenv("EDITOR");
 		if (OPTeditor == (char *)NULL || *OPTeditor == '\0') {
 			putmess(NO_EDITOR);

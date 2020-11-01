@@ -82,9 +82,9 @@ parsetree unp_test();
 
 /* Commands: */
 
-parsetree cmd_suite();
-parsetree cmd_seq();
-parsetree ucmd_seq();
+parsetree cmd_suite(intlet cil, bool first, parsetree (*suite) (/* ??? */));
+parsetree cmd_seq(intlet cil, bool first, bool *emp);
+parsetree ucmd_seq(intlet cil, bool first, bool *emp);
 value tail_line();
 
 /* B units */

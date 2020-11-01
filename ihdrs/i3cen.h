@@ -19,16 +19,16 @@ typedef struct {
 
 #define Wnil ((wsenvptr *) 0)
 
-Visible Procedure initcurenv();
-Visible Procedure initworkspace();
-Visible Procedure endworkspace();
-Visible Procedure initcentralworkspace();
-Visible Procedure endcentralworkspace();
-Visible bool      is_unit();
-Visible Procedure initstdenv();
-Visible Procedure endstdenv();
-Visible wsenvptr  setcurenv();
-Visible Procedure resetcurenv();
+Visible Procedure initcurenv(void);
+Visible Procedure initworkspace(void);
+Visible Procedure endworkspace(void);
+Visible Procedure initcentralworkspace(bool startup);
+Visible Procedure endcentralworkspace(bool last);
+Visible bool      is_unit(value name, literal type, value **howto, wsenvptr *wse);
+Visible Procedure initstdenv(void);
+Visible Procedure endstdenv(void);
+Visible wsenvptr  setcurenv(wsenvptr wse);
+Visible Procedure resetcurenv(wsenvptr wse);
 
 extern wsenvptr cur_env;   /* pointer to current environment  */
 extern wsenvptr use_env;   /* pointer to using environment */

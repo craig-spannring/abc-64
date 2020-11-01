@@ -48,7 +48,6 @@ extern char itemwidth[];	/*  uses: */
 #define Tw (sizeof(tabitem))
 #define Kw (sizeof(keysitem))
 
-intlet uflow();
 
 /*********************************************************************/
 /* sizes of btrees                                                   */
@@ -166,6 +165,8 @@ rangenode, *rangeptr;
 
 #define Maxheight 20        /* should be some function of B */
 
+intlet uflow(intlet n, intlet l, char *cbuf, btreeptr *pbuf, intlet it);
+
 /* Procedure merge(); */
     /* btreeptr pleft; itemptr pitm; btreeptr pright; literal it; */
 bool rebalance();
@@ -226,11 +227,11 @@ bool get_th_item();	/* itemptr pitm; value num, v; */
 
 /* Private definitions for grabbing and ref count scheme */
 
-btreeptr grabbtreenode();	/* literal flag, it */
-btreeptr copybtree();    	/* btreeptr pnode */
+btreeptr grabbtreenode(literal flag, literal it);	/* literal flag, it */
+btreeptr copybtree(btreeptr pnode);    	/* btreeptr pnode */
 /* Procedure uniqlbtreenode(); */	/* btreeptr *pptr; literal it */
-btreeptr ccopybtreenode();	/* btreeptr pnode; literal it */
-btreeptr mknewroot();
+btreeptr ccopybtreenode(btreeptr pnode, literal it);	/* btreeptr pnode; literal it */
+btreeptr mknewroot(btreeptr ptr0, itemptr pitm0, btreeptr ptr1, literal it);
     /* btreeptr ptr0, itemptr pitm0, btreeptr ptr1, literal it */
 /* Procedure relbtree(); */		/* btreeptr pnode; literal it */
 /* Procedure freebtreenode(); */	/* btreeptr pnode; */

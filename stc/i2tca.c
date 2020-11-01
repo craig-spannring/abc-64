@@ -20,12 +20,12 @@
 #include "port.h"
 #include "b1grab.h"
 
-Forward Hidden Procedure tc_node();
-Forward Hidden Procedure put_code();
-Forward Hidden Procedure set_ret_name();
-Forward Hidden Procedure pts_init();
-Forward Hidden Procedure pts_free();
-Forward Hidden Procedure pt_push();
+Forward Hidden Procedure tc_node(parsetree v);
+Forward Hidden Procedure put_code(parsetree v, char type);
+Forward Hidden Procedure set_ret_name(value name);
+Forward Hidden Procedure pts_init(void);
+Forward Hidden Procedure pts_free(void);
+Forward Hidden Procedure pt_push(polytype pt);
 
 #define WRONG_ARGUMENT	MESS(2300, "wrong argument of type_check()")
 #define WARNING_DUMMY	MESS(2301, "next line must be impossible as a refinement name, e.g. with a space:")
@@ -353,13 +353,13 @@ Hidden int nactuals= 0;
 
 /************************************************************************/
 
-Forward Hidden polytype pt_pop();
-Forward Hidden polytype external_type();
+Forward Hidden polytype pt_pop(void);
+Forward Hidden polytype external_type(string *pt);
 
-Forward Hidden string get_code();
-Forward Hidden string fpr_code();
+Forward Hidden string get_code(value name, int type, wsenvptr wse);
+Forward Hidden string fpr_code(value name, literal type, char **functab, string defcode);
 
-Visible Procedure type_check(v) parsetree v; {
+Visible Procedure type_check(parsetree v) {
 	typenode n;
 
 	if (!still_ok || v == NilTree)
@@ -386,7 +386,7 @@ Visible Procedure type_check(v) parsetree v; {
 #define FF First_fieldnr
 #define Fld(v, f) (*(Branch(v, f)))
 
-Hidden Procedure tc_node(v) parsetree v; {
+Hidden Procedure tc_node(parsetree v) {
 	string t;
 	string t_saved= NULL;
 	int f;
@@ -691,10 +691,7 @@ Hidden Procedure tc_node(v) parsetree v; {
 
 /* def_typeode(): add/replace the typecode mapping of a how-to */
 
-Hidden Procedure def_typecode(pname, tc, wse)
-     value pname;
-     value tc;
-     wsenvptr wse;
+Hidden Procedure def_typecode(value pname, value tc, wsenvptr wse)
 {
 	e_replace(tc, &(wse->abctypes), pname);
 	wse->typeschanges = Yes;
@@ -702,9 +699,7 @@ Hidden Procedure def_typecode(pname, tc, wse)
 
 /* del_typecode(): remove the typecode mapping of a how-to */
 
-Hidden Procedure del_typecode(pname, wse)
-     value pname;
-     wsenvptr wse;
+Hidden Procedure del_typecode(value pname, wsenvptr wse)
 {
 	e_delete(&(wse->abctypes), pname);
 	wse->typeschanges = Yes;
@@ -712,10 +707,7 @@ Hidden Procedure del_typecode(pname, wse)
 
 /* tc_exists(): search the typecode mapping of a how-to */
 
-Hidden bool tc_exists(pname, cc, wse)
-     value pname;
-     value **cc;
-     wsenvptr wse;
+Hidden bool tc_exists(value pname, value **cc, wsenvptr wse)
 {
 	return in_env(wse->abctypes, pname, cc);
 }
@@ -723,7 +715,7 @@ Hidden bool tc_exists(pname, cc, wse)
 /* get and put table mapping pname's to typecode's of how-to's
  * to file when entering or leaving workspace.
  */
-Visible Procedure initstc() {
+Visible Procedure initstc(void) {
 	value fn;
 	
 	if (Valid(cur_env->abctypes)) {
@@ -745,7 +737,7 @@ Visible Procedure initstc() {
 	cur_env->typeschanges= No;
 }
 
-Visible Procedure put_types()
+Visible Procedure put_types(void)
 {
 	char *dir;
 	int len;
@@ -766,14 +758,14 @@ Visible Procedure put_types()
 	cur_env->typeschanges= No;
 }
 
-Visible Procedure endstc()
+Visible Procedure endstc(void)
 {
 	put_types();
 	if (terminated) return;
 	release(cur_env->abctypes); cur_env->abctypes= Vnil;
 }
 
-Visible Procedure rectypes()
+Visible Procedure rectypes(void)
 {
 	if (Valid(cur_env->abctypes))
 		release(cur_env->abctypes);
@@ -785,7 +777,7 @@ Visible Procedure rectypes()
 
 /************************************************************************/
 
-Visible value stc_code(pname) value pname; {
+Visible value stc_code(value pname) {
 	value *tc;
 	
 	if (tc_exists(pname, &tc, cur_env))
@@ -797,7 +789,7 @@ Visible value stc_code(pname) value pname; {
 Hidden value old_abctypes;
 Hidden bool old_typeschanges;
 
-Visible Procedure del_types() {
+Visible Procedure del_types(void) {
 	old_abctypes= copy(cur_env->abctypes);
 	old_typeschanges= cur_env->typeschanges;
 	release(cur_env->abctypes);
@@ -805,7 +797,7 @@ Visible Procedure del_types() {
 	cur_env->typeschanges= Yes;
 }
 
-Visible Procedure adjust_types(no_change) bool no_change; {
+Visible Procedure adjust_types(bool no_change) {
 	if (no_change) {
 		/* recover old inter-unit typetable */
 		release(cur_env->abctypes);
@@ -822,9 +814,9 @@ Visible Procedure adjust_types(no_change) bool no_change; {
 /* Calculate code for how-to definition and put into typetable */
 /* formals are on the stack */
 
-Forward Hidden value type_code();
+Forward Hidden value type_code(polytype p);
 
-Hidden Procedure put_code(v, type) parsetree v; char type; {
+Hidden Procedure put_code(parsetree v, char type) {
 	value howcode, fmlcode;
 	value pname, *tc;
 	polytype x;
@@ -861,7 +853,7 @@ Hidden Procedure put_code(v, type) parsetree v; char type; {
 	release(pname); release(howcode);
 }
 
-Hidden value type_code(p) polytype p; {
+Hidden value type_code(polytype p) {
 	typekind p_kind;
 	polytype tp;
 	polytype ext;
@@ -937,10 +929,7 @@ Hidden value type_code(p) polytype p; {
  * from the respective tables
  */
 
-Hidden string get_code(name, type, wse)
-     value name;
-     int type;
-     wsenvptr wse;
+Hidden string get_code(value name, int type, wsenvptr wse)
 {
 	value pname;
 	value *aa;
@@ -954,7 +943,7 @@ Hidden string get_code(name, type, wse)
 	return NULL;
 }
 
-Hidden string pre_fpr_code(fn, func) value fn; char *func[]; {
+Hidden string pre_fpr_code(value fn, char **func) {
 	int i;
 	string f= strval(fn);
 	
@@ -967,11 +956,7 @@ Hidden string pre_fpr_code(fn, func) value fn; char *func[]; {
 	/*NOTREACHED*/
 }
 
-Hidden string fpr_code(name, type, functab, defcode)
-     value name;
-     literal type;
-     char *functab[];
-     string defcode;
+Hidden string fpr_code(value name, literal type, char **functab, string defcode)
 {
 	string t;
 	wsenvptr wse;
@@ -989,7 +974,7 @@ Hidden string fpr_code(name, type, functab, defcode)
 
 /************************************************************************/
 
-Hidden polytype external_type(pt) string *pt; {
+Hidden polytype external_type(string *pt) {
 	int n;
 	string t;
 	polytype x;
@@ -1008,7 +993,7 @@ Hidden polytype external_type(pt) string *pt; {
 
 /************************************************************************/
 
-Hidden Procedure set_ret_name(name) value name; {
+Hidden Procedure set_ret_name(value name) {
 	value n1;
 	
 	n1= curtail(name, one);
@@ -1028,14 +1013,14 @@ Hidden polytype *pts_start;
 Hidden polytype *pts_top;
 Hidden polytype *pts_end;
 
-Hidden Procedure pts_init() {
+Hidden Procedure pts_init(void) {
 	pts_start= (polytype *) getmem((unsigned) (STACKINCR * sizeof(polytype)));
 	pts_top= pts_start;
 	pts_end= pts_start + STACKINCR;
 	*(pts_top)= (polytype) Vnil;
 }
 
-Hidden Procedure pts_free() {
+Hidden Procedure pts_free(void) {
 	if (interrupted) {
 		for (--pts_top; pts_top >= pts_start; --pts_top) {
 			p_release(*pts_top);
@@ -1044,7 +1029,7 @@ Hidden Procedure pts_free() {
 	freemem((ptr) pts_start);
 }
 
-Hidden Procedure pts_grow() {
+Hidden Procedure pts_grow(void) {
 	int oldtop= pts_top - pts_start;
 	int syze= (pts_end - pts_start) + STACKINCR;
 	
@@ -1053,13 +1038,13 @@ Hidden Procedure pts_grow() {
 	pts_end= pts_start + syze;
 }
 
-Hidden Procedure pt_push(pt) polytype pt; {
+Hidden Procedure pt_push(polytype pt) {
 	if (pts_top >= pts_end)
 		pts_grow();
 	*pts_top++= pt;
 }
 
-Hidden polytype pt_pop() {
+Hidden polytype pt_pop(void) {
 #ifndef NDEBUG
 	if (pts_top <= pts_start)
 		syserr(EMPTY_STACK);

@@ -43,9 +43,7 @@ Visible int abc_todo;
 
 #define O_eiolpurx (O_e | O_iolprx | O_u)
 
-main(argc, argv)
-     int argc;
-     char **argv;
+main(int argc, char **argv)
 {
 	int c;
 	int flags = 0;
@@ -161,7 +159,7 @@ main(argc, argv)
 	}
 	
 	if (flags & O_e) {
-		char *getenv();
+		char *getenv(const char *);
 		OPTeditor= getenv("EDITOR");
 		if (OPTeditor == (char *)NULL || *OPTeditor == '\0') {
 			putmess(NO_EDITOR);

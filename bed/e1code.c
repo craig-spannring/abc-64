@@ -12,7 +12,7 @@ Visible char code_array[RANGE];
 Visible char invcode_array[RANGE];
 Visible int lastcode= 0;
 
-Visible Procedure initcodes() {
+Visible Procedure initcodes(void) {
 	int c;
 
 	code_array['\n'] = ++lastcode;

@@ -16,7 +16,7 @@
 #include "i3sta.h"
 #include "b1grab.h"
 
-Forward Hidden Procedure jumptoend();
+Forward Hidden Procedure jumptoend(void);
 
 Forward Visible Procedure newl(value n);
 

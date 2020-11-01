@@ -16,16 +16,16 @@
 #include "port.h"
 #include "b1grab.h"
 
-Forward Hidden Procedure rec_target();
-Forward Hidden Procedure rec_unit();
-Forward Hidden Procedure mk_permentry();
-Forward Hidden Procedure mk_suggitem();
-Forward Hidden Procedure rec_current();
-Forward Hidden Procedure recperm();
-Forward Hidden Procedure recsugg();
-Forward Hidden Procedure recpos();
-Forward Hidden Procedure recerrV();
-Forward Hidden Procedure cantwrite();
+Forward Hidden Procedure rec_target(value fname);
+Forward Hidden Procedure rec_unit(value fname, bool all);
+Forward Hidden Procedure mk_permentry(value pname, value fname);
+Forward Hidden Procedure mk_suggitem(parsetree u);
+Forward Hidden Procedure rec_current(value curr);
+Forward Hidden Procedure recperm(void);
+Forward Hidden Procedure recsugg(void);
+Forward Hidden Procedure recpos(void);
+Forward Hidden Procedure recerrV(int m, value v);
+Forward Hidden Procedure cantwrite(string file);
 
 /*
  * Code to recover the contents of an ABC workspace.
@@ -52,7 +52,7 @@ Hidden bool rec_ok= Yes;
 Hidden value old_perm;
 Hidden value sugglis;
 
-Visible Procedure rec_workspace() {
+Visible Procedure rec_workspace(void) {
 	value lis, fname;
 	value k, len, m;
 
@@ -101,7 +101,7 @@ Visible Procedure rec_workspace() {
 	ws_recovered= Yes;
 }
 
-Visible Procedure rec_suggestions() {
+Visible Procedure rec_suggestions(void) {
 	value lis, fname;
 	value k, len, m;
 
@@ -131,7 +131,7 @@ Visible Procedure rec_suggestions() {
 	initworkspace();
 }
 
-Hidden Procedure rec_target(fname) value fname; {
+Hidden Procedure rec_target(value fname) {
 	value pname;
 	value name;
 	intlet k, len;
@@ -163,7 +163,7 @@ Hidden Procedure rec_target(fname) value fname; {
 	release(name);
 }
 
-Hidden Procedure rec_unit(fname, all) value fname; bool all; {
+Hidden Procedure rec_unit(value fname, bool all) {
 	FILE *fp;
 	char *line;
 	value pname;
@@ -202,7 +202,7 @@ Hidden Procedure rec_unit(fname, all) value fname; bool all; {
 	release((value) u);
 }
 
-Hidden Procedure mk_permentry(pname, fname) value pname, fname; {
+Hidden Procedure mk_permentry(value pname, value fname) {
 	value fn;
 	
 	if (in_keys(pname, cur_env->perm)) {
@@ -228,7 +228,7 @@ Hidden Procedure mk_permentry(pname, fname) value pname, fname; {
 	release(fn);
 }
 
-Hidden Procedure mk_suggitem(u) parsetree u; {
+Hidden Procedure mk_suggitem(parsetree u) {
 	value formals, k, t, next, v;
 	value sugg, sp_hole, sp;
 	
@@ -268,7 +268,7 @@ Hidden Procedure mk_suggitem(u) parsetree u; {
 	release(sugg);
 }
 
-Hidden Procedure rec_current(curr) value curr; {
+Hidden Procedure rec_current(value curr) {
 	value *pn;
 	
 	if (in_keys(curr, old_perm)
@@ -279,12 +279,12 @@ Hidden Procedure rec_current(curr) value curr; {
 	}
 }
 
-Hidden Procedure recperm() {
+Hidden Procedure recperm(void) {
 	cur_env->permchanges= Yes;
 	put_perm();
 }
 
-Hidden Procedure recsugg() {
+Hidden Procedure recsugg(void) {
 	FILE *fp;
 	value k, len, m;
 	value sugg;
@@ -313,7 +313,7 @@ Hidden Procedure recsugg() {
 	release(k); release(len);
 }
 
-Hidden Procedure recpos() {
+Hidden Procedure recpos(void) {
 	/* to be done */
 	/* since the number of filenames remembered is limited
 	 * any filenames disappeared in recovering will
@@ -322,7 +322,7 @@ Hidden Procedure recpos() {
 }
 
 
-Hidden Procedure recerrV(m, v) int m; value v; {
+Hidden Procedure recerrV(int m, value v) {
 	if (rec_ok) {
 		bioerr(R_ERROR);
 		rec_ok= No;
@@ -330,7 +330,7 @@ Hidden Procedure recerrV(m, v) int m; value v; {
 	bioerrV(m, v);
 }
 
-Hidden Procedure cantwrite(file) string file; {
+Hidden Procedure cantwrite(string file) {
 	value fn= mk_text(file);
 	bioerrV(R_FWRITE, fn);
 	release(fn);

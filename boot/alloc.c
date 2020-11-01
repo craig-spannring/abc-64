@@ -7,7 +7,7 @@
 #include "b.h"
 #include "main.h"
 
-Visible Procedure allocate_tables() {
+Visible Procedure allocate_tables(void) {
 	
 	symdef= (struct syminfo *)
 		getmem((unsigned) maxsym*sizeof(struct syminfo));

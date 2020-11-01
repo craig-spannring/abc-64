@@ -30,7 +30,7 @@ Hidden pos poshead= PNULL;
 
 Hidden bool poschanges;
 
-Hidden pos new_pos(fname, line) char *fname; int line; {
+Hidden pos new_pos(char *fname, int line) {
 	pos new= (pos) getmem((unsigned) sizeof(poschain));
 	new->fname= (char *) savestr(fname);
 	new->line= line;
@@ -38,12 +38,12 @@ Hidden pos new_pos(fname, line) char *fname; int line; {
 	return new;
 }
 
-Hidden Procedure free_pos(filpos) pos filpos; {
+Hidden Procedure free_pos(pos filpos) {
 	freestr(filpos->fname);
 	freemem((ptr) filpos);
 }
 
-Hidden int del_pos(fname) char *fname; {
+Hidden int del_pos(char *fname) {
 	pos filpos= poshead;
 	pos prev= PNULL;
 	int line= 1;
@@ -65,7 +65,7 @@ Hidden int del_pos(fname) char *fname; {
 	return line;
 }
 
-Hidden Procedure sav_pos(fname, line) char *fname; int line; {
+Hidden Procedure sav_pos(char *fname, int line) {
 	pos new;
 	
 	VOID del_pos(fname);
@@ -75,7 +75,7 @@ Hidden Procedure sav_pos(fname, line) char *fname; int line; {
 	poschanges= Yes;
 }
 
-Visible Procedure initpos() {
+Visible Procedure initpos(void) {
 	FILE *file;
 	char *buffer;
 	char *fname;
@@ -107,7 +107,7 @@ Visible Procedure initpos() {
 	fclose(file);
 }
 
-Hidden Procedure wripos() {
+Hidden Procedure wripos(void) {
 	FILE *fp;
 	pos filpos;
 	
@@ -129,7 +129,7 @@ Hidden Procedure wripos() {
 	fclose(fp);
 }
 
-Visible Procedure endpos() {
+Visible Procedure endpos(void) {
 	pos prev;
 
 	wripos();
@@ -142,7 +142,7 @@ Visible Procedure endpos() {
 
 /* getpos() is called from editor */
 
-Visible int getpos(fname) char *fname; {
+Visible int getpos(char *fname) {
 	pos filpos= poshead;
 	
 	while (filpos != PNULL) {
@@ -155,19 +155,19 @@ Visible int getpos(fname) char *fname; {
 
 /* savpos() is called from editor */
 
-Visible bool savpos(fname, ep) char *fname; environ *ep; {
+Visible bool savpos(char *fname, environ *ep) {
 	sav_pos(fname, lineno(ep) + 1);
 }
 
 /* delpos() is called from interpreter */
 
-Visible Procedure delpos(fname) char *fname; {
+Visible Procedure delpos(char *fname) {
 	VOID del_pos(fname);
 }
 
 /* movpos() is called from interpreter */
 
-Visible Procedure movpos(ofname, nfname) char *ofname, *nfname; {
+Visible Procedure movpos(char *ofname, char *nfname) {
 	int n_line= del_pos(ofname);
 	sav_pos(nfname, n_line);
 }

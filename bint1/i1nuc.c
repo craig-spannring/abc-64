@@ -20,7 +20,7 @@
    The character string is overwritten on each next call.
    It assumes BASE is a power of 10. */
 
-Hidden char *convint(v)  integer v; {
+Hidden char *convint(integer v) {
 	static char *buffer, shortbuffer[tenlogBASE+3];
 	static char fmt[10];
 	char *cp;
@@ -51,7 +51,7 @@ Hidden char *convint(v)  integer v; {
 	return buffer;
 }
 
-Hidden value tento_d(x) double x; {
+Hidden value tento_d(double x) {
 	if (x > Maxint || x < -Maxint) {
 		value n= (value) mk_int(x);
 		value v= power((value) int_10, n);
@@ -65,7 +65,7 @@ Hidden value tento_d(x) double x; {
  * or minus the number of zero's after the decimal point
  */
 
-Hidden int digits_in(v) value v; {
+Hidden int digits_in(value v) {
 	integer p, q;
 	struct integer pp, qq;
 	double x;
@@ -114,7 +114,7 @@ Hidden int digits_in(v) value v; {
  * and does not normalize a rational result sometimes.
  */
 
-Visible string convnum(v)  value v; {
+Visible string convnum(value v) {
 	value r, re, rre;
 	int rndsize= 0;
 	int num;
@@ -251,7 +251,7 @@ Visible string convnum(v)  value v; {
    approximate.
 */
 
-Visible value numconst(v)  value v; {
+Visible value numconst(value v) {
 	string txt, txt0;
 	string tp;
 	int numdigs, fraclen;
@@ -363,7 +363,7 @@ recover:
  * can be read back identically.
  */
 
-Visible Procedure printnum(fp, v) FILE *fp; value v; {
+Visible Procedure printnum(FILE *fp, value v) {
 	if (Approximate(v)) {
 		app_print(fp, (real) v);
 		return;

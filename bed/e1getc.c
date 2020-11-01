@@ -18,9 +18,9 @@ extern bool use_bed;
 #define ESC '\033'
 
 Forward int maxdeflen;
-Forward Hidden Procedure initsense();
-Forward Hidden Procedure initmouse();
-Forward Hidden bool equalhead();
+Forward Hidden Procedure initsense(void);
+Forward Hidden Procedure initmouse(void);
+Forward Hidden bool equalhead(string keystr, int nkey, string def, int len);
 
 /*
 This file contains a little parser for key definition files.
@@ -75,8 +75,7 @@ Visible int errcount= 0; /* Number of errors detected */
 
 Visible int ndefs;
 
-Hidden Procedure err1(m)
-	string m;
+Hidden Procedure err1(string m)
 {
 	static char errbuf[MESSBUFSIZE];
 		/* since putmess() below overwrites argument m via getmess() */
@@ -94,13 +93,12 @@ Hidden Procedure err1(m)
 	putserr(errbuf);
 }
 
-Hidden Procedure err(m)
-	int m;
+Hidden Procedure err(int m)
 {
 	err1(getmess(m));
 }
 
-Hidden Procedure adv()
+Hidden Procedure adv(void)
 {
 	int c;
 
@@ -116,14 +114,13 @@ Hidden Procedure adv()
 	}
 }
 
-Hidden Procedure skipspace()
+Hidden Procedure skipspace(void)
 {
 	while (nextc == ' ' || nextc == '\t')
 		adv();
 }
 
-Hidden int lookup(name)
-	string name;
+Hidden int lookup(string name)
 {
 	int i;
 
@@ -210,12 +207,12 @@ Hidden Procedure sigundef_intrchar() {
 
 #endif /* !CANLOOKAHEAD */
 
-Hidden bool store(code, deflen, def, rep, name) /* return whether stored */
-	int code;
-	int deflen;
-	string def;
-	string rep;
-	string name;
+Hidden bool store(int code, int deflen, string def, string rep, string name) /* return whether stored */
+	         
+	           
+	           
+	           
+	            
 {
 	struct tabent *d, *last= deftab+ndefs;
 #ifndef CANLOOKAHEAD
@@ -292,18 +289,13 @@ Hidden bool store(code, deflen, def, rep, name) /* return whether stored */
 	return Yes;
 }
 
-Visible Procedure addkeydef(code, deflen, def, rep, name)
-	int code;
-	int deflen;
-	string def;
-	string rep;
-	string name;
+Visible Procedure addkeydef(int code, int deflen, string def, string rep, string name)
 {
 	/* called from porting directory */
 	VOID store(code, deflen, def, rep, name);
 }
 
-Hidden string getname()
+Hidden string getname(void)
 {
 	char buffer[20];
 	string bp;
@@ -339,7 +331,7 @@ Hidden string getname()
 	return (string) savestr(buffer);
 }
 
-Hidden int getstring(pstr) string *pstr;
+Hidden int getstring(string *pstr)
 {
 	char buf[256]; /* Arbitrary limit */
 	char c;
@@ -408,7 +400,7 @@ Hidden int getstring(pstr) string *pstr;
 	return len;
 }
 
-Hidden string getrep()
+Hidden string getrep(void)
 {
 	char buf[256]; /* Arbitrary limit */
 	char c;
@@ -443,7 +435,7 @@ Hidden string getrep()
 	return savestr(buf);
 }
 
-Hidden Procedure get_definition()
+Hidden Procedure get_definition(void)
 {
 	string name;
 	int d;
@@ -522,7 +514,7 @@ Hidden Procedure get_definition()
 	}
 }
 
-Hidden Procedure get_line()
+Hidden Procedure get_line(void)
 {
 	adv();
 	skipspace();
@@ -584,7 +576,7 @@ Visible Procedure dumpkeys(where)
 extern int nharddefs;
 #endif
 
-Hidden Procedure setdeflen()  /* and count the defs */
+Hidden Procedure setdeflen(void)  /* and count the defs */
 {
 	struct tabent *d;
 
@@ -602,7 +594,7 @@ Hidden Procedure setdeflen()  /* and count the defs */
 #endif
 }
 
-Hidden Procedure readkeysfile()
+Hidden Procedure readkeysfile(void)
 {
 #ifdef KEYS
 	saveharddefs();
@@ -632,7 +624,7 @@ Hidden Procedure readkeysfile()
 #endif
 }
 
-Visible Procedure initkeys()
+Visible Procedure initkeys(void)
 {
 	setdeflen();   /* and count the defs */
 	errcount= 0;
@@ -657,7 +649,7 @@ extern string gotoformat;
 extern string mousesense;
 extern string mouseformat;
 
-Hidden string defstring(name) string name; {
+Hidden string defstring(string name) {
 	int i;
 
 	i= lookup(name);
@@ -667,7 +659,7 @@ Hidden string defstring(name) string name; {
 	return NULL;
 }
 
-Hidden Procedure initsense() {
+Hidden Procedure initsense(void) {
 	gotosense= defstring(S_GSENSE);
 	gotoformat= defstring(S_GFORMAT);
 	if (gotosense != NULL && gotoformat != NULL) {
@@ -676,7 +668,7 @@ Hidden Procedure initsense() {
 	/* check [goto] defined, and not only one of gsense and gformat ??? */
 }
 
-Hidden Procedure initmouse() {
+Hidden Procedure initmouse(void) {
 	mousesense= defstring(S_MSENSE);
 	mouseformat= defstring(S_MFORMAT);
 	/* check [mouse] defined ??? */
@@ -686,8 +678,7 @@ Hidden Procedure initmouse() {
 
 extern bool vtrmactive;
 
-Hidden Procedure outstring(name)
-	string name;
+Hidden Procedure outstring(string name)
 {
 	int i= lookup(name);
 
@@ -703,7 +694,7 @@ Hidden Procedure outstring(name)
 
 /* Output the terminal's initialization sequence, if any. */
 
-Visible Procedure initgetc()
+Visible Procedure initgetc(void)
 {
 	outstring(S_TERMINIT);
 }
@@ -711,7 +702,7 @@ Visible Procedure initgetc()
 
 /* Output a sequence, if any, to return the terminal to a 'normal' state. */
 
-Visible Procedure endgetc()
+Visible Procedure endgetc(void)
 {
 	outstring(S_TERMDONE);
 }
@@ -738,7 +729,7 @@ Hidden char *keystroke;
 Hidden int nkeys= 0;
 Visible int maxdeflen= 0;
 
-Visible Procedure initoperations() {
+Visible Procedure initoperations(void) {
 	struct tabent *d;
 
 	d= deftab;
@@ -753,7 +744,7 @@ Visible Procedure initoperations() {
 
 /* called from editor: */
 
-Visible int getoperation() {
+Visible int getoperation(void) {
 	int c;
 	int oprn;
 	struct tabent *d, *last= deftab+ndefs;
@@ -798,7 +789,7 @@ extern bool suspendabc();
 
 Visible int pollcnt= 0;
 
-Visible Procedure pollinterrupt() {
+Visible Procedure pollinterrupt(void) {
 	int c;
 	int op;
 	struct tabent *d, *last= deftab+ndefs;
@@ -869,7 +860,7 @@ Visible Procedure pollinterrupt() {
 	}
 }
 
-Hidden bool equalhead(keystr, nkey, def, len) string keystr, def; int nkey, len; {
+Hidden bool equalhead(string keystr, int nkey, string def, int len) {
 	int i;
 
 	if (nkey > len)

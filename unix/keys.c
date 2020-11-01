@@ -6,7 +6,7 @@
 #include "oper.h"
 #include "port.h"
 
-char *getenv();
+char *getenv(const char *);
 
 /* struct tabent {int code; int deflen; string def, rep, name;} in getc.h */
 
@@ -125,8 +125,8 @@ Visible struct tabent deftab[MAXDEFS] = {
 
 /* Merge key definitions from termcap into the default table. */
 
-Hidden Procedure readtermcap() {
-	string tgetstr();
+Hidden Procedure readtermcap(void) {
+	string tgetstr(char *, char **);
 	char buffer[1024]; /* Constant dictated by termcap manual entry */
 	static char area[1024];
 	string endarea= area;
@@ -183,7 +183,7 @@ Hidden char *erase_char= NULL;
 #include <signal.h>
 #endif
 
-Hidden Procedure getspchars() {
+Hidden Procedure getspchars(void) {
 #ifndef TERMIO
 	struct sgttyb sgbuf;
 #ifdef TIOCGETC
@@ -255,7 +255,7 @@ Hidden Procedure getspchars() {
 
 /* The following is needed for the helpblurb */
 
-Visible string reprchar(c) int c; {
+Visible string reprchar(int c) {
 
 	static char str[20];
 
@@ -297,7 +297,7 @@ Visible string reprchar(c) int c; {
 	}
 }
 
-Hidden Procedure add_special_chars() {
+Hidden Procedure add_special_chars(void) {
 	string anentry;
 	struct tabent *d, *last;
 	
@@ -337,7 +337,7 @@ Visible char intrchar;
 extern FILE *keyfp;
 #endif
 
-Visible Procedure addspeckeys() {
+Visible Procedure addspeckeys(void) {
 	getspchars();
 #ifndef CANLOOKAHEAD
 	if (intr_char != NULL && *intr_char != '\0')

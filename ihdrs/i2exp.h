@@ -59,7 +59,7 @@ struct prio {
 #define dprio(i) pprio(i, P_dya)
 #define mprio(i) pprio(i, P_mon)
 
-    struct prio * pprio();
+    struct prio * pprio(value f, char adic);
 
     extern Visible bool tag_operator(txptr q, value *v);
 

@@ -98,7 +98,7 @@ Visible Procedure abced_file(string filename, intlet errline, literal kind, bool
 	}
 }
 
-Visible char *ed_line(kind, indent) literal kind; int indent; {
+Visible char *ed_line(literal kind, int indent) {
 	char *buf= (char *) NULL;
 	environ *ep= top_ep;
 	char *senddoc();

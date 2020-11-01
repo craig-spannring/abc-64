@@ -9,20 +9,20 @@ extern "C" {
 
 /* Interpreter utilities */
 
-value v_local();
-value v_global();
-loc local_loc();
-loc global_loc();
-loc trim_loc();
-loc tbsel_loc();
-value pre_fun();
+value v_local(value name, value number);
+value v_global(value name);
+loc local_loc(basidf i);
+loc global_loc(basidf i);
+loc trim_loc(loc l, value N, char sign);
+loc tbsel_loc(loc R, value K);
+value pre_fun(value nd1, intlet pre, value nd2);
 extern value resval;
 
-value evalthread();
+value evalthread(parsetree start);
 
 #define Changed_formal(v) (v == Vnil || !Is_indirect(v))
 
-value locvalue();
+value locvalue(loc l, value **ll, bool err);
 
 #ifdef __cplusplus
 }

@@ -16,17 +16,14 @@
 #include "code.h"
 #include "b1grab.h"
 
-Forward Hidden bool ifmatch();
+Forward Hidden bool ifmatch(environ *ep, string *pstr, string str, int alt_c);
 
 /*
  * Try to insert the character c in the focus *pp.
  */
 
 Visible bool
-insguess(pp, c, ep)
-	path *pp;
-	char c;
-	environ *ep;
+insguess(path *pp, char c, environ *ep)
 {
 	path pa = parent(*pp);
 	node n;
@@ -96,11 +93,7 @@ insguess(pp, c, ep)
  */
 
 Visible bool
-mayinsert(n, ich, s2, c)
-	node n;
-	int ich;
-	int s2;
-	char c;
+mayinsert(node n, int ich, int s2, char c)
 {
 	int sympa = symbol(n);
 	struct classinfo *ci;
@@ -135,10 +128,7 @@ mayinsert(n, ich, s2, c)
  */
 
 Visible bool
-soften(ep, pstr, alt_c)
-	environ *ep;
-	string *pstr;
-	int alt_c;
+soften(environ *ep, string *pstr, int alt_c)
 {
 	path pa = parent(ep->focus);
 	node n;
@@ -212,10 +202,7 @@ soften(ep, pstr, alt_c)
  */
 
 Visible bool
-resuggest(ep, pstr, alt_c)
-	environ *ep;
-	string *pstr;
-	int alt_c;
+resuggest(environ *ep, string *pstr, int alt_c)
 {
 	struct table *tp;
 	struct classinfo *ci;
@@ -335,11 +322,7 @@ resuggest(ep, pstr, alt_c)
  */
 
 Hidden bool
-ifmatch(ep, pstr, str, alt_c)
-	environ *ep;
-	string *pstr;
-	string str;
-	int alt_c;
+ifmatch(environ *ep, string *pstr, string str, int alt_c)
 {
 	int c = str[ep->s2];
 

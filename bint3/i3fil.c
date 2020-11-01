@@ -15,17 +15,16 @@
 #include "i3scr.h"
 #include "i3sou.h"
 
-Forward Hidden bool fnm_extend();
-Forward Hidden bool fnm_narrow();
-Forward Hidden Procedure conv_fname();
+Forward Hidden bool fnm_extend(char *fname, int n, char *suffix);
+Forward Hidden bool fnm_narrow(char *fname, int n);
+Forward Hidden Procedure conv_fname(char *fname, char *suffix);
 
 /* f_rename() changes the name of a file via the system call rename();
  * rename() requires that both files are on the same file system, so
  * be careful when calling f_rename()
  */
 
-Visible Procedure f_rename(fname, nfname)
-     value fname, nfname;
+Visible Procedure f_rename(value fname, value nfname)
 {
 	char *f1, f2[100];
 	
@@ -36,21 +35,20 @@ Visible Procedure f_rename(fname, nfname)
 	/* what if it fails??? */
 }
 
-Visible Procedure f_delete(file)
-     char *file;
+Visible Procedure f_delete(char *file)
 {
 	unlink(file);
 }
 
-Visible unsigned f_size(file) FILE *file; {
-	long s, ftell();
+Visible unsigned f_size(FILE *file) {
+	long s, ftell(FILE *);
 	fseek(file, 0l, 2);
 	s= ftell(file);
 	fseek(file, 0l, 0); /* rewind */
 	return s;
 }
 
-Visible Procedure f_close(usrfile) FILE *usrfile; {
+Visible Procedure f_close(FILE *usrfile) {
 	bool ok= fflush(usrfile) != EOF;
 	if (fclose(usrfile) == EOF || !ok)
 		interr(MESS(3700, "write error (disk full?)"));
@@ -64,7 +62,7 @@ Visible bool f_interactive(FILE *file) {
 
 #define LINESIZE 200
 
-Visible char *f_getline(file) FILE *file; {
+Visible char *f_getline(FILE *file) {
 	char line[LINESIZE];
 	char *pline= NULL;
 	
@@ -100,7 +98,7 @@ Hidden struct class classes[]= {
 
 #define NCLASSES (sizeof classes / sizeof classes[0])
 
-Hidden char *filesuffix(type) literal type; {
+Hidden char *filesuffix(literal type) {
 	struct class *cp;
 
 	for (cp= classes; cp < &classes[NCLASSES]; ++cp) {
@@ -140,7 +138,7 @@ Visible value new_fname(value name, literal type) {
 	return mk_text(fname);
 }
 
-Hidden bool fnm_extend(fname, n, suffix) char *fname, *suffix; int n; {
+Hidden bool fnm_extend(char *fname, int n, char *suffix) {
 	/* e.g. "ABC.cmd" => "ABC1.cmd" */
 	int m;
 	int k= n;
@@ -168,7 +166,7 @@ Hidden bool fnm_extend(fname, n, suffix) char *fname, *suffix; int n; {
 	return Yes;
 }
 
-Hidden bool fnm_narrow(fname, n) char *fname; int n; {
+Hidden bool fnm_narrow(char *fname, int n) {
 	/* e.g. "ABC.cmd" => "AB1.cmd" */
 	int m;
 	
@@ -199,7 +197,7 @@ Hidden bool fnm_narrow(fname, n) char *fname; int n; {
  *  the latter is as portably unspecial as possible.
  */
 
-Hidden Procedure conv_fname(fname, suffix) char *fname, *suffix; {
+Hidden Procedure conv_fname(char *fname, char *suffix) {
 	char *ext_point= fname + strlen(fname) - strlen(suffix);
 	
 	while (fname < ext_point) {

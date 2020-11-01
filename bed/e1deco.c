@@ -19,18 +19,18 @@
 
 extern bool lefttorite;
 
-Forward Hidden bool delvarying();
-Forward Hidden bool delfixed();
-Forward Hidden bool delsubset();
-Forward Hidden bool delwhole();
-Forward Hidden bool delhole();
-Forward Hidden Procedure nonewline();
-Forward Hidden Procedure balance();
-Forward Hidden bool copyin();
-Forward Hidden bool colonhack();
-Forward Hidden bool allright();
+Forward Hidden bool delvarying(environ *ep);
+Forward Hidden bool delfixed(environ *ep);
+Forward Hidden bool delsubset(environ *ep, bool hack);
+Forward Hidden bool delwhole(environ *ep);
+Forward Hidden bool delhole(environ *ep);
+Forward Hidden Procedure nonewline(queue *pq);
+Forward Hidden Procedure balance(environ *ep);
+Forward Hidden bool copyin(environ *ep, queue q);
+Forward Hidden bool colonhack(environ *ep, int all);
+Forward Hidden bool allright(string repr);
 
-Forward value copyout();
+Forward value copyout(environ *ep);
 
 /*
  * DELETE and COPY currently share a buffer, called the copy buffer.
@@ -54,8 +54,7 @@ Forward value copyout();
  */
 
 Visible bool
-deltext(ep)
-	environ *ep;
+deltext(environ *ep)
 {
 	higher(ep);
 	shrink(ep);
@@ -74,8 +73,7 @@ deltext(ep)
  */
 
 Visible bool
-delbody(ep)
-	environ *ep;
+delbody(environ *ep)
 {
 	ep->changed = Yes;
 
@@ -108,8 +106,7 @@ delbody(ep)
  */
 
 Hidden bool
-delvarying(ep)
-	environ *ep;
+delvarying(environ *ep)
 {
 	auto queue q = Qnil;
 	node n = tree(ep->focus);
@@ -152,8 +149,7 @@ delvarying(ep)
  */
 
 Hidden bool
-delfixed(ep)
-	environ *ep;
+delfixed(environ *ep)
 {
 	node n = tree(ep->focus);
 	char buf[15]; /* Long enough for all fixed texts */
@@ -202,9 +198,7 @@ delfixed(ep)
  * (the latter being sent to qq)
  */
 
-Hidden bool hole_ify_keywords(ep, qq)
-	environ *ep;
-	queue *qq;
+Hidden bool hole_ify_keywords(environ *ep, queue *qq)
 {
 	treereplace(&ep->focus, gram(Kw_plus));
 	ep->mode= VHOLE;
@@ -224,9 +218,7 @@ Hidden bool hole_ify_keywords(ep, qq)
  */
 
 Hidden bool
-delsubset(ep, hack)
-	environ *ep;
-	bool hack;
+delsubset(environ *ep, bool hack)
 {
 	auto queue q = Qnil;
 	auto queue q2 = Qnil;
@@ -311,8 +303,7 @@ delsubset(ep, hack)
  * Delete the focus if ep->mode == SUBLIST.
  */
 
-delsublist(ep)
-	environ *ep;
+delsublist(environ *ep)
 {
 	node n;
 	int i;
@@ -371,8 +362,7 @@ delsublist(ep)
  */
 
 Hidden bool
-delwhole(ep)
-	environ *ep;
+delwhole(environ *ep)
 {
 	int sym = symbol(tree(ep->focus));
 
@@ -390,8 +380,7 @@ delwhole(ep)
  */
 
 Hidden bool
-delhole(ep)
-	environ *ep;
+delhole(environ *ep)
 {
 	node n;
 	int sym;
@@ -497,8 +486,7 @@ delfocus(path *pp)
  */
 
 Visible bool
-copyinout(ep)
-	environ *ep;
+copyinout(environ *ep)
 {
 	shrink(ep);
 	if (!ishole(ep)) {
@@ -522,8 +510,7 @@ copyinout(ep)
  */
 
 Visible value
-copyout(ep)
-	environ *ep;
+copyout(environ *ep)
 {
 	auto queue q = Qnil;
 	auto path p;
@@ -587,8 +574,7 @@ copyout(ep)
  */
 
 Hidden Procedure
-nonewline(pq)
-	queue *pq;
+nonewline(queue *pq)
 {
 	node n;
 	int c;
@@ -624,8 +610,7 @@ nonewline(pq)
  */
 
 Hidden Procedure
-balance(ep)
-	environ *ep;
+balance(environ *ep)
 {
 	string *rp = noderepr(tree(ep->focus));
 	int i;
@@ -650,9 +635,9 @@ balance(ep)
  */
 
 Hidden bool
-copyin(ep, q)
-	environ *ep;
-	/*auto*/ queue q;
+copyin(environ *ep, queue q)
+	            
+	/*auto*/         
 {
 	auto queue q2 = Qnil;
 	bool res;
@@ -686,8 +671,7 @@ copyin(ep, q)
  */
 
 Visible bool
-ishole(ep)
-	environ *ep;
+ishole(environ *ep)
 {
 	int sym;
 
@@ -725,8 +709,7 @@ ishole(ep)
  */
 
 Hidden bool
-colonhack(ep, all)
-	environ *ep;
+colonhack(environ *ep, int all)
 {
 	node n = tree(ep->focus);
 	node n1;
@@ -766,8 +749,7 @@ colonhack(ep, all)
  */
 
 Hidden bool
-allright(repr)
-	string repr;
+allright(string repr)
 {
 	if (repr) {
 		for (; *repr; ++repr) {

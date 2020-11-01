@@ -32,19 +32,19 @@
 
 Hidden value var_list;
 
-Visible Procedure start_vars() {
+Visible Procedure start_vars(void) {
 	var_list = mk_elt();
 }
 
-Visible Procedure add_var(tvar) polytype tvar; {
+Visible Procedure add_var(polytype tvar) {
 	insert(tvar, &var_list);
 }
 
-Hidden bool in_vars(t) polytype t; {
+Hidden bool in_vars(polytype t) {
 	return in(t, var_list);
 }
 
-Visible Procedure end_vars() {
+Visible Procedure end_vars(void) {
 	release(var_list);
 }
 
@@ -60,11 +60,11 @@ Visible Procedure end_vars() {
 Hidden value reprtable;
 extern value ptype_of; 		/* defined in i2tp.c */
 
-Visible Procedure setreprtable() {
+Visible Procedure setreprtable(void) {
 	reprtable = copy(ptype_of);
 }
 
-Visible Procedure delreprtable() {
+Visible Procedure delreprtable(void) {
 	release(reprtable);
 }
 
@@ -72,29 +72,29 @@ Visible Procedure delreprtable() {
 
 Hidden value errvarlist;
 
-Visible Procedure starterrvars() {
+Visible Procedure starterrvars(void) {
 	errvarlist= mk_elt();
 }
 
-Visible Procedure adderrvar(t) polytype t; {
+Visible Procedure adderrvar(polytype t) {
 	if (in_vars(t) && !in(t, errvarlist))
 		insert(t, &errvarlist);
 }
 
-Visible Procedure enderrvars() {
+Visible Procedure enderrvars(void) {
 	release(errvarlist);
 }
 
 /* miscellaneous procs */
 
-Visible value conc(v, w) value v, w; {
+Visible value conc(value v, value w) {
 	value c;
 	c = concat(v, w);
 	release(v); release(w);
 	return c;
 }
 
-Hidden bool newvar(u) polytype u; {
+Hidden bool newvar(polytype u) {
 	value u1;
 	char ch;
 	u1 = curtail(ident(u), one);
@@ -105,14 +105,14 @@ Hidden bool newvar(u) polytype u; {
 
 #define Known(tu) (!t_is_var(kind(tu)) && !t_is_error(kind(tu)))
 
-Hidden polytype oldbottomtype(u) polytype u; {
+Hidden polytype oldbottomtype(polytype u) {
 	polytype tu= u;
 	while (t_is_var(kind(tu)) && in_keys(ident(tu), reprtable))
 		tu= *adrassoc(reprtable, ident(tu));
 	return tu; /* not a copy, just a pointer! */
 }
 
-Hidden value t_repr(u) polytype u; {
+Hidden value t_repr(polytype u) {
 	typekind u_kind;
 	polytype tau;
 	value c;
@@ -185,7 +185,7 @@ Hidden value t_repr(u) polytype u; {
 	}
 }
 
-Hidden value typmess(format, s1, s2) string format, s1, s2; {
+Hidden value typmess(string format, string s1, string s2) {
 	unsigned len;
 	string bf;
 	value m;
@@ -200,7 +200,7 @@ Hidden value typmess(format, s1, s2) string format, s1, s2; {
 
 /* now, the real error messages */
 
-Visible Procedure badtyperr(a, b) polytype a, b; {
+Visible Procedure badtyperr(polytype a, polytype b) {
 	value t;
 	value nerrs;
 	polytype te, bte;

@@ -14,12 +14,12 @@
 #include "i3err.h"
 #include "b1grab.h"
 
-Forward Hidden parsetree cmd_unit();
-Forward Hidden value cmd_formals();
-Forward Hidden parsetree funprd_unit();
-Forward Hidden parsetree fp_formals();
-Forward Hidden parsetree fml_operand();
-Forward Hidden bool share();
+Forward Hidden parsetree cmd_unit(char *kw, bool heading);
+Forward Hidden value cmd_formals(txptr q, value kw);
+Forward Hidden parsetree funprd_unit(bool heading, bool isfunc);
+Forward Hidden parsetree fp_formals(txptr q, bool isfunc, value *name, value *adic);
+Forward Hidden parsetree fml_operand(txptr q);
+Forward Hidden bool share(txptr q, parsetree *v, value *c);
 
 /* ******************************************************************** */
 /*		unit							*/
@@ -29,11 +29,11 @@ Hidden value formlist, sharelist;
 Hidden envtab reftab; 
 Visible literal idf_cntxt;
 
-Forward Hidden parsetree ref_suite();
+Forward Hidden parsetree ref_suite(intlet cil);
 
 #define unicmd_suite(level) cmd_suite(level, Yes, ucmd_seq)
 
-Visible parsetree unit(heading, editing) bool heading, editing; {
+Visible parsetree unit(bool heading, bool editing) {
 	parsetree v= NilTree;
 	char *kw;
 	
@@ -68,7 +68,7 @@ Visible parsetree unit(heading, editing) bool heading, editing; {
 /*		cmd_unit						*/
 /* ******************************************************************** */
 
-Hidden parsetree cmd_unit(kw, heading) char *kw; bool heading; {
+Hidden parsetree cmd_unit(char *kw, bool heading) {
 	parsetree v;
 	value w= mk_text(kw);
 	value c, f;
@@ -96,7 +96,7 @@ Hidden parsetree cmd_unit(kw, heading) char *kw; bool heading; {
 	return v;
 }
 
-Hidden value cmd_formals(q, kw) txptr q; value kw; {
+Hidden value cmd_formals(txptr q, value kw) {
 	value t= Vnil, v= Vnil;
 	txptr ftx;
 	value nkw;
@@ -117,7 +117,7 @@ Hidden value cmd_formals(q, kw) txptr q; value kw; {
 /*		fun_unit/prd_unit					*/
 /* ******************************************************************** */
 
-Hidden parsetree funprd_unit(heading, isfunc) bool heading, isfunc; {
+Hidden parsetree funprd_unit(bool heading, bool isfunc) {
 	parsetree v, f; 
 	value name, c, adicity;
 	txptr ftx, ttx;
@@ -151,7 +151,7 @@ Hidden parsetree funprd_unit(heading, isfunc) bool heading, isfunc; {
 #define REF_IN_SH  SH_IN_SH
 #define REF_IN_REF MESS(2806, "%s is already a refinement name")
 
-Hidden Procedure treat_idf(t) value t; {
+Hidden Procedure treat_idf(value t) {
 	switch (idf_cntxt) {
 		case In_formal:	if (in(t, formlist)) 
 					pprerrV(FML_IN_FML, t);
@@ -175,8 +175,8 @@ Hidden Procedure treat_idf(t) value t; {
 
 #define NO_FUN_NAME	MESS(2807, "cannot find function name")
 
-Hidden parsetree fp_formals(q, isfunc, name, adic) txptr q; bool isfunc;
-		value *name, *adic; {
+Hidden parsetree fp_formals(txptr q, bool isfunc, value *name, value *adic)
+{
 	parsetree v1, v2, v3;
 
 	*name= Vnil;
@@ -222,7 +222,7 @@ Hidden parsetree fp_formals(q, isfunc, name, adic) txptr q; bool isfunc;
 	return node5(isfunc ? DYAF : DYAPRD, v1, *name, v3, Vnil);
 }
 
-Hidden parsetree fml_operand(q) txptr q; {
+Hidden parsetree fml_operand(txptr q) {
 	value t;
 	skipsp(&tx);
 	if (nothing(q, MESS(2810, "nothing instead of expected template operand"))) 
@@ -240,7 +240,7 @@ Hidden parsetree fml_operand(q) txptr q; {
 /*		unit_command_suite					*/
 /* ******************************************************************** */
 
-Visible parsetree ucmd_seq(cil, first, emp) intlet cil; bool first, *emp; {
+Visible parsetree ucmd_seq(intlet cil, bool first, bool *emp) {
 	value c;
 	intlet level= ilev();
 	intlet l= lino;
@@ -262,7 +262,7 @@ Visible parsetree ucmd_seq(cil, first, emp) intlet cil; bool first, *emp; {
 	return NilTree;
 } 
 
-Hidden bool share(q, v, c) txptr q; parsetree *v; value *c; {
+Hidden bool share(txptr q, parsetree *v, value *c) {
 	char *kw;
 	txptr tx0= tx;
 	
@@ -281,7 +281,7 @@ Hidden bool share(q, v, c) txptr q; parsetree *v; value *c; {
 /*		refinement_suite					*/
 /* ******************************************************************** */
 
-Hidden parsetree  ref_suite(cil) intlet cil; {
+Hidden parsetree  ref_suite(intlet cil) {
 	char *kw;
 	value name= Vnil;
 	bool t;
@@ -329,8 +329,8 @@ Hidden parsetree  ref_suite(cil) intlet cil; {
 /*		collateral, compound					*/
 /* ******************************************************************** */
 
-Hidden parsetree n_collateral(q, n, base) txptr q; intlet n;
-		parsetree (*base)(); {
+Hidden parsetree n_collateral(txptr q, intlet n, parsetree (*base) (/* ??? */))
+{
 	parsetree v, w; txptr ftx, ttx;
 	if (find(S_COMMA, q, &ftx, &ttx)) {
 		w= (*base)(ftx); tx= ttx;
@@ -345,7 +345,7 @@ Hidden parsetree n_collateral(q, n, base) txptr q; intlet n;
 	return n > 1 ? v : node2(COLLATERAL, v);
 }
 
-Visible parsetree collateral(q, base) txptr q; parsetree (*base)(); {
+Visible parsetree collateral(txptr q, parsetree (*base) (/* ??? */)) {
 	return n_collateral(q, 1, base);
 }
 
@@ -360,7 +360,7 @@ Visible parsetree compound(q, base) txptr q; parsetree (*base)(); {
 /*		idf, singidf						*/
 /* ******************************************************************** */
 
-Hidden parsetree singidf(q) txptr q; {
+Hidden parsetree singidf(txptr q) {
 	parsetree v;
 	skipsp(&tx);
 	if (nothing(q, MESS(2812, "nothing instead of expected name")))
@@ -379,6 +379,6 @@ Hidden parsetree singidf(q) txptr q; {
 	return v;
 }
 
-Visible parsetree idf(q) txptr q; {
+Visible parsetree idf(txptr q) {
 	return collateral(q, singidf);
 }

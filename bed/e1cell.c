@@ -20,8 +20,8 @@ extern bool noscroll;
 extern bool dflag;
 #endif
 
-Forward Hidden Procedure feedfreelist();
-Forward Hidden Procedure dupmatch();
+Forward Hidden Procedure feedfreelist(void);
+Forward Hidden Procedure dupmatch(cell *old, cell *rep, int oldcnt, int repcnt);
 
 /*
  * Definitions for internals of cell manipulations.
@@ -48,11 +48,7 @@ Hidden cell *freelist;
  */
 
 Visible cell *
-replist(tops, rep, oldlno, oldlcnt)
-	cell *tops;
-	cell *rep;
-	int oldlno;
-	int oldlcnt;
+replist(cell *tops, cell *rep, int oldlno, int oldlcnt)
 {
 	cell head;
 	cell *p;
@@ -101,7 +97,7 @@ replist(tops, rep, oldlno, oldlcnt)
  */
 
 Hidden cell *
-newcell()
+newcell(void)
 {
 	cell *p;
 
@@ -121,7 +117,7 @@ newcell()
  */
 
 Hidden Procedure
-feedfreelist()
+feedfreelist(void)
 {
 	int n = (PAGESIZE-MALLOCLOSS) / CELLSIZE;
 	cell *p = (cell*) getmem((unsigned)(n*CELLSIZE));
@@ -166,11 +162,7 @@ discard(cell *p)
  */
 
 Hidden Procedure
-dupmatch(old, rep, oldcnt, repcnt)
-	cell *old;
-	cell *rep;
-	int oldcnt;
-	int repcnt;
+dupmatch(cell *old, cell *rep, int oldcnt, int repcnt)
 {
 	int delta = repcnt - oldcnt;
 
@@ -209,9 +201,9 @@ dupmatch(old, rep, oldcnt, repcnt)
  */
 
 Visible cell *
-build(p, lcnt)
-	/*auto*/ path p;
-	int lcnt;
+build(path p, int lcnt)
+	/*auto*/        
+	         
 {
 	cell head;
 	cell *q = &head;
@@ -257,8 +249,7 @@ build(p, lcnt)
  */
 
 Visible cell *
-gettop(tops)
-	cell *tops;
+gettop(cell *tops)
 {
 	cell *pfwa = tops; /* First line of sliding window */
 	cell *plwa = tops; /* Last+1 line of sliding window */

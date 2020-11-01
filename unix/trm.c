@@ -180,7 +180,7 @@ Hidden char strcapnames[] =
 Hidden char flagcaps[NFLAGS];
 Hidden char flagnames[]= "amdadbinmimsxsbshcxn";
 
-Hidden Procedure getcaps(parea) char **parea; {
+Hidden Procedure getcaps(char **parea) {
 	char *capname;
 	char **capvar;
 	char *flagvar;
@@ -275,32 +275,32 @@ Hidden int up_cost; 		/* cost of up */
 Hidden int ins_mf, ins_oh, del_mf, del_oh;
 Hidden int ed_cost, ei_cost; 		/* used in move() */
 
-Forward Hidden int getttyfp();
-Forward Hidden int str0cost();
-Forward Hidden int gettermcaps();
-Forward Hidden int setttymode();
-Forward Hidden Procedure resetttymode();
-Forward Hidden int start_trm();
-Forward Hidden bool get_pos();
-Forward Hidden void put_line();
-Forward Hidden Procedure set_mode();
-Forward Hidden Procedure get_so_mode();
-Forward Hidden Procedure standout();
-Forward Hidden Procedure standend();
-Forward Hidden Procedure put_str();
-Forward Hidden Procedure ins_str();
-Forward Hidden Procedure del_str();
-Forward Hidden Procedure put_c();
-Forward Hidden Procedure clear_lines();
-Forward Hidden Procedure clr_to_eol();
-Forward Hidden Procedure set_blanks();
-Forward Hidden Procedure scr_lines();
-Forward Hidden Procedure addlines();
-Forward Hidden Procedure dellines();
-Forward Hidden Procedure lf_scroll();
-Forward Hidden Procedure move_lines();
-Forward Hidden Procedure trmpushback();
-Forward Hidden int subshell();
+Forward Hidden int getttyfp(void);
+Forward Hidden int str0cost(char *str);
+Forward Hidden int gettermcaps(void);
+Forward Hidden int setttymode(void);
+Forward Hidden Procedure resetttymode(void);
+Forward Hidden int start_trm(void);
+Forward Hidden bool get_pos(string format, int *py, int *px);
+Forward Hidden void put_line(int y, int xskip, string data, string mode, int len);
+Forward Hidden Procedure set_mode(int m);
+Forward Hidden Procedure get_so_mode(void);
+Forward Hidden Procedure standout(void);
+Forward Hidden Procedure standend(void);
+Forward Hidden Procedure put_str(char *data, char *mode, int n, bool inserting);
+Forward Hidden Procedure ins_str(char *data, char *mode, int n);
+Forward Hidden Procedure del_str(int n);
+Forward Hidden Procedure put_c(char ch, char mo);
+Forward Hidden Procedure clear_lines(int yfirst, int ylast);
+Forward Hidden Procedure clr_to_eol(void);
+Forward Hidden Procedure set_blanks(int y, int xfrom, int xto);
+Forward Hidden Procedure scr_lines(int yfrom, int yto, int n, int dy);
+Forward Hidden Procedure addlines(int n);
+Forward Hidden Procedure dellines(int n);
+Forward Hidden Procedure lf_scroll(int yto, int by);
+Forward Hidden Procedure move_lines(int yfrom, int yto, int n, int dy);
+Forward Hidden Procedure trmpushback(int c);
+Forward Hidden int subshell(void);
 
 /* The type of scrolling possible determines which routines get used;
  * these may be:
@@ -310,11 +310,11 @@ Forward Hidden int subshell();
  */
 Forward Hidden Procedure (*scr_up)();
 Forward Hidden Procedure (*scr_down)();
-Forward Hidden Procedure scr1up();
-Forward Hidden Procedure scr1down();
-Forward Hidden Procedure scr2up();
-Forward Hidden Procedure scr2down();
-Forward Hidden Procedure scr3up();
+Forward Hidden Procedure scr1up(int yfirst, int ylast, int n);
+Forward Hidden Procedure scr1down(int yfirst, int ylast, int n);
+Forward Hidden Procedure scr2up(int yfirst, int ylast, int n);
+Forward Hidden Procedure scr2down(int yfirst, int ylast, int n);
+Forward Hidden Procedure scr3up(int yfirst, int ylast, int by);
 Hidden bool canscroll= Yes;
 
 /*
@@ -440,13 +440,13 @@ Hidden int countchar(int ch) {
 	ccc++;
 }
 
-Hidden int strcost(str) char *str; {
+Hidden int strcost(char *str) {
 	if (str == NULL)
 		return Infinity;
 	return str0cost(str);
 }
 
-Hidden int str0cost(str) char *str; {
+Hidden int str0cost(char *str) {
 	ccc = 0;
 	tputs(str, 1, countchar);
 	return ccc;
@@ -793,7 +793,7 @@ Visible Procedure trmsense(string sense, string format, int* py, int* px)
 	cur_x = Undefined;
 }
 
-Hidden bool get_pos(format, py, px) string format; int *py, *px; {
+Hidden bool get_pos(string format, int *py, int *px) {
 	int fc; 		/* current format character */
 	int ic; 		/* current input character */
 	int num;
@@ -871,7 +871,7 @@ Hidden bool get_pos(format, py, px) string format; int *py, *px; {
  * (2) we do not screw up characters or so_mode
  * when rewriting linedata[y] from x_from upto x_to
  */
-Hidden bool rewrite_ok(y, xfrom, xto) int y, xfrom, xto; {
+Hidden bool rewrite_ok(int y, int xfrom, int xto) {
 	char *plnyx, *pmdyx, *plnyto;
 	
 	if (xto > lengthline[y])
@@ -903,7 +903,7 @@ Hidden bool rewrite_ok(y, xfrom, xto) int y, xfrom, xto; {
 #define Left	3
 #define CrWrite	4
 
-Hidden Procedure move(y, x) int y, x; {
+Hidden Procedure move(int y, int x) {
 	int dy, dx;
 	int y_cost, x_cost, y_move, x_move;
 	int mode_cost;
@@ -1109,7 +1109,7 @@ Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, str
  * and
  *	d2 maybe less than 0.
  */
-Hidden void put_line(y, xskip, data, mode, len) int y, xskip; string data; string mode; int len; {
+Hidden void put_line(int y, int xskip, string data, string mode, int len) {
 	char *op, *oq, *mp;
 	char *np, *nq, *nend, *mo;
 	char *bp, *bq1, *p, *q;
@@ -1297,7 +1297,7 @@ Hidden void put_line(y, xskip, data, mode, len) int y, xskip; string data; strin
 	}
 }
 
-Hidden Procedure set_mode(m) int m; {
+Hidden Procedure set_mode(int m) {
 	if (m == mode)
 		return;
 	switch (mode) {
@@ -1344,7 +1344,7 @@ Hidden Procedure standend(void) {
 		linemode[cur_y][cur_x] = SECOOK;
 }
 
-Hidden Procedure put_str(data, mode, n, inserting) char *data; char *mode; int n; bool inserting; {
+Hidden Procedure put_str(char *data, char *mode, int n, bool inserting) {
 	char ch, mo;
 	short so;
 	char *ln_y_x, *ln_y_end;
@@ -1374,7 +1374,7 @@ Hidden Procedure put_str(data, mode, n, inserting) char *data; char *mode; int n
 	}
 }
 
-Hidden Procedure ins_str(data, mode, n) char *data, *mode; int n; {
+Hidden Procedure ins_str(char *data, char *mode, int n) {
 	int x;
 	
 	/* x will start AFTER the line, because there might be a cookie */
@@ -1385,7 +1385,7 @@ Hidden Procedure ins_str(data, mode, n) char *data, *mode; int n; {
 	put_str(data, mode, n, Yes);
 }
 
-Hidden Procedure del_str(n) int n; {
+Hidden Procedure del_str(int n) {
 	int x, xto;
 	
 	xto = lengthline[cur_y] - n; /* again one too far because of cookie */
@@ -1405,7 +1405,7 @@ Hidden Procedure del_str(n) int n; {
 		Putstr(dc_str);
 }
 
-Hidden Procedure put_c(ch, mo) char ch; char mo; {
+Hidden Procedure put_c(char ch, char mo) {
 	char sobit, xs_flag;
 
 	fputc(ch, fp);
@@ -1419,7 +1419,7 @@ Hidden Procedure put_c(ch, mo) char ch; char mo; {
 	cur_x++;
 }
 
-Hidden Procedure clear_lines(yfirst, ylast) int yfirst, ylast; {
+Hidden Procedure clear_lines(int yfirst, int ylast) {
 	int y;
 	
 	if (!has_xs && so_mode != Off)
@@ -1464,7 +1464,7 @@ Hidden Procedure clr_to_eol(void) {
 	}
 }
 
-Hidden Procedure set_blanks(y, xfrom, xto) int y, xfrom, xto; {
+Hidden Procedure set_blanks(int y, int xfrom, int xto) {
 	int x;
 	
 	for (x = xfrom; x < xto; x++) {
@@ -1532,7 +1532,7 @@ Visible Procedure trmscrollup(int yfirst, int ylast, int by) {
 	VOID fflush(fp);
 }
 
-Hidden Procedure scr_lines(yfrom, yto, n, dy) int yfrom, yto, n, dy; {
+Hidden Procedure scr_lines(int yfrom, int yto, int n, int dy) {
 	int y;
 	char *savedata;
 	char *savemode;
@@ -1552,7 +1552,7 @@ Hidden Procedure scr_lines(yfrom, yto, n, dy) int yfrom, yto, n, dy; {
 	}
 }
 
-Hidden Procedure scr1up(yfirst, ylast, n) int yfirst, ylast, n; {
+Hidden Procedure scr1up(int yfirst, int ylast, int n) {
 	move(yfirst, 0);
 	dellines(n);
 	if (ylast < g_lines-1) {
@@ -1562,7 +1562,7 @@ Hidden Procedure scr1up(yfirst, ylast, n) int yfirst, ylast, n; {
 }
 
 
-Hidden Procedure scr1down(yfirst, ylast, n) int yfirst, ylast, n; {
+Hidden Procedure scr1down(int yfirst, int ylast, int n) {
 	if (ylast == g_lines-1) {
 		clear_lines(ylast-n+1, ylast);
 	}
@@ -1575,7 +1575,7 @@ Hidden Procedure scr1down(yfirst, ylast, n) int yfirst, ylast, n; {
 }
 
 
-Hidden Procedure addlines(n) int n; {
+Hidden Procedure addlines(int n) {
 	if (par_al_str && n > 1)
 			Putstr(tgoto(par_al_str, n, n));
 	else {
@@ -1585,7 +1585,7 @@ Hidden Procedure addlines(n) int n; {
 }
 
 
-Hidden Procedure dellines(n) int n; {
+Hidden Procedure dellines(int n) {
 	if (par_dl_str && n > 1)
 		Putstr(tgoto(par_dl_str, n, n));
 	else {
@@ -1595,7 +1595,7 @@ Hidden Procedure dellines(n) int n; {
 }
 
 
-Hidden Procedure scr2up(yfirst, ylast, n) int yfirst, ylast, n; {
+Hidden Procedure scr2up(int yfirst, int ylast, int n) {
 	Putstr(tgoto(cs_str, ylast, yfirst));
 	cur_y = cur_x = Undefined;
 	move(ylast, 0);
@@ -1609,7 +1609,7 @@ Hidden Procedure scr2up(yfirst, ylast, n) int yfirst, ylast, n; {
 }
 
 
-Hidden Procedure scr2down(yfirst, ylast, n) int yfirst, ylast, n; {
+Hidden Procedure scr2down(int yfirst, int ylast, int n) {
 	Putstr(tgoto(cs_str, ylast, yfirst));
 	cur_y = cur_x = Undefined;
 	move(yfirst, 0);
@@ -1624,7 +1624,7 @@ Hidden Procedure scr2down(yfirst, ylast, n) int yfirst, ylast, n; {
 
 /* for dumb scrolling, uses and updates internal administration */
 
-Hidden Procedure scr3up(yfirst, ylast, by) int yfirst, ylast, by; {
+Hidden Procedure scr3up(int yfirst, int ylast, int by) {
 	if (by > 0 && yfirst == 0) {
 		lf_scroll(ylast, by);
 	}
@@ -1638,9 +1638,7 @@ Hidden Procedure scr3up(yfirst, ylast, by) int yfirst, ylast, by; {
 	}
 }
 
-Hidden Procedure lf_scroll(yto, by)
-     int yto;
-     int by;
+Hidden Procedure lf_scroll(int yto, int by)
 {
 	int n = by;
 
@@ -1653,11 +1651,7 @@ Hidden Procedure lf_scroll(yto, by)
 	clear_lines(yto-by+1, yto);
 }
 
-Hidden Procedure move_lines(yfrom, yto, n, dy)
-     int yfrom;
-     int yto;
-     int n;
-     int dy;
+Hidden Procedure move_lines(int yfrom, int yto, int n, int dy)
 {
 	while (n-- > 0) {
 		put_line(yto, 0, linedata[yfrom], linemode[yfrom], lengthline[yfrom]);
@@ -1794,7 +1788,7 @@ Visible int trminput(void) {
 	return c & 0377;
 }
 
-Hidden Procedure trmpushback(c) int c; {
+Hidden Procedure trmpushback(int c) {
 	pushback= c;
 }
 
