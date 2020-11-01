@@ -41,7 +41,8 @@ target_compile_options(abc PRIVATE
   -Wimplicit-function-declaration
   #-Wno-return-type
   -Wno-parentheses
-
+  -Wno-deprecated-declarations
+  
   # -Wno-int-to-pointer-cast
   # -Werror=int-to-pointer-cast
   )
