@@ -7,7 +7,9 @@
 #include "b1grab.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "e1getc.h"
 #include "i1btr.h"
+#include "i1lta.h"
 #include "i1tlt.h"
 #include "i3err.h"
 
@@ -329,8 +331,6 @@ Hidden value iconcat(value v, value w) { /* v^w */
 	Root(v) = zip(s1, sp1, s2, sp2);
 	return v;
 }
-
-#define Odd(n) (((n)&1) != 0)
 
 Hidden value irepeat(value v, int n) { /* v^^n */
 	value x, w = grab(Tex, Ct);

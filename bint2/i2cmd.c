@@ -24,6 +24,17 @@ Forward Hidden parsetree alt_suite(void);
 Forward Hidden parsetree alt_seq(intlet cil, bool first, bool else_encountered, bool *emp);
 
 /* ******************************************************************** */
+/*		simple_command						*/
+/*									*/
+/* ******************************************************************** */
+
+Visible bool simple_command(char *kw, parsetree *v, value *c) {
+	return bas_com(kw, v) || term_com(kw, v) || udr_com(kw, v)
+		? (*c= tail_line(), Yes) : No;
+}
+
+
+/* ******************************************************************** */
 /*		command_suite						*/
 /* ******************************************************************** */
 
@@ -107,16 +118,6 @@ Visible value tail_line(void) {
 	if (is_comment(&v)) return v;
 	if (!ateol()) parerr(MESS(2002, "something unexpected in this line"));
 	return Vnil;
-}
-
-/* ******************************************************************** */
-/*		simple_command						*/
-/*									*/
-/* ******************************************************************** */
-
-Visible bool simple_command(char *kw, parsetree *v, value *c) {
-	return bas_com(kw, v) || term_com(kw, v) || udr_com(kw, v)
-		? (*c= tail_line(), Yes) : No;
 }
 
 /* ******************************************************************** */

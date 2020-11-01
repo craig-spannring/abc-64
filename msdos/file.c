@@ -105,8 +105,7 @@ Hidden char *savepath(path)
 	return path1;
 }
 
-Visible Porting Procedure freepath(path)
-     char *path;
+Visible Porting Procedure freepath(char *path)
 {
 	if (path != NULL) free(path);
 }

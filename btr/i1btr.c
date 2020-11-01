@@ -5,6 +5,7 @@
 #include "b1memo.h"
 #include "bmem.h"
 #include "i1btr.h"
+#include "i1lta.h"
 #include "i1tlt.h"
 #include "i3err.h"
 
@@ -12,7 +13,6 @@
 /* grab, copy, release of btree(node)s                               */
 /*********************************************************************/
 
-Visible Procedure relbtree(btreeptr pnode, literal it);
 
 Visible btreeptr
 grabbtreenode(literal flag, literal it)

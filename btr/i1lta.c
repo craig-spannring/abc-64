@@ -2,6 +2,8 @@
 
 /* Access and update lists and tables */
 
+#include "i1lta.h"
+
 #include "b.h"
 #include "bobj.h"
 #include "i1btr.h"

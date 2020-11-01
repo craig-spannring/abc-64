@@ -54,6 +54,7 @@ target_link_libraries(abc
 target_include_directories(abc
   PRIVATE
   ${mach_inc_dir}
+  hdrs
   bhdrs
   ehdrs
   ihdrs
