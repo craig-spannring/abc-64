@@ -27,7 +27,7 @@ Forward Hidden parsetree alt_seq(intlet cil, bool first, bool else_encountered, 
 /*		command_suite						*/
 /* ******************************************************************** */
 
-Visible parsetree cmd_suite(intlet cil, bool first, parsetree (*suite) (/* ??? */))
+Visible parsetree cmd_suite(intlet cil, bool first, parsetree (*suite)(intlet cil, bool first, bool *emp))
 {
 	parsetree v= NilTree;
 	

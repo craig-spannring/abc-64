@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 
-
 # find_package(Curses REQUIRED)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+message("in CMakeLists.txt.  CMAKE_C_FLAGS are ${CMAKE_C_FLAGS}")
 
 if (UNIX)
   set(mach_inc_dir unix)

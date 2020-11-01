@@ -42,6 +42,8 @@ Forward Hidden bool gotoscrollbar(environ *ep, int x);
 Forward Hidden int poscomp(path p, int y, int x);
 Forward Hidden Procedure fixsublist(environ *ep);
 
+Forward Visible Procedure gotofix(environ *ep, int y, int x);
+
 Visible bool gotocursor(environ *ep) {
 	int y;
 	int x;
@@ -247,8 +249,7 @@ poscomp(path p, int y, int x)
  * object starting here.
  */
 
-Visible Procedure
-gotofix(environ *ep, int y, int x)
+Visible Procedure gotofix(environ *ep, int y, int x)
 {
 	int fx;
 	int fy;

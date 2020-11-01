@@ -4,6 +4,7 @@
 
 #include "b.h"
 #include "bobj.h"
+#include "e1getc.h"
 #include "i0err.h"
 #include "i1nug.h"
 #include "i1nui.h"

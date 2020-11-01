@@ -62,6 +62,7 @@ struct prio {
     struct prio * pprio(value f, char adic);
 
     extern Visible bool tag_operator(txptr q, value *v);
+    extern Visible Procedure initexp(expadm *adm, int n, char level);
 
 
 #ifdef __cplusplus

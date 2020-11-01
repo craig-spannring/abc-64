@@ -16,8 +16,8 @@ extern "C" {
     extern Visible bool ateol(void);
     extern Visible bool findrel(txptr q, txptr* ftx);
 
-    extern Visible bool _less_than_sign(void);
-    extern Visible bool _greater_than_sign(void);
+    extern Visible bool less_than_sign_(void);
+    extern Visible bool greater_than_sign_(void);
 
     extern Visible bool is_cmdname(txptr q, char** name);
 

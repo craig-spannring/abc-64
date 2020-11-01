@@ -12,6 +12,8 @@
 /* grab, copy, release of btree(node)s                               */
 /*********************************************************************/
 
+Visible Procedure relbtree(btreeptr pnode, literal it);
+
 Visible btreeptr
 grabbtreenode(literal flag, literal it)
 {

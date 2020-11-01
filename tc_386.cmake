@@ -19,4 +19,4 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 
-message("setup toolchain")
+message("setup toolchain.  CMAKE_C_FLAGS are ${CMAKE_C_FLAGS}")

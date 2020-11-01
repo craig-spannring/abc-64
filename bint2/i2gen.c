@@ -2,10 +2,13 @@
 
 /* Code generation */
 
+#include "i2gen.h"
+
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"
 #include "i0err.h"
+#include "i2fix.h"
 #include "i2nod.h"
 #include "i2gen.h" /* Must be after i2nod.h */
 #include "i2par.h"

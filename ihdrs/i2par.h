@@ -82,7 +82,7 @@ parsetree unp_test();
 
 /* Commands: */
 
-parsetree cmd_suite(intlet cil, bool first, parsetree (*suite) (/* ??? */));
+parsetree cmd_suite(intlet cil, bool first, parsetree (*suite)(intlet cil, bool first, bool *emp));
 parsetree cmd_seq(intlet cil, bool first, bool *emp);
 parsetree ucmd_seq(intlet cil, bool first, bool *emp);
 value tail_line();
