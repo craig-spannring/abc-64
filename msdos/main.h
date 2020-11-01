@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
+#include "common_os.h"
+
 #ifndef MAIN_h_eb22fe55fccd269cb781f66cdffd0eb1
 #define MAIN_h_eb22fe55fccd269cb781f66cdffd0eb1
 
@@ -7,10 +9,6 @@
 extern "C" {
 #endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
-
-Visible Porting long filemodtime();
-Visible Porting Procedure freepath(char *path);
-Visible Porting char *curdir();
 
 #define DRIVE_SEP ':'
 
