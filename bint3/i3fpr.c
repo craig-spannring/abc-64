@@ -46,7 +46,7 @@ struct funtab {
 
 	{S_TIMES,	Dfd, Nume, prod},
 	{S_OVER,	Dfd, Nume, quot},
-	{S_POWER,	Dfd, Nume, power},
+	{S_POWER,	Dfd, Nume, vpower},
 
 	{S_BEHEAD,	Dfd, Other, behead},
 	{S_CURTAIL,	Dfd, Other, curtail},
@@ -59,7 +59,7 @@ struct funtab {
 	{S_NUMBER,	Mfd, Other, size},
 	{S_NUMBER,	Dfd, Other, size2},
 
-	{F_pi,		Zfd, Other, pi},
+	{F_pi,		Zfd, Other, vpi},
 	{F_e,		Zfd, Other, e_natural},
 	{F_now,		Zfd, Other, nowisthetime},
 	
@@ -69,10 +69,10 @@ struct funtab {
 	{F_ceiling,	Mfd, Nume, ceil_f},
 	{F_round,  	Mfd, Nume, round1},
 	{F_round,  	Dfd, Nume, round2},
-	{F_mod,    	Dfd, Nume, mod},
+	{F_mod,    	Dfd, Nume, vmod},
 	{F_root,   	Mfd, Nume, root1},
 	{F_root,   	Dfd, Nume, root2},
-	{F_random, 	Zfd, Nume, random},
+	{F_random, 	Zfd, Nume, vrandom},
 	
 	{F_exactly,	Mfd, Nume, exactly},
 
@@ -89,9 +89,9 @@ struct funtab {
 	{F_arctan,	Dfd, Nume, arctan2},
 	{F_angle,	Dfd, Numpair, angle2},
 	
-	{F_exp,		Mfd, Nume, exp1},
-	{F_log,		Mfd, Nume, log1},
-	{F_log,		Dfd, Nume, log2},
+	{F_exp,		Mfd, Nume, vexp1},
+	{F_log,		Mfd, Nume, vlog1},
+	{F_log,		Dfd, Nume, vlog2},
 
 	{F_stripped,	Mfd, Textual, stripped},
 	{F_split,	Mfd, Textual, split},

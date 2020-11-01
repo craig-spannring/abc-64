@@ -4,6 +4,8 @@
  * B editor -- Parse tree and Focus stack.
  */
 
+#include "e1node.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
@@ -560,8 +562,7 @@ nextmarked(pp, x)
 }
 #endif
 
-Visible bool
-firstmarked(path *pp, markbits x)
+Visible bool firstmarked(path *pp, markbits x)
 {
 	while (!marked(*pp, x)) {
 		if (!up(pp))

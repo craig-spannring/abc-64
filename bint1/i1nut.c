@@ -48,7 +48,7 @@ Visible value prod2n(value v, value n, bool simplify) {
 	}
 	
 	if (n != zero) {
-		t1 = (integer) power((value) int_2, n);
+		t1 = (integer) vpower((value) int_2, n);
 		p = int_prod(t2 = p, t1);
 		Release(t1); Release(t2);
 	}

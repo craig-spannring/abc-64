@@ -4,8 +4,13 @@
  * B editor -- Commands to make the focus larger and smaller in various ways.
  */
 
+#include "e1wide.h"
+
 #include "b.h"
 #include "bedi.h"
+#include "e1erro.h"
+#include "e1gram.h"
+#include "e1supr.h"
 #include "etex.h"
 #include "bobj.h"
 #include "e1edoc.h"
@@ -145,8 +150,7 @@ widen(environ *ep, bool deleting)
  * Narrow -- make the focus smaller.
  */
 
-Visible bool
-narrow(environ *ep)
+Visible bool narrow(environ *ep)
 {
 	node n;
 	int sym;
@@ -288,8 +292,7 @@ extend(environ *ep)
  * Right-Narrow -- make the focus smaller, going to the last item of a list.
  */
 
-Visible bool
-rnarrow(environ *ep)
+Visible bool rnarrow(environ *ep)
 {
 	node n;
 	node nn;

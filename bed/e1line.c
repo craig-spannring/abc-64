@@ -8,6 +8,8 @@
  * (i.e., rp[0]).
  */
 
+#include "e1line.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
@@ -27,8 +29,7 @@
  * (Used by screen update algorithm only.)
  */
 
-Visible bool
-eqlines(node n1, node n2)
+Visible bool eqlines(node n1, node n2)
 {
 	node nn1;
 	node nn2;
@@ -70,8 +71,7 @@ eqlines(node n1, node n2)
  * Compute the length of the line beginning at the current node.
  */
 
-Visible int
-linelen(node n)
+Visible int linelen(node n)
 {
 	node nn;
 	string *rp = noderepr(n);
@@ -108,8 +108,7 @@ linelen(node n)
  * it cannot set ep->mode or call higher() properly!
  */
 
-Visible bool
-nextline(path *pp)
+Visible bool nextline(path *pp)
 {
 	node n;
 	node nn;
@@ -148,8 +147,7 @@ nextline(path *pp)
  * on the next line.
  */
 
-Visible int
-lineno(environ *ep)
+Visible int lineno(environ *ep)
 {
 	int y;
 
@@ -167,8 +165,7 @@ lineno(environ *ep)
  * (Hope the abovementioned trick isn't necessary.)
  */
 
-Visible int
-colno(environ *ep)
+Visible int colno(environ *ep)
 {
 	int x= focoffset(ep);
 
@@ -182,8 +179,7 @@ colno(environ *ep)
  * Make the focus exactly one line wide (if at all possible).
  */
 
-Visible Procedure
-oneline(environ *ep)
+Visible Procedure oneline(environ *ep)
 {
 	node n;
 	node nn;

@@ -5,14 +5,21 @@
  */
 
 #include "e1erro.h"
+
+#include <stdio.h>
+#include <stdarg.h>
+
 #include "b.h"
 #include "bedi.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "e1erro.h"
 #include "erro.h"
+#include "i3err.h"
 #include "node.h"
 #include "trm.h"
 #include "port.h"
+
 
 string querepr();
 
@@ -41,8 +48,7 @@ Forward Hidden int addscrollbar(int totlines, int topline, int scrlines);
  * If there is no message, show status and copy buffer and recording mode.
  */
 
-Visible Procedure
-stsline(int totlines, int topline, int scrlines, value copybuffer, bool recording)
+Visible Procedure stsline(int totlines, int topline, int scrlines, value copybuffer, bool recording)
 {
 	string bp;
 	char *msg_mode= NULL;
@@ -130,8 +136,7 @@ addscrollbar(int totlines, int topline, int scrlines)
  * until it has been displayed.
  */
 
-Hidden Procedure
-ederr1(string s)
+Hidden Procedure ederr1(string s)
 {
 	ringbell = Yes;
 	if (s && priority < 3) {
@@ -140,22 +145,19 @@ ederr1(string s)
 	}
 }
 
-Visible Procedure
-ederr(int m)
+Visible Procedure ederr(int m)
 {
 	if (m == 0) ringbell= Yes;
 	else ederr1(getmess(m));
 }
 
-Visible Procedure
-ederrS(int m, string s)
+Visible Procedure ederrS(int m, string s)
 {
 	sprintf(messbuf, getmess(m), s);
 	ederr1(messbuf);	
 }
 
-Visible Procedure
-ederrC(int m, char c)
+Visible Procedure ederrC(int m, char c)
 {
 	sprintf(messbuf, getmess(m), c);
 	ederr1(messbuf);
@@ -166,8 +168,7 @@ ederrC(int m, char c)
  * Unlike error messages, the last such message is displayed.
  */
 
-Visible Procedure
-edmessage(string s)
+Visible Procedure edmessage(string s)
 {
 	if (s && priority <= 2) {
 		priority = 2;
@@ -199,13 +200,17 @@ Visible Procedure asserr(string file, int line)
 Visible bool dflag = No;
 
 /* VARARGS 1 */
-Visible Procedure
-debug(string fmt, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10)
+Visible Procedure debug(string fmt, ...)
 {
+	va_list  ap; 
 	if (fmt && priority <= 1) {
-		priority = 1;
-		sprintf(msgbuffer,
-			fmt, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+      
+      priority = 1;
+      va_start(ap, fmt); 
+      vsnprintf(msgbuffer, MAXMSG, fmt, ap);
+      va_end(ap); 
+      // sprintf(msgbuffer,
+			//    fmt, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 	}
 }
 
@@ -215,8 +220,7 @@ debug(string fmt, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8
  * Dump any error message still remaining to console or stderr.
  */
 
-Visible Procedure
-enderro(void)
+Visible Procedure enderro(void)
 {
 	if (!msgbuffer)
 		return;
@@ -227,7 +231,8 @@ enderro(void)
 	ringbell = No;
 }
 
-Visible Procedure init_erro(void) {
+Visible Procedure init_erro(void)
+{
 	int i;
 
 	msgbuffer= (char*) getmem(MAXMSG);

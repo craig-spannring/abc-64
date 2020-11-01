@@ -9,17 +9,6 @@
 extern "C" {
 #endif
 
-/* B values, locations, environments: the B abstract machine */
-
-/* Avoid name conflicts with standard header files: */
-#define power b_power
-#define exp1 b_exp1
-#define log1 b_log1
-#define log2 b_log2
-#define pi b_pi
-#define random b_random
-#define remove b_remove
-#define mod b_mod
 
 /****************************** general ******************************/
 
@@ -92,21 +81,21 @@ value mk_integer(int i);  /* int argument */
 /* Functions on numbers */
 value sum(value u, value v);
 value diff(value u, value v);
-value negated();
-value prod();
-value quot();
-value floor_f();
-value ceil_f();
-value round1();
-value round2();
-value mod();
-value power();
+value negated(value u);
+value prod(value u, value v);
+value quot(value u, value v);
+value floor_f(value u);
+value ceil_f(value u);
+value round1(value u);
+value round2(value n, value v);
+value vmod(value u, value v);
+value vpower();
 value absval();
 value signum();
 value numerator();
 value denominator();
 value approximate();
-value random();
+value vrandom();
 value root1();
 value sin1();
 value cos1();
@@ -119,11 +108,11 @@ value tan2();
 value arctan2();
 value angle2();
 value radius();
-value exp1();
-value log1();
+value vexp1();
+value vlog1();
 value root2();
-value log2();
-value pi();
+value vlog2();
+value vpi();
 value e_natural();
 value nowisthetime();
 value exactly();
@@ -142,7 +131,7 @@ value mk_range();
 bool is_rangelist();
 
 Visible Procedure insert();
-Visible Procedure remove();
+Visible Procedure vremove();
 
 /****************************** Tables ******************************/
 
@@ -175,7 +164,7 @@ value thof();
 value item();
 value choice();
 
-int length(); /* The same as size, temporary until part2 is written in B */
+int length(value v); /* The same as size, temporary until part2 is written in B */
 bool empty(); /* whether #v=0: also temporary */
 
 

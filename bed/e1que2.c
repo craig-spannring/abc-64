@@ -4,10 +4,20 @@
  * B editor -- Manipulate queues of nodes, higher levels.
  */
 
+#include "e1que2.h"
+
 #include "b.h"
 #include "bedi.h"
+#include "e1deco.h"
+#include "e1edoc.h"
+#include "e1erro.h"
+#include "e1node.h"
+#include "e1que1.h"
 #include "etex.h"
 #include "bobj.h"
+#include "e1ins2.h"
+#include "e1que2.h"
+#include "e1supr.h"
 #include "node.h"
 #include "supr.h"
 #include "queu.h"
@@ -34,8 +44,7 @@ Forward Hidden bool canfitchar(int c, struct classinfo *ci);
  * are then inserted individually.
  */
 
-Visible bool
-ins_queue(environ *ep, queue *pq, queue *pq2)
+Visible bool ins_queue(environ *ep, queue *pq, queue *pq2)
 {
 	bool ok = Yes;
 	node n;
@@ -106,8 +115,7 @@ ins_queue(environ *ep, queue *pq, queue *pq2)
  * without affecting the focus position.
  */
 
-Visible bool
-app_queue(environ *ep, queue *pq)
+Visible bool app_queue(environ *ep, queue *pq)
 {
 	int where;
 	static int markbit = 1; /* To properly handle recursive calls */
@@ -134,8 +142,7 @@ app_queue(environ *ep, queue *pq)
  * Advance to next thing after current position.
  */
 
-Visible bool
-move_on(environ *ep)
+Visible bool move_on(environ *ep)
 {
 	node n;
 	string *rp;
@@ -184,8 +191,7 @@ move_on(environ *ep)
  * <<<<< This code is a dinosaur and should be revised. >>>>>
  */
 
-Visible bool
-fix_move(environ *ep)
+Visible bool fix_move(environ *ep)
 {
 	int ich;
 	int i;
@@ -235,8 +241,7 @@ fix_move(environ *ep)
  * Insert a node in the parse tree.
  */
 
-Hidden bool
-ins_node(environ *ep, node n, queue *pq)
+Hidden bool ins_node(environ *ep, node n, queue *pq)
 {
 	int sym;
 	node nn;
@@ -354,7 +359,7 @@ ins_node(environ *ep, node n, queue *pq)
 					return Yes;
 				}
 			} while (resttoqueue(&ep->focus, pq)
-				|| move_on(ep) && ep->mode == ATEND);
+               || (move_on(ep) && ep->mode == ATEND));
 			return No;
 
 		default:
@@ -529,12 +534,8 @@ Visible bool justgoon = No;
 
 #define NEXT_CH (++str, alt_c = 0)
 
-Visible bool
-ins_string(environ *ep, string str, queue *pq, int alt_c)
-	            
-	/*auto*/            
-	          
-	          
+Visible bool ins_string(environ *ep, string str, queue *pq, int alt_c)
+	/*auto*/ 
 {
 	node nn;
 	auto value v;

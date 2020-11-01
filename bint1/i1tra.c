@@ -213,7 +213,7 @@ Hidden value numchoice(value m) {
 	/* choose a number between 1 and limit*ceiling(m/limit) */
 	if (numcomp(m, rndm_limit) <= 0) {
 		/* standard def: 1 + floor(random*m) */
-		r= random();
+		r= vrandom();
 		p= prod(r, m);
 		release(r);
 		r= floor_f(p);

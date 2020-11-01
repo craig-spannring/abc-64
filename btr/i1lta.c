@@ -471,7 +471,7 @@ Visible Procedure insert(value v, value *pl) {
 #endif
 }
 
-Visible Procedure remove(v, pl) value v, *pl; {
+Visible Procedure vremove(v, pl) value v, *pl; {
 	if (is_large_range(*pl)) {
 		interr(REMOVE_RAN);
 		return;

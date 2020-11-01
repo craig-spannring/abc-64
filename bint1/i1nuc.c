@@ -54,7 +54,7 @@ Hidden char *convint(integer v) {
 Hidden value tento_d(double x) {
 	if (x > Maxint || x < -Maxint) {
 		value n= (value) mk_int(x);
-		value v= power((value) int_10, n);
+		value v= vpower((value) int_10, n);
 		release(n);
 		return v;
 	}

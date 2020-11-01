@@ -4,6 +4,8 @@
  * B editor -- Random access focus positioning.
  */
 
+#include "e1goto.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
@@ -41,8 +43,6 @@ Forward Hidden bool dosense(environ *ep, string sense, string format);
 Forward Hidden bool gotoscrollbar(environ *ep, int x);
 Forward Hidden int poscomp(path p, int y, int x);
 Forward Hidden Procedure fixsublist(environ *ep);
-
-Forward Visible Procedure gotofix(environ *ep, int y, int x);
 
 Visible bool gotocursor(environ *ep) {
 	int y;
@@ -130,8 +130,7 @@ gotoscrollbar(environ *ep, int x)
  * the position (y, x).
  */
 
-Visible bool
-gotoyx(environ *ep, int y, int x)
+Visible bool gotoyx(environ *ep, int y, int x)
 {
 	node n;
 	string *rp;

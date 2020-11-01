@@ -3,6 +3,7 @@
 /*Handle interrupts and signals*/
 
 #include "b.h"
+#include "b1mess.h"
 
 #ifdef SIGNAL
 

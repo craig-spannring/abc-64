@@ -4,10 +4,17 @@
  * B editor -- Insert characters from keyboard.
  */
 
+#include "e1ins2.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
 #include "bobj.h"
+#include "e1deco.h"
+#include "e1edoc.h"
+#include "e1inse.h"
+#include "e1que2.h"
+#include "e1supr.h"
 #include "node.h"
 #include "supr.h"
 #include "queu.h"
@@ -117,8 +124,7 @@ ins_char(environ *ep, int c, int alt_c)
  * Insert a newline.
  */
 
-Visible bool
-ins_newline(environ *ep, bool reading_file)
+Visible bool ins_newline(environ *ep, bool reading_file)
 {
 	node n;
 	int sym;

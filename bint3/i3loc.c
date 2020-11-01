@@ -431,7 +431,7 @@ Visible Procedure l_remove(value v, loc l) {
 			interr(REM_EMPTY_LIST);
 		else {
 			rm_indirection(l);
-			remove(v, ll);
+			vremove(v, ll);
 		}
 	}
 }
@@ -457,7 +457,7 @@ Visible Procedure unbind(loc l) {
 		if (Is_simploc(l)) {
 			simploc *ll= Simploc(l);
 			if (in(ll->i, *bndtgs))
-				remove(ll->i, bndtgs);
+				vremove(ll->i, bndtgs);
 		}
 		else if (Is_compound(l)) {
 			intlet k, len= Nfields(l);

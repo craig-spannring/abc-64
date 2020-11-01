@@ -344,7 +344,7 @@ Visible Procedure set_random(value v) {
 
 #define T21 2097152.0	/* 2**21 */
 
-Visible value random() {
+Visible value vrandom() {
 	double p, r;
 
 	/* Get three packets of 21 bits.
@@ -369,7 +369,7 @@ Visible value random() {
 	lastran = p - MM*floor(p/MM);
 	r= (floor(lastran/32.0)+r)/T21;
 
-	if (r >= 1.0) return random();
+	if (r >= 1.0) return vrandom();
 	return (value) mk_approx(r, 0.0);
 }
 

@@ -1,10 +1,15 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
+#include <term.h>
+
 #include "b.h"
+#include "b1mess.h"
 #include "bmem.h"
 #include "getc.h"
+#include "i3err.h"
 #include "oper.h"
 #include "port.h"
+
 
 char *getenv(const char *);
 
@@ -126,7 +131,6 @@ Visible struct tabent deftab[MAXDEFS] = {
 /* Merge key definitions from termcap into the default table. */
 
 Hidden Procedure readtermcap(void) {
-	string tgetstr(char *, char **);
 	char buffer[1024]; /* Constant dictated by termcap manual entry */
 	static char area[1024];
 	string endarea= area;

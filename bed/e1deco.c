@@ -5,10 +5,14 @@
  */
 
 #include "e1deco.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
 #include "bobj.h"
+#include "e1edoc.h"
+#include "e1erro.h"
+#include "e1inse.h"
 #include "erro.h"
 #include "node.h"
 #include "gram.h"
@@ -72,8 +76,7 @@ deltext(environ *ep)
  * Delete the focus under the assumption that it contains some text.
  */
 
-Visible bool
-delbody(environ *ep)
+Visible bool delbody(environ *ep)
 {
 	ep->changed = Yes;
 

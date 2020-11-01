@@ -4,6 +4,8 @@
  * Subroutines (refinements) for ins_string() (see que2.c).
  */
 
+#include "e1inse.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
@@ -22,8 +24,7 @@ Forward Hidden bool ifmatch(environ *ep, string *pstr, string str, int alt_c);
  * Try to insert the character c in the focus *pp.
  */
 
-Visible bool
-insguess(path *pp, char c, environ *ep)
+Visible bool insguess(path *pp, char c, environ *ep)
 {
 	path pa = parent(*pp);
 	node n;
@@ -92,8 +93,7 @@ insguess(path *pp, char c, environ *ep)
  * child `ich' of node `n'; that child must be a Text.
  */
 
-Visible bool
-mayinsert(node n, int ich, int s2, char c)
+Visible bool mayinsert(node n, int ich, int s2, char c)
 {
 	int sympa = symbol(n);
 	struct classinfo *ci;
@@ -127,8 +127,7 @@ mayinsert(node n, int ich, int s2, char c)
  * as possible will have been incorporated in the string node.
  */
 
-Visible bool
-soften(environ *ep, string *pstr, int alt_c)
+Visible bool soften(environ *ep, string *pstr, int alt_c)
 {
 	path pa = parent(ep->focus);
 	node n;

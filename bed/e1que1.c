@@ -4,8 +4,14 @@
  * B editor -- Manipulate queues of nodes, lower levels.
  */
 
+#include "e1que1.h"
+
 #include "b.h"
 #include "bedi.h"
+#include "e1deco.h"
+#include "e1edoc.h"
+#include "e1gram.h"
+#include "e1inse.h"
 #include "etex.h"
 #include "bobj.h"
 #include "node.h"
@@ -35,8 +41,7 @@ Visible Procedure qrelease(q)
  * Append queue 2 to the end of queue 1.
  */
 
-Visible Procedure
-joinqueues(queue *pq, queue q)
+Visible Procedure joinqueues(queue *pq, queue q)
 {
 	if (emptyqueue(q))
 		return;
@@ -54,8 +59,7 @@ joinqueues(queue *pq, queue q)
  * Empty strings and Optional holes are silently discarded.
  */
 
-Visible Procedure
-preptoqueue(node n, queue *pq)
+Visible Procedure preptoqueue(node n, queue *pq)
 {
 	queue q;
 
@@ -80,8 +84,7 @@ preptoqueue(node n, queue *pq)
  * Append a node to the end of a queue (same extras as preptoqueue).
  */
 
-Visible Procedure
-addtoqueue(queue *pq, node n)
+Visible Procedure addtoqueue(queue *pq, node n)
 {
 	auto queue q = Qnil;
 
@@ -94,8 +97,7 @@ addtoqueue(queue *pq, node n)
  * Push a string onto a queue.
  */
 
-Visible Procedure
-stringtoqueue(string str, queue *pq)
+Visible Procedure stringtoqueue(string str, queue *pq)
 {
 	value  v;
 
@@ -129,8 +131,7 @@ addstringtoqueue(pq, str)
  * Get the first node of a queue and delink it ("pop").
  */
 
-Visible node
-queuebehead(queue *pq)
+Visible node queuebehead(queue *pq)
 {
 	node n;
 	queue q = *pq;
@@ -150,8 +151,7 @@ queuebehead(queue *pq)
  * 'Atomic' nodes (texts and holes) are pushed unadorned.
  */
 
-Visible Procedure
-splitnode(node n, queue *pq)
+Visible Procedure splitnode(node n, queue *pq)
 {
 	node nn;
 	string *rp;
@@ -195,8 +195,7 @@ splitnode(node n, queue *pq)
  * (timo)
  */
 
-Visible bool
-resttoqueue(path *pp, queue *pq)
+Visible bool resttoqueue(path *pp, queue *pq)
 {
 	auto queue q = Qnil;
 	path pa = parent(*pp);
@@ -255,8 +254,7 @@ Hidden bool rest_is_hollow(node n) {
  * Also, it cannot fail.
  */
 
-Visible Procedure
-nosuggtoqueue(environ *ep, queue *pq)
+Visible Procedure nosuggtoqueue(environ *ep, queue *pq)
 {
 	auto queue q = Qnil;
 	int i;
@@ -297,15 +295,14 @@ nosuggtoqueue(environ *ep, queue *pq)
  * Check whether the remainder of the current node is all suggestion.
  */
 
-Visible bool
-issuggestion(environ *ep)
+Visible bool issuggestion(environ *ep)
 {
 	node n;
 	int nch;
 	int sym;
 	int i;
 
-	if (ep->mode != VHOLE && ep->mode != FHOLE || !(ep->s1&1))
+	if ((ep->mode != VHOLE && ep->mode != FHOLE) || !(ep->s1&1))
 		return No; /* Actually wrong call? */
 
 	n = tree(ep->focus);
@@ -323,8 +320,7 @@ issuggestion(environ *ep)
  * See if a node fits in a hole.
  */
 
-Visible bool
-fitnode(path *pp, node n)
+Visible bool fitnode(path *pp, node n)
 {
 	if (!allowed(*pp, symbol(n)))
 		return No;
@@ -341,8 +337,7 @@ fitnode(path *pp, node n)
  * another call.)
  */
 
-Visible int
-fitstring(path *pp, string str, int alt_c)
+Visible int fitstring(path *pp, string str, int alt_c)
 {
 	environ dummyenv;
 	node n;
@@ -418,8 +413,7 @@ fitstring(path *pp, string str, int alt_c)
  * this is implemented incomplete.
  */
 
-Visible Procedure
-fixfocus(environ *ep, int len)
+Visible Procedure fixfocus(environ *ep, int len)
 {
 	node nn;
 	node n = tree(ep->focus);
@@ -456,7 +450,7 @@ fixfocus(environ *ep, int len)
 		if (i) {
 			nn = child(n, i);
 			w = nodewidth(nn);
-			if (w < 0 || w >= len && len >= 0) {
+			if (w < 0 || (w >= len && len >= 0)) {
 				s_downi(ep, i);
 				fixfocus(ep, len);
 				return;
@@ -493,8 +487,7 @@ fixfocus(environ *ep, int len)
  * deserves re-interpretation.
  */
 
-Visible bool
-spacefix(environ *ep)
+Visible bool spacefix(environ *ep)
 {
 	path pa;
 	node n;
@@ -522,8 +515,7 @@ spacefix(environ *ep)
  * Prepend a subset of a node to a queue.
  */
 
-Visible Procedure
-subsettoqueue(node n, int s1, int s2, queue *pq)
+Visible Procedure subsettoqueue(node n, int s1, int s2, queue *pq)
 {
 	string *rp = noderepr(n);
 
@@ -541,8 +533,7 @@ subsettoqueue(node n, int s1, int s2, queue *pq)
  * Produce flat text out of a queue's first line, to show it on screen.
  */
 
-Visible string
-querepr(value qv)
+Visible string querepr(value qv)
 {
 	queue q = (queue)qv;
 	node n;

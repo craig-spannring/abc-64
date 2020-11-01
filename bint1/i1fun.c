@@ -151,7 +151,7 @@ Visible value absval(value u) {
  * them contain quite subtle code.
  */
 
-Visible value mod(u, v) value u, v; {
+Visible value vmod(value u, value v) {
 	value q, f, d, p;
 
 	if (v == (value)int_0 ||
@@ -183,7 +183,7 @@ Visible value mod(u, v) value u, v; {
  * u**v has the most special cases of all the predefined arithmetic functions.
  */
 
-Visible value power(u, v) value u, v; {
+Visible value vpower(u, v) value u, v; {
 	real ru, rv, rw;
 	if (Exact(u) && (Integral(v) ||
 			/* Next check catches for integers disguised as rationals: */
@@ -499,7 +499,7 @@ Visible value root2(value u, value v) {
 		v = Copy(v);
 	} else {
 		u = quot((value)int_1, u);
-		v = power(v, u);
+		v = vpower(v, u);
 		release(u);
 	}
 
@@ -525,7 +525,7 @@ Visible value root1(value v) {
 
 /* The rest of the mathematical functions */
 
-Visible value pi() {
+Visible value vpi() {
 	return (value) mk_approx(3.141592653589793238463, 0.0);
 }
 Visible value e_natural(void) {
@@ -644,14 +644,14 @@ Visible value radius(value u, value v) {
 	return rad;
 }
 
-Visible value exp1(v) value v; {
+Visible value vexp1(v) value v; {
 	real w = (real) approximate(v);
 	real x = app_exp(w);
 	Release(w);
 	return (value) x;
 }
 
-Visible value log1(v) value v; {
+Visible value vlog1(v) value v; {
 	real w, x;
 	if (numcomp(v, zero) <= 0) {
 		interr(MESS(609, "in log x, x <= 0"));
@@ -663,7 +663,7 @@ Visible value log1(v) value v; {
 	return (value) x;
 }
 
-Visible value log2(u, v) value u, v;{
+Visible value vlog2(u, v) value u, v;{
 	value w;
 	if (numcomp(u, zero) <= 0) {
 		interr(MESS(610, "in b log x, b <= 0"));
@@ -673,8 +673,8 @@ Visible value log2(u, v) value u, v;{
 		interr(MESS(611, "in b log x, x <= 0"));
 		return copy(zero);
 	}
-	u = log1(u);
-	v = log1(v);
+	u = vlog1(u);
+	v = vlog1(v);
 	w = quot(v, u);
 	release(u), release(v);
 	return w;

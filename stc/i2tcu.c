@@ -5,6 +5,7 @@
 #include "b.h"
 #include "bobj.h"
 #include "i2stc.h"
+#include "i2tcp.h"
 
 Forward Hidden Procedure u_unify(polytype a, polytype b, polytype *pu);
 Forward Hidden Procedure unify_subtypes(polytype a, polytype b, polytype *pu);

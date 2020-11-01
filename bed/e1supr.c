@@ -8,6 +8,10 @@
 #include "bedi.h"
 #include "etex.h"
 #include "bobj.h"
+#include "e1edoc.h"
+#include "e1eval.h"
+#include "e1gram.h"
+#include "e1supr.h"
 #include "erro.h"
 #include "i3err.h"
 #include "node.h"
@@ -346,7 +350,7 @@ Hidden bool subisnull(node n, string *rp, int i, bool ignorespaces)
 
 	if (i&1) { /* Fixed text */
 		repr = rp[i/2];
-		return !Fw_positive(repr) || ignorespaces && allspaces(repr);
+		return !Fw_positive(repr) || (ignorespaces && allspaces(repr));
 	}
 	nn = child(n, i/2);
 	return nodewidth(nn) == 0;
@@ -592,7 +596,7 @@ Hidden bool nextitem(environ *ep)
 Hidden bool previtem(environ *ep)
 {
 	if (ep->s1 <= 1
-		|| ep->s1 == 2 && fwidth(noderepr(tree(ep->focus))[0]) < 0)
+      || (ep->s1 == 2 && fwidth(noderepr(tree(ep->focus))[0]) < 0))
 		return No; /* Already at first item */
 	--ep->s1;
 	return Yes;

@@ -163,7 +163,7 @@ Visible integer int_gcd(integer u1, integer v1) {
 	}
 	
 	t= mk_int((double) k);
-	twopow= (integer) power((value) int_2, (value) t);
+	twopow= (integer) vpower((value) int_2, (value) t);
 	Release(t);
 	
 	if (IsSmallInt(v))

@@ -4,6 +4,8 @@
  * B editor -- All routines referencing the grammar table are in this file.
  */
 
+#include "e1gram.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
@@ -209,7 +211,7 @@ Hidden Procedure makesugg(classptr cp) {
 		if (*cp >= TABLEN)
 			continue;
 		Assert(*cp > 0);
-		tp = &table[*cp];
+		tp = &table[(int)(*cp)];
 		rp = tp->r_repr;
 		if (rp[0] && isupper(rp[0][0])) {
 			bp = buffer;
@@ -284,10 +286,10 @@ Visible bool samelevel(int sym, int sym1)
 	if (sym1 < sym)
 		zzz = sym, sym = sym1, sym1 = zzz; /* Ensure sym <= sym1 */
 	/* Now always sym < sym1 */
-	return sym == Kw_plus && sym1 == Exp_plus
-		|| sym == Formal_kw_plus && sym1 == Formal_naming_plus
-		|| sym == And && sym1 == And_kw
-		|| sym == Or && sym1 == Or_kw;
+	return ((sym == Kw_plus && sym1 == Exp_plus)
+          || (sym == Formal_kw_plus && sym1 == Formal_naming_plus)
+          || (sym == And && sym1 == And_kw)
+          || (sym == Or && sym1 == Or_kw));
 }
 
 

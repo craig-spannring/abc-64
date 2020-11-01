@@ -6,6 +6,12 @@
 
 #include "b.h"
 #include "bedi.h"
+#include "e1edoc.h"
+#include "e1goto.h"
+#include "e1gram.h"
+#include "e1line.h"
+#include "e1supr.h"
+#include "e1wide.h"
 #include "etex.h"
 #include "bobj.h"
 #include "node.h"
@@ -409,6 +415,7 @@ acceptcommand(environ *ep)
 		i = ep->s1 - 1;
 		break;
 	default:
+		i = 0; 
 		Abort();
 	}
 	ep->mode = WHOLE;

@@ -14,6 +14,11 @@ extern "C" {
  */
 
 /*
+ * From "e1erro.h"
+ */
+extern Visible Procedure asserr(string file, int line);
+
+/*
  * Assertion macro.
  *
  * This one differs from the one in #include <assert.h> in that it

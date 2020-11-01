@@ -1,16 +1,24 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 #include "b.h"
+#include "b1file.h"
+#include "b1grab.h"
+#include "b1mess.h"
+#include "b1outp.h"
 #include "bint.h"
 #include "bobj.h"
 #include "bfil.h"
-#include "port.h"
-#include "release.h"
+#include "e1comm.h"
+#include "e1erro.h"
+#include "e1getc.h"
 #include "i3env.h"
+#include "i3err.h"
+#include "i3fil.h"
 #include "i3scr.h"
 #include "i3sou.h"
 #include "port.h"
-#include "b1grab.h"
+#include "release.h"
+#include "port.h"
 
 #define CANT_OPEN MESS(1700, "can't open input file %s\n")
 

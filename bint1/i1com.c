@@ -11,9 +11,11 @@
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"
+#include "i1nui.h"
 #include "i2nod.h"
 #include "i2gen.h" /* Must be after i2nod.h */
 #include "i3env.h"
+#include "i3err.h"
 
 /* Values */
 

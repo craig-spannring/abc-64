@@ -5,6 +5,7 @@
 #include "b.h"
 #include "bobj.h"
 #include "i0err.h"
+#include "i1nui.h"
 #include "i1num.h"
 #include "i3err.h"
 
@@ -370,7 +371,7 @@ Visible integer app_floor(real u) {
 	}
 	v = mk_int(ldexp(frac, DBLBITS));
 	w = mk_int(expo - DBLBITS);
-	twotow = power((value)int_2, (value)w);
+	twotow = vpower((value)int_2, (value)w);
 	result = prod((value)v, twotow);
 	Release(v), Release(w), Release(twotow);
 	if (!Integral(result)) 

@@ -15,6 +15,10 @@
 #include "etex.h"
 #include "bobj.h"
 #include "bfil.h"
+#include "e1erro.h"
+#include "e1lexi.h"
+#include "e1gram.h"
+#include "e1que2.h"
 #include "node.h"
 #include "supr.h"
 #include "gram.h"
@@ -22,6 +26,8 @@
 #include "queu.h"
 #include "port.h"
 #include "b1grab.h"
+#include "common_os.h"
+
 
 extern bool lefttorite;
 extern bool incentralws;
@@ -315,7 +321,6 @@ static int lastisugg= -1; /* keep track of last suggestion */
 
 Hidden node nextsugg(string str, int len, int new_c, bool in_sugghowname, bool colon_allowed)
 {
-	string sg;
 	int i;
 	int istop;
 	string sugg_i;

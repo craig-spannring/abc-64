@@ -2,6 +2,8 @@
 
 /* polytype representation */
 
+#include "i2tcp.h"
+
 #include "b.h"
 #include "bobj.h"
 #include "i2stc.h"

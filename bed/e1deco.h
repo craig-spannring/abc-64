@@ -4,14 +4,14 @@
 
 #include "b.h"
 #include "bedi.h"
+#include "supr.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
     extern Visible Procedure delfocus(path *pp); 
-
+    extern Visible bool delbody(environ *ep);
 
 #ifdef __cplusplus
 }

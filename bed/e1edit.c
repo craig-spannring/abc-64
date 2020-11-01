@@ -9,6 +9,12 @@
 #include "bedi.h"
 #include "etex.h"
 #include "bmem.h"
+#include "e1erro.h"
+#include "e1goto.h"
+#include "e1gram.h"
+#include "e1inse.h"
+#include "e1ins2.h"
+#include "e1que2.h"
 #include "erro.h"
 #include "bobj.h"
 #include "i3err.h"
@@ -90,7 +96,7 @@ readfile(environ *ep, string filename, int line, bool creating)
 	} while (c != EOF);
 	freemem((ptr) buf);
 	fclose(fp);
-	if (ep->mode == FHOLE || ep->mode == VHOLE && (ep->s1&1)) {
+	if (ep->mode == FHOLE || (ep->mode == VHOLE && (ep->s1&1))) {
 		cp = "";
 		VOID soften(ep, &cp, 0);
 	}
@@ -202,7 +208,7 @@ readtext(FILE *fp, char quote)
 
 	for (; ; ++cp) {
 		c = getc(fp);
-		if (!isascii(c) || c != ' ' && !isprint(c)) {
+		if (!isascii(c) || (c != ' ' && !isprint(c))) {
 #ifndef NDEBUG
 			if (c == EOF)
 				debug("readtext: EOF");
@@ -281,7 +287,7 @@ readsym(FILE *fp)
 		c = getc(fp);
 		if (c == EOF)
 			return -1;
-		if (!isascii(c) || !isalnum(c) && c != '_') {
+		if (!isascii(c) || (!isalnum(c) && c != '_')) {
 			if (ungetc(c, fp) == EOF)
 				syserr(MESS(6204, "readsym: ungetc failed"));
 			break;
