@@ -35,16 +35,17 @@ target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
 
   
-  # -Wall
+  -Wall
 
   #-Wno-implicit-int
   -Wimplicit-function-declaration
   #-Wno-return-type
-  -Wno-parentheses
-  -Wno-deprecated-declarations
-  -Wno-unused-value
+  #-Wno-parentheses
+  #-Wno-deprecated-declarations
+  #-Wno-unused-value
   -Wno-incompatible-pointer-types
-  -Wno-sometimes-unitialized
+  -Wno-char-subscripts
+  #-Wno-sometimes-unitialized
   
   # -Wno-int-to-pointer-cast
   # -Werror=int-to-pointer-cast
