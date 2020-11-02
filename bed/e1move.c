@@ -4,6 +4,8 @@
  * B editor -- Process arrow keys in four directions, plus TAB.
  */
 
+#include "e1move.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "e1edoc.h"
@@ -29,8 +31,7 @@ Forward Hidden bool tabstop(environ *ep, int i);
  * Common code for PREVIOUS and NEXT commands.
  */
 
-Hidden bool
-prevnext(environ *ep, int direction)
+Hidden bool prevnext(environ *ep, int direction)
 {
 	node n;
 	node n1;
@@ -178,8 +179,7 @@ prevnext(environ *ep, int direction)
 }
 
 
-Visible bool
-previous(environ *ep)
+Visible bool previous(environ *ep)
 {
 	if (!prevnext(ep, Left))
 		return No;
@@ -187,16 +187,14 @@ previous(environ *ep)
 }
 
 
-Visible bool
-nextarrow(environ *ep)
+Visible bool nextarrow(environ *ep)
 {
 	if (!prevnext(ep, Rite))
 		return No;
 	return Yes;
 }
 
-Visible bool
-leftarrow(environ *ep)
+Visible bool leftarrow(environ *ep)
 {
 	int w;
 	bool hole;
@@ -226,8 +224,7 @@ leftarrow(environ *ep)
 	return Yes;
 }
 
-Visible bool
-ritearrow(environ *ep)
+Visible bool ritearrow(environ *ep)
 {
 	while (narrow(ep))
 		;
@@ -243,8 +240,7 @@ ritearrow(environ *ep)
  * Assume current position given as SUBSET.
  */
 
-Hidden bool
-nextchar(environ *ep, int direction)
+Hidden bool nextchar(environ *ep, int direction)
 {
 	int ich;
 	int nch;
@@ -307,8 +303,7 @@ nextchar(environ *ep, int direction)
  * Up and down arrows.
  */
 
-Hidden bool
-updownarrow(environ *ep, int yincr)
+Hidden bool updownarrow(environ *ep, int yincr)
 {
 	int y, x;
 
@@ -324,20 +319,17 @@ updownarrow(environ *ep, int yincr)
 	return Yes;
 }
 
-Visible bool
-uparrow(environ *ep)
+Visible bool uparrow(environ *ep)
 {
 	return updownarrow(ep, -1);
 }
 
-Visible bool
-downarrow(environ *ep)
+Visible bool downarrow(environ *ep)
 {
 	return updownarrow(ep, 1);
 }
 
-Visible bool
-upline(environ *ep)
+Visible bool upline(environ *ep)
 {
 	int y;
 
@@ -350,8 +342,7 @@ upline(environ *ep)
 	return Yes;
 }
 
-Visible bool
-downline(environ *ep)
+Visible bool downline(environ *ep)
 {
 	int w;
 
@@ -373,8 +364,7 @@ downline(environ *ep)
  */
 
 
-Visible bool
-acceptcommand(environ *ep)
+Visible bool acceptcommand(environ *ep)
 {
 	int i;
 	string repr;
@@ -441,8 +431,7 @@ acceptcommand(environ *ep)
  * Find suitable tab stops for acceptcommand.
  */
 
-Hidden bool
-tabstop(environ *ep, int i)
+Hidden bool tabstop(environ *ep, int i)
 {
 	node n = tree(ep->focus);
 	int nch;

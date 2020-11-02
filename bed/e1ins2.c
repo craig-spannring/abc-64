@@ -50,8 +50,7 @@ Hidden bool quot_in_tag(int c, environ *ep) {
 		(sym == Name || sym == Keyword));
 }
 
-Visible bool
-ins_char(environ *ep, int c, int alt_c)
+Visible bool ins_char(environ *ep, int c, int alt_c)
 {
 	auto queue q = Qnil;
 	auto queue qf = Qnil;
@@ -224,8 +223,7 @@ Visible bool ins_newline(environ *ep, bool reading_file)
  * Refinement for ins_newline() to do the initial processing.
  */
 
-Hidden bool
-fiddle(environ *ep, bool *pmayindent, bool reading_file)
+Hidden bool fiddle(environ *ep, bool *pmayindent, bool reading_file)
 {
 	int level;
 	auto string str = "";
@@ -279,8 +277,7 @@ fiddle(environ *ep, bool *pmayindent, bool reading_file)
  * Return Yes if this happened AND rp[1] contained a \t.
  */
 
-Hidden bool
-hackhack(environ *ep)
+Hidden bool hackhack(environ *ep)
 {
 	node n;
 	int ich = ichild(ep->focus);
@@ -307,8 +304,7 @@ hackhack(environ *ep)
  * decrease-indentation position.
  */
 
-Hidden bool
-atdedent(environ *ep)
+Hidden bool atdedent(environ *ep)
 {
 	path pa;
 	node npa;
@@ -350,8 +346,7 @@ atdedent(environ *ep)
  * skipping blank space only.
  */
 
-Hidden bool
-nexthole(environ *ep)
+Hidden bool nexthole(environ *ep)
 {
 	node n;
 	int ich;

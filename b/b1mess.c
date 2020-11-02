@@ -18,6 +18,7 @@
 #include "b.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "i3err.h"
 #include "port.h"
 
 /* While we are reading the Messages file, we build an index.

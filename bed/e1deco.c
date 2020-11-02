@@ -13,6 +13,11 @@
 #include "e1edoc.h"
 #include "e1erro.h"
 #include "e1inse.h"
+#include "e1gram.h"
+#include "e1node.h"
+#include "e1que2.h"
+#include "e1supr.h"
+#include "e1wide.h"
 #include "erro.h"
 #include "node.h"
 #include "gram.h"
@@ -98,6 +103,7 @@ Visible bool delbody(environ *ep)
 
 	default:
 		Abort();
+		return 0;
 		/* NOTREACHED */
 	}
 }
@@ -107,8 +113,7 @@ Visible bool delbody(environ *ep)
  * Delete portion (ep->mode == SUBRANGE) of varying text ((ep->s1&1) == 0).
  */
 
-Hidden bool
-delvarying(environ *ep)
+Hidden bool delvarying(environ *ep)
 {
 	auto queue q = Qnil;
 	node n = tree(ep->focus);
@@ -150,8 +155,7 @@ delvarying(environ *ep)
  * Delete portion (ep->mode == SUBRANGE) of fixed text ((ep->s1&1) == 1).
  */
 
-Hidden bool
-delfixed(environ *ep)
+Hidden bool delfixed(environ *ep)
 {
 	node n = tree(ep->focus);
 	char buf[15]; /* Long enough for all fixed texts */
@@ -219,8 +223,7 @@ Hidden bool hole_ify_keywords(environ *ep, queue *qq)
  * Delete focus if ep->mode == SUBSET.
  */
 
-Hidden bool
-delsubset(environ *ep, bool hack)
+Hidden bool delsubset(environ *ep, bool hack)
 {
 	auto queue q = Qnil;
 	auto queue q2 = Qnil;
@@ -305,7 +308,7 @@ delsubset(environ *ep, bool hack)
  * Delete the focus if ep->mode == SUBLIST.
  */
 
-delsublist(environ *ep)
+bool delsublist(environ *ep)
 {
 	node n;
 	int i;
@@ -363,8 +366,7 @@ delsublist(environ *ep)
  * Delete the focus if ep->mode == WHOLE.
  */
 
-Hidden bool
-delwhole(environ *ep)
+Hidden bool delwhole(environ *ep)
 {
 	int sym = symbol(tree(ep->focus));
 
@@ -381,8 +383,7 @@ delwhole(environ *ep)
  * Assume shrink() has been called before!
  */
 
-Hidden bool
-delhole(environ *ep)
+Hidden bool delhole(environ *ep)
 {
 	node n;
 	int sym;
@@ -572,8 +573,7 @@ Visible value copyout(environ *ep)
  * Subroutine to ensure the copy buffer doesn't start with a newline.
  */
 
-Hidden Procedure
-nonewline(queue *pq)
+Hidden Procedure nonewline(queue *pq)
 {
 	node n;
 	int c;
@@ -608,8 +608,7 @@ nonewline(queue *pq)
  * matching \b is immediately following.
  */
 
-Hidden Procedure
-balance(environ *ep)
+Hidden Procedure balance(environ *ep)
 {
 	string *rp = noderepr(tree(ep->focus));
 	int i;
@@ -633,8 +632,7 @@ balance(environ *ep)
  * Copy the copy buffer to the focus.
  */
 
-Hidden bool
-copyin(environ *ep, queue q)
+Hidden bool copyin(environ *ep, queue q)
 	            
 	/*auto*/         
 {
@@ -694,6 +692,7 @@ Visible bool ishole(environ *ep)
 
 	default:
 		Abort();
+		return No;
 		/* NOTREACHED */
 	}
 }
@@ -706,8 +705,7 @@ Visible bool ishole(environ *ep)
  * Hacked to enable deletion of sequence of hole's at outer level.
  */
 
-Hidden bool
-colonhack(environ *ep, int all)
+Hidden bool colonhack(environ *ep, int all)
 {
 	node n = tree(ep->focus);
 	node n1;
@@ -746,8 +744,7 @@ colonhack(environ *ep, int all)
  * (i.e. containing only spaces, colons and the allowed control characters).
  */
 
-Hidden bool
-allright(string repr)
+Hidden bool allright(string repr)
 {
 	if (repr) {
 		for (; *repr; ++repr) {

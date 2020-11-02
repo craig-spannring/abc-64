@@ -4,6 +4,7 @@
 
 #include "b.h"
 #include "b1mess.h"
+#include "i3err.h"
 
 #ifdef SIGNAL
 

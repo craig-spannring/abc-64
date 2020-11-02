@@ -6,12 +6,14 @@
 #include "b.h"
 #include "b1memo.h"
 #include "b1mess.h"
+#include "b1outp.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i3err.h"
 #include "oper.h"
 #include "getc.h"
 #include "port.h"
+#include "trm.h"
 
 extern bool use_bed;
 

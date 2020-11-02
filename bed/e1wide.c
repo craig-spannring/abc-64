@@ -23,8 +23,7 @@
  * Widen -- make the focus larger.
  */
 
-Visible bool
-widen(environ *ep, bool deleting)
+Visible bool widen(environ *ep, bool deleting)
 {
 	node n;
 	node nn;
@@ -140,6 +139,7 @@ widen(environ *ep, bool deleting)
 
 	default:
 		Abort();
+		return No;
 		/* NOTREACHED */
 	}
 	/* Not reached */
@@ -207,13 +207,13 @@ Visible bool narrow(environ *ep)
 		
 	default:
 		Abort();
+		return No;
 		/* NOTREACHED */
 	}
 }
 
 
-Visible bool
-extend(environ *ep)
+Visible bool extend(environ *ep)
 {
 	node n;
 	int i;
@@ -283,6 +283,7 @@ extend(environ *ep)
 
 	default:
 		Abort();
+    return 0;
 		/* NOTREACHED */
 	}
 }
@@ -351,6 +352,7 @@ Visible bool rnarrow(environ *ep)
 		
 	default:
 		Abort();
+		return 0;
 		/* NOTREACHED */
 	}
 }

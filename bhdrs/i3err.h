@@ -31,7 +31,8 @@ extern "C" {
     Visible Procedure re_errfile(void);
     Visible Procedure checkerr(void);
     Visible Procedure typerrV(int m, value v);
-
+    Visible Procedure fpe_signal(void);
+    
 #ifdef __cplusplus
 }
 #endif

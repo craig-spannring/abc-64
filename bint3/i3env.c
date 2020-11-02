@@ -6,6 +6,7 @@
 #include "b1outp.h"
 #include "bint.h"
 #include "bobj.h"
+#include "i1lta.h"
 #include "i3err.h"
 #include "i3env.h" 	/* for curline, curlino  */
 #include "b1grab.h"
@@ -116,7 +117,7 @@ Visible Procedure e_delete(value *t, value k) {
 		}
 	}
 	else if (!Is_table(*t)) syserr(MESS(3001, "deleting from non-environment"));
-	else if (in_keys(k, *t)) delete(t, k);
+	else if (in_keys(k, *t)) deleteitem(t, k);
 }
 
 Visible value* envassoc(value t, value ke) {

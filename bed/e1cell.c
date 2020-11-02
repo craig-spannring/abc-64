@@ -10,6 +10,8 @@
 #include "bedi.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "e1erro.h"
+#include "e1line.h"
 #include "node.h"
 #include "cell.h"
 #include "port.h"
@@ -300,12 +302,12 @@ gettop(cell *tops)
 				/* Conservatism may succeed */
 				if (pscreen->c_onscreen >= nscreen - nfwa
 					&& (nlfocus < nfwa+winheight
-						|| !plwa && nlfocus == nfwa+winheight))
+              || (!plwa && nlfocus == nfwa+winheight)))
 					break; /* focus entirely on screen */
 			}
 			else { /* No comrades seen */
 				if (nffocus - nfwa <= nfwa+winheight - nlfocus
-					|| !plwa && nlwa <= nfwa+winheight)
+            || (!plwa && nlwa <= nfwa+winheight))
 					break; /* Nicely centered focus or end of unit */
 			}
 		}

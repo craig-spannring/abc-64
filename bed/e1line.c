@@ -12,6 +12,8 @@
 
 #include "b.h"
 #include "bedi.h"
+#include "e1edoc.h"
+#include "e1supr.h"
 #include "etex.h"
 #include "bobj.h"
 #include "node.h"

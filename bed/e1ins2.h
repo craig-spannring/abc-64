@@ -12,6 +12,7 @@
 extern "C" {
 #endif
 
+    extern Visible bool ins_char(environ *ep, int c, int alt_c);
     extern Visible bool ins_newline(environ *ep, bool reading_file);
 
 #ifdef __cplusplus

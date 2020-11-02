@@ -4,6 +4,8 @@
  * B editor -- Suggestion handling module.
  */
 
+#include "e1sugg.h"
+
 #include "b.h"
 
 #ifdef USERSUGG
@@ -72,8 +74,7 @@ Visible Procedure initcensugg(void) {
 	ncentral= nsugg;
 }
 
-Visible Procedure
-initsugg(void)
+Visible Procedure initsugg(void)
 {
 	if (incentralws)
 		ncentral= nbuiltin;
@@ -128,8 +129,7 @@ Visible Procedure endsugg(void) {
  * ***** Should check more thoroughly. *****
  */
 
-Hidden bool
-checksugg(string bp)
+Hidden bool checksugg(string bp)
 {
 	if (!isascii(*bp))
 		return No;
@@ -266,8 +266,7 @@ Visible Procedure addsugg(string str, int builtin) {
  * Must supply the whole string as argument.
  */
 
-Hidden Procedure
-delsugg(string str)
+Hidden Procedure delsugg(string str)
 {
 	int i;
 
@@ -374,8 +373,7 @@ Hidden node firstsugg(string s, int startsugg, bool colon_allowed)
 	return Nnil;
 }
 
-Visible bool
-setsugg(path *pp, char c, environ *ep, bool colon_allowed)
+Visible bool setsugg(path *pp, char c, environ *ep, bool colon_allowed)
 {
 	char buf[2];
 	node n;
@@ -740,8 +738,7 @@ Hidden char *lastsugg= NULL;	/* the buffer */
 Hidden char *pbuf;
 Hidden int buflen= 0;
 
-Visible Procedure
-readsugg(path p)
+Visible Procedure readsugg(path p)
 {
 	p = pathcopy(p);
 	top(&p);
@@ -762,8 +759,7 @@ readsugg(path p)
  * 'lastsugg'; we add it again if the unit is not empty.
  */
 
-Visible Procedure
-writesugg(path p)
+Visible Procedure writesugg(path p)
 {
 	p = pathcopy(p);
 	top(&p);
@@ -791,7 +787,7 @@ writesugg(path p)
  * keywords and other stuff by spaces).
  */
 
-Hidden bool
+Hidden bool 
 getpattern(node n)
 {
 	string *rp = noderepr(n);
@@ -894,8 +890,7 @@ Hidden Procedure addstr(string s) {
 	}
 }
 
-Visible Procedure
-endclasses(void)
+Visible Procedure endclasses(void)
 {
 #ifdef MEMTRACE
 	int i;

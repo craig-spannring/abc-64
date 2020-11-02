@@ -18,9 +18,7 @@ extern "C" {
             int s_lim;
     } finger[Maxheight], *fingertip;
 
-
-
-    Visible bool      delete(value *pt, value k) ;
+    Visible bool      deleteitem(value *pt, value k) ;
     Visible bool      in_keys(value k, value t);
     Visible bool      is_rangelist(value v);
     Visible bool      uniq_assoc(value t, value k);

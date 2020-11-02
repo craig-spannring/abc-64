@@ -10,7 +10,10 @@
 #include "bedi.h"
 #include "etex.h"
 #include "bobj.h"
+#include "e1gram.h"
 #include "e1lexi.h"
+#include "e1que1.h"
+#include "e1sugg.h"
 #include "node.h"
 #include "gram.h"
 #include "supr.h"
@@ -200,8 +203,7 @@ Visible bool soften(environ *ep, string *pstr, int alt_c)
  * Return Yes if *pstr has been advanced.
  */
 
-Visible bool
-resuggest(environ *ep, string *pstr, int alt_c)
+Visible bool resuggest(environ *ep, string *pstr, int alt_c)
 {
 	struct table *tp;
 	struct classinfo *ci;
@@ -320,8 +322,7 @@ resuggest(environ *ep, string *pstr, int alt_c)
  * longest match.
  */
 
-Hidden bool
-ifmatch(environ *ep, string *pstr, string str, int alt_c)
+Hidden bool ifmatch(environ *ep, string *pstr, string str, int alt_c)
 {
 	int c = str[ep->s2];
 

@@ -4,10 +4,13 @@
 #include "bint.h"
 #include "bobj.h"
 #include "b0lan.h"
+#include "i2cmd.h"
 #include "i2par.h"
+#include "i2syn.h"
 #include "i3err.h"
 #include "i3env.h"
 #include "i3scr.h"
+#include "i3sou.h"
 #include "b1grab.h"
 
 /* ******************************************************************** */

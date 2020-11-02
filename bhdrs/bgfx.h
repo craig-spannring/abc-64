@@ -18,8 +18,8 @@ typedef struct ivector {
 extern ivector dev_origin; /* Lower left corner of device */
 extern ivector dev_corner; /* Upper right corner of device */
 
-extern bool enter_gfx();
-extern exit_gfx();
+//extern bool enter_gfx();
+//extern exit_gfx();
 
 extern int gfx_mode;
 #define TEXT_MODE 1

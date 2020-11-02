@@ -5,9 +5,11 @@
 #include "bint.h"
 #include "bobj.h"
 #include "i0err.h"
+#include "i1lta.h"
 #include "i3err.h"
 #include "i3env.h" /* for bndtgs */
 #include "i3in2.h"
+#include "i3sou.h"
 #include "b1grab.h"
 
 Forward Hidden bool in_locenv(value t, value k, value **ll);
@@ -394,7 +396,7 @@ Visible Procedure l_del(loc l) {
 			lv= locvalue(tl->R, &ll, Yes);
 			if (in_keys(tl->K, lv)) {
 				rm_indirection(tl->R);
-				delete(ll, tl->K);
+				deleteitem(ll, tl->K);
 			}
 		}
 	}

@@ -5,6 +5,7 @@
 #include "bmem.h"
 #include "bobj.h"
 #include "bfil.h"
+#include "e1getc.h"
 #include "i3cen.h"
 #include "i3sou.h"
 #include "i4bio.h"

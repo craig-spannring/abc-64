@@ -4,6 +4,7 @@
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "e1getc.h"
 #include "i3env.h"
 #include "i3scr.h"
 #include "i3sou.h"

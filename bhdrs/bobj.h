@@ -3,6 +3,7 @@
 #ifndef BOBJ_h_945555dcedb9ec8701ff4cfb11761611
 #define BOBJ_h_945555dcedb9ec8701ff4cfb11761611
 
+#include "b.h"
 #include "i1num.h"
 
 #ifdef __cplusplus
@@ -13,7 +14,7 @@ extern "C" {
 /****************************** general ******************************/
 
 typedef int relation; /* < 0, == 0, > 0 */
-relation compare();
+relation compare(value v, value w);
 
 /*************************************************************************/
 

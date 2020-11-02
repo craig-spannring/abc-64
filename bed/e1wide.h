@@ -8,6 +8,9 @@ extern "C" {
     Visible bool narrow(environ *ep);
     Visible bool rnarrow(environ *ep);
 
+    Visible bool widen(environ *ep, bool deleting);
+    Visible bool extend(environ *ep);
+
 #ifdef __cplusplus
 }
 #endif

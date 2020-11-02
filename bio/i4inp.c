@@ -3,6 +3,8 @@
 #include "b.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "i3scr.h"
+#include "i3sou.h"
 #include "i4bio.h"
 #include "b1grab.h"
 

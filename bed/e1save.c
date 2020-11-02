@@ -8,6 +8,7 @@
 
 #include "b.h"
 #include "b0lan.h"
+#include "b1memo.h"
 #include "bedi.h"
 #include "etex.h"
 #include "bmem.h"
@@ -46,7 +47,7 @@ Hidden Procedure savewalk(node n, int level, bufadm *bp, FILE *fp)
 			savewalk(child(n, i), level, bp, fp);
 		cp = rp[i];
 		if (!cp) continue;
-		for (; c = *cp; ++cp) {
+		for (; (c = *cp); ++cp) {
 			switch (c) {
 
 			case '\n':

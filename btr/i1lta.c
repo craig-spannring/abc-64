@@ -422,7 +422,7 @@ Visible Procedure replace(value a, value *pt, value k) {
 #endif
 }
 
-Visible bool delete(value *pt, value k)  {
+Visible bool deleteitem(value *pt, value k)  {
 	finger    f;
   fingertip ft= f;
   intlet    it= Itemtype(*pt);
@@ -473,7 +473,7 @@ Visible Procedure vremove(value v, value *pl) {
 		interr(REMOVE_RAN);
 		return;
 	}
-	if (!delete(pl, v) && still_ok)
+	if (!deleteitem(pl, v) && still_ok)
 		interr(REMOVE_ENTRY);
 }
 

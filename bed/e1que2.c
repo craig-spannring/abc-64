@@ -11,8 +11,11 @@
 #include "e1deco.h"
 #include "e1edoc.h"
 #include "e1erro.h"
+#include "e1inse.h"
+#include "e1gram.h"
 #include "e1node.h"
 #include "e1que1.h"
+#include "e1sugg.h"
 #include "etex.h"
 #include "bobj.h"
 #include "e1ins2.h"
@@ -945,7 +948,7 @@ Visible int joinstring(path *pp, string str, bool spflag, int alt_c, bool mayind
 			continue;
 		if (isinclass(sym1, tp->r_class[0])
 			&& ((canfitchar(str[0], tp->r_class[1]))
-				|| str[0] == '?' && !inter_active)) {
+          || (str[0] == '?' && !inter_active))) {
 			if (cp[0] == spflag + 1) {
 				symfound = symcp;
 				break;

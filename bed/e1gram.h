@@ -16,7 +16,7 @@ extern "C" {
     Visible bool issublist(int sym);
     Visible bool samelevel(int sym, int sym1);
     Visible bool allowed(path p, int sym);
-    Visible int nametosym(string str);
+    Visible int  nametosym(string str);
     Visible bool isinclass(int sym, struct classinfo *ci);
     
 #ifdef __cplusplus
