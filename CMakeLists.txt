@@ -42,6 +42,9 @@ target_compile_options(abc PRIVATE
   #-Wno-return-type
   -Wno-parentheses
   -Wno-deprecated-declarations
+  -Wno-unused-value
+  -Wno-incompatible-pointer-types
+  -Wno-sometimes-unitialized
   
   # -Wno-int-to-pointer-cast
   # -Werror=int-to-pointer-cast
