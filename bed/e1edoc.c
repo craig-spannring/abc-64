@@ -3,6 +3,13 @@
 #include "e1edoc.h"
 #include "b.h"
 #include "bedi.h"
+#include "e1deco.h"
+#include "e1spos.h"
+#include "e1erro.h"
+#include "e1goto.h"
+#include "e1help.h"
+#include "e1save.h"
+#include "e1supr.h"
 #include "etex.h"
 #include "bobj.h"
 #include "node.h"
@@ -12,6 +19,7 @@
 #include "queu.h"
 #include "supr.h"
 #include "tabl.h"
+#include "trm.h"
 #include "port.h"
 #include "b1grab.h"
 
@@ -103,8 +111,7 @@ Visible bool suspendabc(void) {
 	return r;
 }
 
-Visible bool
-editdocument(environ *ep, bool bad_file)
+Visible bool editdocument(environ *ep, bool bad_file)
 {
 	int k;
 	int first = 0;
@@ -527,8 +534,7 @@ execute(environ *ep, int cmd)
  * Initialize an environment variable.	Most things are set to 0 or NULL.
  */
 
-Visible Procedure
-clrenv(environ *ep)
+Visible Procedure clrenv(environ *ep)
 {
 	ep->focus = newpath(NilPath, gram(Optional), 1);
 	ep->mode = WHOLE;
@@ -552,8 +558,7 @@ clrenv(environ *ep)
  * (Higher() is called VERY often, so this pays).
  */
 
-Visible Procedure
-higher(environ *ep)
+Visible Procedure higher(environ *ep)
 {
 	path p = ep->focus;
 	int pl = 0;
@@ -574,8 +579,7 @@ higher(environ *ep)
  * Issue debug status message.
  */
 
-Visible Procedure
-dbmess(environ *ep)
+Visible Procedure dbmess(environ *ep)
 {
 #ifndef SMALLSYS
 	char stuff[80];
@@ -737,8 +741,7 @@ writetext(value v, FILE *fp)
 }
 
 
-Visible bool
-savequeue(value v, string filename)
+Visible bool savequeue(value v, string filename)
 {
 	FILE *fp;
 	auto queue q = (queue)v;
@@ -768,7 +771,7 @@ savequeue(value v, string filename)
 #ifdef EDITRACE
 extern FILE *dumpfp;
 
-Visible Procedure dumpev(ep, m) environ *ep; string m;
+Visible Procedure dumpev(environ *ep, string m)
 {
 	char stuff[80];
 	string str = stuff;

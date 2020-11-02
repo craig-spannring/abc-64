@@ -9,11 +9,19 @@
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
+#include "e1wide.h"
 #include "bobj.h"
+#include "e1edoc.h"
+#include "e1erro.h"
+#include "e1gram.h"
+#include "e1line.h"
+#include "e1scrn.h"
+#include "e1supr.h"
 #include "erro.h"
 #include "node.h"
 #include "gram.h"
 #include "supr.h"
+#include "trm.h"
 
 extern int winheight;
 extern int winstart;
@@ -219,7 +227,7 @@ poscomp(path p, int y, int x)
 
 	ly = Ycoord(p);
 	lx = Xcoord(p);
-	if (y < ly || y == ly && (lx < 0 || x < lx))
+	if (y < ly || (y == ly && (lx < 0 || x < lx)))
 		return BEFORE;
 	n = tree(p);
 	w = nodewidth(n);
@@ -236,7 +244,7 @@ poscomp(path p, int y, int x)
 		if (lx >= 0)
 			lx += w;
 	}
-	if (y < ly || y == ly && (lx < 0 || x < lx))
+	if (y < ly || (y == ly && (lx < 0 || x < lx)))
 		return INSIDE;
 	return BEYOND;
 }

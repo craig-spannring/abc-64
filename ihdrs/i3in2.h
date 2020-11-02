@@ -24,6 +24,8 @@ value evalthread(parsetree start);
 
 value locvalue(loc l, value **ll, bool err);
 
+bool in_ranger(loc l, value *pv);
+
 #ifdef __cplusplus
 }
 #endif

@@ -4,6 +4,7 @@
 #include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "i1nui.h"
 #include "i1num.h"
 #include "i3err.h"
 

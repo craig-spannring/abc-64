@@ -5,8 +5,12 @@
 #include "b.h"
 #include "b1grab.h"
 #include "bobj.h"
+#include "i1nua.h"
+#include "i1nui.h"
 #include "i1num.h"
+#include "i1nur.h"
 #include "i3err.h"
+#include "port.h"
 
 /*
  * This file contains operations on numbers that are not predefined
@@ -207,6 +211,7 @@ Visible relation numcomp(value u, value v) {
 		return s;
 
 	default: syserr(MESS(1303, "num_comp")); /* NOTREACHED */
+		return 0;
 
 	}
 }

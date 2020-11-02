@@ -910,8 +910,7 @@ joinnodes(path *pp, node n1, node n2, bool spflag)
  * Returns the number of characters consumed from str.
  */
 
-Visible int
-joinstring(path *pp, string str, bool spflag, int alt_c, bool mayindent)
+Visible int joinstring(path *pp, string str, bool spflag, int alt_c, bool mayindent)
 {
 	struct table *tp;
 	path pa = parent(*pp);
@@ -1058,8 +1057,7 @@ canfitchar(int c, struct classinfo *ci)
  * Debug routine to print a queue.
  */
 
-Visible Procedure
-qshow(queue q, string where)
+Visible Procedure qshow(queue q, string where)
 {
 	node n;
 	char buf[256];

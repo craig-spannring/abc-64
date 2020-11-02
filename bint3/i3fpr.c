@@ -7,6 +7,7 @@
 #include "bobj.h"
 #include "i0err.h"
 #include "b0lan.h"
+#include "i1nui.h"
 #include "i1num.h"
 #include "i2par.h"
 #include "i3cen.h"
@@ -266,6 +267,7 @@ Visible value pre_fun(value nd1, intlet pre, value nd2) {
 		else
 			return((*fp->f_fun)(nd1, nd2));
 	default: syserr(MESS(3207, "pre-defined fpr wrong"));
+		 return Vnil;
 		 /*NOTREACHED*/
 	}
 }
@@ -305,6 +307,7 @@ MESS(3212, "in the test e not.in t, t is a text, but e isn't a character")
 		return !in(nd1, nd2);
 	default:
 		syserr(MESS(3213, "predicate not covered by proposition"));
+		return No;
 		/*NOTREACHED*/
 	}
 }

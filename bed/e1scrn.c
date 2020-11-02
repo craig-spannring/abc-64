@@ -4,18 +4,27 @@
  * B editor -- Screen management package, higher level routines.
  */
 
+#include "e1scrn.h"
+
 #include "b.h"
+#include "b1mess.h"
+#include "b1outp.h"
 #include "bedi.h"
 #include "etex.h"
 #include "bobj.h"
+#include "e1cell.h"
+#include "e1erro.h"
+#include "e1getc.h"
+#include "e1node.h"
+#include "e1supr.h"
 #include "erro.h"
+#include "i3err.h"
 #include "node.h"
 #include "supr.h"
 #include "gram.h"
 #include "cell.h"
 #include "trm.h"
 #include "port.h"
-#include "e1cell.h"
 
 #ifndef NDEBUG
 extern bool dflag;
@@ -48,8 +57,7 @@ Hidden cell *tops;
  * Actual screen update.
  */
 
-Visible Procedure
-actupdate(value copybuffer, bool recording, bool lasttime)
+Visible Procedure actupdate(value copybuffer, bool recording, bool lasttime)
 	                 
 	               
 	               /* Yes if called from final screen update */
@@ -137,8 +145,7 @@ actupdate(value copybuffer, bool recording, bool lasttime)
  * Grow the window if not maximum size.
  */
 
-Hidden Procedure
-growwin(void)
+Hidden Procedure growwin(void)
 {
 	int winsize;
 	int growth;
@@ -168,8 +175,7 @@ growwin(void)
  * further on the screen.)
  */
 
-Hidden int
-makeroom(cell *p, int curlno, int delcnt)
+Hidden int makeroom(cell *p, int curlno, int delcnt)
 {
 	int here = 0;
 	int needed = Space(p);
@@ -229,8 +235,7 @@ makeroom(cell *p, int curlno, int delcnt)
  * Returns new delcnt, like makeroom does.
  */
 
-Hidden int
-make2room(cell *p, int curlno, int delcnt)
+Hidden int make2room(cell *p, int curlno, int delcnt)
 {
 	int nextline = curlno + Space(p);
 	int sline = winheight - delcnt;
@@ -258,8 +263,7 @@ make2room(cell *p, int curlno, int delcnt)
  * Routine called for every change in the screen.
  */
 
-Visible Procedure
-virtupdate(environ *oldep, environ *newep, int highest)
+Visible Procedure virtupdate(environ *oldep, environ *newep, int highest)
 {
 	environ old;
 	environ new;
@@ -314,8 +318,7 @@ virtupdate(environ *oldep, environ *newep, int highest)
 }
 
 
-Hidden bool
-atlinestart(environ *ep)
+Hidden bool atlinestart(environ *ep)
 {
 	string repr = noderepr(tree(ep->focus))[0];
 
@@ -329,8 +332,7 @@ atlinestart(environ *ep)
  * (0 if the whole unit has no linefeeds.)
  */
 
-Hidden int
-fixlevels(environ *oldep, environ *newep, int highest)
+Hidden int fixlevels(environ *oldep, environ *newep, int highest)
 {
 	int oldpl = pathlength(oldep->focus);
 	int newpl = pathlength(newep->focus);
@@ -378,8 +380,7 @@ fixlevels(environ *oldep, environ *newep, int highest)
  * Initialization code.
  */
  
-Visible Procedure
-initterm(void)
+Visible Procedure initterm(void)
 {
 	initvtrm(); /* init virtual terminal package */
 	initgetc(); /* term-init string */
@@ -389,8 +390,7 @@ initterm(void)
 Visible bool vtrmactive= No;
 extern bool in_init;
 
-Hidden Procedure
-initvtrm(void)
+Hidden Procedure initvtrm(void)
 {
 	int flags = 0;
 	int err;
@@ -418,8 +418,7 @@ initvtrm(void)
 	vtrmactive= Yes;
 }
 
-Visible Procedure
-endterm(void)
+Visible Procedure endterm(void)
 {
 	trmsync(winheight, 0);	/* needed for buggy vt100's, that
 				 * may leave cusor at top of screen
@@ -436,8 +435,7 @@ endterm(void)
  * document.  (Called after each editing action.)
  */
 
-Visible Procedure
-endshow(void)
+Visible Procedure endshow(void)
 {
 	cell *p;
 	int last = winheight;
@@ -465,8 +463,7 @@ endshow(void)
  * (I.e. for lines with >= 80 spaces indentation)
  */
 
-Visible bool
-backtranslate(int *py, int *px)
+Visible bool backtranslate(int *py, int *px)
 {
 	cell *p;
 	int y = *py;
@@ -480,7 +477,7 @@ backtranslate(int *py, int *px)
 			if (*px < 0)
 				*px = 0;
 			*py = i;
-			if (p->c_oldvhole && (y > focy || y == focy && x > focx))
+			if (p->c_oldvhole && (y > focy || (y == focy && x > focx)))
 				--*px; /* Correction if beyond Vhole on same logical line */
 			return Yes;
 		}
@@ -494,8 +491,7 @@ backtranslate(int *py, int *px)
  * Set the indent level and window start line.
  */
 
-Visible Procedure
-setindent(int x)
+Visible Procedure setindent(int x)
 {
 	winstart= winheight-1;
 	/* the following is a hack; should change when

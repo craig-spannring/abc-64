@@ -10,9 +10,12 @@
 extern "C" {
 #endif
 
-    extern Visible Procedure delfocus(path *pp); 
     extern Visible bool delbody(environ *ep);
-
+    extern Visible Procedure delfocus(path *pp);
+    extern Visible bool copyinout(environ *ep);
+    extern Visible value copyout(environ *ep);
+    extern Visible bool ishole(environ *ep);
+    
 #ifdef __cplusplus
 }
 #endif

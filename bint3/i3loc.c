@@ -102,7 +102,7 @@ Visible Procedure uniquify(loc l) {
 			if (Is_local(*ta))
 				uniql(aa= Field(*ta, SmallIntVal(ke)));
 			else {
-				VOID uniq_assoc(*ta, ke);
+				uniq_assoc(*ta, ke);
 				aa= adrassoc(*ta, ke);
 			}
 			if (*aa != Vnil && Is_indirect(*aa))
@@ -120,7 +120,7 @@ Visible Procedure uniquify(loc l) {
 			if (!Is_table(ta)) interr(SEL_NO_TABLE);
 			else if (empty(ta)) interr(SEL_EMPTY);
 			else if (!in_keys(ke, ta)) interr(NO_KEY_OF_TABLE);
-			else VOID uniq_assoc(ta, ke);
+			else uniq_assoc(ta, ke);
 		}
 	}
 	else if (Is_trimloc(l)) {
@@ -133,7 +133,7 @@ Visible Procedure uniquify(loc l) {
 }
 
 Visible Procedure check_location(loc l) {
-	VOID location(l, Yes);
+	location(l, Yes);
 	/* location may produce an error message */
 }
 

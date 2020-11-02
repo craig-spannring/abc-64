@@ -3,14 +3,21 @@
 /* B input/output handling */
 
 #include "b.h"
+#include "b1memo.h"
+#include "b1mess.h"
+#include "b1outp.h"
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "bcom.h"
+#include "e1getc.h"
+#include "i1tex.h"
 #include "i2nod.h"
 #include "i2par.h"
+#include "i3com.h"
 #include "i3typ.h"
 #include "i3env.h"
+#include "i3fil.h"
 #include "i3in2.h"
 #include "i3scr.h"
 #include "i3err.h"
@@ -116,7 +123,7 @@ Hidden Procedure put_ch(char c) {
 #define OUTER 2
 #define COLL  4
 
-Hidden Procedure (*outproc)();
+Hidden Procedure (*outproc)(char c);
 
 #define Push_sp(perm) {if (!perm) (*outproc)(' ');}
 

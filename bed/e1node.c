@@ -8,6 +8,7 @@
 
 #include "b.h"
 #include "bedi.h"
+#include "e1eval.h"
 #include "etex.h"
 #include "bobj.h"
 #include "node.h"
@@ -39,8 +40,7 @@ Forward Hidden Procedure repwidth(node *pn, node old, node new);
  */
 
 #ifdef lint
-Visible node nodecopy(n)
-     node n;
+Visible node nodecopy(node n)
 {
 	return (node) copy((value) n);
 }
@@ -62,8 +62,7 @@ Visible Procedure nodeuniql(pn)
  * Allocate a new node.
  */
 
-Hidden node
-mk_node(int nch)
+Hidden node mk_node(int nch)
 {
 	node n = (node) grab(Nod, nch);
 	int i;
@@ -76,8 +75,7 @@ mk_node(int nch)
 	return n;
 }
 
-Visible node
-newnode(int nch, int sym, node *children)
+Visible node newnode(int nch, int sym, node *children)
 {
 	node n = (node) mk_node(nch); /* Must preset with zeros! */
 
@@ -112,8 +110,7 @@ Visible int nodewidth(node n) {
  * Like treereplace(), it does not increase the reference count of n.
  */
 
-Visible Procedure
-setchild(node *pn, int i, node n)
+Visible Procedure setchild(node *pn, int i, node n)
 {
 	node *pch;
 	node oldchild;
@@ -144,22 +141,19 @@ setchild(node *pn, int i, node n)
  */
 
 #ifdef lint
-Visible path
-pathcopy(p)
+Visible path pathcopy(p)
 	path p;
 {
 	return (path) copy((value) p);
 }
 
-Visible Procedure
-pathrelease(p)
+Visible Procedure pathrelease(p)
 	path p;
 {
 	release((value)p);
 }
 
-Visible Procedure
-pathuniql(pp)
+Visible Procedure pathuniql(pp)
 	path *pp;
 {
 	uniql((value*)pp);
@@ -170,8 +164,7 @@ pathuniql(pp)
  * Allocate a new path entry.
  */
 
-Hidden path
-mk_path(void)
+Hidden path mk_path(void)
 {
 	path p = (path) grab(Pat, 0);
 
@@ -186,8 +179,7 @@ mk_path(void)
 	return p;
 }
 
-Visible path
-newpath(path pa, node n, int i)
+Visible path newpath(path pa, node n, int i)
 {
 	path p = (path) mk_path();
 
@@ -225,8 +217,7 @@ newpath(path pa, node n, int i)
  * be the major caller of noderepr() and fwidth().
  */
 
-Hidden Procedure
-repwidth(node *pn, node old, node new)
+Hidden Procedure repwidth(node *pn, node old, node new)
 {
 	int w = Width(*pn);
 	int oldwidth = nodewidth(old);
@@ -256,8 +247,7 @@ repwidth(node *pn, node old, node new)
 }
 
 
-Visible Procedure
-markpath(path *pp, markbits new)
+Visible Procedure markpath(path *pp, markbits new)
 {
 	node *pn;
 	markbits old;
@@ -273,8 +263,7 @@ markpath(path *pp, markbits new)
 }
 
 
-Visible Procedure
-unmkpath(path *pp, int del)
+Visible Procedure unmkpath(path *pp, int del)
 {
 	node *pn;
 	markbits old;
@@ -290,8 +279,7 @@ unmkpath(path *pp, int del)
 }
 
 
-Hidden Procedure
-clearmarks(node *pn)
+Hidden Procedure clearmarks(node *pn)
 {
 	int i;
 
@@ -312,8 +300,7 @@ clearmarks(node *pn)
  * Mark bits are copied from the node being replaced.
  */
 
-Visible Procedure
-treereplace(path *pp, node n)
+Visible Procedure treereplace(path *pp, node n)
 {
 	node *pn;
 	markbits old;
@@ -335,8 +322,7 @@ treereplace(path *pp, node n)
 }
 
 
-Visible bool
-up(path *pp)
+Visible bool up(path *pp)
 {
 	path p = *pp;
 	path pa = Parent(p);
@@ -392,8 +378,7 @@ up(path *pp)
 }
 
 
-Visible bool
-downi(path *pp, int i)
+Visible bool downi(path *pp, int i)
 {
 	node n;
 	auto int y;
@@ -414,8 +399,7 @@ downi(path *pp, int i)
 }
 
 
-Visible bool
-downrite(path *pp)
+Visible bool downrite(path *pp)
 {
 	if (!Isnode(Tree(*pp)))
 		return No;
@@ -423,8 +407,7 @@ downrite(path *pp)
 }
 
 
-Visible bool
-left(path *pp)
+Visible bool left(path *pp)
 {
 	int i;
 
@@ -437,8 +420,7 @@ left(path *pp)
 }
 
 
-Visible bool
-rite(path *pp)
+Visible bool rite(path *pp)
 {
 	int i;
 	path pa = Parent(*pp);
@@ -463,16 +445,14 @@ rite(path *pp)
  * ones (lint will tell you which they are).
  */
 
-Visible Procedure
-top(path *pp)
+Visible Procedure top(path *pp)
 {
 	while (up(pp))
 		;
 }
 
 #ifdef NOT_USED
-Visible bool
-nextnode(pp)
+Visible bool nextnode(pp)
 	path *pp;
 {
 	while (!rite(pp)) {
@@ -484,8 +464,7 @@ nextnode(pp)
 #endif
 
 #ifdef NOT_USED
-Visible Procedure
-firstleaf(pp)
+Visible Procedure firstleaf(pp)
 	path *pp;
 {
 	while (down(pp))
@@ -494,8 +473,7 @@ firstleaf(pp)
 #endif
 
 #ifdef NOT_USED
-Visible bool
-nextleaf(pp)
+Visible bool nextleaf(pp)
 	path *pp;
 {
 	if (!nextnode(pp))
@@ -506,8 +484,7 @@ nextleaf(pp)
 #endif
 
 #ifdef NOT_USED
-Visible bool
-prevnode(pp)
+Visible bool prevnode(pp)
 	path *pp;
 {
 	while (!left(pp)) {
@@ -606,8 +583,7 @@ prevmarked(pp, x)
  */
 
 
-Visible int
-pathlength(path p)
+Visible int pathlength(path p)
 {
 	int n;
 
@@ -616,8 +592,7 @@ pathlength(path p)
 	return n;
 }
 
-Visible Procedure
-putintrim(value *pn, int head, int tail, string str)
+Visible Procedure putintrim(value *pn, int head, int tail, string str)
 {
 	value v = *pn; 
 	value t1, t2, t3;
@@ -639,8 +614,7 @@ putintrim(value *pn, int head, int tail, string str)
  * Touch the node in focus.
  */
 
-Visible Procedure
-touchpath(path *pp)
+Visible Procedure touchpath(path *pp)
 {
 	nodeuniql(Loctree(pp));
 }

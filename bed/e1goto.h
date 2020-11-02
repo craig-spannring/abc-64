@@ -12,9 +12,10 @@
 extern "C" {
 #endif
 
-    Forward Visible Procedure gotofix(environ *ep, int y, int x);
-    Forward Visible bool      gotoyx(environ *ep, int y, int x);
-
+    extern Visible Procedure gotofix(environ *ep, int y, int x);
+    extern Visible bool      gotoyx(environ *ep, int y, int x);
+    extern Visible bool      gotocursor(environ *ep);
+    extern Visible bool      gotomouse(environ *ep);
 
 #ifdef __cplusplus
 }

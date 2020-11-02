@@ -201,6 +201,9 @@ extern literal idf_cntxt;
 #define _sign2_is(s) \
 	(Char(tx) == (s[0]) && Char(tx+1) == (s[1]) ? (tx+= 2, Yes) : No)
 
+/*
+ * Implicitly invoke function call in a way that looks like a variable access
+ */
 #define nwl_sign	nwl_sign_()
 #define times_sign	times_sign_()
 #define over_sign	over_sign_()
@@ -211,6 +214,16 @@ extern literal idf_cntxt;
 #define less_than_sign	less_than_sign_()
 #define greater_than_sign greater_than_sign_()
 
+extern Visible bool nwl_sign_(void);
+extern Visible bool times_sign_(void);
+extern Visible bool over_sign_(void);
+extern Visible bool power_sign_(void);
+extern Visible bool numtor_sign_(void);
+extern Visible bool denomtor_sign_(void);
+extern Visible bool join_sign_(void);
+extern Visible bool less_than_sign_(void);
+extern Visible bool greater_than_sign_(void);
+    
 /* keywords */
 
 #define atkw(kw, s)		(strcmp(kw, s) == 0)

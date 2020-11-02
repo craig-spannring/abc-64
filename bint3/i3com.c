@@ -1,10 +1,14 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
+#include "i3com.h"
+
 #include "b.h"
 #include "b1memo.h"
+#include "b1outp.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "bcom.h"
+#include "e1comm.h"
 #include "i3err.h"
 #include "i3scr.h"
 #include "port.h"

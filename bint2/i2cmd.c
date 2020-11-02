@@ -2,6 +2,7 @@
 
 #include "i2cmd.h"
 #include "i2par.h"
+
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"
@@ -91,8 +92,9 @@ Hidden bool chk_indent(intlet nlevel, intlet olevel, bool first)
 Hidden Procedure suite_command(parsetree *v, value *c) {
 	char *kw;
 	
-	if (!is_cmdname(ceol, &kw) || !control_command(kw, v) && 
-			!simple_command(kw, v, c) ) 
+	if (!is_cmdname(ceol, &kw)
+      || (!control_command(kw, v)
+          && !simple_command(kw, v, c)) )
 		parerr(MESS(2001, "no command where expected"));
 }
 

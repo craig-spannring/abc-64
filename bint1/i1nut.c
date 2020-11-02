@@ -2,6 +2,8 @@
 
 #include "b.h"
 #include "bobj.h" /* for relation */
+#include "e1getc.h"
+#include "i1nug.h"
 #include "i1num.h"
 #include "b1grab.h"
 

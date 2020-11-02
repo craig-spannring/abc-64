@@ -7,10 +7,13 @@
  * obj.c contain common parts).
  */
 
+#include "i1tra.h"
+
 #include "b.h"
 #include "bobj.h"
 #include "i0err.h"
 #include "i1num.h"
+#include "i3err.h"
 
 #define CHOICE_TLT	MESS(1600, "in choice t, t is not a text list or table")
 #define CHOICE_EMPTY	MESS(1601, "in choice t, t is empty")

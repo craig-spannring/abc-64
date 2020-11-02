@@ -4,6 +4,8 @@
  * B editor -- Save Parse tree on file.
  */
 
+#include "e1save.h"
+
 #include "b.h"
 #include "b0lan.h"
 #include "bedi.h"

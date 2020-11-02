@@ -3,6 +3,7 @@
 #include "i1nug.h"
 #include "b.h"
 #include "bobj.h"
+#include "i1nui.h"
 #include "i1num.h"
 #include "i3err.h"
 

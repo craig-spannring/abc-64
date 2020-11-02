@@ -12,9 +12,13 @@
 #include "bobj.h"
 #include "e1deco.h"
 #include "e1edoc.h"
+#include "e1erro.h"
 #include "e1inse.h"
+#include "e1node.h"
+#include "e1que1.h"
 #include "e1que2.h"
 #include "e1supr.h"
+#include "e1wide.h"
 #include "node.h"
 #include "supr.h"
 #include "queu.h"
@@ -382,8 +386,8 @@ Hidden bool atrealhole(environ *ep) {
 			if (Is_etext(n))
 				return No;
 			if (symbol(n) == Hole
-			    || symbol(n) == Exp_plus 
-			       && symbol(child(n, 1)) == Hole
+			    || (symbol(n) == Exp_plus 
+              && symbol(child(n, 1)) == Hole)
 			   )
 				return Yes;
 		}

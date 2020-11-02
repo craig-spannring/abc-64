@@ -4,6 +4,8 @@
  * B editor -- Save focus position.
  */
 
+#include "e1spos.h"
+
 #include "b.h"
 
 #ifdef SAVEPOS
@@ -12,6 +14,7 @@
 #include "bedi.h"
 #include "bobj.h"
 #include "bfil.h"
+#include "e1line.h"
 #include "node.h"
 #include "supr.h"
 #include "bmem.h"
@@ -157,6 +160,7 @@ Visible int getpos(char *fname) {
 
 Visible bool savpos(char *fname, environ *ep) {
 	sav_pos(fname, lineno(ep) + 1);
+  return 1;
 }
 
 /* delpos() is called from interpreter */

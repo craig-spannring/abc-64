@@ -48,11 +48,6 @@ Visible width itemwidth[4]= {Cw, Lw, Tw, Kw};
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-typedef struct {
-	btreeptr s_ptr;
-	int s_lim;
-} finger[Maxheight], *fingertip;
-
 #define Snil ((fingertip)0)
 
 #define Push(s, p, l) ((s)->s_ptr= (p), ((s)->s_lim= (l)), (s)++)
@@ -428,7 +423,9 @@ Visible Procedure replace(value a, value *pt, value k) {
 }
 
 Visible bool delete(value *pt, value k)  {
-	finger f; fingertip ft= f; intlet it= Itemtype(*pt);
+	finger    f;
+  fingertip ft= f;
+  intlet    it= Itemtype(*pt);
 #ifdef BTRTRACE
 	if (btrfp) check(*pt, " (delete in)");
 #endif
@@ -471,7 +468,7 @@ Visible Procedure insert(value v, value *pl) {
 #endif
 }
 
-Visible Procedure vremove(v, pl) value v, *pl; {
+Visible Procedure vremove(value v, value *pl) {
 	if (is_large_range(*pl)) {
 		interr(REMOVE_RAN);
 		return;

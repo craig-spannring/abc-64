@@ -139,8 +139,7 @@ Visible int fwidth(string str)
  * have correctly been calculated.
  */
 
-Visible int
-evalwidth(node n)
+Visible int evalwidth(node n)
 {
 	int w;
 	int i;

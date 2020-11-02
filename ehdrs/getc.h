@@ -28,8 +28,6 @@ extern Procedure addkeydef();
 #else
 
 #define MAXDEFS 100
-extern Procedure initgetc();
-extern Procedure endgetc();
 
 #endif
 

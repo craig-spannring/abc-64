@@ -57,8 +57,7 @@ Forward value copyout(environ *ep);
  * if it is only a hole.
  */
 
-Visible bool
-deltext(environ *ep)
+Visible bool deltext(environ *ep)
 {
 	higher(ep);
 	shrink(ep);
@@ -472,8 +471,7 @@ delhole(environ *ep)
  * Subroutine to delete the focus.
  */
 
-Visible Procedure
-delfocus(path *pp)
+Visible Procedure delfocus(path *pp)
 {
 	path pa = parent(*pp);
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
@@ -488,8 +486,7 @@ delfocus(path *pp)
  * empty (just a hole).
  */
 
-Visible bool
-copyinout(environ *ep)
+Visible bool copyinout(environ *ep)
 {
 	shrink(ep);
 	if (!ishole(ep)) {
@@ -512,8 +509,7 @@ copyinout(environ *ep)
  * Copy the focus to the copy buffer.
  */
 
-Visible value
-copyout(environ *ep)
+Visible value copyout(environ *ep)
 {
 	auto queue q = Qnil;
 	auto path p;
@@ -673,8 +669,7 @@ copyin(environ *ep, queue q)
  * Assumes shrink(ep) has already been performed.
  */
 
-Visible bool
-ishole(environ *ep)
+Visible bool ishole(environ *ep)
 {
 	int sym;
 

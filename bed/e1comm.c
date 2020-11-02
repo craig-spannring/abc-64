@@ -8,6 +8,12 @@
 #include "b.h"
 #include "bedi.h"
 #include "bcom.h"
+#include "e1edoc.h"
+#include "e1deco.h"
+#include "e1save.h"
+#include "e1spos.h"
+#include "e1supr.h"
+#include "i3err.h"
 #include "node.h"
 #include "supr.h"       /* for environ */
 #include "tabl.h"
@@ -49,16 +55,16 @@ Visible Procedure endbed(void) {
 		/* To avoid loops if saving is cancelled. */
 	if (savewhere && ep) {
 		if (ep->generation > 0) {
-			VOID save(ep->focus, savewhere);
+			save(ep->focus, savewhere);
 #ifdef USERSUGG
 			writesugg(ep->focus);
 #endif /* USERSUGG */
 		}
 #ifdef SAVEBUF
 		if (ep->copyflag)
-			VOID savequeue(ep->copybuffer, (string) buffile);
+			savequeue(ep->copybuffer, (string) buffile);
 		else
-			VOID savequeue(Vnil, (string) buffile);
+			savequeue(Vnil, (string) buffile);
 #endif /* SAVEBUF */
 #ifdef SAVEPOS
 		savpos(savewhere, ep);
@@ -66,9 +72,9 @@ Visible Procedure endbed(void) {
 	}
 #ifdef SAVEBUF
 	if (top_ep->copyflag)
-		VOID savequeue(top_ep->copybuffer, (string) buffile);
+		savequeue(top_ep->copybuffer, (string) buffile);
 	else
-		VOID savequeue(Vnil, (string) buffile);
+		savequeue(Vnil, (string) buffile);
 #endif /* SAVEBUF */
 	Erelease(*top_ep);
 }
@@ -83,11 +89,11 @@ Visible Procedure abced_file(string filename, intlet errline, literal kind, bool
 #endif
 	setindent(0);
 	doctype= D_perm;
-	VOID dofile(ep, filename, errline, kind, creating, changed);
+	dofile(ep, filename, errline, kind, creating, changed);
 	endshow();
 	top(&ep->focus);
 	ep->mode = WHOLE;
-	VOID deltext(ep);
+	deltext(ep);
 	if (!ep->copyflag) {
 		release(ep->copybuffer);
 		ep->copybuffer = Vnil;
@@ -121,13 +127,13 @@ Visible char *ed_line(literal kind, int indent) {
 	if (kind != R_cmd) {
 		doctype= D_input;
 	}
-	VOID editdocument(ep, No);
+	editdocument(ep, No);
 	endshow();
 	top(&ep->focus);
 	ep->mode = WHOLE;
 	if (!canceled)
 		buf= senddoc(ep->focus);
-	VOID deltext(ep);
+	deltext(ep);
 
 	if (canceled) {
 		int_signal();

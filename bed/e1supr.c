@@ -4,6 +4,8 @@
  * B editor -- Superroutines.
  */
 
+#include "e1supr.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "etex.h"
@@ -74,7 +76,7 @@ Visible Procedure subgrow(environ *ep, bool ignorespaces, bool deleting)
 	case VHOLE:
 	case FHOLE:
 		ritevhole(ep);
-		if (ep->mode != FHOLE && ep->mode != VHOLE || lenitem(ep) == 0)
+		if ((ep->mode != FHOLE && ep->mode != VHOLE) || lenitem(ep) == 0)
 			leftvhole(ep);
 		else if (ep->mode == FHOLE && ep->s2 == 0 && ep->s1 > 1) {
 			n= tree(ep->focus);
@@ -271,7 +273,7 @@ Visible Procedure shrink(environ *ep)
 			if (ep->mode != VHOLE && ep->mode != FHOLE)
 				continue;
 			sym = symbol(tree(ep->focus));
-			if (sym == Optional || sym == Hole && ep->s2 == 0)
+			if (sym == Optional || (sym == Hole && ep->s2 == 0))
 				ep->mode = WHOLE;
 			return;
 
@@ -680,7 +682,7 @@ Visible bool prevnnitem(environ *ep)
 
 	while (previtem(ep)) {
 		len = lenitem(ep);
-		if (len > 0 || len < 0 && ep->s1 > 1)
+		if (len > 0 || (len < 0 && ep->s1 > 1))
 			return Yes;
 	}
 	ep->s1 = s1save;
@@ -851,6 +853,7 @@ Visible int focwidth(environ *ep)
 
 	default:
 		Abort();
+		return 0;
 		/* NOTREACHED */
 	}
 }
@@ -914,6 +917,7 @@ Visible int focoffset(environ *ep)
 
 	default:
 		Abort();
+		return 0;
 		/* NOTREACHED */
 	}
 }
@@ -968,6 +972,7 @@ Visible int focchar(environ *ep)
 
 	default:
 		Abort();
+		return 0;
 		/* NOTREACHED */
 
 	}

@@ -2,6 +2,8 @@
 
 /* B texts */
 
+#include "i1tex.h"
+
 #include "b.h"
 #include "b1memo.h"
 #include "b1grab.h"
@@ -212,7 +214,6 @@ typedef stackelem *stackptr;
 #define Push(s, p, l) ((s)->s_ptr = (p), ((s)->s_lim = (l)), (s)++)
 #define Pop(s, p, l) (--(s), (p) = (s)->s_ptr, (l) = (s)->s_lim)
 
-extern stackptr unzip();
 extern int movnptrs();
 
 Hidden btreeptr zip(stackptr s1, stackptr sp1, stackptr s2, stackptr sp2) {
@@ -470,7 +471,7 @@ Visible value repeat(value t, value n) {
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-Visible Procedure convtext(void (*outproc) (/* ??? */), value v, char quote)
+Visible Procedure convtext(void (*outproc) (char ch), value v, char quote)
 {
 	if (!Valid(v) || !Is_text(v)) {
 		(*outproc)('?');

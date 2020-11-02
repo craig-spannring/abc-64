@@ -6,6 +6,7 @@
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "e1getc.h"
 #include "i0err.h"
 #include "i2nod.h"
 #include "i3err.h"

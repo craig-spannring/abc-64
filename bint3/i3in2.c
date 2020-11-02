@@ -8,6 +8,7 @@
 #include "i0err.h"
 #include "i3cen.h"
 #include "i3env.h"
+#include "i3err.h"
 #include "i3in2.h"
 #include "i3sou.h"
 #include "b1grab.h"

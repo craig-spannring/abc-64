@@ -4,10 +4,13 @@
  * B editor -- Print help blurb.
  */
 
+#include "e1help.h"
+
 #include "b.h"
 #include "bedi.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "e1erro.h"
 #include "oper.h"
 #include "getc.h"
 #include "port.h"
@@ -73,8 +76,7 @@ Forward Hidden Procedure more_help(void);
  * The user must type [RETURN] to continue.
  */
 
-Visible bool
-help(void)
+Visible bool help(void)
 {
 	int len = sizeof buffer;
 	bool two_columns;

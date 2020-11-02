@@ -6,11 +6,11 @@
 #define E1SUPR_h_2115d5d2980180e9da9293d6c42f4cc1
 
 #include "b.h"
+#include "supr.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
     
     Visible bool allspaces(string str);
     Visible bool nextnnitem(environ *ep);
@@ -23,6 +23,8 @@ extern "C" {
     Visible int  nodechar(node n);
     Visible void ecopy(environ *s, environ *d);
     Visible void erelease(environ* ep);
+    Visible bool checkep(environ *ep);
+    Visible bool ev_eq(environ *l, environ *r);
 
 #ifdef __cplusplus
 }

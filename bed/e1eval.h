@@ -8,9 +8,9 @@
 extern "C" {
 #endif
 
-extern Visible Procedure evalcoord(node n, int jch, int *py, int *px, int *plevel); 
-extern Visible int fwidth(string str);
-
+    extern Visible Procedure evalcoord(node n, int jch, int *py, int *px, int *plevel); 
+    extern Visible int fwidth(string str);
+    extern Visible int evalwidth(node n);
 
 #ifdef __cplusplus
 }

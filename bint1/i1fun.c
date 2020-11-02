@@ -7,7 +7,10 @@
 #include "b.h"
 #include "bobj.h"
 #include "i0err.h"
+#include "i1nua.h"
+#include "i1nui.h"
 #include "i1num.h"
+#include "i3err.h"
 
 /*
  * The visible routines here implement predefined B arithmetic operators,
@@ -155,8 +158,8 @@ Visible value vmod(value u, value v) {
 	value q, f, d, p;
 
 	if (v == (value)int_0 ||
-		Rational(v) && Numerator((rational)v) == int_0 ||
-		Approximate(v) && Frac((real)v) == 0) {
+      (Rational(v) && Numerator((rational)v) == int_0) ||
+      (Approximate(v) && Frac((real)v) == 0)) {
 		interr(MESS(600, "in x mod y, y is zero"));
 		return Copy(u);
 	}
@@ -187,7 +190,7 @@ Visible value vpower(u, v) value u, v; {
 	real ru, rv, rw;
 	if (Exact(u) && (Integral(v) ||
 			/* Next check catches for integers disguised as rationals: */
-			Rational(v) && Denominator((rational)v) == int_1)) {
+                   (Rational(v) && Denominator((rational)v) == int_1))) {
 		rational a;
 		integer b = Integral(v) ? (integer)v : Numerator((rational)v);
 			/* Now b is really an integer. */
@@ -493,8 +496,8 @@ Visible value denominator(value v) {
 
 Visible value root2(value u, value v) {
 	if (u == (value)int_0 ||
-		Rational(u) && Numerator((rational)u) == int_0 ||
-		Approximate(u) && Frac((real)u) == 0) {
+      (Rational(u) && Numerator((rational)u) == int_0) ||
+      (Approximate(u) && Frac((real)u) == 0)) {
 		interr(MESS(604, "in n root x, n is zero"));
 		v = Copy(v);
 	} else {

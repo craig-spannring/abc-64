@@ -2,6 +2,7 @@
 
 /* Rational arithmetic */
 
+#include "i1nur.h"
 #include "b.h"
 #include "bobj.h"
 #include "e1getc.h"
