@@ -16,6 +16,8 @@ stc/*.o
 CMakeLists.txt~
 Makefile
 abc
+abc32
+abc64
 abckeys
 mkmach
 answers
