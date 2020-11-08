@@ -33,21 +33,21 @@ set_property(TARGET abc PROPERTY C_STANDARD 11)
 add_dependencies(abc mach_h_AutoGened file_h_AutoGened)
 target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
-
   
   -Wall
-
+  
   #-Wno-implicit-int
-  -Wimplicit-function-declaration
+  # -Wimplicit-function-declaration
   #-Wno-return-type
-  #-Wno-parentheses
-  #-Wno-deprecated-declarations
-  #-Wno-unused-value
-  -Wno-incompatible-pointer-types
-  -Wno-char-subscripts
+  # -Wno-parentheses
+  -Wno-deprecated-declarations
+  # -Wno-unused-value
+  # -Wno-char-subscripts
   #-Wno-sometimes-unitialized
   
+  # -Wno-incompatible-pointer-types
   # -Wno-int-to-pointer-cast
+  # -Wint-to-pointer-cast
   # -Werror=int-to-pointer-cast
   )
 target_link_libraries(abc
