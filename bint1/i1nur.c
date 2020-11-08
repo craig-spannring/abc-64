@@ -250,7 +250,7 @@ Visible relation rat_comp(rational u, rational v) {
 	integer nu, nv;
 
 	/* 1. Compare pointers */
-	if (u == v || N(u) == N(v) && D(u) == D(v)) return 0;
+	if (u == v || (N(u) == N(v) && D(u) == D(v))) return 0;
 
 	/* 2. Either zero? */
 	if (N(u) == int_0) return int_comp(int_0, N(v));

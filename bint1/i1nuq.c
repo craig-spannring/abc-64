@@ -88,8 +88,8 @@ Visible digit int_ldiv(integer v1, integer w1, integer *pquot, integer *prem) {
 
 	/* Check v << w or single-digit w */
 	if (Length(v1) < Length(w1)
-		|| Length(v1) == Length(w1)
-			&& Digit(v1, Length(v1)-1) < Digit(w1, Length(w1)-1)) {
+		|| (Length(v1) == Length(w1)
+			&& Digit(v1, Length(v1)-1) < Digit(w1, Length(w1)-1))) {
 		a = int_0;
 		if (prem) {
 			if (v1 == &vv1) *prem= (integer) MkSmallInt(Digit(v1,0));

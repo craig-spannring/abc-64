@@ -104,7 +104,7 @@ Visible value split(value t) {
 	return r;
 }
 
-Hidden value uplower(value t, int (*islowupper) (/* ??? */), int (*touplower) (/* ??? */))
+Hidden value uplower(value t, int (*islowupper) (char), int (*touplower) (/* ??? */))
 {
 	value i, sizt, r, ti, c;
 	char s[2];

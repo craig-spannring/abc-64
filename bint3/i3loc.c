@@ -177,12 +177,12 @@ Visible loc trim_loc(loc l, value N, char sign) {
 		
 		if (sign == '@') { 	/* behead: B= max{N-1+B, B} */
 			Bnew= sum(B, w= diff(N, one));
-			if (changed= (compare(Bnew, B) > 0))
+			if ((changed= (compare(Bnew, B) > 0)))
 				B= Bnew;
 		}
 		else {			/* curtail: C= max{n-N-B, C} */
 			Cnew= diff(w= diff(n, N), B);
-			if (changed= (compare(Cnew, C) > 0))
+			if ((changed = (compare(Cnew, C) > 0)))
 				C= Cnew;
 		}
 		if (changed) {
@@ -343,7 +343,7 @@ Hidden bool l_exists(loc l) {
 		simploc *sl= Simploc(l);
 		value ta= sl->e->tab, *ll;
 		return in_locenv(ta, sl->i, &ll) ||
-			Loc_indirect(ll) && Is_global(ta);
+			(Loc_indirect(ll) && Is_global(ta));
 	}
 	else if (Is_trimloc(l)) {
 		interr(DEL_TRIM_TARGET);

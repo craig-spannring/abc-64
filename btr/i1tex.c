@@ -4,18 +4,21 @@
 
 #include "i1tex.h"
 
+#include <assert.h>
+
 #include "b.h"
 #include "b1memo.h"
 #include "b1grab.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "e1erro.h"
 #include "e1getc.h"
 #include "i1btr.h"
 #include "i1lta.h"
 #include "i1tlt.h"
 #include "i3err.h"
 
-Forward Hidden Procedure convbtext(void (*outproc) (/* ??? */), btreeptr p, char quote);
+Forward Hidden Procedure convbtext(void (*outproc) (char), btreeptr p, char quote);
 
 #define CURTAIL_TEX	MESS(200, "in t|n, t is not a text")
 #define CURTAIL_NUM	MESS(201, "in t|n, n is not a number")
@@ -216,6 +219,13 @@ typedef stackelem *stackptr;
 
 extern int movnptrs();
 
+Hidden fingertip cvt_stack_to_fingertip(const stackelem* s) {
+    assert(sizeof(*((fingertip)0)) == sizeof(*s));
+    assert(sizeof(((fingertip)0)->s_ptr) == sizeof(s->s_ptr));
+    assert(sizeof(((fingertip)0)->s_lim) == sizeof(s->s_lim));
+    return (fingertip)s;
+}
+ 
 Hidden btreeptr zip(stackptr s1, stackptr sp1, stackptr s2, stackptr sp2) {
 	btreeptr p1, p2, newptr[2]; int l1, l2, i, n, n2;
 #define q1 newptr[0]
@@ -309,8 +319,9 @@ Hidden btreeptr zip(stackptr s1, stackptr sp1, stackptr s2, stackptr sp2) {
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 Hidden value ibehead(value v, int h) { /* v@h */
-	stack s; stackptr sp;
-	sp = (stackptr) unzip(Root(v), h-1, s);
+	stack s;
+	stackptr sp;
+	sp = (stackptr) unzip(Root(v), h-1, cvt_stack_to_fingertip(s));
 	v = grab(Tex, Ct);
 	Root(v) = zip(Snil, Snil, s, sp);
 	return v;
@@ -318,7 +329,7 @@ Hidden value ibehead(value v, int h) { /* v@h */
 
 Hidden value icurtail(value v, int t) { /* v|t */
 	stack s; stackptr sp;
-	sp = (stackptr) unzip(Root(v), t, s);
+	sp = (stackptr) unzip(Root(v), t, cvt_stack_to_fingertip(s));
 	v = grab(Tex, Ct);
 	Root(v) = zip(s, sp, Snil, Snil);
 	return v;
@@ -326,8 +337,8 @@ Hidden value icurtail(value v, int t) { /* v|t */
 
 Hidden value iconcat(value v, value w) { /* v^w */
 	stack s1, s2;
-	stackptr sp1 = (stackptr) unzip(Root(v), Tltsize(v), s1);
-	stackptr sp2 = (stackptr) unzip(Root(w), 0, s2);
+	stackptr sp1 = (stackptr) unzip(Root(v), Tltsize(v), cvt_stack_to_fingertip(s1));
+	stackptr sp2 = (stackptr) unzip(Root(w), 0, cvt_stack_to_fingertip(s2));
 	v = grab(Tex, Ct);
 	Root(v) = zip(s1, sp1, s2, sp2);
 	return v;
@@ -482,7 +493,7 @@ Visible Procedure convtext(void (*outproc) (char ch), value v, char quote)
 	if (quote) (*outproc)(quote);
 }
 
-Hidden Procedure convbtext(void (*outproc) (/* ??? */), btreeptr p, char quote)
+Hidden Procedure convbtext(void (*outproc) (char), btreeptr p, char quote)
 {
 	int i, n = Lim(p); char c;
 

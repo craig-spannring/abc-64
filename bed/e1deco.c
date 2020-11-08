@@ -463,6 +463,7 @@ Hidden bool delhole(environ *ep)
 	default:
 		Abort();
 		/* NOTREACHED */
+		return No;
 
 	}
 }

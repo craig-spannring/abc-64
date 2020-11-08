@@ -438,6 +438,7 @@ Hidden int ccc;
 /*ARGSUSED*/
 Hidden int countchar(int ch) {
 	ccc++;
+  return ch; 
 }
 
 Hidden int strcost(char *str) {
@@ -684,9 +685,9 @@ Hidden int start_trm(void) {
 	struct winsize win;
 
 	if (ioctl(0, TIOCGWINSZ, (char*)&win) == 0) {
-		if (win.ws_col > 0 && ((int) win.ws_col) != g_cols
+		if ((win.ws_col > 0 && ((int) win.ws_col) != g_cols)
 		    ||
-		    win.ws_row > 0 && ((int) win.ws_row) != g_lines) {
+		    (win.ws_row > 0 && ((int) win.ws_row) != g_lines)) {
 			/* Window size has changed.
 			   Release previously allocated buffers. */
 			if (linedata != NULL) {
@@ -801,7 +802,7 @@ Hidden bool get_pos(string format, int *py, int *px) {
 	bool incr_orig = No;
 	int i, ni;
 
-	while (fc = *format++) {
+	while ((fc = *format++)) {
 		if (fc != '%') {
 			if (trminput() != fc)
 				return No;
@@ -1481,6 +1482,7 @@ Hidden Procedure set_blanks(int y, int xfrom, int xto) {
  */
 Hidden int outchar(int ch) {
 	fputc(ch, fp);
+  return ch;
 }
 
 /*
@@ -1507,9 +1509,9 @@ Visible Procedure trmscrollup(int yfirst, int ylast, int by) {
 	if (!has_xs && so_mode != Off)
 		standend();
 	
-	if (by > 0 && yfirst + by > ylast
+	if ((by > 0 && yfirst + by > ylast)
 	    ||
-	    by < 0 && yfirst - by > ylast)
+	    (by < 0 && yfirst - by > ylast))
 	{
 		clear_lines(yfirst, ylast);
 		return;

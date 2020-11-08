@@ -28,7 +28,7 @@ Visible bool maystart(char c, int ilex) {
 
 	ilex-= LEXICAL;
 	Assert(0 <= ilex && ilex < NLEX);
-	if (!isascii(c) || c != ' ' && !isprint(c))
+	if (!isascii(c) || (c != ' ' && !isprint(c)))
 		return No;
 	cp= lextab[ilex].l_start;
 	if (*cp == '^')
@@ -47,7 +47,7 @@ Visible bool maycontinue(char c, int ilex) {
 
 	ilex-= LEXICAL;
 	Assert(0 <= ilex && ilex < NLEX);
-	if (!isascii(c) || c != ' ' && !isprint(c))
+	if (!isascii(c) || (c != ' ' && !isprint(c)))
 		return No;
 	cp= lextab[ilex].l_continue;
 	if (*cp == '^')

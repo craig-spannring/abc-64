@@ -41,7 +41,7 @@ typedef union itm {
 
 /* Itemwidth, used for offset in btreenodes */
 typedef char width;
-#define Itemwidth(it) (itemwidth[it])
+#define Itemwidth(it) (itemwidth[(unsigned int)it])
 extern char itemwidth[];	/*  uses: */
 #define Cw (sizeof(texitem))
 #define Lw (sizeof(lisitem))

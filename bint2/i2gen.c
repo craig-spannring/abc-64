@@ -573,8 +573,8 @@ Visible value copystddef(value f) {
 Hidden bool is_basic_target(value v) {
 	if (!Valid(v))
 		return No;
-	return	locals != Vnil && envassoc(locals, v) != Pnil ||
-		envassoc(globals, v) != Pnil;
+	return	(locals != Vnil && envassoc(locals, v) != Pnil) ||
+      envassoc(globals, v) != Pnil;
 }
 
 Hidden bool is_variable(value v) {

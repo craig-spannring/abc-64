@@ -26,10 +26,10 @@ grabbtreenode(literal flag, literal it)
 		sizeof(btabnode), sizeof(btabnode)};
 	switch (flag) {
 	case Inner:
-		syz= isize[it];
+      syz= isize[(unsigned int)it];
 		break;
 	case Bottom:
-		syz= bsize[it];
+      syz= bsize[(unsigned int)it];
 		break;
 	case Irange:
 	case Crange:

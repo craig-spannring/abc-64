@@ -103,8 +103,8 @@ Visible bool mayinsert(node n, int ich, int s2, char c)
 	classptr cp;
 	value v = (value) child(n, ich);
 	char c1;
-	bool (*fun1)() = s2 > 0 ? /*&*/maystart : /*&*/maycontinue;
-	bool (*fun2)() = s2 > 0 ? /*&*/maycontinue : /*&*/maystart;
+	bool (*fun1)(char, int) = s2 > 0 ? /*&*/maystart : /*&*/maycontinue;
+	bool (*fun2)(char, int) = s2 > 0 ? /*&*/maycontinue : /*&*/maystart;
 
 	Assert(v && v->type == Etex);
 	Assert(sympa > 0 && sympa < TABLEN);
@@ -162,7 +162,7 @@ Visible bool soften(environ *ep, string *pstr, int alt_c)
 			continue;
 		if (cp[1] >= TABLEN)
 			continue;
-		tp = &table[cp[1]];
+		tp = &table[(unsigned int)cp[1]];
 		if (Fw_zero(tp->r_repr[0])) {
 			Assert(tp->r_class[0]->c_class[0] >= LEXICAL);
 			n = tp->r_node;
@@ -175,8 +175,8 @@ Visible bool soften(environ *ep, string *pstr, int alt_c)
 	buf[ep->s2] = 0;
 	setchild(&n, 1, (node) mk_etext(buf));
 	if (!mayinsert(n, 1, ep->s2, repr[ep->s2])) {
-		if (!**pstr || !mayinsert(n, 1, ep->s2, **pstr)
-			&& (!alt_c || !mayinsert(n, 1, ep->s2, alt_c))) {
+		if (!**pstr || (!mayinsert(n, 1, ep->s2, **pstr)
+			&& (!alt_c || !mayinsert(n, 1, ep->s2, alt_c)))) {
 			noderelease(n); /* Don't forget! */
 			return No;
 		}
@@ -275,8 +275,8 @@ Visible bool resuggest(environ *ep, string *pstr, int alt_c)
 			if (!str)
 				str = "";
 			if (strcmp(str, oldrp[i])
-				|| childsym[i] != Optional && childsym[i] != Hole
-					&& !isinclass(childsym[i], tp->r_class[i])) {
+				|| (childsym[i] != Optional && childsym[i] != Hole
+					&& !isinclass(childsym[i], tp->r_class[i]))) {
 				ok = No;
 				break;
 			}

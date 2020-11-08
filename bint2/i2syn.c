@@ -421,7 +421,7 @@ Visible intlet ilev(void) {
 }
 
 Visible Procedure veli(void) { /* After a look-ahead call of ilev */
-	if (!interactive && ifile == sv_ifile || OPTunpack)
+	if ((!interactive && ifile == sv_ifile) || OPTunpack)
 		f_lino--;
 	if (ifile == sv_ifile)
 		i_looked_ahead= Yes;
