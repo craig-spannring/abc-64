@@ -366,7 +366,7 @@ Visible bool up(path *pp)
 						del &= ~marks(Child(npa, i));
 				Delmarks(ppa, del);
 			}
-			Setmarks(pnpa, Marks(npa)&~del|add);
+			Setmarks(pnpa, (Marks(npa) & (~del)) | add);
 		}
 	}
 	/* else: still connected */

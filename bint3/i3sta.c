@@ -728,7 +728,7 @@ Hidden bool collect_value(value *pv, value seq, value locenv, int *pnextlocal)
 		
 		default:
 			syserr(MESS(4118, "bad node type in collect_value"));
-		
+			v = 0; // should never get here. 
 		}
 		*Field(*pv, k)= v;
 	}

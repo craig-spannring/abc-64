@@ -2,6 +2,8 @@
 
 /* Prepare for code generation -- find out which tags are targets */
 
+#include <stdint.h>
+
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"
@@ -14,7 +16,7 @@
 #include "b1grab.h"
 
 
-Visible int nextvarnumber; /* Counts local targets (including formals) */
+Visible intptr_t nextvarnumber; /* Counts local targets (including formals) */
 Hidden int nformals; /* nr of formals */
 Hidden bool bound; /* flag to recognise bound tags */
 
@@ -72,7 +74,8 @@ Visible Procedure cleanup(void) {
  */
 
 Hidden Procedure a_tag(value name, value *targs) {
-	value *aa; int varnumber;
+	value *aa;
+	intptr_t varnumber;
 	if (locals != Vnil && envassoc(locals, name) != Pnil);
 	else if (envassoc(globals, name) != Pnil);
 	else if (envassoc(refinements, name) != Pnil) {

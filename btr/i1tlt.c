@@ -100,6 +100,7 @@ Hidden value treesize(btreeptr pnode) {
 	case Bottom: 
 	case Crange: 
 	    syserr(MESS(327, "Bigsize in Bottom or Crange"));
+			vsize = 0; // should never get here. 
 	}
 	return(vsize);
     }

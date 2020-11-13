@@ -3,6 +3,8 @@
 #ifndef I2GEN_h_41bfdaf891b1223a184ca60fb0cc4a88
 #define I2GEN_h_41bfdaf891b1223a184ca60fb0cc4a88
 
+#include <stdint.h>
+
 #include "b.h"
 #include "bint.h"
 
@@ -12,7 +14,7 @@ extern "C" {
 
 #define Is_node(t) ((t) != NilTree && Is_parsetree(t))
 
-extern int nextvarnumber; /* Counts local targets (including formals) */
+extern intptr_t nextvarnumber; /* Counts local targets (including formals) */
 extern value locals, globals, mysteries, refinements;
 extern string gentab[];
 

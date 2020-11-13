@@ -254,13 +254,14 @@ Visible string convnum(value v) {
 
 Visible value numconst(value v) {
 	string txt, txt0;
-	string tp;
+	string tp = "";
 	int numdigs, fraclen;
 	integer a;
 	digit accu;
 	value c;
 
 	txt= sstrval(v);
+	tp= txt;
 	if (*txt == 'e') a = int_1;
 	else {
 		txt0= txt;

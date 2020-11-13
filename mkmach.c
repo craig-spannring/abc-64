@@ -362,7 +362,7 @@ int main(int argc, char **argv) {
 	printf("#define Maxint %d %sMaximum int%s\n", maxint, co, oc);
 
 	if (2*intpower + 1 <= longpower) {
-		printf("typedef int digit;\n");
+		printf("typedef int digit; /*here*/\n");
 		maxdigit= maxint;
 	}
 	else {

@@ -209,7 +209,7 @@ Visible Procedure jumpto(parsetree t) {
 	backpatch(t);
 }
 
-Hidden parsetree seterr(int n) {
+Hidden parsetree seterr(intptr_t n) {
 	return (parsetree)MkSmallInt(n);
 }
 

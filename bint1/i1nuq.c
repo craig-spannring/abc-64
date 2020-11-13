@@ -57,6 +57,10 @@ Hidden integer int1div(integer v, digit n1, digit *prem) {
 	return int_canon(q);
 }
 
+typedef struct {
+		int x;
+		double y;
+} FooBar; 
 
 /* Long division routine, gives access to division algorithm. */
 
@@ -92,7 +96,11 @@ Visible digit int_ldiv(integer v1, integer w1, integer *pquot, integer *prem) {
 			&& Digit(v1, Length(v1)-1) < Digit(w1, Length(w1)-1))) {
 		a = int_0;
 		if (prem) {
-			if (v1 == &vv1) *prem= (integer) MkSmallInt(Digit(v1,0));
+      
+			if (v1 == &vv1) {
+				const int d = Digit(v1,0);
+				*prem= (integer) MkSmallInt(d); 
+			}
 			else *prem = (integer) Copy(v1);
 		}
 	}
