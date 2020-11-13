@@ -41,6 +41,7 @@ target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
   
   -Wall
+  -Wint-to-pointer-cast
   
   #-Wno-implicit-int
   # -Wimplicit-function-declaration
@@ -127,7 +128,6 @@ set(abc_srcs
   ${CMAKE_CURRENT_LIST_DIR}/unix/edit.c
   ${CMAKE_CURRENT_LIST_DIR}/unix/dir.c
   ${CMAKE_CURRENT_LIST_DIR}/unix/trm.c
-  ${CMAKE_CURRENT_LIST_DIR}/unix/main.c
   ${CMAKE_CURRENT_LIST_DIR}/unix/usage.c
   ${CMAKE_CURRENT_LIST_DIR}/unix/os.c
   ${CMAKE_CURRENT_LIST_DIR}/unix/sig.c
