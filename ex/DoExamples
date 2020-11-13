@@ -3,7 +3,7 @@ WS='*.ex'
 OK=yes
 
 case $1 in
-local)	abc=../abc;;
+local)	abc=../${ABC:-abc};;
 *)	abc=abc;;
 esac
 
