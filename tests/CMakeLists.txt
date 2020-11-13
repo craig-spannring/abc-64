@@ -5,11 +5,9 @@ enable_testing()
 
 include(GoogleTest)
 
-message("srcs are ${abc_srcs}")
-
-# function(add_test, name)
 function(add_test name)
   add_executable(${name} ${name}.cpp)
+  target_sources(${name} PRIVATE ${abc_srcs})
   target_include_directories(${name}
     PRIVATE
     ${mach_inc_dir}
@@ -20,7 +18,14 @@ function(add_test name)
     ${PROJECT_SOURCE_DIR}/btr
     ${CUSTOM_AUTOGENED_FILES}/inc
     )
-  target_link_libraries(${name} PUBLIC gtest gmock gtest_main)
+  target_link_libraries(${name} PUBLIC
+    gtest
+    gmock
+    gtest_main
+    m
+    # ${CURSES_LIBRARIES}
+    -lncurses
+    )
   gtest_discover_tests(${name})
 endfunction()
 
