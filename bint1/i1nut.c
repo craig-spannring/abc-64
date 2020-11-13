@@ -70,7 +70,7 @@ Visible value prod2n(value v, value n, bool simplify) {
 /* v is shifted n "digits" to the left */
 
 Hidden integer int10shift(integer v, intlet n) {
-	struct integer vv;
+	struct integer_ vv;
 	integer w;
 	int i;
 	

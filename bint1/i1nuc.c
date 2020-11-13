@@ -68,7 +68,7 @@ Hidden value tento_d(double x) {
 
 Hidden int digits_in(value v) {
 	integer p, q;
-	struct integer pp, qq;
+	struct integer_ pp, qq;
 	double x;
 	value t1= Vnil, t2= Vnil;
 

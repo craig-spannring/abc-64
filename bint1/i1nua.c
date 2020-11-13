@@ -23,12 +23,12 @@
 
 #ifdef EXT_RANGE
 
-Hidden struct real app_0_buf = {Num, 1, -1, FILLER  0.0, -BIG};
+Hidden struct real_ app_0_buf = {Num, 1, -1, FILLER  0.0, -BIG};
 	/* Exponent must be less than any realistic exponent! */
 
 #else /* !EXT_RANGE */
 
-Hidden struct real app_0_buf = {Num, 1, -1, FILLER  0.0};
+Hidden struct real_ app_0_buf = {Num, 1, -1, FILLER  0.0};
 
 #endif /* !EXT_RANGE */
 
@@ -90,7 +90,7 @@ Hidden value twoto_dblbitsmin1; /* 2**(DBLBITS-1) */
 	
 Hidden double getexponent(value v) {
 	integer p, q;
-	struct integer pp, qq;
+	struct integer_ pp, qq;
 	double x;
 
 	v = absval(v);
@@ -114,7 +114,7 @@ Hidden double getexponent(value v) {
 
 Visible value app_frexp(value v) {
 	integer w;
-	struct integer ww;
+	struct integer_ ww;
 	value s, t;
 	double frac, expo;
 	relation neg;
@@ -305,7 +305,7 @@ Visible real app_power(real u, real v) {
 Visible bool about2_to_integral(real ru, value v, real *rv) {
 	double expo;
 	integer w;
-	struct integer ww;
+	struct integer_ ww;
 	int i;
 	bool neg = No;
 

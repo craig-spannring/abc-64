@@ -213,7 +213,7 @@ Visible value convert(value v, bool coll, bool outer) {
 		release(openbr); release(closebr); release(sep);
 		break;
 	default:
-	 	if (testing) {
+	 	if (testing_on) {
 			t= mk_text("?");
 			concato(&t, cv= mkchar(Type(v))); release(cv);
 			concato(&t, cv= mkchar('$')); release(cv);

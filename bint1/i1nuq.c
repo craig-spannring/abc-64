@@ -15,7 +15,7 @@ Visible integer int1mul(integer v, digit n1) {
 	digit save, bigcarry, carry = 0;
 	twodigit z, zz, n = n1;
 	int i;
-	struct integer vv;
+	struct integer_ vv;
 
 	FreezeSmallInt(v, vv);
 
@@ -42,7 +42,7 @@ Hidden integer int1div(integer v, digit n1, digit *prem) {
 	integer q;
 	twodigit r_over_n, r = 0, n = n1;
 	int i;
-	struct integer vv;
+	struct integer_ vv;
 
 	FreezeSmallInt(v, vv);
 
@@ -68,7 +68,7 @@ Visible digit int_ldiv(integer v1, integer w1, integer *pquot, integer *prem) {
 	integer a;
 	int sign = 1, rel_v = 0, rel_w = 0;
 	digit div, rem;
-	struct integer vv1, ww1;
+	struct integer_ vv1, ww1;
 
 	if (w1 == int_0) syserr(MESS(1100, "zero division (int_ldiv)"));
 

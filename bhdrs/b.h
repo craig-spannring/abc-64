@@ -62,14 +62,14 @@ typedef short intlet;
  * addressing (maybe you can use the sign bit as tag).
  */
 
-#define IsSmallInt(v) (((int)(v)) & 1)
-#define SmallIntVal(v) (((int)(v) & ~1) / 2)
+#define IsSmallInt(v) (((intptr_t)(v)) & 1)
+#define SmallIntVal(v) (((intptr_t)(v) & ~1) / 2)
 #define MkSmallInt(i) ( (value) (((intptr_t) i)*2 | 1) )
 	/* (Can't use << and >> because their effect on negative numbers
 		is not defined.) */
-typedef struct value {HEADER; string *cts;} *value;
+typedef struct value_ {HEADER; string *cts;} *value;
 								
-#define Hdrsize (sizeof(struct value)-sizeof(string))
+#define Hdrsize (sizeof(struct value_)-sizeof(string))
 
 #define Type(v) (IsSmallInt(v) ? Num : (v)->type)
 #define Length(v) ((v)->len)
@@ -113,7 +113,7 @@ extern bool still_ok;
 extern bool mess_ok;
 extern bool interactive;
 extern bool rd_interactive;
-extern bool testing;
+extern bool testing_on;
 extern bool terminated;
 /* interrupts are polled; see comments in e1getc.c */
 extern int pollcnt;

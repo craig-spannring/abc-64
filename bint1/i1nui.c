@@ -144,7 +144,7 @@ Hidden Procedure dig_gadd(digit *to, intlet nto, digit *from, intlet nfrom, digi
 /* Should have its own version of dig-gadd without double precision */
 
 Visible integer int_gadd(integer v, integer w, intlet factor) {
-	struct integer vv, ww;
+	struct integer_ vv, ww;
 	integer s;
 	int len, lenv, i;
 
@@ -184,7 +184,7 @@ Visible integer int_diff(integer v, integer w) {
 Visible integer int_prod(integer v, integer w) {
 	int i;
 	integer a;
-	struct integer vv, ww;
+	struct integer_ vv, ww;
 
 	if (v == int_0 || w == int_0) return int_0;
 	if (v == int_1) return (integer) Copy(w);
@@ -216,7 +216,7 @@ Visible integer int_neg(integer u) {
 Visible relation int_comp(integer v, integer w) {
 	int sv, sw;
 	int i;
-	struct integer vv, ww;
+	struct integer_ vv, ww;
 
 	/* 1. Compare pointers and equal SmallInts */
 	if (v == w) return 0;

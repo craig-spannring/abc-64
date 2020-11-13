@@ -92,7 +92,7 @@ value round2(value n, value v);
 value vmod(value u, value v);
 value vpower();
 value absval();
-value signum();
+value signum(value u);
 value numerator();
 value denominator();
 value approximate();

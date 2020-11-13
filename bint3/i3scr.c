@@ -297,7 +297,7 @@ Hidden Procedure dowri(value v, int flags)
 		(*outproc)('}');
 	}
 	else {
-		if (testing) {
+		if (testing_on) {
 			(*outproc)('?');
 			(*outproc)(Type(v));
 			(*outproc)('?');

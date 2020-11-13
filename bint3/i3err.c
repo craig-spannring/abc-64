@@ -320,7 +320,7 @@ Visible Procedure fpe_signal(void) {
 	interr(MESS(3123, "unexpected arithmetic overflow"));
 }
 
-Visible bool testing= No;
+Visible bool testing_on= No;
 
 Visible Procedure bye(int ex) {
 #ifdef GFX

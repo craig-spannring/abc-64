@@ -243,7 +243,7 @@ Hidden int tlterr;
 #define T_EMPTY 2
 #define T_CHAR 3
 
-Hidden int tlt_func(value e, value t, value (*li_func) (/* ??? */), bool (*te_visit) (/* ??? */), bool (*ta_visit) (/* ??? */))
+Hidden int tlt_func(value e, value t, value (*li_func) (value, value), bool (*te_visit) (itemptr), bool (*ta_visit) (itemptr))
 	            			/* [e] func t */
 	                    		/* func for lists */
 	                                   /* 'visit' for walktree */

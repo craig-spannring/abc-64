@@ -35,7 +35,7 @@ extern "C" {
 
 /* typedef int digit; or short; calculated in mkconfig -> config.h */
 
-typedef struct integer {
+typedef struct integer_ {
 	HEADER;
 	digit	dig[1];
 } *integer;
@@ -103,7 +103,7 @@ value mk_exact();
 
 /***************** Definitions exported for approximate numbers *************/
 
-typedef struct real {
+typedef struct real_ {
 	HEADER;
 	double	frac;
 #ifdef EXT_RANGE
