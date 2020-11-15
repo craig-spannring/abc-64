@@ -1,11 +1,15 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include <memory>
 
 #include "gtest/gtest.h"
 
 #include "b.h"
 #include "bobj.h"
+#include "bint.h"
+#include "i2par.h"
+// #include "i1nur.h"   // bint1/
 
 extern "C"
 {
@@ -35,6 +39,19 @@ TEST(whitebox, mk_integer_002)
 {
 }
 
+	extern "C" char* get_line(void); 
+
+// TEST(whitebox, singexpr_001)
+// {
+// 	first_col= tx= get_line(); 
+// 
+// 	parsetree  tree = singexpr(first_col);
+// }
+
+// TEST(whitebox, mk_rat_001)
+// {
+//   rational r = mk_rat(2, 2, 1, true);
+// }
 
 int main(int argc, char** argv)
 {

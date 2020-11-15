@@ -11,11 +11,15 @@ function(add_test name)
   target_include_directories(${name}
     PRIVATE
     ${mach_inc_dir}
+
     ${PROJECT_SOURCE_DIR}/hdrs
     ${PROJECT_SOURCE_DIR}/bhdrs
     ${PROJECT_SOURCE_DIR}/ehdrs
     ${PROJECT_SOURCE_DIR}/ihdrs
+    
     ${PROJECT_SOURCE_DIR}/btr
+    ${PROJECT_SOURCE_DIR}/bint1
+    
     ${CUSTOM_AUTOGENED_FILES}/inc
     )
   target_link_libraries(${name} PUBLIC
