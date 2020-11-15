@@ -47,7 +47,7 @@ extern int winheight;
 bool ask_for();
 
 #ifdef TYPE_CHECK
-value stc_code();
+value stc_code(value);
 #endif
 
 #define Is_filed(v) (Is_indirect(v))

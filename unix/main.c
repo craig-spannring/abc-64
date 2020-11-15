@@ -5,6 +5,7 @@
 #include "b1mess.h"
 #include "b1memo.h"
 #include "bfil.h"
+#include "bvis.h"
 #include "i3err.h"
 #include "getopt.h"
 #include "port.h"

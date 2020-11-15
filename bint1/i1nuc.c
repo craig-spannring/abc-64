@@ -6,6 +6,7 @@
 #include "bobj.h"
 #include "i1nui.h"
 #include "i1num.h"
+#include "i1tex.h"
 #include "i3err.h"
 
 #define MAXDIGITS (MAXNUMDIG)
@@ -360,27 +361,3 @@ recover:
 }
 
 
-/*
- * printnum(f, v) writes a number v on file f in such a way that it
- * can be read back identically.
- */
-
-Visible Procedure printnum(FILE *fp, value v) {
-	if (Approximate(v)) {
-		app_print(fp, (real) v);
-		return;
-	}
-	if (Rational(v) && Denominator((rational)v) != int_1) {
-		int i = Roundsize(v);
-		fputs(convnum((value)Numerator((rational)v)), fp);
-		if (i > 0) {
-			/* The assumption here is that in u/v, the Roundsize
-			   of the result is the sum of that of the operands. */
-			putc('.', fp);
-			do putc('0', fp); while (--i > 0);
-		}
-		putc('/', fp);
-		v = (value) Denominator((rational)v);
-	}
-	fputs(convnum(v), fp);
-}

@@ -70,7 +70,9 @@ extern "C" {
 	extern Visible Procedure push_item(expadm *adm, parsetree v);
 	extern Visible Procedure do_dya(expadm *adm, value v);
 	extern Visible Procedure reduce(expadm *adm);
-	
+
+	extern Visible Procedure trim_target(txptr q, parsetree *v);
+
 #ifdef __cplusplus
 }
 #endif

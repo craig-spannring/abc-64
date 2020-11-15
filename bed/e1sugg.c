@@ -18,9 +18,14 @@
 #include "bobj.h"
 #include "bfil.h"
 #include "e1erro.h"
-#include "e1lexi.h"
+#include "e1etex.h"
 #include "e1gram.h"
+#include "e1lexi.h"
+#include "e1node.h"
+#include "e1que1.h"
 #include "e1que2.h"
+#include "e1supr.h"
+#include "i3sou.h"
 #include "node.h"
 #include "supr.h"
 #include "gram.h"
@@ -378,7 +383,6 @@ Visible bool setsugg(path *pp, char c, environ *ep, bool colon_allowed)
 	char buf[2];
 	node n;
 	string s;
-	string lastunitname();
 
 	if (lefttorite)
 		return No;

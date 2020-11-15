@@ -39,8 +39,8 @@ typedef struct cell cell;
 #define Oldspace(p) \
 	SpaceRound((p)->c_length + (p)->c_oldindent + (p)->c_oldvhole)
 
-cell *replist();
-cell *build();
+cell *replist(cell *tops, cell *rep, int oldlno, int oldlcnt);
+cell *build(path p, int lcnt);
 
 extern int llength;
 extern int winheight;

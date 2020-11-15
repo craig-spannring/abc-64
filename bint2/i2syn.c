@@ -148,7 +148,7 @@ Visible bool find(string s, txptr q, txptr* ftx, txptr* ttx) {
 	return search(No, s, q, (*ftx= tx, ftx), ttx);
 }
 
-Forward Hidden txptr lcol();
+Forward Hidden txptr lcol(void);
 
 Visible Procedure findceol(void) {
 	txptr q= lcol(), ttx;

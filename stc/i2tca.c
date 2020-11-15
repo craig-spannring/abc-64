@@ -360,6 +360,7 @@ Forward Hidden polytype external_type(string *pt);
 
 Forward Hidden string get_code(value name, int type, wsenvptr wse);
 Forward Hidden string fpr_code(value name, literal type, char **functab, string defcode);
+Forward Visible Procedure usetypetable(value t);
 
 Visible Procedure type_check(parsetree v) {
 	typenode n;

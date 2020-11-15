@@ -9,7 +9,7 @@ extern "C" {
 
 /* Interpreter */
 
-value pop();
+value pop(void);
 /* Procedure push(); */
 
 #define Stop ((parsetree)zero) /* Legal stop */

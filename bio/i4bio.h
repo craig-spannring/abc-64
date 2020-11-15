@@ -8,17 +8,19 @@ extern "C" {
 #endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
-value get_names();
-bool abcfile();
-bool abcworkspace();
-bool unitfile();
-bool targetfile();
-char *base_fname();
-bool typeclash();
+	value get_names(char *path, bool (*isabc) (char *path, char *name));
+	bool abcfile(char *path, char *name);
+	bool abcworkspace(char *path, char *name);
+	bool unitfile(value fname);
+	bool targetfile(value fname);
+	// char *base_fname();
+	bool typeclash(value pname, value fname);
 
-extern bool ws_recovered;
-extern bool gr_recovered;
+	Visible Procedure bioerrV(int m, value v);
 
+	extern bool ws_recovered;
+	extern bool gr_recovered;
+	
 #define IO_NAME		MESS(4600, "*** %s isn't the name of a location\n")
 #define O_INIT		MESS(4601, "*** %s hasn't been initialised\n")
 #define O_TABLE		MESS(4602, "*** %s isn't a table\n")

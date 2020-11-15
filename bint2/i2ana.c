@@ -2,6 +2,8 @@
 
 /* Prepare for code generation -- find out which tags are targets */
 
+#include "i2ana.h"
+
 #include <stdint.h>
 
 #include "b.h"

@@ -1,6 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* B interpreter -- independent subroutines */
+#include "i3in2.h"
 
 #include "b.h"
 #include "bint.h"
@@ -10,6 +11,8 @@
 #include "i3env.h"
 #include "i3err.h"
 #include "i3in2.h"
+#include "i3loc.h"
+#include "i3scr.h"
 #include "i3sou.h"
 #include "b1grab.h"
 

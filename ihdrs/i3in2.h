@@ -3,6 +3,9 @@
 #ifndef I3IN2_h_b32a402960b8ca952c1686cb8ded04bf
 #define I3IN2_h_b32a402960b8ca952c1686cb8ded04bf
 
+#include "b.h"
+#include "bint.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -25,6 +28,8 @@ value evalthread(parsetree start);
 value locvalue(loc l, value **ll, bool err);
 
 bool in_ranger(loc l, value *pv);
+
+void load_global(value v, value name, bool err);
 
 #ifdef __cplusplus
 }

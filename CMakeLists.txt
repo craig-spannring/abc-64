@@ -42,13 +42,24 @@ target_compile_options(abc PRIVATE
   
   -Wall
   -Wint-to-pointer-cast
+
   
   #-Wno-implicit-int
-  # -Wimplicit-function-declaration
-  #-Wno-return-type
+  
+  -Wold-style-definition
+  # -Werror=old-style-definition
+  -Wold-style-declaration
+  -Wstrict-prototypes
+  -Wold-style-definition
+  -Wstrict-prototypes
+  -Wimplicit-function-declaration
+  
+  -Wreturn-type
+  
   # -Wno-parentheses
   -Wno-deprecated-declarations
   -Wno-unused-value
+  
   # -Wno-char-subscripts
   #-Wno-sometimes-unitialized
   

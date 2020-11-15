@@ -10,6 +10,7 @@
 #include "bedi.h"
 #include "e1erro.h"
 #include "e1gram.h"
+#include "e1line.h"
 #include "e1supr.h"
 #include "etex.h"
 #include "bobj.h"

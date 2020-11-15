@@ -203,9 +203,7 @@ dupmatch(cell *old, cell *rep, int oldcnt, int repcnt)
  */
 
 Visible cell *
-build(path p, int lcnt)
-	/*auto*/        
-	         
+build(path p, int lcnt)	         
 {
 	cell head;
 	cell *q = &head;

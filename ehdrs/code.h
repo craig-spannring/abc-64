@@ -12,7 +12,7 @@ extern char code_array[];
 extern char invcode_array[];
 extern int lastcode;
 
-extern Procedure initcodes();
+extern Procedure initcodes(void);
 
 #define RANGE 128 /* ASCII characters are in {0 .. RANGE-1} */
 

@@ -16,7 +16,7 @@ extern "C" {
 /*
  * From "e1erro.h"
  */
-extern Visible Procedure asserr(string file, int line);
+	extern Visible Procedure asserr(string file, int line);
 
 /*
  * Assertion macro.
@@ -40,17 +40,17 @@ extern Visible Procedure asserr(string file, int line);
 #define Assert(cond) (assert(cond))
 #endif /* NDEBUG */
 
-node newnode();
+	node newnode(int nch, int sym, node *children);
 
 #ifndef NDEBUG
 #define symbol(n) (Assert(Is_Node(n)), (n)->n_symbol)
 #define nchildren(n) (Assert(Is_Node(n)), Length(n))
 #define marks(n) (Assert(Is_Node(n)), (n)->n_marks)
-#define child(n, i) \
+#define child(n, i)							\
 	(Assert(Is_Node(n) && (i)>0 && (i)<=Length(n)), (n)->n_child[(i)-1])
-#define lastchild(n) \
+#define lastchild(n)							\
 	(Assert(Is_Node(n) && Length(n)>0), (n)->n_child[Length(n)-1])
-#define firstchild(n) \
+#define firstchild(n)						\
 	(Assert(Is_Node(n) && Length(n)>0), (n)->n_child[0])
 #else /* NDEBUG */
 #define symbol(n) ((n)->n_symbol)
@@ -61,12 +61,11 @@ node newnode();
 #define firstchild(n) ((n)->n_child[0])
 #endif /* NDEBUG */
 
-int nodewidth();
+	int nodewidth(node n);
 #define marked(p, x) (marks(tree(p))&(x))
 
-path newpath();
-int pathlenght();
-
+	path newpath(path pa, node n, int i);
+	
 #define parent(p) ((p)->p_parent)
 #define tree(p) ((p)->p_tree)
 #define ichild(p) ((p)->p_ichild)
@@ -78,23 +77,23 @@ int pathlenght();
 /* Procedure markpath(); */
 /* Procedure unmkpath(); */
 /* Procedure treereplace(); */
-bool up();
-bool downi();
+	bool up(path *pp);
+	bool downi(path *pp, int i);
 
 #define down(n) downi(n, 1)
 
-bool downrite();
-bool left();
-bool rite();
+	bool downrite(path*);
+	bool left(path*);
+	bool rite(path*);
 /* Procedure top(); */
-bool nextnode();
+	// bool nextnode();
 /* Procedure firstleaf(); */
-bool nextleaf();
-bool prevnode();
+	// bool nextleaf();
+	// bool prevnode();
 /* Procedure lastleaf(); */
-bool prevleaf();
-bool nextmarked();
-bool prevmarked();
+	// bool prevleaf();
+	// bool nextmarked();
+	// bool prevmarked();
 
 /*
  * The following are routines for lint, but macros for CC.
@@ -103,13 +102,13 @@ bool prevmarked();
 
 #ifdef lint
 
-Visible node nodecopy();
-Visible Procedure noderelease();
-Visible Procedure nodeuniql();
+	Visible node nodecopy();
+	Visible Procedure noderelease();
+	Visible Procedure nodeuniql();
 
-Visible path pathcopy();
-Visible Procedure pathrelease();
-Visible Procedure pathuniql();
+	Visible path pathcopy();
+	Visible Procedure pathrelease();
+	Visible Procedure pathuniql();
 
 #else
 
@@ -123,8 +122,8 @@ Visible Procedure pathuniql();
 
 #endif
 
-node grab_node();
-path grab_path();
+	// node grab_node();
+	// path grab_path();
 
 
 #ifdef __cplusplus

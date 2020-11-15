@@ -25,7 +25,7 @@
 	   It works for MS-DOS because I have ported readdir
 	   to MS-DOS, too.  Guido. */
 
-Visible value get_names(char *path, bool (*isabc) (/* ??? */)) {
+Visible value get_names(char *path, bool (*isabc) (char *path, char *name)) {
 	DIR *dp;
 	struct direct *dirp;
 	value v;

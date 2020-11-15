@@ -9,6 +9,7 @@
 #include "bobj.h"
 #include "i0err.h"
 #include "i1num.h"
+#include "i2gen.h"
 #include "i2nod.h"
 #include "i3cen.h"
 #include "i3err.h"
@@ -16,7 +17,10 @@
 #include "i3fpr.h"
 #include "i3int.h"
 #include "i3in2.h"
+#include "i3loc.h"
 #include "i3sou.h"
+
+#define Refinement(r) ((ref *)Ats(r))
 
 Forward Hidden Procedure sub_epibreer(parsetree argtree, value vl, value *plocals, int *pnextlocal);
 Forward Hidden Procedure putbackargs(value locenv);

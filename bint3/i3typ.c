@@ -1,6 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* Type matching */
+#include "i3typ.h"
+
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"

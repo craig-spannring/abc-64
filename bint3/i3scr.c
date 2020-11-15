@@ -2,6 +2,8 @@
 
 /* B input/output handling */
 
+#include "i3scr.h"
+
 #include "b.h"
 #include "b1memo.h"
 #include "b1mess.h"
@@ -51,14 +53,14 @@ Hidden int intsize(value v) {
 
 /******************************* Output *******************************/
 
+Visible Procedure flushout(void) {
+	doflush(outfile);
+}
+
 Visible Procedure newline(void) {
 	putchr(outfile, '\n');
 	flushout();
 	at_nwl= Yes;
-}
-
-Visible Procedure flushout(void) {
-	doflush(outfile);
 }
 
 Visible Procedure oline(void) {
@@ -158,6 +160,31 @@ Visible Procedure wri(FILE *fp, value v, bool coll, bool outer, bool perm)
 }
 
 Hidden bool lwt;
+
+/*
+ * printnum(f, v) writes a number v on file f in such a way that it
+ * can be read back identically.
+ */
+
+Visible Procedure printnum(FILE *fp, value v) {
+	if (Approximate(v)) {
+		app_print(fp, (real) v);
+		return;
+	}
+	if (Rational(v) && Denominator((rational)v) != int_1) {
+		int i = Roundsize(v);
+		fputs(convnum((value)Numerator((rational)v)), fp);
+		if (i > 0) {
+			/* The assumption here is that in u/v, the Roundsize
+			   of the result is the sum of that of the operands. */
+			putc('.', fp);
+			do putc('0', fp); while (--i > 0);
+		}
+		putc('/', fp);
+		v = (value) Denominator((rational)v);
+	}
+	fputs(convnum(v), fp);
+}
 
 Hidden Procedure dowri(value v, int flags)
 {

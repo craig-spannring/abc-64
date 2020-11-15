@@ -1,4 +1,5 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
+#include "e1etex.h"
 
 #include "b.h"
 #include "bedi.h"

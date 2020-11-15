@@ -29,7 +29,7 @@ Visible Procedure qrelease();
 #endif
 #define emptyqueue(q) (!(q))
 
-node queuebehead();
+node queuebehead(queue *pq);
 
 #ifdef __cplusplus
 }

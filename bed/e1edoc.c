@@ -6,11 +6,15 @@
 #include "e1deco.h"
 #include "e1spos.h"
 #include "e1erro.h"
+#include "e1etex.h"
 #include "e1goto.h"
+#include "e1gram.h"
 #include "e1help.h"
 #include "e1ins2.h"
 #include "e1move.h"
 #include "e1save.h"
+#include "e1scrn.h"
+#include "e1sugg.h"
 #include "e1supr.h"
 #include "e1wide.h"
 #include "etex.h"
@@ -27,7 +31,7 @@
 #include "b1grab.h"
 
 extern bool io_exit;
-extern int getoperation();
+extern int getoperation(void);
 
 #define Mod(k) (((k)+MAXHIST) % MAXHIST)
 #define Succ(k) (((k)+1) % MAXHIST)

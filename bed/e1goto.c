@@ -15,6 +15,8 @@
 #include "e1erro.h"
 #include "e1gram.h"
 #include "e1line.h"
+#include "e1node.h"
+#include "e1que1.h"
 #include "e1scrn.h"
 #include "e1supr.h"
 #include "erro.h"

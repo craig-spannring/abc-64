@@ -452,7 +452,7 @@ Hidden bool elt_dis(parsetree *v) {
 	return No;
 }
 
-Hidden parsetree par_lta(txptr q, expadm *adm, void (*lta_item) (/* ??? */))
+Hidden parsetree par_lta(txptr q, expadm *adm, void (*lta_item) (txptr q, expadm *adm))
 {
 	txptr ftx, ttx;
 	int n;

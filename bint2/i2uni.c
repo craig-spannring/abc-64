@@ -7,6 +7,7 @@
 #include "b0lan.h"
 #include "i2par.h"
 #include "i2nod.h"
+#include "i2syn.h"
 #include "i3env.h"
 #include "i3sou.h"
 #include "i2syn.h"

@@ -35,7 +35,7 @@ extern "C" {
 	extern Visible Procedure hold(struct state *pl);
 	extern Visible Procedure jumpto(parsetree t);
 	extern Visible Procedure let_go(struct state *pl);
-	
+	extern Visible Procedure fix_nodes(parsetree *pt, parsetree *code);
 
 #ifdef __cplusplus
 }

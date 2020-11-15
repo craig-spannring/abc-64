@@ -27,8 +27,7 @@ Forward Hidden bool isnull(node n, string *rp, int i);
 Forward Hidden bool nextitem(environ *ep);
 Forward Hidden bool previtem(environ *ep);
 Forward Hidden bool isunititem(environ *ep);
-Forward Hidden Procedure lastnnitem(environ *ep);
-
+	
 /*
  * Compute the length of the ep->s1'th item of node tree(ep->focus).
  */
@@ -47,20 +46,6 @@ Visible int lenitem(environ *ep)
 	return nodewidth(nn);
 }
 
-
-/*
- * Find the largest possible representation of the focus.
- * E.g., a WHOLE can also be represented as a SUBSET of its parent,
- * provided it has a parent.
- * Also, a SUBSET may be extended with some empty left and right
- * items and then look like a WHOLE, etc.
- * This process is repeated until no more improvements can be made.
- */
-
-Visible Procedure grow(environ *ep, bool deleting)
-{
-	subgrow(ep, Yes, deleting);
-}
 
 Visible Procedure subgrow(environ *ep, bool ignorespaces, bool deleting)
 {
@@ -195,6 +180,19 @@ Visible Procedure subgrow(environ *ep, bool ignorespaces, bool deleting)
 	/* Not reached */
 }
 
+/*
+ * Find the largest possible representation of the focus.
+ * E.g., a WHOLE can also be represented as a SUBSET of its parent,
+ * provided it has a parent.
+ * Also, a SUBSET may be extended with some empty left and right
+ * items and then look like a WHOLE, etc.
+ * This process is repeated until no more improvements can be made.
+ */
+
+Visible Procedure grow(environ *ep, bool deleting)
+{
+	subgrow(ep, Yes, deleting);
+}
 
 /*
  * Ditto to find smallest possible representation.
@@ -324,8 +322,7 @@ Visible Procedure subgrsubset(environ *ep, bool ignorespaces)
  * Ditto for the smallest way.
  */
 
-Visible Procedure /* Ought to be Hidden */
-shrsubset(environ *ep)
+Visible Procedure shrsubset(environ *ep)
 {
 	node n = tree(ep->focus);
 	string *rp = noderepr(n);
@@ -701,7 +698,7 @@ Visible Procedure firstnnitem(environ *ep)
 }
 #endif
 
-Hidden Procedure lastnnitem(environ *ep)
+Visible Procedure lastnnitem(environ *ep)
 {
 	ep->s1 = 2*nchildren(tree(ep->focus)) + 1;
 	while (lenitem(ep) == 0) {

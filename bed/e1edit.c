@@ -4,6 +4,8 @@
  * B editor -- Read unit from file.
  */
 
+#include "e1edit.h"
+
 #include "b.h"
 #include "b1memo.h"
 #include "bedi.h"
@@ -379,8 +381,7 @@ readnode(FILE *fp)
  * Read a node written in a more or less internal format.
  */
 
-Visible value
-editqueue(string filename)
+Visible value editqueue(string filename)
 {
 	FILE *fp = fopen(filename, "r");
 	auto queue q = Qnil;

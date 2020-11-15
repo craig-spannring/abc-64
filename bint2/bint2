@@ -1,0 +1,21 @@
+  /home/MTI.local/craig.spannring/abc-unix/bint2:
+  total used in directory 156 available 141951744
+  drwx------  2 craig.spannring domain^users  4096 Nov 14 23:55 .
+  lrwxrwxrwx  1 craig.spannring domain^users    41 Nov 14 23:53 .#i2syn.c -> craig.spannring@milnx1220.2127:1605106244
+  -rw-r--r--  1 craig.spannring domain^users   267 Nov 14 23:34 i2syn.h~
+  -rwxr-xr-x  1 craig.spannring domain^users 13455 Nov 14 23:34 i2syn.c
+  -rwxr-xr-x  1 craig.spannring domain^users  9728 Nov 14 23:34 i2uni.c
+  -rwxr-xr-x  1 craig.spannring domain^users 20650 Nov 14 23:25 i2gen.c
+  -rwxr-xr-x  1 craig.spannring domain^users   767 Nov 14 21:09 i2tar.c
+  -rwxr-xr-x  1 craig.spannring domain^users 13995 Nov 14 21:09 i2exp.c
+  -rwxr-xr-x  1 craig.spannring domain^users  8935 Nov 14 20:00 i2ana.c
+  -rwxr-xr-x  1 craig.spannring domain^users  3728 Nov 14 19:54 i2fix.c
+  drwx------ 29 craig.spannring domain^users  4096 Nov 14 18:39 ..
+  -rwxr-xr-x  1 craig.spannring domain^users  9731 Nov  1 18:16 i2cmd.c
+  -rw-r--r--  1 craig.spannring domain^users   397 Oct 31 18:46 i2fix.h
+  -rwxr-xr-x  1 craig.spannring domain^users  4330 Oct 31 17:47 i2tes.c
+  -rwxr-xr-x  1 craig.spannring domain^users  9788 Oct 31 17:47 i2dis.c
+  -rw-r--r--  1 craig.spannring domain^users   226 Oct 26 21:20 i2cmd.h~
+  -rw-r--r--  1 craig.spannring domain^users   262 Oct 26 20:33 i2exp.h~
+  -rwxr-xr-x  1 craig.spannring domain^users  3429 Aug 12  1991 DEP
+  -rwxr-xr-x  1 craig.spannring domain^users    85 Aug 12  1991 MF

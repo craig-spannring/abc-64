@@ -62,35 +62,49 @@ extern bool need_rec_suggestions;
 #define Cts_ext ".cts"
 #define Wsp_ext ""
 
-Visible value permkey(value name, literal type);
-Visible value get_pname(parsetree v);
-Visible value getval(value fname, literal ct);
-Visible value gettarval(value fname, value name);
-
-Visible value new_fname(value name, literal type);	/* devise a filename for a unit or target */
-Visible value mkabcname(char *name);	/* vice versa for recovering target name */
 #define CONVP_SIGN '_'		/* to map point */
 #define CONVDQ_SIGN '@'		/* to map double quote */
 
-Visible bool ckws_writable(int m);
 
-    extern Visible Procedure del_target(value name);
-    
-    extern Visible Procedure putval(value v, char *dir, char *name, literal ct, bool silently);
-    extern Visible Procedure puttarval(value v, char *dir, value fname, value tname, bool silently);
-    extern Visible Procedure put_perm(void);
-    extern Visible Procedure create_unit(void);
-    extern Visible Procedure edit_unit(void);
-    extern Visible Procedure edit_target(void);
-    extern Visible Procedure initperm(void);
-    extern Visible Procedure endperm(void);
-    extern Visible Procedure initsou(void);
-    extern Visible Procedure endsou(void);
-    extern Visible Procedure lst_uhds(void);
-    extern Visible Procedure rem_unit(parsetree u, wsenvptr wse);
-    extern Visible Procedure def_target(value name, value t);
-    extern Visible Procedure clear_perm(void);
+	extern Visible bool  need_rec_suggestions; /* e.g. after abc -u file ... */
+	extern Visible value errtname;
+	extern Visible value last_target;          /* last edited target */
+	extern Visible value last_unit;            /* last edited/erroneous unit */
 
+	extern Visible bool ckws_writable(int m);
+	extern Visible bool is_loaded(char *fname, value pname, value **aa);
+	extern Visible bool p_exists(value pname, value **aa);
+	extern Visible bool u_exists(value pname, value **aa);
+	extern Visible Procedure clear_perm(void);
+	extern Visible Procedure create_unit(void);
+	extern Visible Procedure def_perm(value pname, value fname);
+	extern Visible Procedure def_std_howto(value pname, value h);
+	extern Visible Procedure def_target(value name, value t);
+	extern Visible Procedure def_unit(value pname, value u);
+	extern Visible Procedure del_target(value name);
+	extern Visible Procedure edit_target(void);
+	extern Visible Procedure edit_unit(void);
+	extern Visible Procedure endperm(void);
+	extern Visible Procedure endsou(void);
+	extern Visible Procedure free_perm(value pname);
+	extern Visible Procedure initperm(void);
+	extern Visible Procedure initsou(void);
+	extern Visible Procedure lst_uhds(void);
+	extern Visible Procedure put_perm(void);
+	extern Visible Procedure puttarval(value v, char *dir, value fname, value tname, bool silently);
+	extern Visible Procedure putval(value v, char *dir, char *name, literal ct, bool silently);
+	extern Visible Procedure rem_unit(parsetree u, wsenvptr wse);
+	extern Visible Procedure rem_unit(parsetree u, wsenvptr wse);
+	extern Visible string lastunitname(void);
+	extern Visible value get_pname(parsetree v);
+	extern Visible value gettarval(value fname, value name);
+	extern Visible value get_unit(value *pname, bool filed, bool editing);
+	extern Visible value getval(value fname, literal ct);
+	extern Visible value mkabcname(char *name);	/* vice versa for recovering target name */
+	extern Visible value new_fname(value name, literal type);	/* devise a filename for a unit or target */
+	extern Visible value permkey(value name, literal type);
+
+	
 #ifdef __cplusplus
 }
 #endif

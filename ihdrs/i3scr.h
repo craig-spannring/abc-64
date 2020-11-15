@@ -12,17 +12,20 @@ extern "C" {
 
 /* screen */
 
-extern value iname;
-extern bool outeractive;
-extern bool at_nwl;
-extern bool Eof;
-extern FILE *ifile;
-extern FILE *sv_ifile;
-extern char *get_line(void);
-extern char q_answer(int m, char c1, char c2, char c3);
-extern char *getfmtbuf(string fmt, int n);
-extern bool is_intended(int m);
-extern bool read_ioraw(value *v);
+	extern value iname;
+	extern bool outeractive;
+	extern bool at_nwl;
+	extern bool Eof;
+	extern FILE *ifile;
+	extern FILE *sv_ifile;
+	extern char *get_line(void);
+	extern char q_answer(int m, char c1, char c2, char c3);
+	extern char *getfmtbuf(string fmt, int n);
+	extern bool is_intended(int m);
+	extern bool read_ioraw(value *v);
+
+	Forward Visible Procedure writnewline(void);
+	Forward Visible Procedure wri(FILE *fp, value v, bool coll, bool outer, bool perm);
 
 #ifdef __cplusplus
 }

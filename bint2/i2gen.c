@@ -33,7 +33,8 @@ Forward Hidden Procedure f_ttag(parsetree *pt);
 Forward Hidden Procedure f_ctag(parsetree *pt);
 
 Visible Procedure fix_nodes(parsetree *pt, parsetree *code) {
-	context c; value *setup(), *su;
+	context c;
+	value *su;
 	sv_context(&c);
 	curline= *pt; curlino= one;
 	su= setup(*pt);

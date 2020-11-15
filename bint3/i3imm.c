@@ -5,6 +5,7 @@
 #include "bobj.h"
 #include "b0lan.h"
 #include "i2cmd.h"
+#include "i2gen.h"
 #include "i2par.h"
 #include "i2syn.h"
 #include "i3err.h"

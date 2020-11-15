@@ -217,7 +217,6 @@ typedef stackelem *stackptr;
 #define Push(s, p, l) ((s)->s_ptr = (p), ((s)->s_lim = (l)), (s)++)
 #define Pop(s, p, l) (--(s), (p) = (s)->s_ptr, (l) = (s)->s_lim)
 
-extern int movnptrs();
 
 Hidden fingertip cvt_stack_to_fingertip(const stackelem* s) {
     assert(sizeof(*((fingertip)0)) == sizeof(*s));

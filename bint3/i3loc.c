@@ -1,6 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* B locations and environments */
+#include "i3loc.h"
+
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"
@@ -13,6 +15,7 @@
 #include "b1grab.h"
 
 Forward Hidden bool in_locenv(value t, value k, value **ll);
+
 
 #define TAR_NO_INIT	MESS(3600, "location not initialised")
 #define TARNAME_NO_INIT	MESS(3601, "%s hasn't been initialised")

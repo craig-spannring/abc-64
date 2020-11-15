@@ -2,10 +2,13 @@
 
 /* process type unification errors */
 
+#include "i2tce.h"
+
 #include "b.h"
 #include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "i1tex.h"
 #include "i2stc.h"
 #include "i3err.h"
 #include "b1grab.h"

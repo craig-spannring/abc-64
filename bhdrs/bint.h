@@ -87,7 +87,6 @@ value mk_how(parsetree unit, bool filed);
 /************************************************************************/
 
 typedef struct{parsetree rp;} ref;
-#define Refinement(r) ((ref *)Ats(r))
 #define Is_refinement(v) (Type(v) == Ref)
 value mk_ref(parsetree rp);
 

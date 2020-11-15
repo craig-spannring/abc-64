@@ -61,6 +61,10 @@ extern "C" {
 	extern Visible Procedure e_replace(value v, value* t, value k);
 	extern Visible Procedure e_delete(value *t, value k);
 
+	extern Visible Procedure extbnd_tags(value btl, envtab et);
+	extern Visible Procedure re_env(void);
+	extern Visible Procedure sv_context(context *sc);
+	
 #ifdef __cplusplus
 }
 #endif

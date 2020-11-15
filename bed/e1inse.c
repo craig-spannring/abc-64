@@ -12,6 +12,7 @@
 #include "bobj.h"
 #include "e1gram.h"
 #include "e1lexi.h"
+#include "e1node.h"
 #include "e1que1.h"
 #include "e1sugg.h"
 #include "node.h"

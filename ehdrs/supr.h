@@ -85,7 +85,7 @@ typedef struct {
 #define Ecopy(e1, e2) ecopy(&(e1), &(e2))
 #define Erelease(e) erelease(&(e))
 
-bool ishole();
+	bool ishole(environ *ep);
 
 #ifdef __cplusplus
 }

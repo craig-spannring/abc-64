@@ -9,9 +9,14 @@
 #include "bedi.h"
 #include "bcom.h"
 #include "e1edoc.h"
+#include "e1edit.h"
 #include "e1deco.h"
+#include "e1gram.h"
+#include "e1node.h"
 #include "e1save.h"
+#include "e1scrn.h"
 #include "e1spos.h"
+#include "e1sugg.h"
 #include "e1supr.h"
 #include "i3err.h"
 #include "node.h"
@@ -23,9 +28,6 @@
 #ifdef GFX
 #include "bgfx.h"
 #endif
-
-
-value editqueue();
 
 Visible int doctype;
 extern bool canceled;
@@ -107,7 +109,6 @@ Visible Procedure abced_file(string filename, intlet errline, literal kind, bool
 Visible char *ed_line(literal kind, int indent) {
 	char *buf= (char *) NULL;
 	environ *ep= top_ep;
-	char *senddoc();
 
 	if (kind == R_cmd)
 		setroot(Imm_cmd);
