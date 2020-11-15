@@ -10,6 +10,7 @@
 #include "b1mess.h"
 #include "b1outp.h"
 #include "bedi.h"
+#include "e1outp.h"
 #include "etex.h"
 #include "bobj.h"
 #include "e1cell.h"
@@ -30,7 +31,7 @@
 extern bool dflag;
 #endif
 
-Forward cell *gettop();
+Forward cell *gettop(cell *tops);
 Forward Hidden Procedure growwin(void);
 Forward Hidden int makeroom(cell *p, int curlno, int delcnt);
 Forward Hidden int make2room(cell *p, int curlno, int delcnt);

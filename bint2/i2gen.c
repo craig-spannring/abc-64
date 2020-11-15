@@ -8,10 +8,12 @@
 #include "bint.h"
 #include "bobj.h"
 #include "i0err.h"
+#include "i2ana.h"
 #include "i2fix.h"
 #include "i2nod.h"
 #include "i2gen.h" /* Must be after i2nod.h */
 #include "i2par.h"
+#include "i2tca.h"
 #include "i3cen.h"
 #include "i3env.h"
 #include "i3err.h"

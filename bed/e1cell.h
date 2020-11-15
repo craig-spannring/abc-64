@@ -8,7 +8,10 @@
 extern "C" {
 #endif
 
-    extern Visible Procedure discard(cell *p);
+	extern Visible Procedure discard(cell *p);
+	extern Visible cell *replist(cell *tops, cell *rep, int oldlno, int oldlcnt);
+	extern Visible cell *build(path p, int lcnt);
+	extern Visible cell *gettop(cell *tops);
 
 #ifdef __cplusplus
     }

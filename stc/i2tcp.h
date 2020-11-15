@@ -13,7 +13,18 @@
 extern "C" {
 #endif
 
-    Visible Procedure putsubtype(polytype sub, polytype u, intlet isub);
+	extern Visible Procedure putsubtype(polytype sub, polytype u, intlet isub);
+	extern Visible polytype mkt_polytype(typekind k, intlet nsub);
+	extern Visible Procedure putsubtype(polytype sub, polytype u, intlet isub);
+	extern Visible Procedure new_externals(void);
+	extern Visible polytype mkt_ext(void);
+	extern Visible Procedure p_release(polytype u);
+	extern Visible Procedure repl_type_of(polytype u, polytype p);
+	extern Visible polytype bottomtype(polytype u);
+	extern Visible Procedure usetypetable(value t);
+	extern Visible Procedure deltypetable(void);
+	extern Visible Procedure initpol(void);
+	extern Visible Procedure endpol(void);
 
 #ifdef __cplusplus
 }

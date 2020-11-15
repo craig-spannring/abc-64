@@ -8,6 +8,7 @@
 #include "i2par.h"
 #include "i2nod.h"
 #include "i2syn.h"
+#include "i2tca.h"
 #include "i3env.h"
 #include "i3sou.h"
 #include "i2syn.h"
@@ -330,7 +331,7 @@ Hidden parsetree  ref_suite(intlet cil) {
 /*		collateral, compound					*/
 /* ******************************************************************** */
 
-Hidden parsetree n_collateral(txptr q, intlet n, parsetree (*base) (/* ??? */))
+Hidden parsetree n_collateral(txptr q, intlet n, parsetree (*base) (txptr q))
 {
 	parsetree v, w; txptr ftx, ttx;
 	if (find(S_COMMA, q, &ftx, &ttx)) {

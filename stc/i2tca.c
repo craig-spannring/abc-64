@@ -1,6 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, amsterdam, 1988. */
 
 /* ABC type check */
+#include "i2tca.h"
 
 #include "b.h"
 #include "b1memo.h"
@@ -13,11 +14,15 @@
 #include "i2nod.h"
 #include "i2par.h"
 #include "i2stc.h"
+#include "i2tca.h"
+#include "i2tce.h"
 #include "i2tcp.h"
+#include "i2tcu.h"
 #include "i3bws.h"
 #include "i3cen.h"
 #include "i3err.h"
 #include "i3env.h"	/* for curline and curlino */
+#include "i3fil.h"
 #include "i3sou.h"
 #include "port.h"
 #include "b1grab.h"

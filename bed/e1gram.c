@@ -8,6 +8,8 @@
 
 #include "b.h"
 #include "bedi.h"
+#include "e1etex.h"
+#include "e1sugg.h"
 #include "etex.h"
 #include "bmem.h"
 #include "bobj.h"

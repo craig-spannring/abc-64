@@ -5,6 +5,7 @@
  */
 
 #include "e1cell.h"
+
 #include "b.h"
 #include "b0lan.h"
 #include "bedi.h"
@@ -49,8 +50,7 @@ Hidden cell *freelist;
  * Returns a pointer to the deleted chain (with a Nil end pointer).
  */
 
-Visible cell *
-replist(cell *tops, cell *rep, int oldlno, int oldlcnt)
+Visible cell *replist(cell *tops, cell *rep, int oldlno, int oldlcnt)
 {
 	cell head;
 	cell *p;
@@ -98,8 +98,7 @@ replist(cell *tops, cell *rep, int oldlno, int oldlcnt)
  * Allocate a new cell.
  */
 
-Hidden cell *
-newcell(void)
+Hidden cell *newcell(void)
 {
 	cell *p;
 
@@ -118,8 +117,7 @@ newcell(void)
  * to keep consecutive accesses fast.
  */
 
-Hidden Procedure
-feedfreelist(void)
+Hidden Procedure feedfreelist(void)
 {
 	int n = (PAGESIZE-MALLOCLOSS) / CELLSIZE;
 	cell *p = (cell*) getmem((unsigned)(n*CELLSIZE));
@@ -138,8 +136,7 @@ feedfreelist(void)
  * Discard all entries of a list of cells.
  */
 
-Visible Procedure
-discard(cell *p)
+Visible Procedure discard(cell *p)
 {
 	cell *savefreelist;
 
@@ -163,8 +160,7 @@ discard(cell *p)
  * in the old chain, if they match.
  */
 
-Hidden Procedure
-dupmatch(cell *old, cell *rep, int oldcnt, int repcnt)
+Hidden Procedure dupmatch(cell *old, cell *rep, int oldcnt, int repcnt)
 {
 	int delta = repcnt - oldcnt;
 
@@ -202,8 +198,7 @@ dupmatch(cell *old, cell *rep, int oldcnt, int repcnt)
  * Build a list of cells consisting of the first `lcnt' lines of the tree.
  */
 
-Visible cell *
-build(path p, int lcnt)	         
+Visible cell *build(path p, int lcnt)	         
 {
 	cell head;
 	cell *q = &head;
@@ -248,8 +243,7 @@ build(path p, int lcnt)
  *   screen.
  */
 
-Visible cell *
-gettop(cell *tops)
+Visible cell *gettop(cell *tops)
 {
 	cell *pfwa = tops; /* First line of sliding window */
 	cell *plwa = tops; /* Last+1 line of sliding window */

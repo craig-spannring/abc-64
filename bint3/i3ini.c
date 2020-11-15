@@ -5,12 +5,13 @@
 #include "b1grab.h"
 #include "b1mess.h"
 #include "b1outp.h"
+#include "bfil.h"
 #include "bint.h"
 #include "bobj.h"
-#include "bfil.h"
 #include "e1comm.h"
 #include "e1erro.h"
 #include "e1getc.h"
+#include "e1scrn.h"
 #include "i3env.h"
 #include "i3err.h"
 #include "i3fil.h"
@@ -18,7 +19,6 @@
 #include "i3sou.h"
 #include "port.h"
 #include "release.h"
-#include "port.h"
 
 #define CANT_OPEN MESS(1700, "can't open input file %s\n")
 

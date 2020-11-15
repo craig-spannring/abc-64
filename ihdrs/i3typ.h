@@ -13,10 +13,14 @@ extern "C" {
 /* Type matching */
 
 typedef value btype;
-btype valtype(value v);
-btype loctype(loc l);
-/* Procedure must_agree(); */
+	
+	extern Visible btype valtype(value v);
+	extern Visible btype loctype(loc l);
+	extern Visible Procedure must_agree(btype t, btype u, int m);
+	extern Visible int length(value v);
+	
 
+	
 
 #ifdef __cplusplus
 }

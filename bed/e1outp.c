@@ -3,12 +3,15 @@
 /*
  * B editor -- Screen management package, lower level output part.
  */
+#include "e1outp.h"
 
 #include "b.h"
 #include "b1memo.h"
 #include "bedi.h"
 #include "e1erro.h"
+#include "e1etex.h"
 #include "e1line.h"
+#include "e1node.h"
 #include "e1supr.h"
 #include "etex.h"
 #include "bobj.h"
@@ -44,8 +47,7 @@ Forward Hidden bool chismash(string *pbuf, string *pmod, node n, int i, int mask
  * Save position of the focus for use by outnode/outfocus.
  */
 
-Visible Procedure
-savefocus(environ *ep)
+Visible Procedure savefocus(environ *ep)
 {
 	int sym;
 	int w;
@@ -108,8 +110,7 @@ savefocus(environ *ep)
  * Incorporate the information saved about the focus.
  */
 
-Visible Procedure
-setfocus(cell *tops)
+Visible Procedure setfocus(cell *tops)
 {
 	cell *p;
 	int i;
@@ -135,8 +136,7 @@ setfocus(cell *tops)
  * Signal that actual updata is started.
  */
 
-Visible Procedure
-startactupdate(bool nofocus)
+Visible Procedure startactupdate(bool nofocus)
 {
 	if (nofocus) {
 		multiline = 0;
@@ -149,8 +149,7 @@ startactupdate(bool nofocus)
  * Signal the end of the actual update.
  */
 
-Visible Procedure
-endactupdate(void)
+Visible Procedure endactupdate(void)
 {
 }
 
@@ -159,8 +158,7 @@ endactupdate(void)
  * Output a line of text.
  */
 
-Visible Procedure
-outline(cell *p, int lineno)
+Visible Procedure outline(cell *p, int lineno)
 {
 	node n = p->c_data;
 	int w = nodewidth(n);
@@ -233,8 +231,7 @@ outline(cell *p, int lineno)
 		strsmash(pbuf, pmod, " ", 0); \
 	strsmash(pbuf, pmod, "?", STANDOUT)
 
-Hidden Procedure
-focsmash(string *pbuf, string *pmod, node n)
+Hidden Procedure focsmash(string *pbuf, string *pmod, node n)
 {
 	value v;
 	string str;
@@ -364,8 +361,7 @@ focsmash(string *pbuf, string *pmod, node n)
 	}
 }
 
-Hidden Procedure
-smash(string *pbuf, string *pmod, node n, int mask)
+Hidden Procedure smash(string *pbuf, string *pmod, node n, int mask)
 {
 	string *rp;
 	int i;
@@ -381,8 +377,7 @@ smash(string *pbuf, string *pmod, node n, int mask)
 	}
 }
 
-Hidden Procedure
-strsmash(string *pbuf, string *pmod, string str, int mask)
+Hidden Procedure strsmash(string *pbuf, string *pmod, string str, int mask)
 {
 	if (!str)
 		return;
@@ -394,8 +389,7 @@ strsmash(string *pbuf, string *pmod, string str, int mask)
 	}
 }
 
-Hidden Procedure
-subsmash(string *pbuf, string *pmod, string str, int len, int mask)
+Hidden Procedure subsmash(string *pbuf, string *pmod, string str, int len, int mask)
 {
 	if (!str)
 		return;
@@ -413,8 +407,7 @@ subsmash(string *pbuf, string *pmod, string str, int len, int mask)
  * Return No if it contained a newline (to stop the parent).
  */
 
-Hidden bool
-chismash(string *pbuf, string *pmod, node n, int i, int mask)
+Hidden bool chismash(string *pbuf, string *pmod, node n, int i, int mask)
 {
 	node nn = child(n, i);
 	int w;

@@ -56,14 +56,22 @@ extern "C" {
 	extern parsetree curline;
 	extern value curlino;
 
-	extern Visible bool in_env(value tab, value ke, value **aa);
-	extern Visible Procedure sethowtoname(value v);
-	extern Visible Procedure e_replace(value v, value* t, value k);
-	extern Visible Procedure e_delete(value *t, value k);
 
+	extern Visible bool in_env(value tab, value ke, value **aa);
+	extern Visible Procedure e_delete(value *t, value k);
+	extern Visible Procedure endenv(void);
+	extern Visible Procedure e_replace(value v, value* t, value k);
 	extern Visible Procedure extbnd_tags(value btl, envtab et);
+	extern Visible Procedure initenv(void);
+	extern Visible Procedure initprmnv(void);
+	extern Visible Procedure lst_ttgs(void);
 	extern Visible Procedure re_env(void);
+	extern Visible Procedure set_context(context *sc);
+	extern Visible Procedure sethowtoname(value v);
+	extern Visible Procedure setprmnv(void);
 	extern Visible Procedure sv_context(context *sc);
+	extern Visible value* envassoc(value t, value ke);
+
 	
 #ifdef __cplusplus
 }

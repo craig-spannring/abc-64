@@ -13,6 +13,7 @@
 #include "etex.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "e1node.h"
 #include "node.h"
 #include "gram.h"
 #include "b1grab.h"

@@ -12,6 +12,7 @@
 #include "e1goto.h"
 #include "e1gram.h"
 #include "e1line.h"
+#include "e1sugg.h"
 #include "e1supr.h"
 #include "e1wide.h"
 #include "etex.h"

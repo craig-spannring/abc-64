@@ -8,8 +8,14 @@
 extern "C" {
 #endif
 
-extern Visible bool f_interactive(FILE *file);
-
+	extern Visible Procedure f_rename(value fname, value nfname);
+	extern Visible Procedure f_delete(char *file);
+	extern Visible unsigned f_size(FILE *file);
+	extern Visible Procedure f_close(FILE *usrfile);
+	extern Visible bool f_interactive(FILE *file);
+	extern Visible char *f_getline(FILE *file);
+	extern Visible value new_fname(value name, literal type);
+	extern Visible value mkabcname(char *name);
 
 #ifdef __cplusplus
 }

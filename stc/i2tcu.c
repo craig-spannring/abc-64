@@ -1,10 +1,12 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 /* unification of polytypes */
+#include "i2tcu.h"
 
 #include "b.h"
 #include "bobj.h"
 #include "i2stc.h"
+#include "i2tce.h"
 #include "i2tcp.h"
 
 Forward Hidden Procedure u_unify(polytype a, polytype b, polytype *pu);
