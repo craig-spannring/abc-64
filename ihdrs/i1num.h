@@ -46,12 +46,12 @@ typedef struct integer_ {
 #define Freeze2(v, vv) \
 	((vv).len= (v) != 0, (vv).dig[0]= SmallIntVal(v), (v)= &(vv))
 
-integer int_gadd(integer v, integer w, intlet factor);
-integer int_canon(integer v);
-integer int_sum(integer v, integer w);
-integer int_prod(integer v, integer w);
-integer int_diff(integer v, integer w);
-integer int_quot(integer v, integer w);
+extern integer int_gadd(integer v, integer w, intlet factor);
+extern integer int_canon(integer v);
+extern integer int_sum(integer v, integer w);
+extern integer int_prod(integer v, integer w);
+extern integer int_diff(integer v, integer w);
+extern integer int_quot(integer v, integer w);
 
 #define int_0 ((integer) MkSmallInt(0))
 #define int_1 ((integer) MkSmallInt(1))
@@ -87,14 +87,14 @@ typedef struct {
 #define Rational(a) (!IsSmallInt(a) && Length(a)<-1)
 #define Roundsize(a) (-2-Length(a))
 
-rational mk_rat(integer x, integer y, int len, bool simplify);
-  rational rat_sum(rational u, rational v);
-rational rat_diff(rational u, rational v);
-rational rat_neg(rational u);
-rational rat_prod(rational u, rational v);
-rational rat_quot(rational u, rational v);
-rational rat_power(rational a, integer n);
-rational rat_zero(void);
+extern rational mk_rat(integer x, integer y, int len, bool simplify);
+extern rational rat_sum(rational u, rational v);
+extern rational rat_diff(rational u, rational v);
+extern rational rat_neg(rational u);
+extern rational rat_prod(rational u, rational v);
+extern rational rat_quot(rational u, rational v);
+extern rational rat_power(rational a, integer n);
+extern rational rat_zero(void);
 
 extern rational rat_half;
 
@@ -123,30 +123,32 @@ typedef struct real_ {
 
 extern real app_0;
 
-real mk_approx(double frac, double expo);
+extern real mk_approx(double frac, double expo);
 
-real app_sum(real u, real v);
-real app_diff(real u, real v);
-real app_prod(real u, real v);
-real app_quot(real u, real v);
-real app_neg(real u);
+extern real app_sum(real u, real v);
+extern real app_diff(real u, real v);
+extern real app_prod(real u, real v);
+extern real app_quot(real u, real v);
+extern real app_neg(real u);
 
-real app_exp(real v);
-real app_log(real v);
-real app_power(real u, real v);
+extern real app_exp(real v);
+extern real app_log(real v);
+extern real app_power(real u, real v);
 
-value app_frexp(value);
-integer app_floor(real);
-value app_exactly(real);
+extern value app_frexp(value);
+extern integer app_floor(real);
+extern value app_exactly(real);
 
-value prod2n(value v, value n, bool simplify);
-value prod10n(value v, int n, bool simplify);
-rational ratsumhalf(rational u);
+extern value prod2n(value v, value n, bool simplify);
+extern value prod10n(value v, int n, bool simplify);
+extern rational ratsumhalf(rational u);
 
-value grab_num(int len);
-value regrab_num(value v, int len);
-value grab_rat(int len);
+extern value grab_num(int len);
+extern value regrab_num(value v, int len);
+extern value grab_rat(int len);
 
+extern Procedure initnum(void);
+	
 #ifdef __cplusplus
 }
 #endif

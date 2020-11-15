@@ -17,6 +17,7 @@ extern "C" {
 	bool typeclash(value pname, value fname);
 
 	Visible Procedure bioerrV(int m, value v);
+	Visible Procedure bioerr(int m);
 
 	extern bool ws_recovered;
 	extern bool gr_recovered;

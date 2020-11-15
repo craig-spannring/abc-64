@@ -3,6 +3,7 @@
 #include "b.h"
 #include "bfil.h"
 #include "bobj.h"
+#include "i1tex.h"
 #include "i3bws.h"
 #include "i3env.h"
 #include "i3sou.h"

@@ -19,10 +19,10 @@
  * No type checking of operands is done: this must be done by the caller.
  */
 
-typedef value (*valfun)();
-typedef rational (*ratfun)();
-typedef real (*appfun)();
-typedef double (*mathfun)();
+typedef value (*valfun)(integer, integer);
+typedef rational (*ratfun)(rational, rational);
+typedef real (*appfun)(real, real);
+typedef double (*mathfun)(double);
 
 /*
  * For the arithmetic functions (+, -, *, /) the same action is needed:
@@ -43,7 +43,9 @@ Hidden value dyop(value u, value v, valfun int_fun, ratfun rat_fun, appfun app_f
 		return (*int_fun)((integer)u, (integer)v);
 
 	if (Exact(u) && Exact(v)) {
-		rational u1, v1, a;
+		rational u1;
+		rational v1;
+		rational a;
 
 		/* Use rational operation */
 
@@ -67,7 +69,9 @@ Hidden value dyop(value u, value v, valfun int_fun, ratfun rat_fun, appfun app_f
 	/* Use approximate operation */
 
 	{
-		real u1, v1, a;
+		real u1;
+		real v1;
+		real a;
 		u1 = Approximate(u) ? (real) Copy(u) : (real) approximate(u);
 		v1 = Approximate(v) ? (real) Copy(v) : (real) approximate(v);
 		a = (*app_fun)(u1, v1);
@@ -83,21 +87,21 @@ Visible value sum(value u, value v) {
 	if (IsSmallInt(u) && IsSmallInt(v))
 		return (value) mk_int(
 			(double)SmallIntVal(u) + (double)SmallIntVal(v));
-	return dyop(u, v, (value (*)())int_sum, rat_sum, app_sum);
+	return dyop(u, v, (value (*)(integer, integer))int_sum, rat_sum, app_sum);
 }
 
 Visible value diff(value u, value v) {
 	if (IsSmallInt(u) && IsSmallInt(v))
 		return (value) mk_int(
 			(double)SmallIntVal(u) - (double)SmallIntVal(v));
-	return dyop(u, v, (value (*)())int_diff, rat_diff, app_diff);
+	return dyop(u, v, (value (*)(integer, integer))int_diff, rat_diff, app_diff);
 }
 
 Visible value prod(value u, value v) {
 	if (IsSmallInt(u) && IsSmallInt(v))
 		return (value) mk_int(
 			(double)SmallIntVal(u) * (double)SmallIntVal(v));
-	return dyop(u, v, (value (*)())int_prod, rat_prod, app_prod);
+	return dyop(u, v, (value (*)(integer,integer))int_prod, rat_prod, app_prod);
 }
 
 
@@ -544,7 +548,10 @@ Hidden real over_two_pi(value v) {
 Hidden value trig(value u, value v, mathfun ffun, bool zeroflag)
 {
 	real w;
-	double expo, frac, x, result;
+	double expo;
+	double frac;
+	double x;
+	double result;
 	
 	
 	if (u != Vnil) { /* dyadic version */

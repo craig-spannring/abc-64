@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
+#include "i4rec.h"
+
 #include "b.h"
 #include "bint.h"
 #include "bfil.h"

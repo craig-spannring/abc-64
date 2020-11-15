@@ -12,6 +12,7 @@
 #include "e1edoc.h"
 #include "e1gram.h"
 #include "e1inse.h"
+#include "e1node.h"
 #include "e1supr.h"
 #include "etex.h"
 #include "bobj.h"
