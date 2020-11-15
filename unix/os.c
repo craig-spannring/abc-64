@@ -74,11 +74,9 @@ Visible int getseed(void)
 
 /* getdatetime() - get the date and time */
 
-Visible Procedure getdatetime(year, month, day, hour, minute,
-			      sec, fraction, units)
-     int *year, *month, *day;
-     int *hour, *minute, *sec;
-     long *fraction, *units;
+Visible Procedure getdatetime(int *year, int *month, int *day,
+			      int *hour, int *minute, int *sec,
+			      long *fraction, long *units)
 {
 	struct tm *lt;
 	long secs1970;
@@ -127,7 +125,6 @@ Visible Porting char *curdir(void)
 	char *res;
 #ifdef HAS_GETCWD
 	char *getcwd(char *, size_t);
-	extern int errno;
 	errno=0;
 	res= getcwd(buffer, 1024);
 	if (!res) {

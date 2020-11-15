@@ -349,7 +349,7 @@ Visible Procedure set_random(value v) {
 
 #define T21 2097152.0	/* 2**21 */
 
-Visible value vrandom() {
+Visible value vrandom(void) {
 	double p, r;
 
 	/* Get three packets of 21 bits.
@@ -394,7 +394,8 @@ Visible Procedure endnum(void) {
 }
 
 
-Visible value grab_num(int len) {
+Visible value
+grab_num(int len) {
 	integer v;
 	int i;
 

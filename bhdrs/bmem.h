@@ -12,8 +12,8 @@ extern "C" {
 typedef char *ptr;
 #define Nil ((ptr) 0)
 
-ptr getmem();
-ptr savestr();
+ptr getmem(unsigned syze);
+ptr savestr(char *s);
 #define freestr(s) (freemem((ptr)(s)))
 
 #ifdef MEMTRACE

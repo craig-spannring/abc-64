@@ -108,7 +108,7 @@ typedef struct value_ {HEADER; string *cts;} *value;
 
 /****************************************************************************/
 
-value copy();
+value copy(value v);
 extern bool still_ok;
 extern bool mess_ok;
 extern bool interactive;
@@ -125,7 +125,7 @@ extern bool can_interrupt;
 
 #define MESS(nr, text) nr
 #define GMESS(nr, text) getmess(nr)
-string getmess();
+string getmess(int nr);
 extern char *messbuf;
 #define MESSBUFSIZE 300
 

@@ -345,11 +345,11 @@ Hidden parsetree n_collateral(txptr q, intlet n, parsetree (*base) (/* ??? */))
 	return n > 1 ? v : node2(COLLATERAL, v);
 }
 
-Visible parsetree collateral(txptr q, parsetree (*base) (/* ??? */)) {
+Visible parsetree collateral(txptr q, parsetree (*base) (txptr q)) {
 	return n_collateral(q, 1, base);
 }
 
-Visible parsetree compound(q, base) txptr q; parsetree (*base)(); {
+Visible parsetree compound(txptr q, parsetree (*base)(txptr q)) {
 	parsetree v; txptr ftx, ttx;
 	req(S_CLOSE, q, &ftx, &ttx);
 	v= (*base)(ftx); tx= ttx;

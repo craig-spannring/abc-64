@@ -15,16 +15,16 @@ extern "C" {
 /* Avoid conflict with extra reserved word: */
 #define comp b_comp
 
-typedef struct {							
-	parsetree *stack;
-	parsetree *sp;
-	parsetree *top;
-	int nextend;
-	char level;		/* PARSER or FIXER */
-	char /* bool */ prop;	/* Yes while fixing left expr dya pred */
-	intlet nfield;		/* fieldnr unparsed node during fixing */
-} expadm;
-
+	typedef struct {							
+			parsetree *stack;
+			parsetree *sp;
+			parsetree *top;
+			int nextend;
+			char level;		/* PARSER or FIXER */
+			char /* bool */ prop;	/* Yes while fixing left expr dya pred */
+			intlet nfield;		/* fieldnr unparsed node during fixing */
+	} expadm;
+	
 #define Stack(adm)	(adm->stack)
 #define Sp(adm)		(adm->sp)
 #define Top(adm)	(adm->top)
@@ -47,11 +47,11 @@ typedef struct {
 
 /************************************************************************/
 
-struct prio {
-	string fun;
-	char adic;
-	int L, H;
-};
+	struct prio {
+			string fun;
+			char adic;
+			int L, H;
+	};
 
 #define P_mon '1'
 #define P_dya '2'
@@ -59,12 +59,18 @@ struct prio {
 #define dprio(i) pprio(i, P_dya)
 #define mprio(i) pprio(i, P_mon)
 
-    struct prio * pprio(value f, char adic);
+	struct prio * pprio(value f, char adic);
+	
+	extern Visible bool tag_operator(txptr q, value *v);
+	extern Visible Procedure initexp(expadm *adm, int n, char level);
+	
+	extern Visible Procedure selection(txptr q, parsetree *v);
 
-    extern Visible bool tag_operator(txptr q, value *v);
-    extern Visible Procedure initexp(expadm *adm, int n, char level);
-
-
+	extern Visible Procedure endstack(expadm *adm);
+	extern Visible Procedure push_item(expadm *adm, parsetree v);
+	extern Visible Procedure do_dya(expadm *adm, value v);
+	extern Visible Procedure reduce(expadm *adm);
+	
 #ifdef __cplusplus
 }
 #endif

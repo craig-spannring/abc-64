@@ -8,8 +8,8 @@
 #include "bint.h"
 #include "bobj.h"
 #include "i0err.h"
-#include "i2nod.h"
 #include "i2gen.h" /* Must be after i2nod.h */
+#include "i2nod.h"
 #include "i3env.h"
 #include "i3err.h"
 #include "i3sou.h"
@@ -72,6 +72,9 @@ Visible Procedure cleanup(void) {
    We don't have to look for refinements since these are already known
    from the unit heading.
  */
+
+Hidden Procedure a_fpr_formals(parsetree t);
+Visible Procedure analyze(parsetree t, value *targs);
 
 Hidden Procedure a_tag(value name, value *targs) {
 	value *aa;

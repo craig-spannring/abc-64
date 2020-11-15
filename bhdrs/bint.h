@@ -89,7 +89,7 @@ value mk_how(parsetree unit, bool filed);
 typedef struct{parsetree rp;} ref;
 #define Refinement(r) ((ref *)Ats(r))
 #define Is_refinement(v) (Type(v) == Ref)
-value mk_ref();
+value mk_ref(parsetree rp);
 
 /************************************************************************/
 /*                                                                      */
@@ -122,9 +122,9 @@ typedef struct{loc R; value K;} tbseloc;
 #define Tbseloc(l) ((tbseloc *)Ats(l))
 #define Trimloc(l) ((trimloc *)Ats(l))
 
-loc mk_simploc();
-loc mk_trimloc();
-loc mk_tbseloc();
+loc mk_simploc(basidf id, env en);
+loc mk_trimloc(loc R, value B, value C);
+loc mk_tbseloc(loc R, value K);
 
 #define Is_locloc(v) IsSmallInt(v)
 #define Is_simploc(v) (Type(v) == Sim)
@@ -138,7 +138,7 @@ loc mk_tbseloc();
 #define R_LWB(v) ((value) *Field((v), 0))
 #define R_UPB(v) ((value) *Field((v), 1))
 #define Is_rangebounds(v) (Type(v) == Rangebounds)
-value mk_rbounds();
+value mk_rbounds(value l, value u);
 
 /************************************************************************/
 /* indirection								*/
@@ -147,7 +147,7 @@ value mk_rbounds();
 typedef struct{value val;} indirect;
 #define Indirect(v) ((indirect *)Ats(v))
 #define Is_indirect(v) (Type(v) == Ind)
-value mk_indirect();
+value mk_indirect(value);
 
 /************************************************************************/
 

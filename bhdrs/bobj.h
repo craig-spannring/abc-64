@@ -90,34 +90,34 @@ value ceil_f(value u);
 value round1(value u);
 value round2(value n, value v);
 value vmod(value u, value v);
-value vpower();
-value absval();
+value vpower(value u, value v);
+value absval(value);
 value signum(value u);
-value numerator();
-value denominator();
-value approximate();
-value vrandom();
-value root1();
-value sin1();
-value cos1();
-value tan1();
-value arctan1();
-value angle1();
-value sin2();
-value cos2();
-value tan2();
-value arctan2();
-value angle2();
-value radius();
-value vexp1();
-value vlog1();
-value root2();
-value vlog2();
-value vpi();
-value e_natural();
-value nowisthetime();
-value exactly();
-bool exact();
+value numerator(value);
+value denominator(value);
+value approximate(value);
+value vrandom(void);
+value root1(value);
+value sin1(value);
+value cos1(value);
+value tan1(value);
+value arctan1(value);
+value angle1(value u, value v);
+value sin2(value u, value v);
+value cos2(value u, value v);
+value tan2(value u, value v);
+value arctan2(value u, value v);
+value angle2(value c, value u, value v);
+value radius(value u, value v);
+value vexp1(value);
+value vlog1(value);
+value root2(value u, value v);
+value vlog2(value u, value v);
+value vpi(void);
+value e_natural(void);
+value nowisthetime(void);
+value exactly(value v);
+bool exact(value v);
 
 /****************************** Compounds ******************************/
 #define Nfields(c) Length(c)
@@ -128,45 +128,45 @@ bool exact();
 #define mk_compound(len) grab(Com, len)
 
 /****************************** Lists ******************************/
-value mk_range();
-bool is_rangelist();
+value mk_range(value v1, value v2);
+bool is_rangelist(value v);
 
-Visible Procedure insert();
-Visible Procedure vremove();
+Visible Procedure insert(value v, value *pl);
+Visible Procedure vremove(value v, value *pl);
 
 /****************************** Tables ******************************/
 
-value keys();
-bool in_keys();
-value associate();
+value keys(value t);
+bool in_keys(value k, value t);
+value associate(value t, value k);
 
-Visible Procedure replace();
+Visible Procedure replace(value a, value *pt, value k);
 /* Procedure delete(); */
 
-value* adrassoc();
+value* adrassoc(value t, value k);
 value* key(value v, intlet k);
 value* assoc(value v, intlet k);
 
 /****************************** Texts, Lists, and Tables *******************/
 value mk_elt(void);
 
-bool in();
+bool in(value e, value t);
 
-value size();
-value size2();
-value min1();
-value min2();
-value max1();
-value max2();
+value size(value t);
+value size2(value e, value t);
+value min1(value t);
+value min2(value e, value t);
+value max1(value t);
+value max2(value e, value t);
 #ifdef B_COMPAT
 value th_of();
 #endif
-value thof();
-value item();
-value choice();
+value thof(int k, value v);
+value item(value v, value num);
+value choice(value);
 
 int length(value v); /* The same as size, temporary until part2 is written in B */
-bool empty(); /* whether #v=0: also temporary */
+bool empty(value v); /* whether #v=0: also temporary */
 
 
 

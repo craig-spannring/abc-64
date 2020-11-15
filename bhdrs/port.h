@@ -10,11 +10,11 @@ extern "C" {
 
 /* externals of which the definitions are in a port directory */
 
-Visible bool ed_file();            /* edit.c */
+Visible bool ed_file(char *editor, char *fname, int line);            /* edit.c */
 
-Visible Procedure initfile();      /* file.c */
-Visible char *makepath();
-Visible int Chdir();
+Visible Procedure initfile(void);      /* file.c */
+Visible char *makepath(char *path1, char *path2);
+Visible int Chdir(char *path);
 
 extern char *startdir;
 extern char *bwsdefault;
@@ -30,11 +30,11 @@ extern char *buffile;
 #define BUFFILE		"copybuf.abc"
 #define FORMAT_KEYSFILE "abc%s.key"    /* abc$TERM.key */
 
-Visible string reprchar();              /* keys.c */
+Visible string reprchar(int c);              /* keys.c */
 #ifndef CANLOOKAHEAD
 extern char intrchar;
 #endif
-Visible Procedure addspeckeys();
+Visible Procedure addspeckeys(void);
 /* extern struct tabent deftab[];  in getc.h */
 
 extern char *OPTbwsdir;                /* main.c */
@@ -53,16 +53,18 @@ extern int abc_todo;
 #define abcioWSrecover  5             /* run abc -r (recover a workspace) */
 #define abcioGRrecover  6             /* run abc -x (recover ws parent) */
 
-Visible int getseed();                 /* os.c */
-Visible Procedure getdatetime();
-Visible bool is_path();
-Visible bool is_abspath();
-Visible bool is_directory();
+Visible int getseed(void);                 /* os.c */
+Visible Procedure getdatetime(int *year, int *month, int *day,
+			      int *hour, int *minute, int *sec,
+			      long *fraction, long *units);
+Visible bool is_path(char*);
+Visible bool is_abspath(char*);
+Visible bool is_directory(char *dir, char *name);
 
 extern bool intrptd;                 /* sig.c */
-Visible Procedure initsig();
+Visible Procedure initsig(void);
 
-Visible Procedure abc_usage();       /* usage.c */
+Visible Procedure abc_usage(void);       /* usage.c */
 
 #ifdef __cplusplus
 }

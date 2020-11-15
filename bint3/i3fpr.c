@@ -28,88 +28,95 @@ Forward Hidden Procedure defprd(string repr, literal adic, intlet pre);
 #define In 1
 #define Not_in 2
 
+
 /*
  * Table defining all predefined functions (but not propositions).
  */
-
 struct funtab {
-	string f_name; literal f_adic, f_kind;
-	value	(*f_fun)();
+	string f_name;
+	literal f_adic;
+	literal f_kind;
+	union {
+	    value (*f_fun0)(void);
+	    value (*f_fun1)(value);
+	    value (*f_fun2)(value, value);
+	    value (*f_fun3)(value, value, value);
+	};
 	char /* bool */ f_extended;
 } funtab[] = {
-	{S_ABOUT,	Mfd, Nume, approximate},
-	{S_PLUS,	Mfd, Nume, copy},
-	{S_PLUS,	Dfd, Nume, sum},
-	{S_MINUS,	Mfd, Nume, negated},
-	{S_MINUS,	Dfd, Nume, diff},
-	{S_NUMERATOR,	Mfd, Nume, numerator},
-	{S_DENOMINATOR,	Mfd, Nume, denominator},
+	{S_ABOUT,	Mfd, Nume, {.f_fun1=approximate}},
+	{S_PLUS,	Mfd, Nume, {.f_fun1=copy}},
+	{S_PLUS,	Dfd, Nume, {.f_fun2=sum}},
+	{S_MINUS,	Mfd, Nume, {.f_fun1=negated}},
+	{S_MINUS,	Dfd, Nume, {.f_fun2=diff}},
+	{S_NUMERATOR,	Mfd, Nume, {.f_fun1=numerator}},
+	{S_DENOMINATOR,	Mfd, Nume, {.f_fun1=denominator}},
 
-	{S_TIMES,	Dfd, Nume, prod},
-	{S_OVER,	Dfd, Nume, quot},
-	{S_POWER,	Dfd, Nume, vpower},
+	{S_TIMES,	Dfd, Nume, {.f_fun2=prod}},
+	{S_OVER,	Dfd, Nume, {.f_fun2=quot}},
+	{S_POWER,	Dfd, Nume, {.f_fun2=vpower}},
 
-	{S_BEHEAD,	Dfd, Other, behead},
-	{S_CURTAIL,	Dfd, Other, curtail},
-	{S_JOIN,	Dfd, Other, concat},
-	{S_REPEAT,	Dfd, Other, repeat},
-	{S_LEFT_ADJUST,	Dfd, Adjust, adjleft},
-	{S_CENTER,	Dfd, Adjust, centre},
-	{S_RIGHT_ADJUST, Dfd, Adjust, adjright},
+	{S_BEHEAD,	Dfd, Other, {.f_fun2=behead}},
+	{S_CURTAIL,	Dfd, Other, {.f_fun2=curtail}},
+	{S_JOIN,	Dfd, Other, {.f_fun2=concat}},
+	{S_REPEAT,	Dfd, Other, {.f_fun2=repeat}},
+	{S_LEFT_ADJUST,	Dfd, Adjust, {.f_fun2=adjleft}},
+	{S_CENTER,	Dfd, Adjust, {.f_fun2=centre}},
+	{S_RIGHT_ADJUST, Dfd, Adjust, {.f_fun2=adjright}},
 
-	{S_NUMBER,	Mfd, Other, size},
-	{S_NUMBER,	Dfd, Other, size2},
+	{S_NUMBER,	Mfd, Other, {.f_fun1=size}},
+	{S_NUMBER,	Dfd, Other, {.f_fun2=size2}},
 
-	{F_pi,		Zfd, Other, vpi},
-	{F_e,		Zfd, Other, e_natural},
-	{F_now,		Zfd, Other, nowisthetime},
+	{F_pi,		Zfd, Other, {.f_fun0=vpi}},
+	{F_e,		Zfd, Other, {.f_fun0=e_natural}},
+	{F_now,		Zfd, Other, {.f_fun0=nowisthetime}},
 	
-	{F_abs,    	Mfd, Nume, absval},
-	{F_sign,   	Mfd, Nume, signum},
-	{F_floor,  	Mfd, Nume, floor_f},
-	{F_ceiling,	Mfd, Nume, ceil_f},
-	{F_round,  	Mfd, Nume, round1},
-	{F_round,  	Dfd, Nume, round2},
-	{F_mod,    	Dfd, Nume, vmod},
-	{F_root,   	Mfd, Nume, root1},
-	{F_root,   	Dfd, Nume, root2},
-	{F_random, 	Zfd, Nume, vrandom},
+	{F_abs,    	Mfd, Nume, {.f_fun1=absval}},
+	{F_sign,   	Mfd, Nume, {.f_fun1=signum}},
+	{F_floor,  	Mfd, Nume, {.f_fun1=floor_f}},
+	{F_ceiling,	Mfd, Nume, {.f_fun1=ceil_f}},
+	{F_round,  	Mfd, Nume, {.f_fun1=round1}},
+	{F_round,  	Dfd, Nume, {.f_fun2=round2}},
+	{F_mod,    	Dfd, Nume, {.f_fun2=vmod}},
+	{F_root,   	Mfd, Nume, {.f_fun1=root1}},
+	{F_root,   	Dfd, Nume, {.f_fun2=root2}},
+	{F_random, 	Zfd, Nume, {.f_fun0=vrandom}},
 	
-	{F_exactly,	Mfd, Nume, exactly},
+	{F_exactly,	Mfd, Nume, {.f_fun1=exactly}},
 
-	{F_sin,		Mfd, Nume, sin1},
-	{F_cos, 	Mfd, Nume, cos1},
-	{F_tan,		Mfd, Nume, tan1},
-	{F_arctan,	Mfd, Nume, arctan1},
-	{F_angle,	Mfd, Numpair, angle1},
-	{F_radius,	Mfd, Numpair, radius},
+	{F_sin,		Mfd, Nume, {.f_fun1=sin1}},
+	{F_cos, 	Mfd, Nume, {.f_fun1=cos1}},
+	{F_tan,		Mfd, Nume, {.f_fun1=tan1}},
+	{F_arctan,	Mfd, Nume, {.f_fun1=arctan1}},
+	{F_angle,	Mfd, Numpair, {.f_fun2=angle1}},
+	{F_radius,	Mfd, Numpair, {.f_fun2=radius}},
 
-	{F_sin,		Dfd, Nonzero, sin2},
-	{F_cos, 	Dfd, Nonzero, cos2},
-	{F_tan, 	Dfd, Nonzero, tan2},
-	{F_arctan,	Dfd, Nume, arctan2},
-	{F_angle,	Dfd, Numpair, angle2},
+	{F_sin,		Dfd, Nonzero, {.f_fun2=sin2}},
+	{F_cos, 	Dfd, Nonzero, {.f_fun2=cos2}},
+	{F_tan, 	Dfd, Nonzero, {.f_fun2=tan2}},
+	{F_arctan,	Dfd, Nume, {.f_fun2=arctan2}},
+	{F_angle,	Dfd, Numpair, {.f_fun3=angle2}},
 	
-	{F_exp,		Mfd, Nume, vexp1},
-	{F_log,		Mfd, Nume, vlog1},
-	{F_log,		Dfd, Nume, vlog2},
+	{F_exp,		Mfd, Nume, {.f_fun1=vexp1}},
+	{F_log,		Mfd, Nume, {.f_fun1=vlog1}},
+	{F_log,		Dfd, Nume, {.f_fun2=vlog2}},
 
-	{F_stripped,	Mfd, Textual, stripped},
-	{F_split,	Mfd, Textual, split},
-	{F_upper,	Mfd, Textual, upper},
-	{F_lower,	Mfd, Textual, lower},
+	{F_stripped,	Mfd, Textual, {.f_fun1=stripped}},
+	{F_split,	Mfd, Textual, {.f_fun1=split}},
+	{F_upper,	Mfd, Textual, {.f_fun1=upper}},
+	{F_lower,	Mfd, Textual, {.f_fun1=lower}},
 
-	{F_keys,	Mfd, Other, keys},
+	{F_keys,	Mfd, Other, {.f_fun1=keys}},
 #ifdef B_COMPAT
-	{F_thof, 	Dfd, Other, th_of},
+	{F_thof, 	Dfd, Other, {.f_fun2=th_of}},
 #endif
-	{F_item, 	Dfd, Other, item},
-	{F_min,  	Mfd, Other, min1},
-	{F_min,  	Dfd, Other, min2},
-	{F_max,  	Mfd, Other, max1},
-	{F_max,  	Dfd, Other, max2},
-	{F_choice, 	Mfd, Other, choice},
-	{"",		 Dfd, Other, NULL} /*sentinel*/
+	{F_item, 	Dfd, Other, {.f_fun2=item}},
+	{F_min,  	Mfd, Other, {.f_fun1=min1}},
+	{F_min,  	Dfd, Other, {.f_fun2=min2}},
+	{F_max,  	Mfd, Other, {.f_fun1=max1}},
+	{F_max,  	Dfd, Other, {.f_fun2=max2}},
+	{F_choice, 	Mfd, Other, {.f_fun1=choice}},
+	{"",		 Dfd, Other, {NULL}} /*sentinel*/
 };
 
 Visible Procedure initfpr(void)
@@ -255,17 +262,17 @@ Visible value pre_fun(value nd1, intlet pre, value nd2) {
 	release(name);
 	
 	switch (adic) {
-	case Zfd: return((*fp->f_fun)());
+	case Zfd: return((*fp->f_fun0)());
 	case Mfd:
 		if (fp->f_kind == Numpair)
-			return((*fp->f_fun)(*Field(nd2,0), *Field(nd2,1)));
+			return((*fp->f_fun2)(*Field(nd2,0), *Field(nd2,1)));
 		else
-			return((*fp->f_fun)(nd2));
+			return((*fp->f_fun1)(nd2));
 	case Dfd:
 		if (fp->f_kind == Numpair)
-			return((*fp->f_fun)(nd1, *Field(nd2,0), *Field(nd2,1)));
+			return((*fp->f_fun3)(nd1, *Field(nd2,0), *Field(nd2,1)));
 		else
-			return((*fp->f_fun)(nd1, nd2));
+			return((*fp->f_fun2)(nd1, nd2));
 	default: syserr(MESS(3207, "pre-defined fpr wrong"));
 		 return Vnil;
 		 /*NOTREACHED*/

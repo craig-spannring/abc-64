@@ -13,14 +13,14 @@ extern "C" {
 
 /* environments and context */
 
-typedef struct {
-	value howtoname;
-	env curnv;
-	value r_names, *bndtgs;
-	literal cntxt, resexp;
-	parsetree cur_line;
-	value cur_lino;
-} context;
+	typedef struct {
+			value howtoname;
+			env curnv;
+			value r_names, *bndtgs;
+			literal cntxt, resexp;
+			parsetree cur_line;
+			value cur_lino;
+	} context;
 
 #define Enil ((env) NULL)
 
@@ -38,25 +38,28 @@ typedef struct {
 #define Rep '+'
 #define Voi ' '
 
-extern value* envassoc();
+	extern value* envassoc(value, value);
 
-extern env curnv; extern value *bndtgs;
-extern literal cntxt, resexp; extern value howtoname;
-extern value errtname;
-extern intlet lino;
-extern intlet f_lino;
-extern intlet i_lino;
+	extern env curnv; extern value *bndtgs;
+	extern literal cntxt, resexp; extern value howtoname;
+	extern value errtname;
+	extern intlet lino;
+	extern intlet f_lino;
+	extern intlet i_lino;
 
-extern context read_context;
+	extern context read_context;
 
-extern envtab prmnvtab;
-extern envchain prmnvchain;
-extern env prmnv;
+	extern envtab prmnvtab;
+	extern envchain prmnvchain;
+	extern env prmnv;
 
-extern parsetree curline;
-extern value curlino;
+	extern parsetree curline;
+	extern value curlino;
 
-extern Visible bool in_env(value tab, value ke, value **aa);
+	extern Visible bool in_env(value tab, value ke, value **aa);
+	extern Visible Procedure sethowtoname(value v);
+	extern Visible Procedure e_replace(value v, value* t, value k);
+	extern Visible Procedure e_delete(value *t, value k);
 
 #ifdef __cplusplus
 }

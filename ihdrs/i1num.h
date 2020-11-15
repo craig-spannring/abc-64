@@ -87,19 +87,19 @@ typedef struct {
 #define Rational(a) (!IsSmallInt(a) && Length(a)<-1)
 #define Roundsize(a) (-2-Length(a))
 
-rational mk_rat();
-rational rat_sum();
-rational rat_diff();
-rational rat_neg();
-rational rat_prod();
-rational rat_quot();
-rational rat_power();
-rational rat_zero();
+rational mk_rat(integer x, integer y, int len, bool simplify);
+  rational rat_sum(rational u, rational v);
+rational rat_diff(rational u, rational v);
+rational rat_neg(rational u);
+rational rat_prod(rational u, rational v);
+rational rat_quot(rational u, rational v);
+rational rat_power(rational a, integer n);
+rational rat_zero(void);
 
 extern rational rat_half;
 
-value tento();
-value mk_exact();
+value tento(int n);
+value mk_exact(integer p, integer q, int len);
 
 /***************** Definitions exported for approximate numbers *************/
 
@@ -123,29 +123,29 @@ typedef struct real_ {
 
 extern real app_0;
 
-real mk_approx();
+real mk_approx(double frac, double expo);
 
-real app_sum();
-real app_diff();
-real app_prod();
-real app_quot();
-real app_neg();
+real app_sum(real u, real v);
+real app_diff(real u, real v);
+real app_prod(real u, real v);
+real app_quot(real u, real v);
+real app_neg(real u);
 
-real app_exp();
-real app_log();
-real app_power();
+real app_exp(real v);
+real app_log(real v);
+real app_power(real u, real v);
 
-value app_frexp();
-integer app_floor();
-value app_exactly();
+value app_frexp(value);
+integer app_floor(real);
+value app_exactly(real);
 
-value prod2n();
-value prod10n();
-rational ratsumhalf();
+value prod2n(value v, value n, bool simplify);
+value prod10n(value v, int n, bool simplify);
+rational ratsumhalf(rational u);
 
-value grab_num();
-value regrab_num();
-value grab_rat();
+value grab_num(int len);
+value regrab_num(value v, int len);
+value grab_rat(int len);
 
 #ifdef __cplusplus
 }

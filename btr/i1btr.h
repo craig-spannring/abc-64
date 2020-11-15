@@ -167,65 +167,6 @@ rangenode, *rangeptr;
 
 intlet uflow(intlet n, intlet l, char *cbuf, btreeptr *pbuf, intlet it);
 
-/* Procedure merge(); */
-    /* btreeptr pleft; itemptr pitm; btreeptr pright; literal it; */
-bool rebalance();
-    /* btreeptr *pptr1; itemptr pitm; btreeptr pptr2;
-       intlet minlim, maxlim; literal it; */
-/* Procedure restore_child(); */
-    /* btreeptr pparent; intlet ichild, minl, maxl; literal it; */
-bool inodeinsert();
-    /* btreeptr pnode, *pptr; itemptr pitm; intlet at; literal it; */
-bool bnodeinsert();
-    /* btreeptr pnode, *pptr; itemptr pitm; intlet at; literal it; */
-bool i_search();
-    /* btreeptr pnode; value key; intlet *pl; width iw; */
-bool b_search();
-    /* btreeptr pnode; value key; intlet *pl; width iw; */
-
-/*********************************************************************/
-/* texts only (mbte.c)                                               */
-/*********************************************************************/
-
-btreeptr trimbtextnode(); /* btreeptr pnode, intlet from,to */
-btreeptr trimitextnode(); /* btreeptr pnode, intlet from,to */
-bool join_itm();
-    /* btreeptr pnode, *pptr; itemptr pitm; bool after */
-
-/*********************************************************************/
-/* lists only (mbli.c)                                               */
-/*********************************************************************/
-
-btreeptr spawncrangenode(); /* value lwb, upb */
-/* Procedure set_size_and_lim(); */ 	/* btreeptr pnode */
-/* PRrocedure ir_to_bottomnode(); */ 	/* btreeptr *pptr; */
-bool ins_itm();
-    /* btreeptr *pptr1; itemptr pitm; btreeptr *pptr2; literal it; */
-/* Procedure rem_greatest(); */
-    /* btreeptr *pptr; itemptr prepl_itm; literal it; */
-bool rem_itm(); 
-    /* btreeptr *pptr1; itemptr pitm;
-       itemptr p_insitm; btreeptr *pptr2; bool *psplit;
-       literal it; */
-
-/*********************************************************************/
-/* tables only (mbla.c)                                              */
-/*********************************************************************/
-
-bool rpl_itm(); 
-    /* btreeptr *pptr1, *pptr2; itemptr pitm; bool *p_added */
-bool del_itm(); 
-    /* btreeptr *pptr1; itemptr pitm */
-value assocval(); 	/* btreeptr pnode; value key; */
-bool assocloc();
-    /* value **ploc; btreeptr pnode; value key; */
-bool u_assoc();	/* btreeptr pnode; value key; */
-
-/***************** Texts, lists and tables ********************/
-/* Procedure move_itm(); */ 	/* itemptr pdes, psrc; literal it; */
-bool get_th_item();	/* itemptr pitm; value num, v; */
-
-
 /* Private definitions for grabbing and ref count scheme */
 
 btreeptr grabbtreenode(literal flag, literal it);	/* literal flag, it */
@@ -233,9 +174,7 @@ btreeptr copybtree(btreeptr pnode);    	/* btreeptr pnode */
 void uniqlbtreenode(btreeptr *pptr, literal it);
 btreeptr ccopybtreenode(btreeptr pnode, literal it);	/* btreeptr pnode; literal it */
 btreeptr mknewroot(btreeptr ptr0, itemptr pitm0, btreeptr ptr1, literal it);
-    /* btreeptr ptr0, itemptr pitm0, btreeptr ptr1, literal it */
 void relbtree(btreeptr pnode, literal it);
-/* Procedure freebtreenode(); */	/* btreeptr pnode; */
 
 #ifdef __cplusplus
 }

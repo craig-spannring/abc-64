@@ -46,19 +46,18 @@ typedef char *txptr;
 	 (c) == C_ABOUT || (c) == C_TIMES || (c) == C_OVER || \
 	 (c) == C_PLUS || (c) == C_MINUS || (c) == C_NUMBER)
 
-txptr fcol();
-char *keyword();
+txptr fcol(void);
+char *keyword(void);
 
-bool _denomtor_sign();
-bool mon_sign();
+bool mon_sign(value *v);
 
 extern txptr tx, ceol, first_col;
 extern intlet cur_ilev;
-intlet ilev();
+intlet ilev(void);
 
 extern value res_cmdnames;
 
-value cr_text();
+value cr_text(txptr p, txptr q);
 
 /* contexts: */
 #define In_share 's'
@@ -68,31 +67,31 @@ value cr_text();
 
 /* Expressions: */
 
-parsetree expr();
-parsetree singexpr();
+parsetree expr(txptr q);
+parsetree singexpr(txptr q);
 
 /* Targets: */
 
-parsetree targ(); 
+parsetree targ(txptr q); 
 
 /* Tests: */
 
-parsetree test(); 
-parsetree unp_test();
+parsetree test(txptr q); 
+parsetree unp_test(txptr q);
 
 /* Commands: */
 
 parsetree cmd_suite(intlet cil, bool first, parsetree (*suite)(intlet cil, bool first, bool *emp));
 parsetree cmd_seq(intlet cil, bool first, bool *emp);
 parsetree ucmd_seq(intlet cil, bool first, bool *emp);
-value tail_line();
+value tail_line(void);
 
 /* B units */
 
-parsetree unit();
-parsetree collateral();
-parsetree compound();
-parsetree idf();
+parsetree unit(bool heading, bool editing);
+parsetree collateral(txptr q, parsetree (*base) (txptr q));
+parsetree compound(txptr q, parsetree (*base)(txptr q));
+parsetree idf(txptr q);
 extern literal idf_cntxt;
 
 /* signs */

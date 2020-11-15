@@ -55,7 +55,7 @@ Forward Hidden Procedure writetext(value v, FILE *fp);
 Visible bool dofile(environ *ep, string filename, int linenumber, literal kind, bool creating, bool *changed)
 {
 	bool read_bad= No;
-	bool readfile();
+	bool readfile(environ *ep, string filename, int line, bool creating);
 	
 #ifdef SAVEPOS
 	if (linenumber <= 0)

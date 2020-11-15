@@ -10,6 +10,7 @@
 #include "bobj.h"
 #include "i1btr.h"
 #include "i1tlt.h"
+#include "i1tex.h"
 #include "i3err.h"
 #include "i3typ.h"
 

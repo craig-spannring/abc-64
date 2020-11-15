@@ -20,7 +20,7 @@
 #define S_dya  '2'
 #define S_mon  '3'
 
-Hidden Procedure f_unparsed(parsetree *pt, parsetree (*fct) (/* ??? */)) {
+Hidden Procedure f_unparsed(parsetree *pt, parsetree (*fct) (expadm *adm, parsetree root)) {
 	parsetree t= *pt;
 	expadm adm;
 	struct state v;

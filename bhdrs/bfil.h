@@ -35,7 +35,7 @@ extern string temp1file;
 
 /* extern Procedure freepath(); */
 
-char *f_getline();		/* return line from file including \n */
+char *f_getline(FILE *file);		/* return line from file including \n */
 
 #ifdef __cplusplus
 }

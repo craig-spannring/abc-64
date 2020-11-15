@@ -186,7 +186,7 @@ Visible value vmod(value u, value v) {
  * u**v has the most special cases of all the predefined arithmetic functions.
  */
 
-Visible value vpower(u, v) value u, v; {
+Visible value vpower(value u, value v) {
 	real ru, rv, rw;
 	if (Exact(u) && (Integral(v) ||
 			/* Next check catches for integers disguised as rationals: */
@@ -528,7 +528,7 @@ Visible value root1(value v) {
 
 /* The rest of the mathematical functions */
 
-Visible value vpi() {
+Visible value vpi(void) {
 	return (value) mk_approx(3.141592653589793238463, 0.0);
 }
 Visible value e_natural(void) {
@@ -647,14 +647,14 @@ Visible value radius(value u, value v) {
 	return rad;
 }
 
-Visible value vexp1(v) value v; {
+Visible value vexp1(value v) {
 	real w = (real) approximate(v);
 	real x = app_exp(w);
 	Release(w);
 	return (value) x;
 }
 
-Visible value vlog1(v) value v; {
+Visible value vlog1(value v) {
 	real w, x;
 	if (numcomp(v, zero) <= 0) {
 		interr(MESS(609, "in log x, x <= 0"));
@@ -666,7 +666,7 @@ Visible value vlog1(v) value v; {
 	return (value) x;
 }
 
-Visible value vlog2(u, v) value u, v;{
+Visible value vlog2(value u, value v) {
 	value w;
 	if (numcomp(u, zero) <= 0) {
 		interr(MESS(610, "in b log x, b <= 0"));
