@@ -9,6 +9,7 @@
 #include "bobj.h"
 #include "bint.h"
 #include "i2par.h"
+#include "i3int.h"
 // #include "i1nur.h"   // bint1/
 
 extern "C"
@@ -57,7 +58,8 @@ TEST(whitebox, expr_001)
 	first_col = tx; 
 	ceol      = tx + 15;
 	char *q   = tx + 13;
-	expr(q); 
+	parsetree t = expr(q);
+	EXPECT_TRUE(Is_parsetree(t));
 }
 // TEST(whitebox, singexpr_001)
 // {

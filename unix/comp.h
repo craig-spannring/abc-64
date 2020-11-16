@@ -14,7 +14,7 @@ extern "C" {
 
 typedef char literal;	/* to emphasize meaning only */
 
-typedef int expint;	/*The 2nd argument of frexp points to this */
+typedef int frexpint;	/*The 2nd argument of frexp points to this */
 			/*(see manual page frexp(3)).              */
 			/*On some 68K systems must be short (foo!) */
 

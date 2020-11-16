@@ -42,7 +42,7 @@ Hidden double twologBASE;
  * So here is our own version.
  */
 
-Hidden double b_frexp(double frac, expint *ep)
+Hidden double b_frexp(double frac, frexpint *ep)
 {
 	if (frac == 0.0) {
 		*ep = 0;
@@ -60,7 +60,7 @@ Hidden double b_frexp(double frac, expint *ep)
 Visible real mk_approx(double frac, double expo) {
 	real u;
 #ifdef EXT_RANGE
-	expint v;
+	frexpint v;
 	if (frac != 0) frac = b_frexp(frac, &v), expo += v;
 	if (frac == 0 || expo < -BIG) return (real) Copy(app_0);
 	if (expo > BIG) {
@@ -234,7 +234,7 @@ Visible real app_log(real v) {
 
 Visible real app_exp(real v) {
 #ifdef EXT_RANGE
-	expint ei;
+	frexpint ei;
 	double frac = Frac(v), vexpo = Expo(v), new_expo;
 	static double canexp;
 	if (!canexp)
@@ -356,7 +356,7 @@ Visible int app_comp(real u, real v) {
 
 Visible integer app_floor(real u) {
 	double frac, expo;
-	expint ei;
+	frexpint ei;
 	integer v, w;
 	value twotow, result;
 	
@@ -386,7 +386,7 @@ Visible value app_exactly(real u) {
 	integer v, n, t1, t2;
 	double frac, expo, rest, p;
 	unsigned long l;
-	expint e, re, dummy;
+	frexpint e, re, dummy;
 	int z, digits;
 	bool neg;
 	
@@ -437,7 +437,7 @@ Visible value app_exactly(real u) {
 Visible Procedure app_print(FILE *fp, real v) {
 	double frac= Frac(v);
 	double expo= Expo(v);
-	expint ei;
+	frexpint ei;
 	integer w;
 	string str;
 	
