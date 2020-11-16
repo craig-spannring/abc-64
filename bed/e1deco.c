@@ -42,8 +42,6 @@ Forward Hidden bool copyin(environ *ep, queue q);
 Forward Hidden bool colonhack(environ *ep, int all);
 Forward Hidden bool allright(string repr);
 
-Forward value copyout(environ *ep);
-
 /*
  * DELETE and COPY currently share a buffer, called the copy buffer.
  * (Physically, there is one such a buffer in each environment.)

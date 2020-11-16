@@ -3,6 +3,9 @@
 #ifndef I3INT_h_e408d609ab8dd2cd846d26e6887bda33
 #define I3INT_h_e408d609ab8dd2cd846d26e6887bda33
 
+#include "b.h"
+#include "bint.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -37,6 +40,12 @@ parsetree *_thread2();
 #ifndef Thread2
 #define Thread2(t) _Thread2(t)
 #endif
+
+extern Visible value resval;
+extern Visible bool terminated;
+
+extern Visible Procedure execthread(parsetree start);
+extern Visible value evalthread(parsetree start);
 
 #ifdef __cplusplus
 }

@@ -54,7 +54,6 @@ Visible bool ins_char(environ *ep, int c, int alt_c)
 {
 	auto queue q = Qnil;
 	auto queue qf = Qnil;
-	value copyout();
 	auto string str;
 	char buf[2];
 	int where;

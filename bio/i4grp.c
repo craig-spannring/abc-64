@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
+#include "i4grp.h"
+
 #include "b.h"
 #include "bfil.h"
 #include "bobj.h"

@@ -14,14 +14,13 @@
 #include "bmem.h"
 #include "bobj.h"
 #include "e1erro.h"
+#include "e1que1.h"
 #include "erro.h"
 #include "i3err.h"
 #include "node.h"
 #include "trm.h"
 #include "port.h"
 
-
-string querepr();
 
 extern int winheight; /* From scrn.c */
 extern int winstart; /* From scrn.c */

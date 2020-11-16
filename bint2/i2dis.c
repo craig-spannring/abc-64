@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
+#include "i2dis.h"
+
 #include "b.h"
 #include "b1memo.h"
 #include "b1outp.h"

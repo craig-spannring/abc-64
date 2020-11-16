@@ -787,7 +787,7 @@ Visible int getoperation(void) {
 /* called from interpreter to enable interrupt and suspend: */
 
 #define FAILSUSP	MESS(6521, "Sorry, I failed to suspend ABC\n")
-extern bool suspendabc();
+extern bool suspendabc(void);
 
 Visible int pollcnt= 0;
 

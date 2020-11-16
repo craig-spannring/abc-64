@@ -22,6 +22,7 @@
 #include "b.h"
 
 #include <stdlib.h>
+#include <signal.h>
 
 #ifndef TERMIO
 #include <sgtty.h>
@@ -308,8 +309,8 @@ Forward Hidden int subshell(void);
  * (2) with a settable scrolling region, like VT100 (cs_str, sr_str, sf_str);
  * (3) no hardware scrolling available.
  */
-Forward Hidden Procedure (*scr_up)();
-Forward Hidden Procedure (*scr_down)();
+Forward Hidden Procedure (*scr_up)(int, int, int);
+Forward Hidden Procedure (*scr_down)(int, int, int);
 Forward Hidden Procedure scr1up(int yfirst, int ylast, int n);
 Forward Hidden Procedure scr1down(int yfirst, int ylast, int n);
 Forward Hidden Procedure scr2up(int yfirst, int ylast, int n);
@@ -770,8 +771,6 @@ Hidden int start_trm(void) {
 
 Visible Procedure trmsense(string sense, string format, int* py, int* px)
 {
-	bool get_pos();
-
 #ifdef VTRMTRACE
 	if (vtrmfp) fprintf(vtrmfp, "\ttrmsense(&yy, &xx);\n");
 #endif
@@ -1873,7 +1872,7 @@ Visible int trmavail(void) {
 
 Visible int trmsuspend(void) {
 #ifdef SIGTSTP
-	SIGTYPE (*oldsig)();
+	SIGTYPE (*oldsig)(int);
 	
 	oldsig= signal(SIGTSTP, SIG_IGN);
 	if (oldsig == SIG_IGN) {

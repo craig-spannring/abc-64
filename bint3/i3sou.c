@@ -11,14 +11,18 @@
 #include "bmem.h"
 #include "bobj.h"
 #include "bfil.h"
+#include "i2dis.h"
+#include "i2gen.h"
 #include "i2par.h"
 #include "i2nod.h"
 #include "i2syn.h"
+#include "i2tca.h"
 #include "i3bws.h"
 #include "i3cen.h"
 #include "i3com.h"
 #include "i3err.h"
 #include "i3env.h"
+#include "i3fil.h"
 #include "i3scr.h"
 #include "i3in2.h"
 #include "i3sou.h"
@@ -44,7 +48,7 @@ Forward Hidden Procedure lst_fileheading(value v);
 Forward Hidden bool ens_tfiled(value name, value *fname);
 
 extern int winheight;
-bool ask_for();
+bool ask_for(int nr);
 
 #ifdef TYPE_CHECK
 value stc_code(value);

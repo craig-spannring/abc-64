@@ -9,6 +9,7 @@
 #include "bedi.h"
 #include "bmem.h"
 #include "bobj.h"
+#include "i1obj.h"
 #include "i3err.h"
 
 #define Adj(s) (unsigned) (Hdrsize+(s))

@@ -12,6 +12,7 @@
 #include "e1edoc.h"
 #include "e1erro.h"
 #include "e1inse.h"
+#include "e1etex.h"
 #include "e1gram.h"
 #include "e1node.h"
 #include "e1que1.h"

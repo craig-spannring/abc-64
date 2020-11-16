@@ -2,13 +2,15 @@
 
 /* Generic routines for all values */
 
-#include "b.h"
+#include "i1obj.h"
 
+#include "b.h"
 #include "b1grab.h"
 #include "b1memo.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "i1btr.h"
+#include "i1lta.h"
 #include "i1tlt.h"
 #include "i1tex.h"
 #include "i3err.h"
@@ -51,8 +53,6 @@ Hidden Procedure incompatible(value v, value w) {
 }
 
 Visible bool comp_ok = Yes; 		/* Temporary, to catch type errors */
-
-relation comp_tlt(), comp_text();	/* From b1lta.c */
 
 Visible relation compare(value v, value w) {
 	literal vt, wt;
@@ -146,7 +146,9 @@ Visible double hash(value v) {
 }
 
 Visible value convert(value v, bool coll, bool outer) {
-	value t, quote, c, cv, sep, th, openbr, closebr; int k, len; char ch;
+	value t, quote, c, cv, sep, th, openbr, closebr;
+	int k, len;
+	char ch;
 	switch (Type(v)) {
 	case Num:
 		return mk_text(convnum(v));
@@ -220,6 +222,7 @@ Visible value convert(value v, bool coll, bool outer) {
 			concato(&t, cv= mkchar('$')); release(cv);
 			break;
 		}
+		t = NULL; // shouldn't get here
 		syserr(MESS(503, "unknown type in convert"));
 	}
 	return t;

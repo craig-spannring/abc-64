@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-extern Procedure initkeys();
+extern Procedure initkeys(void);
 
 typedef struct tabent {
 	int code;
@@ -19,7 +19,7 @@ typedef struct tabent {
 
 extern struct tabent deftab[];
 extern int ndefs; 		/* number of entries in deftab */
-extern Procedure addkeydef();
+extern Procedure addkeydef(int code, int deflen, string def, string rep, string name);
 
 #ifdef KEYS
 

@@ -11,6 +11,7 @@
 #include "bmem.h"
 #include "bobj.h"
 #include "e1erro.h"
+#include "e1scrn.h"
 #include "oper.h"
 #include "getc.h"
 #include "port.h"

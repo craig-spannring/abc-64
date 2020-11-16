@@ -5,6 +5,7 @@
 #include "b.h"
 #include "bobj.h"
 #include "i1btr.h"
+#include "i1lta.h"
 #include "i1tlt.h"
 #include "i3err.h"
 #include "b1grab.h"
@@ -47,10 +48,6 @@
 #define THOF_U_BND	MESS(326, "in n th'of t, n exceeds #t")
 
 #endif /* B_COMPAT */
-
-/* From b1lta.c */
-int l2size();
-value l2min(), l2max();
 
 Visible value mk_elt(void) { /* {}, internal only */
 	value e = grab(ELT, Lt);
@@ -216,7 +213,7 @@ Hidden value m_val;		/* result for min/max on tables */
 #define Lowchar (-Maxintlet)	/* -infinity for characters */
 #define Highchar (Maxintlet)	/* +infinity */
 
-Hidden bool walktree(btreeptr p, bool (*visit) (/* ??? */)) {
+Hidden bool walktree(btreeptr p, bool (*visit) (itemptr)) {
 	intlet l;
 	
 	if (p EQ Bnil) return Yes; /* i.e., not found (used by in() !) */

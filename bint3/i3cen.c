@@ -8,6 +8,7 @@
 #include "bmem.h"
 #include "bobj.h"
 #include "e1sugg.h"
+#include "i2tca.h"
 #include "i3bws.h"
 #include "i3cen.h"
 #include "i3env.h"

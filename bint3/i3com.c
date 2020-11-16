@@ -9,6 +9,8 @@
 #include "bobj.h"
 #include "bcom.h"
 #include "e1comm.h"
+#include "e1spos.h"
+#include "i1tex.h"
 #include "i3err.h"
 #include "i3scr.h"
 #include "port.h"
@@ -47,7 +49,6 @@ Visible bool f_edit(value fname, intlet errline, literal kind, bool creating)
 Visible bool cmdline(literal kind, bufadm *bp, int indent) {
 	static char *edfirst= NULL;
 	static char *edbuf;
-	char *ed_line();
 	char *edlast;
 
 	for (;;) {

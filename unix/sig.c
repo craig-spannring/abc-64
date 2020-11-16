@@ -4,7 +4,9 @@
 
 #include "b.h"
 #include "b1mess.h"
+#include "e1scrn.h"
 #include "i3err.h"
+#include "i3ini.h"
 
 #ifdef SIGNAL
 
@@ -112,11 +114,14 @@ Hidden SIGTYPE fpesig(int sig) { /* sig == SIGFPE */
 }
 
 
-Hidden SIGTYPE (*setsig(int sig, void (*func) (/* ??? */)))(/* ??? */) {
+/*
+Hidden SIGTYPE (*setsig(sig,     func              ))() int sig; SIGTYPE (*func)(); {  */
+Hidden SIGTYPE (*setsig(int sig, void (*func) (int)))(void) {
+	typedef void (*sighandler)(int); 
 	/*Set a signal, unless it's being ignored*/
-	SIGTYPE (*f)()= signal(sig, SIG_IGN);
+       	sighandler f = signal(sig, SIG_IGN);
 	if (f != SIG_IGN) signal(sig, func);
-	return f;
+	return (void*)f;
 }
 
 Visible Procedure initsig(void) {

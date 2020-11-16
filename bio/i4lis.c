@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
+#include "i4lis.h"
+
 #include "b.h"
 #include "b1memo.h"
 #include "bmem.h"

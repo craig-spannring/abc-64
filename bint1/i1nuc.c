@@ -42,7 +42,7 @@ Hidden char *convint(integer v) {
 	buffer = getmem((unsigned)(Length(v)*tenlogBASE + 1 + neg));
 	cp = buffer;
 	if (neg) *cp++ = '-';
-	sprintf(cp, "%d", Msd(v));
+	sprintf(cp, "%ld", (long)Msd(v));
 	if (!IsSmallInt(v)) {
 		if (!*fmt) sprintf(fmt, "%%0%dd", tenlogBASE);
 		while (*cp) ++cp;

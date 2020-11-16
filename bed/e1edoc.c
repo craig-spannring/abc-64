@@ -12,6 +12,7 @@
 #include "e1help.h"
 #include "e1ins2.h"
 #include "e1move.h"
+#include "e1node.h"
 #include "e1save.h"
 #include "e1scrn.h"
 #include "e1sugg.h"

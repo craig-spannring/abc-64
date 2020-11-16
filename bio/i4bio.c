@@ -9,7 +9,14 @@
 #include "i3scr.h"
 #include "i3sou.h"
 #include "i4bio.h"
+#include "i4inp.h"
+#include "i4grp.h"
+#include "i4lis.h"
+#include "i4pack.h"
+#include "i4out.h"
+#include "i4rec.h"
 #include "port.h"
+
 
 Visible Procedure abcio(int type, char *tabname)
 {

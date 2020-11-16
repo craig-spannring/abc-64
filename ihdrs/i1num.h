@@ -148,6 +148,8 @@ extern value regrab_num(value v, int len);
 extern value grab_rat(int len);
 
 extern Procedure initnum(void);
+extern Procedure endnum(void);
+extern Procedure set_random(value v);
 	
 #ifdef __cplusplus
 }

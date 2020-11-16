@@ -5,7 +5,17 @@ project(abc)
 enable_testing()
 include(GoogleTest)
 
+find_program(CCACHE_FOUND ccache)
+if(CCACHE_FOUND)
+  set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+  set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+endif(CCACHE_FOUND)
+
 # find_package(Curses REQUIRED)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -46,9 +56,9 @@ target_compile_options(abc PRIVATE
   
   #-Wno-implicit-int
   
-  -Wold-style-definition
-  # -Werror=old-style-definition
-  -Wold-style-declaration
+  # -Wout-of-line-declaration
+  -Werror=old-style-definition
+  # -Wold-style-declaration
   -Wstrict-prototypes
   -Wold-style-definition
   -Wstrict-prototypes

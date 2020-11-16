@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
+#include "i3ini.h"
+
 #include "b.h"
 #include "b1file.h"
 #include "b1grab.h"
@@ -13,9 +15,12 @@
 #include "e1getc.h"
 #include "e1gram.h"
 #include "e1scrn.h"
+#include "e1sugg.h"
 #include "i1num.h"
+#include "i1tex.h"
 #include "i2syn.h"
 #include "i2tcp.h"
+#include "i3bws.h"
 #include "i3env.h"
 #include "i3err.h"
 #include "i3fil.h"
@@ -23,6 +28,7 @@
 #include "i3imm.h"
 #include "i3scr.h"
 #include "i3sou.h"
+#include "i3sta.h"
 #include "i4rec.h"
 #include "port.h"
 #include "release.h"

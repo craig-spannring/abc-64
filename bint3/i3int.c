@@ -2,17 +2,23 @@
 
 /* B interpreter using threaded trees */
 
+#include "i3int.h"
+
 #include "b.h"
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"
 #include "e1getc.h"
 #include "i0err.h"
+#include "i1num.h"
+#include "i1tra.h"
 #include "i2nod.h"
 #include "i3err.h"
 #include "i3env.h"
 #include "i3int.h"
 #include "i3in2.h"
+#include "i3loc.h"
+#include "i3scr.h"
 #include "i3sou.h"
 #include "i3sta.h"
 #include "b1grab.h"
@@ -47,12 +53,11 @@ Visible bool terminated;
    a value or not.
 */
 
-Hidden value
-run(parsetree start, bool wantvalue) {
+Hidden value run(parsetree start, bool wantvalue) {
 	value u, v, w;
-  int k, len;
-  bool X, Y;
-  int call_stop= call_level;
+	int k, len;
+	bool X, Y;
+	int call_stop= call_level;
 	parsetree old_next= next;
 	/* While run can be used recursively, save some state info */
 
