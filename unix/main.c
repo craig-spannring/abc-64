@@ -10,6 +10,9 @@
 #include "getopt.h"
 #include "port.h"
 
+#include <unistd.h>
+
+
 Visible char *OPTbwsdir= (char *) NULL;
 			/* -g OPTbwsdir: group name workspaces */
 Visible char *OPTworkspace= (char *) NULL;
@@ -94,6 +97,11 @@ Visible FILE *btrfp= NULL;
 
 int main(int argc, char** argv)
 {
+#ifdef NDEBUG
+	static const char *const optstr = "g:w:c:ei:o:lpurxs";
+#else
+	static const char *const optstr = "g:w:c:ei:o:lpurxsdK:M:E:T:V:B:";
+#endif
 	int c;
 	char *sbuf;
 	int flags = 0;
@@ -102,11 +110,7 @@ int main(int argc, char** argv)
 
 	abc_todo = abcProper;
 
-#ifdef NDEBUG
-	while ((c= getopt(argc, argv, "g:w:c:ei:o:lpurxs")) != EOF) {
-#else
-	while ((c= getopt(argc, argv, "g:w:c:ei:o:lpurxsdK:M:E:T:V:B:")) != EOF) {
-#endif
+	while ((c= getopt(argc, argv, optstr)) != EOF) {
 		switch (c) {
 		case 'g':
 			if (flags & O_g) usage_error = Yes;

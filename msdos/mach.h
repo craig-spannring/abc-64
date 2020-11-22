@@ -59,7 +59,8 @@ typedef long twodigit;
 
 #define Maxtrig BIG /* Max x for sin(x), cos(x), tan(x) */
 
-#define HEADER literal type; reftype refcnt; intlet len
+#define FILLER_FIELD 
+#define HEADER literal type; reftype refcnt; intlet len FILLER_FIELD
 #define FILLER
 
 #ifdef __cplusplus

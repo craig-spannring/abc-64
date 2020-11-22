@@ -48,7 +48,8 @@ typedef long twodigit;
 #define TWOTO_LONGBITS 2147483648.0 /* 2**LONGBITS */
 #define RNDM_LIMIT 1125899906842624.0 /* save limit for choice */
 
-#define HEADER literal type; reftype refcnt; intlet len
+#define FILLER_FIELD 
+#define HEADER literal type; reftype refcnt; intlet len FILLER_FIELD
 #define FILLER
 
 #ifdef __cplusplus

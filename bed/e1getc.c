@@ -15,6 +15,8 @@
 #include "port.h"
 #include "trm.h"
 
+#include <ctype.h>
+
 extern bool use_bed;
 
 #define ESC '\033'

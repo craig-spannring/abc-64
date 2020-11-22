@@ -13,11 +13,34 @@ extern "C" {
 
 typedef struct queue *queue;
 
-struct queue {
+struct gdb_hostile_queue {
 	HEADER;
 	node q_data;
 	queue q_link;
 };
+struct queue {
+	literal type;
+	reftype refcnt;
+	intlet  len FILLER_FIELD;
+	node    q_data;
+	queue   q_link;
+};
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
+static struct gdb_hostile_queue old_unused5[0];
+static struct queue             new_unused5[0];
+STATIC_CHECK(sizeof(old_unused5[0]) == sizeof(new_unused5[0]));
+STATIC_CHECK(offsetof(struct gdb_hostile_queue, type)
+	     == offsetof(struct queue, type));
+STATIC_CHECK(offsetof(struct gdb_hostile_queue, refcnt)
+	     == offsetof(struct queue, refcnt));
+STATIC_CHECK(offsetof(struct gdb_hostile_queue, len)
+	     == offsetof(struct queue, len));
+STATIC_CHECK(offsetof(struct gdb_hostile_queue, q_data)
+	     == offsetof(struct queue, q_data));
+STATIC_CHECK(offsetof(struct gdb_hostile_queue, q_link)
+	     == offsetof(struct queue, q_link));
+#pragma GCC diagnostic pop
 
 #define Qnil ((queue) Vnil)
 #ifdef lint

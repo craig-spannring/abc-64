@@ -8,6 +8,7 @@
 #include "b1memo.h"
 #include "b1mess.h"
 #include "b1outp.h"
+#include "bcom.h"
 #include "bint.h"
 #include "bmem.h"
 #include "bobj.h"
@@ -371,7 +372,7 @@ Hidden Procedure dowri_vals(l, u)
 Hidden bufadm i_buf, o_buf;
 extern bool i_looked_ahead;
 
-Hidden char *read_line(literal kind, bool should_prompt, bool *eof)
+Hidden char *read_line(/*literal*/ interp_to_ed_cmd kind, bool should_prompt, bool *eof)
 {
 	bufadm *bp= (kind == R_cmd && ifile == sv_ifile) ? &i_buf : &o_buf;
 	FILE *fp= (kind == R_cmd || kind == R_ioraw) ? ifile : stdin;

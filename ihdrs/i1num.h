@@ -35,10 +35,26 @@ extern "C" {
 
 /* typedef int digit; or short; calculated in mkconfig -> config.h */
 
-typedef struct integer_ {
+typedef struct gdb_hostile_integer_ {
 	HEADER;
 	digit	dig[1];
+} *gdb_hostile_integer;
+typedef struct integer_ {
+	literal type;
+	reftype refcnt;
+	intlet  len FILLER_FIELD;
+	digit	dig[1];
 } *integer;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
+static struct gdb_hostile_integer_ old_unused1[0];
+static struct integer_           new_unused1[0];
+STATIC_CHECK(sizeof(old_unused1[0]) == sizeof(new_unused1[0]));
+STATIC_CHECK(offsetof(struct gdb_hostile_integer_, type)   == offsetof(struct integer_, type));
+STATIC_CHECK(offsetof(struct gdb_hostile_integer_, refcnt) == offsetof(struct integer_, refcnt));
+STATIC_CHECK(offsetof(struct gdb_hostile_integer_, len)    == offsetof(struct integer_, len));
+STATIC_CHECK(offsetof(struct gdb_hostile_integer_, dig)    == offsetof(struct integer_, dig));
+#pragma GCC diagnostic pop
 
 #define FreezeSmallInt(v, vv) \
 	(IsSmallInt(v) && (Freeze1(v, vv), Freeze2(v, vv)))
@@ -76,11 +92,29 @@ extern integer int_quot(integer v, integer w);
 
 /***************** Definitions exported for rationals *****************/
 
-typedef struct {
+typedef struct gdb_hostile_rational_struct {
 	HEADER;
 	integer	num, den;
+} *gdb_hostile_rational;
+typedef struct rational_struct {
+	literal     type;
+	reftype     refcnt;
+	intlet      len FILLER_FIELD;
+	integer	    num;
+	integer     den;
 } *rational;
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
+static struct gdb_hostile_rational_struct old_unused2[0];
+static struct rational_struct             new_unused2[0];
+STATIC_CHECK(sizeof(old_unused2[0]) == sizeof(new_unused2[0]));
+STATIC_CHECK(sizeof(old_unused2[0]) == sizeof(new_unused2[0]));
+STATIC_CHECK(offsetof(struct gdb_hostile_rational_struct, type)   == offsetof(struct rational_struct, type));
+STATIC_CHECK(offsetof(struct gdb_hostile_rational_struct, refcnt) == offsetof(struct rational_struct, refcnt));
+STATIC_CHECK(offsetof(struct gdb_hostile_rational_struct, len)    == offsetof(struct rational_struct, len));
+STATIC_CHECK(offsetof(struct gdb_hostile_rational_struct, num)    == offsetof(struct rational_struct, num));
+STATIC_CHECK(offsetof(struct gdb_hostile_rational_struct, den)    == offsetof(struct rational_struct, den));
+#pragma GCC diagnostic pop
 
 #define Numerator(a) ((a)->num)
 #define Denominator(a) ((a)->den)
@@ -103,14 +137,37 @@ value mk_exact(integer p, integer q, int len);
 
 /***************** Definitions exported for approximate numbers *************/
 
-typedef struct real_ {
+typedef struct gdb_hostile_real_ {
 	HEADER;
 	double	frac;
 #ifdef EXT_RANGE
 	double	expo;
 #endif /* EXT_RANGE */
+} *gdb_hostile_real;
+typedef struct real_ {
+	literal type;
+	reftype refcnt;
+	intlet  len FILLER_FIELD;
+	double  frac;
+#ifdef EXT_RANGE
+	double  expo;
+#endif /* EXT_RANGE */
 } *real;
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
+static struct gdb_hostile_real_ old_unused3[0];
+static struct real_             new_unused3[0];
+STATIC_CHECK(sizeof(old_unused2[0]) == sizeof(new_unused2[0]));
+STATIC_CHECK(sizeof(old_unused2[0]) == sizeof(new_unused2[0]));
+STATIC_CHECK(offsetof(struct gdb_hostile_real_, type)   == offsetof(struct real_, type));
+STATIC_CHECK(offsetof(struct gdb_hostile_real_, refcnt) == offsetof(struct real_, refcnt));
+STATIC_CHECK(offsetof(struct gdb_hostile_real_, len)    == offsetof(struct real_, len));
+STATIC_CHECK(offsetof(struct gdb_hostile_real_, frac)   == offsetof(struct real_, frac));
+#ifdef EXT_RANGE
+STATIC_CHECK(offsetof(struct gdb_hostile_real_, expo)   == offsetof(struct real_, expo));
+#endif
+#pragma GCC diagnostic pop
+	
 #define Frac(v) ((v)->frac)
 #ifdef EXT_RANGE
 #define Expo(v) ((v)->expo)

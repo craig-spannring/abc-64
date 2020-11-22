@@ -1,6 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 #include <errno.h>
+#include <sys/time.h>
+
 #include "b.h"
 #include "main.h" /* for freepath() */
 #include "port.h" /* for makepath() */

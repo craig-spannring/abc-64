@@ -4,10 +4,15 @@
 #define B_h_f3a79ec21e8ae24eef6ee57844d8f0cc
 
 #include <stdint.h>
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define TOKEN_MK(x, y)  x ## y
+#define TOKEN_MK2(x, y) TOKEN_MK(x, y)
+#define STATIC_CHECK(t) static int TOKEN_MK2(static_chkr_, __LINE__)[t?0:-1]
 
 /* b.h: general */
 
@@ -67,10 +72,28 @@ typedef short intlet;
 #define MkSmallInt(i) ( (value) (((intptr_t) i)*2 | 1) )
 	/* (Can't use << and >> because their effect on negative numbers
 		is not defined.) */
-typedef struct value_ {HEADER; string *cts;} *value;
+typedef struct gdb_hostile_value_ {HEADER; string *cts;} *gdb_hostile_value;
+typedef struct value_ {
+		literal type;
+		reftype refcnt;
+		intlet len FILLER_FIELD;
+		string *cts;
+} *value;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
+static struct gdb_hostile_value_ old_unused0[0];
+static struct value_             new_unused0[0];
+STATIC_CHECK(sizeof(old_unused0[0]) == sizeof(new_unused0[0]));
+STATIC_CHECK(offsetof(struct gdb_hostile_value_, type)   == offsetof(struct value_, type));
+STATIC_CHECK(offsetof(struct gdb_hostile_value_, refcnt) == offsetof(struct value_, refcnt));
+STATIC_CHECK(offsetof(struct gdb_hostile_value_, len)    == offsetof(struct value_, len));
+STATIC_CHECK(offsetof(struct gdb_hostile_value_, cts)    == offsetof(struct value_, cts));
+#pragma GCC diagnostic pop
+
 								
 #define Hdrsize (sizeof(struct value_)-sizeof(string))
 
+		
 #define Type(v) (IsSmallInt(v) ? Num : (v)->type)
 #define Length(v) ((v)->len)
 #define Refcnt(v) ((v)->refcnt)

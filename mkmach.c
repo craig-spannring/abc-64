@@ -108,6 +108,12 @@ int main(int argc, char **argv) {
 	if (setjmp(lab)!=0) { printf("Unexpected over/underflow\n"); exit(1); }
 #endif
 
+	printf("/*                                        \n");
+	printf(" * DO NOT EDIT!                           \n");
+	printf(" *    Auto-generated: %s \n", __FILE__);
+	printf(" *                    %s \n", __DATE__ " " __TIME__);
+	printf(" */ \n\n");
+	
 /****** Calculate number of bits per character **************************/
 
 	c=1; bits=0;
@@ -439,9 +445,11 @@ int main(int argc, char **argv) {
 	printf("\n");
 	nfiller= (unsigned)
 		((sizeof(value)) - ((sizeof(header)) + (sizeof(char **))));
-	printf("#define HEADER literal type; reftype refcnt; intlet len");
 	if (nfiller > 0)
-		printf("; char filler[%lu]", nfiller);
+		printf("#define FILLER_FIELD ; char filler[%lu]\n", nfiller);
+	printf("#define HEADER literal type; reftype refcnt; intlet len FILLER_FIELD");
+	/* if (nfiller > 0)                            */
+	/* 	printf("; char filler[%lu]", nfiller); */
 	printf("\n");
 	printf("#define FILLER");
 	if (nfiller > 0) {

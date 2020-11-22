@@ -11,6 +11,8 @@
 #ifdef SIGNAL
 
 #include <signal.h>
+#include <sys/types.h>
+#include <signal.h>
 
 /*The operating system provides a function signal(s,f)
   that associates function f with the signal s, and returns
@@ -125,6 +127,7 @@ Hidden SIGTYPE (*setsig(int sig, void (*func) (int)))(void) {
 }
 
 Visible Procedure initsig(void) {
+	return;
 	int i;
 	for (i = 1; i<=NSIG; ++i)
 		if (must_handle(i)) VOID setsig(i, burp);

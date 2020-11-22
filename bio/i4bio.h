@@ -13,7 +13,6 @@ extern "C" {
 	bool abcworkspace(char *path, char *name);
 	bool unitfile(value fname);
 	bool targetfile(value fname);
-	// char *base_fname();
 	bool typeclash(value pname, value fname);
 
 	Visible Procedure bioerrV(int m, value v);
