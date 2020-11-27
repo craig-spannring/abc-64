@@ -10,6 +10,7 @@
 Visible ptr getmem(unsigned syze) {
 	ptr p= (ptr) malloc(MALLOC_ARG syze);
 	if (p == Nil) memexh();
+	// memset(p, 0xFF, MALLOC_ARG syze);
 #ifdef MEMTRACE
 	writetrace(F_ALLOC, p, syze);
 #endif

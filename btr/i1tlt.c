@@ -61,7 +61,7 @@ Visible bool empty(value v) { /* #v=0, internal only */
 	case Lis:
 	case Tex:
 	case Tab:
-		return Root(v) EQ Bnil;
+		return Root(v) == Bnil;
 	default:
 		return No;
 		/* Some routines must test empty(t) end return an error
@@ -77,7 +77,7 @@ Hidden value treesize(btreeptr pnode) {
     value vsize, childsize, u;
     intlet l;
     psize = Size(pnode);
-    if (psize EQ Bigsize) {
+    if (psize == Bigsize) {
 	switch (Flag(pnode)) {        
 	case Inner:
 	    vsize = mk_integer((int) Lim(pnode));
@@ -112,7 +112,7 @@ Visible value size(value t) { /* #t */
 	case Tex:
 	case Tab:
 		tsize = Tltsize(t);
-		if (tsize EQ Bigsize) return treesize(Root(t));
+		if (tsize == Bigsize) return treesize(Root(t));
 		return mk_integer(tsize);
 	default:
 		reqerr(SIZE_TLT);
@@ -216,7 +216,7 @@ Hidden value m_val;		/* result for min/max on tables */
 Hidden bool walktree(btreeptr p, bool (*visit) (itemptr)) {
 	intlet l;
 	
-	if (p EQ Bnil) return Yes; /* i.e., not found (used by in() !) */
+	if (p == Bnil) return Yes; /* i.e., not found (used by in() !) */
 	for (l=0; l < Lim(p); l++) {
 		switch (Flag(p)) {
 		case Inner:
@@ -230,7 +230,7 @@ Hidden bool walktree(btreeptr p, bool (*visit) (itemptr)) {
 				return No;
 		}
 	}
-	return Flag(p) EQ Bottom || walktree(Ptr(p, l), visit);
+	return Flag(p) == Bottom || walktree(Ptr(p, l), visit);
 }
 
 /* Common code for min/max-1/2, size2, in. */
@@ -256,7 +256,7 @@ Hidden int tlt_func(value e, value t, value (*li_func) (value, value), bool (*te
 		m_val = (*li_func)(e, t);
 		break;
 	case Tex:
-		if (e NE Vnil) {
+		if (e != Vnil) {
 			if (!Character(e)) {
 				tlterr= T_CHAR;
 				return -1;
@@ -265,7 +265,7 @@ Hidden int tlt_func(value e, value t, value (*li_func) (value, value), bool (*te
 		}
 		wt = Itemwidth(Itemtype(t));
 		found = !walktree(Root(t), te_visit);
-		if (m_char NE Lowchar && m_char NE Highchar)
+		if (m_char != Lowchar && m_char != Highchar)
 			m_val = mkchar(m_char);
 		break;
 	case Tab:
@@ -286,13 +286,13 @@ Hidden value li2size(value e, value t) {
 }
 
 Hidden bool te2size(itemptr pitm) {
-	if (ce EQ Charval(pitm))
+	if (ce == Charval(pitm))
 		count++;
 	return Yes;
 }
 
 Hidden bool ta2size(itemptr pitm) {
-	if (compare(ve, Ascval(pitm)) EQ 0)
+	if (compare(ve, Ascval(pitm)) == 0)
 		count++;
 	return Yes;
 }
@@ -316,11 +316,11 @@ Hidden value li_in(value e, value t) {
 }
 	
 Hidden bool te_in(itemptr pitm) {
-	return Charval(pitm) NE ce;
+	return Charval(pitm) != ce;
 }
 
 Hidden bool ta_in(itemptr pitm) {
-	return compare(ve, Ascval(pitm)) NE 0;
+	return compare(ve, Ascval(pitm)) != 0;
 }
 
 Visible bool in(value e, value t) {
@@ -346,7 +346,7 @@ Hidden bool te_min(itemptr pitm) {
 }
 
 Hidden bool ta_min(itemptr pitm) {
-	if (m_val EQ Vnil || compare(m_val, Ascval(pitm)) > 0) {
+	if (m_val == Vnil || compare(m_val, Ascval(pitm)) > 0) {
 		release(m_val);
 		m_val = copy(Ascval(pitm));
 	}
@@ -379,7 +379,7 @@ Hidden bool te_max(itemptr pitm) {
 }
 
 Hidden bool ta_max(itemptr pitm) {
-	if (m_val EQ Vnil || compare(Ascval(pitm), m_val) > 0) {
+	if (m_val == Vnil || compare(Ascval(pitm), m_val) > 0) {
 		release(m_val);
 		m_val = copy(Ascval(pitm));
 	}
@@ -407,7 +407,7 @@ Hidden bool te2min(itemptr pitm) {
 Hidden bool ta2min(itemptr pitm) {
 	if (compare(Ascval(pitm), ve) > 0
 	    &&
-	    (m_val EQ Vnil || compare(m_val, Ascval(pitm)) > 0)) {
+	    (m_val == Vnil || compare(m_val, Ascval(pitm)) > 0)) {
 		release(m_val);
 		m_val = copy(Ascval(pitm));
 	}
@@ -424,7 +424,7 @@ Visible value min2(value e, value t) {
 		}
 		return Vnil;
 	}
-	if (m_val EQ Vnil && still_ok)
+	if (m_val == Vnil && still_ok)
 		reqerr(MIN2_ELEM);
 	return m_val;
 }
@@ -441,7 +441,7 @@ Hidden bool te2max(itemptr pitm) {
 Hidden bool ta2max(itemptr pitm) {
 	if (compare(ve, Ascval(pitm)) > 0
 	    &&
-	    (m_val EQ Vnil || compare(Ascval(pitm), m_val) > 0)) {
+	    (m_val == Vnil || compare(Ascval(pitm), m_val) > 0)) {
 		release(m_val);
 		m_val = copy(Ascval(pitm));
 	}
@@ -458,7 +458,7 @@ Visible value max2(value e, value t) {
 		}
 		return Vnil;
 	}
-	if (m_val EQ Vnil && still_ok)
+	if (m_val == Vnil && still_ok)
 		reqerr(MAX2_ELEM);
 	return m_val;
 }

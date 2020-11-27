@@ -536,9 +536,13 @@ Visible value keys(value t) { /* keys t */
    it may return a pointer to static storage. */
 
 Hidden itemptr getkth(int k, value v) {
-	finger f; fingertip ft; btreeptr p;
-	intlet it= Itemtype(v), iw= Itemwidth(it), l;
-	static btritem baked; value vk;
+	finger f;
+	fingertip ft;
+	btreeptr p;
+	intlet it= Itemtype(v);
+	intlet iw= Itemwidth(it), l;
+	static btritem baked;
+	value vk;
 	if (Root(v) == Bnil) return Inil;
 	ft= unzip(Root(v), k, f);
 	do {
@@ -626,13 +630,13 @@ Visible relation comp_text(value u, value v) {
 	if (!Is_text(u) || !Is_text(v)) 
 		syserr(MESS(106, "comp_text"));
 	p= Root(u), q= Root(v);
-	if (p EQ Bnil) return (q EQ Bnil) ? 0 : -1;
-	if (q EQ Bnil) return 1;
-	if (Flag(p) EQ Bottom && Flag(q) EQ Bottom) {
+	if (p == Bnil) return (q == Bnil) ? 0 : -1;
+	if (q == Bnil) return 1;
+	if (Flag(p) == Bottom && Flag(q) == Bottom) {
 		len= Lim(p);
 		if (Lim(q) < len) len= Lim(q);
 		r= strncmp(&Bchar(p, 0), &Bchar(q, 0), len);
-		if (r NE 0) return r;
+		if (r != 0) return r;
 		return Lim(p) - Lim(q);
 	}
 	return comp_tlt(u, v);

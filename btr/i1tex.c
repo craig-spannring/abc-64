@@ -148,7 +148,8 @@ Hidden btreeptr mkbtext(string s, int len) {
 }
 
 Visible value mk_text(string s) {
-	value v; int len = strlen(s);
+	value v;
+	int   len = strlen(s);
 
 	v = grab(Tex, Ct);
 	if (len == 0)
@@ -214,14 +215,17 @@ typedef stackelem *stackptr;
 
 #define Snil ((stackptr)0)
 
-#define Push(s, p, l) ((s)->s_ptr = (p), ((s)->s_lim = (l)), (s)++)
-#define Pop(s, p, l) (--(s), (p) = (s)->s_ptr, (l) = (s)->s_lim)
+#define Push(s, p, l) ((s)->s_ptr= (p), ((s)->s_lim= (l)), (s)++)
+#define Pop(s, p, l) (--(s), (p)= (s)->s_ptr, (l)= (s)->s_lim) 
 
 
 Hidden fingertip cvt_stack_to_fingertip(const stackelem* s) {
-    assert(sizeof(*((fingertip)0)) == sizeof(*s));
-    assert(sizeof(((fingertip)0)->s_ptr) == sizeof(s->s_ptr));
-    assert(sizeof(((fingertip)0)->s_lim) == sizeof(s->s_lim));
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
+	static fingertip  ftype[0];
+	STATIC_CHECK(sizeof(stackelem) == sizeof(*ftype[0]));
+#pragma GCC diagnostic pop
+
     return (fingertip)s;
 }
  

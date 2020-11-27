@@ -80,7 +80,7 @@ Visible relation compare(value v, value w) {
 		if (wt != Com || Nfields(v) != Nfields(w)) goto incomp;
 		for (i = 0; i < Nfields(v); i++) {
 			rel = compare(*Field(v, i), *Field(w, i));
-			if (rel NE 0) return(rel);
+			if (rel != 0) return(rel);
 		}
 		return(0);
 	case Tex:
