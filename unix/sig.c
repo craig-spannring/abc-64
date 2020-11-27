@@ -127,7 +127,6 @@ Hidden SIGTYPE (*setsig(int sig, void (*func) (int)))(void) {
 }
 
 Visible Procedure initsig(void) {
-	return;
 	int i;
 	for (i = 1; i<=NSIG; ++i)
 		if (must_handle(i)) VOID setsig(i, burp);
