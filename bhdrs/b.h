@@ -12,8 +12,8 @@ extern "C" {
 
 #define TOKEN_MK(x, y)  x ## y
 #define TOKEN_MK2(x, y) TOKEN_MK(x, y)
-#define STATIC_CHECK(t) static int TOKEN_MK2(static_chkr_, __LINE__)[t?0:-1]
-
+#define STATIC_CHECK(t) static int TOKEN_MK2(static_chkr_, __LINE__)[(t)?0:-1]
+	
 /* b.h: general */
 
 /* The following are not intended as pseudo-encapsulation, */
@@ -74,9 +74,9 @@ typedef short intlet;
 		is not defined.) */
 typedef struct gdb_hostile_value_ {HEADER; string *cts;} *gdb_hostile_value;
 typedef struct value_ {
-		literal type;
+		literal type;            /* See "Types:" in b.h? */
 		reftype refcnt;
-		intlet len FILLER_FIELD;
+		intlet len FILLER_FIELD; /* number of fields? */
 		string *cts;
 } *value;
 #pragma GCC diagnostic push
