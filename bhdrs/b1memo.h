@@ -11,11 +11,11 @@ extern "C" {
     extern Procedure regetmem(ptr *, unsigned syze);
     extern Procedure freemem(ptr p);
     extern Procedure bufpush(bufadm *bp, char c);
-    extern Procedure bufcpy(bufadm *bp, char *s);
+    extern Procedure bufcpy(bufadm *bp, const char *s);
     extern Procedure bufreinit(bufadm *bp);
     extern Procedure bufinit(bufadm *bp);
     extern Procedure buffree(bufadm *bp);
-    extern Procedure bufncpy(bufadm *bp, char *s, int len);
+    extern Procedure bufncpy(bufadm *bp, const char *s, int len);
 
 #ifdef __cplusplus
 }
