@@ -92,7 +92,9 @@ Visible value grab(literal type, intlet len) {
 	value v;
 	Grabber();
 	v= (value) getmem(Adj(syze));
-	v->type= type; v->len= len; v->refcnt= 1;
+	v->type= type;
+	v->len= len;
+	v->refcnt= 1;
 	return v;
 }
 

@@ -108,7 +108,7 @@ Visible Procedure bufpush(bufadm *bp, char c) {
 	*(bp->pbuf)++= c;
 }
 
-Visible Procedure bufcpy(bufadm *bp, char *s) {
+Visible Procedure bufcpy(bufadm *bp, const char *s) {
 	int len= strlen(s);
 
 	while (bp->pbuf + len >= bp->end)
@@ -117,7 +117,7 @@ Visible Procedure bufcpy(bufadm *bp, char *s) {
 	bp->pbuf+= len;
 }
 
-Visible Procedure bufncpy(bufadm *bp, char *s, int len) {
+Visible Procedure bufncpy(bufadm *bp, const char *s, int len) {
 	while (bp->pbuf + len >= bp->end)
 		bufgrow(bp);
 	strncpy(bp->pbuf, s, len);
