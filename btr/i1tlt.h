@@ -3,6 +3,8 @@
 #ifndef I1TLT_h_1a82b7d7c21e62e7561d1efbda29f192
 #define I1TLT_h_1a82b7d7c21e62e7561d1efbda29f192
 
+#include "i1btr.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -32,9 +34,9 @@ STATIC_CHECK(offsetof(struct gdb_hostile_telita, root)   == offsetof(struct teli
 
 #define Itemtype(v) (((telita) (v))->len) /* Itemtype */
 #define Root(v) (((telita) (v))->root)
-#define Tltsize(v) (Root(v) EQ Bnil ? 0 : Size(Root(v)))
+#define Tltsize(v) (Root(v) == Bnil ? 0 : Size(Root(v)))
 
-#define Character(v)	((bool) (Type(v) EQ Tex && Tltsize(v) EQ 1))
+#define Character(v)	((bool) (Type(v) == Tex && Tltsize(v) == 1))
 
 #ifdef __cplusplus
 }
