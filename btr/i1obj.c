@@ -61,7 +61,7 @@ Visible relation compare(value v, value w) {
 	
 	comp_ok = Yes;
 
-	if (v EQ w) return(0);
+	if (v == w) return(0);
 	if (IsSmallInt(v) && IsSmallInt(w))
 		return SmallIntVal(v) - SmallIntVal(w);
 	vt = Type(v);
@@ -94,7 +94,7 @@ Visible relation compare(value v, value w) {
 		return(comp_tlt(v, w));
 	case ELT:
 		if (wt != Tab && wt != Lis && wt != ELT) goto incomp;
-		return(Root(w) EQ Bnil ? 0 : -1);
+		return(Root(w) == Bnil ? 0 : -1);
 	default: 
 		syserr(MESS(501, "comparison of unknown types"));
 		/*NOTREACHED*/

@@ -8,6 +8,7 @@ include(GoogleTest)
 function(add_test name)
   add_executable(${name} ${name}.cpp)
   target_sources(${name} PRIVATE ${abc_srcs})
+  add_dependencies(${name} mach_h_AutoGened file_h_AutoGened)
   target_include_directories(${name}
     PRIVATE
     ${mach_inc_dir}
@@ -35,4 +36,5 @@ endfunction()
 
 message("inc dir ${CUSTOM_AUTOGENED_FILES}/inc")
 add_test(uncategorized)
+add_test(expr_test01)
 

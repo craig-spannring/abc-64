@@ -346,7 +346,7 @@ Hidden Procedure d_textlit(parsetree v, displadm *da)
 
 	displ(w, da);
 	if (Valid(w) && character(w)) {
-		value c = mk_text("`");
+		value c = (value)mk_text("`");
 
 		if (compare(Dquote(da), w) == 0 || compare(c, w) == 0) {
 			displ(w, da);

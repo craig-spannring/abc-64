@@ -22,7 +22,9 @@ typedef unsigned long address;	/* for PC and symbol table (on a tahoe) */
 #define F_FREE  'F'
 #endif
 
-struct bufadm {char *buf, *pbuf, *end; };
+	struct bufadm {char *buf;  /* point to start of active portion of string */
+		       char *pbuf; /* end of string? */
+		       char *end; /* end of allocation */ };
 typedef struct bufadm bufadm;
 
 #ifdef __cplusplus

@@ -34,10 +34,13 @@ typedef union itm {
 #define Ascval(pitm) ((pitm)->t.a)
 
 /* Xt = itemtype, do not change these, their order is used */
-#define Ct (0)
-#define Lt (1)
-#define Tt (2)
-#define Kt (3)
+typedef enum item_type
+{
+	Ct = 0,    // #define Ct (0)
+	Lt = 1,    // #define Lt (1)
+	Tt = 2,    // #define Tt (2)
+	Kt = 3,    // #define Kt (3)
+} item_type;
 
 /* Itemwidth, used for offset in btreenodes */
 typedef char width;
@@ -55,11 +58,11 @@ extern char itemwidth[];	/*  uses: */
 
 #define Bigsize (-1)
 #define Stail(r,s) ((r) > Maxint - (s) ? Bigsize : (r)+(s))
-#define Ssum(r,s)  ((r) EQ Bigsize || (s) EQ Bigsize ? Bigsize : Stail(r,s))
-#define Sincr(r)   ((r) EQ Bigsize ? Bigsize : Stail(r,1))
-#define Sadd2(r)   ((r) EQ Bigsize ? Bigsize : Stail(r,2))
-#define Sdiff(r,s) ((r) EQ Bigsize || (s) EQ Bigsize ? Bigsize : (r)-(s))
-#define Sdecr(r)   ((r) EQ Bigsize ? Bigsize : (r)-(1))
+#define Ssum(r,s)  ((r) == Bigsize || (s) == Bigsize ? Bigsize : Stail(r,s))
+#define Sincr(r)   ((r) == Bigsize ? Bigsize : Stail(r,1))
+#define Sadd2(r)   ((r) == Bigsize ? Bigsize : Stail(r,2))
+#define Sdiff(r,s) ((r) == Bigsize || (s) == Bigsize ? Bigsize : (r)-(s))
+#define Sdecr(r)   ((r) == Bigsize ? Bigsize : (r)-(1))
 
 /*********************************************************************/
 /* (A,B)-btrees                                                      */
@@ -76,15 +79,15 @@ extern char itemwidth[];	/*  uses: */
 
 struct gdb_hostile_btrnode {
     HEADER;
-    int size;
-    char **g;
+    int size_bar;
+//    char **g_bar;
 };
 typedef struct btrnode {
     literal type;
     reftype refcnt;
     intlet  len FILLER_FIELD;
     int     size;
-    char  **g;
+//    char  **g_foo; /* not used?  How can that be? */ 
 } btreenode, *btreeptr;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
@@ -94,8 +97,8 @@ STATIC_CHECK(sizeof(old_unused9[0]) == sizeof(new_unused9[0]));
 STATIC_CHECK(offsetof(struct gdb_hostile_btrnode, type)   == offsetof(struct btrnode, type));
 STATIC_CHECK(offsetof(struct gdb_hostile_btrnode, refcnt) == offsetof(struct btrnode, refcnt));
 STATIC_CHECK(offsetof(struct gdb_hostile_btrnode, len)    == offsetof(struct btrnode, len));
-STATIC_CHECK(offsetof(struct gdb_hostile_btrnode, size)   == offsetof(struct btrnode, size));
-STATIC_CHECK(offsetof(struct gdb_hostile_btrnode, g)      == offsetof(struct btrnode, g));
+STATIC_CHECK(offsetof(struct gdb_hostile_btrnode, size_bar)   == offsetof(struct btrnode, size));
+// STATIC_CHECK(offsetof(struct gdb_hostile_btrnode, g_bar)      == offsetof(struct btrnode, g_foo));
 #pragma GCC diagnostic pop
 
 struct gdb_hostile_innernode {
@@ -338,15 +341,18 @@ STATIC_CHECK(offsetof(struct gdb_hostile_rangenode, upb)    == offsetof(struct r
 #define Bnil ((btreeptr) 0)
 
 #define Flag(pnode)	((pnode)->type)
-#define Inner	'i'
-#define Bottom	'b'
-#define Irange  '.'
-#define Crange  '\''
+typedef enum pnode_type
+{
+	Inner   = 'i',   //#define Inner   'i' 
+	Bottom  = 'b',	 //#define Bottom  'b' 
+	Irange  = '.',	 //#define Irange  '.' 
+	Crange  = '\''	 //#define Crange  '\''
+} pnode_type;
 
 #define Lim(pnode)	((pnode)->len)
-#define Minlim(pnode)	(Flag(pnode) EQ Inner ? Mininner : Minbottom)
-#define Maxlim(pnode)	(Flag(pnode) EQ Inner ? Maxinner : Maxbottom)
-#define SetRangeLim(pnode) (Size(pnode) EQ Bigsize || Size(pnode) > Maxbottom\
+#define Minlim(pnode)	(Flag(pnode) == Inner ? Mininner : Minbottom)
+#define Maxlim(pnode)	(Flag(pnode) == Inner ? Maxinner : Maxbottom)
+#define SetRangeLim(pnode) (Size(pnode) == Bigsize || Size(pnode) > Maxbottom\
 			    ? Biglim : Size(pnode))
 
 #define Size(pnode)	((pnode)->size)
@@ -370,7 +376,7 @@ intlet uflow(intlet n, intlet l, char *cbuf, btreeptr *pbuf, intlet it);
 
 /* Private definitions for grabbing and ref count scheme */
 
-btreeptr grabbtreenode(literal flag, literal it);	/* literal flag, it */
+btreeptr grabbtreenode(pnode_type flag, item_type it);
 btreeptr copybtree(btreeptr pnode);    	/* btreeptr pnode */
 void uniqlbtreenode(btreeptr *pptr, literal it);
 btreeptr ccopybtreenode(btreeptr pnode, literal it);	/* btreeptr pnode; literal it */

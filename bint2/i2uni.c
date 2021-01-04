@@ -1,3 +1,4 @@
+#include <stdio.h>
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #include "b.h"
@@ -72,7 +73,7 @@ Visible parsetree unit(bool heading, bool editing) {
 
 Hidden parsetree cmd_unit(char *kw, bool heading) {
 	parsetree v;
-	value w= mk_text(kw);
+	value w= (value)mk_text(kw);
 	value c, f;
 	txptr ftx, ttx;
 	intlet level= cur_ilev;
@@ -109,7 +110,7 @@ Hidden value cmd_formals(txptr q, value kw) {
 	if (Text(ftx))
 		t= idf(ftx);
 	if (Text(q)) {
-		nkw= mk_text(keyword());
+		nkw= (value)mk_text(keyword());
 		v= cmd_formals(q, nkw);
 	}
 	return node4(FORMAL, kw, t, v);
@@ -312,7 +313,7 @@ Hidden parsetree  ref_suite(intlet cil) {
 			idf_cntxt= In_ref;
 			treat_idf(name);
 		}
-		else name= mk_text(kw);
+		else name= (value)mk_text(kw);
 		if (in_env(reftab, name, &aa)) 
 			pprerrV(REF_IN_REF, name);
 		if (!is_comment(&w)) w= Vnil;
@@ -333,7 +334,11 @@ Hidden parsetree  ref_suite(intlet cil) {
 
 Hidden parsetree n_collateral(txptr q, intlet n, parsetree (*base) (txptr q))
 {
-	parsetree v, w; txptr ftx, ttx;
+	parsetree v;
+	parsetree w;
+	txptr ftx;
+	txptr ttx;
+	
 	if (find(S_COMMA, q, &ftx, &ttx)) {
 		w= (*base)(ftx); tx= ttx;
 		v= n_collateral(q, n+1, base);
