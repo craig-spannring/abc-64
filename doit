@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo -n                                                               &&
+    (cd ~/abc-unix/build32 && ninja -k0 all)                          &&
+    (cd ~/abc-unix ; ABC=${ABC:-abc32} make -C ~/abc-unix/. examples) &&
+    (cd ~/abc-unix/build32 && ninja -k0 all && ninja test)            &&
+    (cd ~/abc-unix/build64 && ninja -k0 all && ninja test)            &&
+    echo -n
