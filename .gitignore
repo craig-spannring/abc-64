@@ -11,7 +11,6 @@ bint3/*.o
 bio/*.o
 b/*.o
 btr/*.o
-build
 build32
 CMakeLists.txt~
 *.c.save
