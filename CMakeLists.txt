@@ -23,8 +23,6 @@ set(CMAKE_C_EXTENSIONS ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-message("in CMakeLists.txt.  CMAKE_C_FLAGS are ${CMAKE_C_FLAGS}")
-
 if (UNIX)
   set(mach_inc_dir ${PROJECT_SOURCE_DIR}/unix)
   set(src_main unix/main.c)
@@ -228,3 +226,9 @@ if(EXISTS ${GOOGLE_TEST_INSTALLATION_SYMLINK})
   add_subdirectory(${GOOGLE_TEST_INSTALLATION_SYMLINK}/.)
   add_subdirectory(tests)
 endif()
+
+#
+# Create a helper file to let my Emacs setup know something about the
+# build.
+# 
+file(WRITE ${CMAKE_BINARY_DIR}/.rtags-config "project: ${CMAKE_BINARY_DIR}")
