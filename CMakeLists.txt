@@ -11,7 +11,22 @@ if(CCACHE_FOUND)
   set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif(CCACHE_FOUND)
 
-# find_package(Curses REQUIRED)
+set(CURSES_NEED_NCURSES "TRUE")
+find_package(Curses)
+
+#
+# Kludge alert!
+# Can't figure out how to get cmake to find the 32-bit version of a
+# 64-bit machine.  Manually hard-code the library and hope for the
+# best.
+#
+if ("${CURSES_INCLUDE_DIR}" STREQUAL "CURSES_INCLUDE_PATH-NOTFOUND")
+  set(CURSES_INCLUDE_DIR "")
+endif()
+if (NOT ${CURSES_FOUND})
+  set(CURSES_LIBRARIES -lncurses)
+endif()
+
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -83,8 +98,7 @@ target_compile_options(abc PRIVATE
 target_link_libraries(abc
   PRIVATE
   m
-  # ${CURSES_LIBRARIES}
-  -lncurses
+  ${CURSES_LIBRARIES}
   )
 target_include_directories(abc
   PRIVATE

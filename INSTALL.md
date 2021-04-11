@@ -2,6 +2,7 @@
 
 # Prerequisites
 - GoogleTest
+- ncurses
 
 # Normal Builds
 
@@ -24,7 +25,7 @@ or
 You must first setup a 32-bit development environment which is in
 general beyond the scope of this document.  For recent versions of
 Unbuntu it might be as simple as
-  `sudo apt install g++-multilib`
+  `sudo apt install g++-multilib lib32ncurses-dev`
 
 To build your FLAGS should be something like 
 
