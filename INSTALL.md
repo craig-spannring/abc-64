@@ -1,5 +1,10 @@
 *Currently this will only run properly when compiled for a 32 bit system.*
 
+# Prerequisites
+- GoogleTest
+
+# Normal Builds
+
 This project follows the standard CMake conventions for building.
 
    $ mkdir build          # This may be located anywhere.
