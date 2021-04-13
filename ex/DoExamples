@@ -2,10 +2,15 @@
 WS='*.ex'
 OK=yes
 
-case $1 in
-local)	abc=../${ABC:-abc};;
-*)	abc=abc;;
-esac
+if [ -n "${ABC}" ]
+then
+	abc=${ABC}
+else 
+	case $1 in	
+	local)	abc=../${ABC:-abc};;
+	*)	abc=abc;;
+	esac
+fi
 
 for ws in $WS
 do
