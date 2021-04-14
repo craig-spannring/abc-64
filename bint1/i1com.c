@@ -181,7 +181,7 @@ Visible value mk_how(parsetree unit, bool filed) {
 }
 
 Visible value mk_ref(parsetree rp) {
-	value r= grab(Refine, 0);
+	value r= grab(RefinementNode, 0);
 	*Ats(r)= copy(rp);
 	return r;
 }

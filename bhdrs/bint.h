@@ -15,7 +15,7 @@ extern "C" {
 #define ParseTreeNode 'T'		/* parsetree */
 #define How 'h'		/* command howto */
 #define Fun '+'		/* function */
-#define Refine 'r'		/* refinement */
+#define RefinementNode 'r'		/* refinement */
 #define Prd 'i'		/* predicate */
 #define Sim 'S'		/* simple location */
 #define Tri '@'		/* trimmed text location */
@@ -87,7 +87,7 @@ value mk_how(parsetree unit, bool filed);
 /************************************************************************/
 
 typedef struct{parsetree rp;} ref;
-#define Is_refinement(v) (Type(v) == Refine)
+#define Is_refinement(v) (Type(v) == RefinementNode)
 value mk_ref(parsetree rp);
 
 /************************************************************************/

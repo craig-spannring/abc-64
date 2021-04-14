@@ -20,7 +20,7 @@
 #include "i3loc.h"
 #include "i3sou.h"
 
-#define Refinement(r) ((ref *)Ats(r))
+#define ToRefinement(r) ((ref *)Ats(r))
 
 Forward Hidden Procedure sub_epibreer(parsetree argtree, value vl, value *plocals, int *pnextlocal);
 Forward Hidden Procedure putbackargs(value locenv);
@@ -294,7 +294,7 @@ Visible Procedure ret(void) {
 Visible Procedure call_refinement(value name, parsetree def, bool test)
 {
 	call(test ? C_reftest : C_refexp,
-		*Branch(Refinement(def)->rp, REF_START));
+		*Branch(ToRefinement(def)->rp, REF_START));
 }
 
 #define YOU_TEST MESS(4103, "You haven't told me HOW TO REPORT %s")
@@ -771,7 +771,7 @@ Visible Procedure x_user_command(value name, parsetree actuals, value def)
 
 	if (Valid(def)) {
 		if (!Is_refinement(def)) syserr(MESS(4121, "bad def in x_user_command"));
-		call(C_refcmd, *Branch(Refinement(def)->rp, REF_START));
+		call(C_refcmd, *Branch(ToRefinement(def)->rp, REF_START));
 		return;
 	}
 	if (!is_unit(name, Cmd, &aa, &wse)) {
