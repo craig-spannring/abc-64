@@ -37,7 +37,7 @@ Hidden unsigned getsyze(literal type, intlet len, int *pnptrs)
 		case Num:
 			syze= numsyze(len, &nptrs);
 			break;
-		case Ptn:
+		case ParseTreeNode:
 			syze= ptnsyze(len, &nptrs);
 			break;
 		case Rangebounds:

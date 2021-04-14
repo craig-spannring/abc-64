@@ -73,7 +73,7 @@ Visible typenode nodetype(parsetree v) {
 /* make parsetree node */
 
 Hidden value mk_ptn(typenode type, intlet len) {
-	parsetree v= (parsetree) grab(Ptn, (len<<8) | type);
+	parsetree v= (parsetree) grab(ParseTreeNode, (len<<8) | type);
 	*Branch(v, len)= *Branch(v, len+1)= NilTree;
 	return v;
 }

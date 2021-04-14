@@ -12,7 +12,7 @@ extern "C" {
 
 /* Types */
 
-#define Ptn 'T'		/* parsetree */
+#define ParseTreeNode 'T'		/* parsetree */
 #define How 'h'		/* command howto */
 #define Fun '+'		/* function */
 #define Ref 'r'		/* refinement */
@@ -37,7 +37,7 @@ typedef envchain *env;
 
 typedef value parsetree;
 #define NilTree ((parsetree) Vnil)
-#define Is_parsetree(v) (Type(v) == Ptn)
+#define Is_parsetree(v) (Type(v) == ParseTreeNode)
 #define ValidTree(v) ((v) != NilTree)
 
 /************************************************************************/
