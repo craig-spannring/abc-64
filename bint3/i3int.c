@@ -54,14 +54,17 @@ Visible bool terminated;
 */
 
 Hidden value run(parsetree start, bool wantvalue) {
-	value u, v, w;
-	int k, len;
-	bool X, Y;
-	int call_stop= call_level;
-	parsetree old_next= next;
+	value    u;
+	value    v;
+	value    w;
+	int      k          = 0;
+	bool     X          = No;
+	bool     Y          = No;     
+	int      call_stop  = call_level;
+	parsetree old_next  = next;
 	/* While run can be used recursively, save some state info */
 
-	next= start;
+	next = start;
 	while (still_ok && !Interrupted()) {
 		pc= next;
 		if (pc == Halt) {
@@ -173,7 +176,8 @@ case SET_RANDOM: Pop1(set_random); break;
 case DELETE: Pop1(l_delete); break;
 case CHECK: if (!report) checkerr(); break;
 
-case WRITE:	/* collateral expression */
+case WRITE: {	/* collateral expression */
+	int len = 0;
 	newl(F(WRT_L_LINES));
 	v = pop();
 	len = Nfields(v);
@@ -182,6 +186,7 @@ case WRITE:	/* collateral expression */
 	release(v);
 	newl(F(WRT_R_LINES));
 	break;
+}
 case WRITE1:	/* single expression */
 	newl(F(WRT_L_LINES));
 	if (F(WRT_EXPR) != Vnil) { v = pop(); writ(v); release(v); }
