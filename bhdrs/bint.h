@@ -17,7 +17,7 @@ extern "C" {
 #define Fun '+'		/* function */
 #define RefinementNode 'r'		/* refinement */
 #define Prd 'i'		/* predicate */
-#define Sim 'S'		/* simple location */
+#define SimpleLoc 'S'		/* simple location */
 #define Tri '@'		/* trimmed text location */
 #define Tse '['		/* table selection location */
 #define Rangebounds 'B'	/* for range as list_item */
@@ -126,7 +126,7 @@ loc mk_trimloc(loc R, value B, value C);
 loc mk_tbseloc(loc R, value K);
 
 #define Is_locloc(v) IsSmallInt(v)
-#define Is_simploc(v) (Type(v) == Sim)
+#define Is_simploc(v) (Type(v) == SimpleLoc)
 #define Is_tbseloc(v) (Type(v) == Tse)
 #define Is_trimloc(v) (Type(v) == Tri)
 

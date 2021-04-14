@@ -44,7 +44,7 @@ Hidden unsigned getsyze(literal type, intlet len, int *pnptrs)
 		case Com:
 			syze= len*sizeof(value); nptrs= len;
 			break;
-		case Sim:
+		case SimpleLoc:
 			syze= sizeof(simploc); nptrs= 1;
 			break;
 		case Tri:

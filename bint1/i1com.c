@@ -138,7 +138,7 @@ Visible parsetree node9(typenode type, value a1, value a2, value a3, value a4, v
 /* OTHER TYPES */
 
 Visible loc mk_simploc(basidf id, env en) {
-	loc l= (loc) grab(Sim, 0);
+	loc l= (loc) grab(SimpleLoc, 0);
 	(*Ats(l))= copy(id); (*(Ats(l)+1))= (value) en;
 	return l;
 }
