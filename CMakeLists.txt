@@ -17,7 +17,7 @@ find_package(Curses)
 #
 # Kludge alert!
 # Can't figure out how to get cmake to find the 32-bit version of a
-# 64-bit machine.  Manually hard-code the library and hope for the
+# curses.  Manually hard-code the library and hope for the
 # best.
 #
 if ("${CURSES_INCLUDE_DIR}" STREQUAL "CURSES_INCLUDE_PATH-NOTFOUND")
@@ -68,14 +68,11 @@ target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
   
   -Wall
+  
   -Wint-to-pointer-cast
-
-  
-  #-Wno-implicit-int
-  
-  # -Wout-of-line-declaration
+  -Wno-implicit-int
   -Werror=old-style-definition
-  # -Wold-style-declaration
+  -Wold-style-declaration
   -Wstrict-prototypes
   -Wold-style-definition
   -Wstrict-prototypes
@@ -83,17 +80,17 @@ target_compile_options(abc PRIVATE
   
   -Wreturn-type
   
-  # -Wno-parentheses
+  -Wno-parentheses
   -Wno-deprecated-declarations
   -Wno-unused-value
   
-  # -Wno-char-subscripts
-  #-Wno-sometimes-unitialized
+  -Wno-char-subscripts
+  -Wno-sometimes-unitialized
   
-  # -Wno-incompatible-pointer-types
-  # -Wno-int-to-pointer-cast
-  # -Wint-to-pointer-cast
-  # -Werror=int-to-pointer-cast
+  -Wno-incompatible-pointer-types
+  -Wno-int-to-pointer-cast
+  -Wint-to-pointer-cast
+  -Werror=int-to-pointer-cast
   )
 target_link_libraries(abc
   PRIVATE
