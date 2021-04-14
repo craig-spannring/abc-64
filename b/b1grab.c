@@ -63,7 +63,7 @@ Hidden unsigned getsyze(literal type, intlet len, int *pnptrs)
 		case Prd:
 			syze= sizeof(funprd); nptrs= 1;
 			break;
-		case Ref:
+		case Refine:
 			syze= sizeof(ref); nptrs= 1;
 			break;
 		case Nod:
