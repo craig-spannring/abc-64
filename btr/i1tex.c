@@ -223,14 +223,9 @@ typedef stackelem *stackptr;
 #define Pop(s, p, l) (--(s), (p)= (s)->s_ptr, (l)= (s)->s_lim) 
 
 
+STATIC_CHECK(sizeof(stackelem) == sizeof(((fingertip)0)[0]));
 Hidden fingertip cvt_stack_to_fingertip(const stackelem* s) {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-variable"
-	static fingertip  ftype[0];
-	STATIC_CHECK(sizeof(stackelem) == sizeof(*ftype[0]));
-#pragma GCC diagnostic pop
-
-    return (fingertip)s;
+	return (fingertip)s;
 }
  
 Hidden btreeptr zip(stackptr s1, stackptr sp1, stackptr s2, stackptr sp2) {

@@ -12,8 +12,8 @@ extern "C" {
 
 #define TOKEN_MK(x, y)  x ## y
 #define TOKEN_MK2(x, y) TOKEN_MK(x, y)
-#define STATIC_CHECK(t) static int TOKEN_MK2(static_chkr_, __LINE__)[(t)?0:-1]
-	
+#define STATIC_CHECK(t) extern const int TOKEN_MK2(static_chkr_, __LINE__)[(t)?0:-1]
+		
 /* b.h: general */
 
 /* The following are not intended as pseudo-encapsulation, */
