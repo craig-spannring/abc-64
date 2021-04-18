@@ -18,16 +18,16 @@ extern "C" {
     Visible bool      left(path *pp);
     Visible bool      rite(path *pp);
     Visible bool      up(path *pp);
-    Visible int       nodewidth(node n);
+    Visible int       nodewidth(nodeptr n);
     Visible int       pathlength(path p);
-    Visible node      newnode(int nch, int sym, node *children);
-    Visible path      newpath(path pa, node n, int i);
+    Visible nodeptr      newnode(int nch, int sym, nodeptr *children);
+    Visible path      newpath(path pa, nodeptr n, int i);
     Visible Procedure markpath(path *pp, markbits new);
     Visible Procedure putintrim(value *pn, int head, int tail, string str);
-    Visible Procedure setchild(node *pn, int i, node n);
+    Visible Procedure setchild(nodeptr *pn, int i, nodeptr n);
     Visible Procedure top(path *pp);
     Visible Procedure touchpath(path *pp);
-    Visible Procedure treereplace(path *pp, node n);
+    Visible Procedure treereplace(path *pp, nodeptr n);
     Visible Procedure unmkpath(path *pp, int del);
 
 #ifdef __cplusplus

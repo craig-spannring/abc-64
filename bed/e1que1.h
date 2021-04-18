@@ -14,21 +14,21 @@
 extern "C" {
 #endif
 
-    Visible bool       fitnode(path *pp, node n);
+    Visible bool       fitnode(path *pp, nodeptr n);
     Visible Procedure  joinqueues(queue *pq, queue q);
-    Visible Procedure  preptoqueue(node n, queue *pq);
-    Visible Procedure  addtoqueue(queue *pq, node n);
+    Visible Procedure  preptoqueue(nodeptr n, queue *pq);
+    Visible Procedure  addtoqueue(queue *pq, nodeptr n);
     Visible Procedure  stringtoqueue(string str, queue *pq);
-    Visible node       queuebehead(queue *pq);
-    Visible Procedure  splitnode(node n, queue *pq);
+    Visible nodeptr       queuebehead(queue *pq);
+    Visible Procedure  splitnode(nodeptr n, queue *pq);
     Visible bool       resttoqueue(path *pp, queue *pq);
     Visible Procedure  nosuggtoqueue(environ *ep, queue *pq);
     Visible bool       issuggestion(environ *ep);
-    Visible bool       fitnode(path *pp, node n);
+    Visible bool       fitnode(path *pp, nodeptr n);
     Visible int        fitstring(path *pp, string str, int alt_c);
     Visible Procedure  fixfocus(environ *ep, int len);
     Visible bool       spacefix(environ *ep);
-    Visible Procedure  subsettoqueue(node n, int s1, int s2, queue *pq);
+    Visible Procedure  subsettoqueue(nodeptr n, int s1, int s2, queue *pq);
     Visible string     querepr(value qv);
 
 #ifdef __cplusplus

@@ -142,7 +142,7 @@ gotoscrollbar(environ *ep, int x)
 
 Visible bool gotoyx(environ *ep, int y, int x)
 {
-	node n;
+	nodeptr n;
 	string *rp;
 	int i;
 	int pc;
@@ -225,7 +225,7 @@ poscomp(path p, int y, int x)
 	int lx;
 	int w;
 	string *rp;
-	node n;
+	nodeptr n;
 
 	ly = Ycoord(p);
 	lx = Xcoord(p);
@@ -346,7 +346,7 @@ Hidden Procedure
 fixsublist(environ *ep)
 {
 	path pa = parent(ep->focus);
-	node n;
+	nodeptr n;
 
 	if (!pa)
 		return;

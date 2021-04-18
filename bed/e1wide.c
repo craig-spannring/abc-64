@@ -26,8 +26,8 @@
 
 Visible bool widen(environ *ep, bool deleting)
 {
-	node n;
-	node nn;
+	nodeptr n;
+	nodeptr nn;
 	int sym;
 	int ich;
 
@@ -153,7 +153,7 @@ Visible bool widen(environ *ep, bool deleting)
 
 Visible bool narrow(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int sym;
 	int nch;
 	string repr;
@@ -216,7 +216,7 @@ Visible bool narrow(environ *ep)
 
 Visible bool extend(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int i;
 	int len;
 	int s1save;
@@ -296,8 +296,8 @@ Visible bool extend(environ *ep)
 
 Visible bool rnarrow(environ *ep)
 {
-	node n;
-	node nn;
+	nodeptr n;
+	nodeptr nn;
 	int i;
 	int sym;
 	

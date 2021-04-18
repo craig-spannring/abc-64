@@ -669,7 +669,7 @@ canexit(environ *ep)
 Hidden bool
 findhole(path *pp)
 {
-	node n = tree(*pp);
+	nodeptr n = tree(*pp);
 
 	if (Is_etext(n))
 		return No;
@@ -703,7 +703,7 @@ Visible Procedure
 #else
 Hidden Procedure
 #endif
-writenode(node n, FILE *fp)
+writenode(nodeptr n, FILE *fp)
 {
 	int nch;
 	int i;
@@ -753,7 +753,7 @@ Visible bool savequeue(value v, string filename)
 {
 	FILE *fp;
 	auto queue q = (queue)v;
-	node n;
+	nodeptr n;
 	bool ok;
 	int lines = 0;
 

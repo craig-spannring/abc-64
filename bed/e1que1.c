@@ -23,7 +23,7 @@
 #include "tabl.h"
 #include "b1grab.h"
 
-Forward Hidden bool rest_is_hollow(node n);
+Forward Hidden bool rest_is_hollow(nodeptr n);
 
 #ifdef lint
 Visible queue qcopy(q)
@@ -61,7 +61,7 @@ Visible Procedure joinqueues(queue *pq, queue q)
  * Empty strings and Optional holes are silently discarded.
  */
 
-Visible Procedure preptoqueue(node n, queue *pq)
+Visible Procedure preptoqueue(nodeptr n, queue *pq)
 {
 	queue q;
 
@@ -86,7 +86,7 @@ Visible Procedure preptoqueue(node n, queue *pq)
  * Append a node to the end of a queue (same extras as preptoqueue).
  */
 
-Visible Procedure addtoqueue(queue *pq, node n)
+Visible Procedure addtoqueue(queue *pq, nodeptr n)
 {
 	auto queue q = Qnil;
 
@@ -106,7 +106,7 @@ Visible Procedure stringtoqueue(string str, queue *pq)
 	if (str == NULL)
 		return;
 	v = mk_etext(str);
-	preptoqueue((node) v, pq);
+	preptoqueue((nodeptr) v, pq);
 	release(v);
 }
 
@@ -133,9 +133,9 @@ addstringtoqueue(pq, str)
  * Get the first node of a queue and delink it ("pop").
  */
 
-Visible node queuebehead(queue *pq)
+Visible nodeptr queuebehead(queue *pq)
 {
-	node n;
+	nodeptr n;
 	queue q = *pq;
 
 	Assert(q);
@@ -153,9 +153,9 @@ Visible node queuebehead(queue *pq)
  * 'Atomic' nodes (texts and holes) are pushed unadorned.
  */
 
-Visible Procedure splitnode(node n, queue *pq)
+Visible Procedure splitnode(nodeptr n, queue *pq)
 {
-	node nn;
+	nodeptr nn;
 	string *rp;
 	int i;
 	int sym;
@@ -201,7 +201,7 @@ Visible bool resttoqueue(path *pp, queue *pq)
 {
 	auto queue q = Qnil;
 	path pa = parent(*pp);
-	node n = tree(*pp);
+	nodeptr n = tree(*pp);
 	int sym = symbol(n);
 	/* markbits x; */
 
@@ -224,8 +224,8 @@ Visible bool resttoqueue(path *pp, queue *pq)
 	return Yes;
 }
 
-Hidden bool rest_is_hollow(node n) {
-	node nn;
+Hidden bool rest_is_hollow(nodeptr n) {
+	nodeptr nn;
 	string *rp;
 	int i;
 	int sym;
@@ -261,8 +261,8 @@ Visible Procedure nosuggtoqueue(environ *ep, queue *pq)
 	auto queue q = Qnil;
 	int i;
 	string *rp;
-	node n;
-	node nn;
+	nodeptr n;
+	nodeptr nn;
 	int sym;
 	string str;
 
@@ -299,7 +299,7 @@ Visible Procedure nosuggtoqueue(environ *ep, queue *pq)
 
 Visible bool issuggestion(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int nch;
 	int sym;
 	int i;
@@ -322,7 +322,7 @@ Visible bool issuggestion(environ *ep)
  * See if a node fits in a hole.
  */
 
-Visible bool fitnode(path *pp, node n)
+Visible bool fitnode(path *pp, nodeptr n)
 {
 	if (!allowed(*pp, symbol(n)))
 		return No;
@@ -342,7 +342,7 @@ Visible bool fitnode(path *pp, node n)
 Visible int fitstring(path *pp, string str, int alt_c)
 {
 	environ dummyenv;
-	node n;
+	nodeptr n;
 	int ich;
 	int len;
 	string cp;
@@ -398,7 +398,7 @@ Visible int fitstring(path *pp, string str, int alt_c)
 		if (len > 1) {
 			buf[len] = 0;
 			if (!downi(pp, ich)) Abort();
-			treereplace(pp, (node) mk_etext(buf));
+			treereplace(pp, (nodeptr) mk_etext(buf));
 			if (!up(pp)) Abort();
 		}
 		return len;
@@ -417,8 +417,8 @@ Visible int fitstring(path *pp, string str, int alt_c)
 
 Visible Procedure fixfocus(environ *ep, int len)
 {
-	node nn;
-	node n = tree(ep->focus);
+	nodeptr nn;
+	nodeptr n = tree(ep->focus);
 	string *rp;
 	int i = 0;
 	int nch;
@@ -492,7 +492,7 @@ Visible Procedure fixfocus(environ *ep, int len)
 Visible bool spacefix(environ *ep)
 {
 	path pa;
-	node n;
+	nodeptr n;
 	string *rp;
 
 	if (ichild(ep->focus) != 2 || symbol(tree(ep->focus)) != Hole)
@@ -517,7 +517,7 @@ Visible bool spacefix(environ *ep)
  * Prepend a subset of a node to a queue.
  */
 
-Visible Procedure subsettoqueue(node n, int s1, int s2, queue *pq)
+Visible Procedure subsettoqueue(nodeptr n, int s1, int s2, queue *pq)
 {
 	string *rp = noderepr(n);
 
@@ -538,7 +538,7 @@ Visible Procedure subsettoqueue(node n, int s1, int s2, queue *pq)
 Visible string querepr(value qv)
 {
 	queue q = (queue)qv;
-	node n;
+	nodeptr n;
 	static char buf[1000]; /***** Cannot overflow? *****/
 	string cp;
 	string sp;

@@ -33,8 +33,8 @@
 extern bool lefttorite;
 	/* Set by edit() to signal we parse purely left-to-right */
 
-Forward Hidden bool ins_node(environ *ep, node n, queue *pq);
-Forward Hidden bool joinnodes(path *pp, node n1, node n2, bool spflag);
+Forward Hidden bool ins_node(environ *ep, nodeptr n, queue *pq);
+Forward Hidden bool joinnodes(path *pp, nodeptr n1, nodeptr n2, bool spflag);
 Forward Hidden bool add_string(environ *ep, string *pstr);
 Forward Hidden bool canfitchar(int c, struct classinfo *ci);
 
@@ -51,7 +51,7 @@ Forward Hidden bool canfitchar(int c, struct classinfo *ci);
 Visible bool ins_queue(environ *ep, queue *pq, queue *pq2)
 {
 	bool ok = Yes;
-	node n;
+	nodeptr n;
 	queue oldq2;
 	environ saveenv;
 	int oldindentation = focindent(ep);
@@ -148,7 +148,7 @@ Visible bool app_queue(environ *ep, queue *pq)
 
 Visible bool move_on(environ *ep)
 {
-	node n;
+	nodeptr n;
 	string *rp;
 	int sym;
 	int ich = ichild(ep->focus);
@@ -245,13 +245,13 @@ Visible bool fix_move(environ *ep)
  * Insert a node in the parse tree.
  */
 
-Hidden bool ins_node(environ *ep, node n, queue *pq)
+Hidden bool ins_node(environ *ep, nodeptr n, queue *pq)
 {
 	int sym;
-	node nn;
+	nodeptr nn;
 	markbits x;
 	string *rp;
-	node fc;
+	nodeptr fc;
 
 	if (symbol(n) == Optional)
 		return Yes;
@@ -384,7 +384,7 @@ Hidden bool softening_builtin(char inch, int sym) {
 	return (bool) (isupper(inch) && Put <= sym && sym < Check);
 }
 
-Hidden bool fits_kwchar(node n, int i, int ch) {
+Hidden bool fits_kwchar(nodeptr n, int i, int ch) {
 	/* REPORT i'th char of Keyword(n) == ch */
 	string s;
 	int si;
@@ -398,7 +398,7 @@ Hidden bool fits_kwchar(node n, int i, int ch) {
 	return (bool) si == ch;
 }
 
-Hidden bool fits_nextkwstart(node n, int ch) {
+Hidden bool fits_nextkwstart(nodeptr n, int ch) {
 	int sym= symbol(n);
 	
 	if (sym == Keyword)
@@ -417,9 +417,9 @@ Hidden bool fits_nextkwstart(node n, int ch) {
  * if they don't, we should not kill them now!
  */
 
-Hidden bool is_varsuggrest(node n, bool exphole_seen) {
+Hidden bool is_varsuggrest(nodeptr n, bool exphole_seen) {
 	int sym= symbol(n);
-	node n2;
+	nodeptr n2;
 	int sym2;
 	
 	if (sym == Kw_plus) {
@@ -455,7 +455,7 @@ Hidden bool is_varsuggrest(node n, bool exphole_seen) {
  * else, if rest resembles suggestion-rest, kill that.
  */
 Hidden bool ack_or_kill_varsuggrest(environ *ep, string *pstr) {
-	node nn= tree(ep->focus);
+	nodeptr nn= tree(ep->focus);
 	
 	if (fits_nextkwstart(child(nn, 2), (int)**pstr)) {
 		/* accept start_char in Keyword */
@@ -493,9 +493,9 @@ Hidden bool range_hack(environ *ep) {
 	path pa;
 	int sympa;
 	string str;
-	node n1;
-	node n2;
-	node nn;
+	nodeptr n1;
+	nodeptr n2;
+	nodeptr nn;
 	int s2= ep->s2;
 	bool r= No;
 	
@@ -509,9 +509,9 @@ Hidden bool range_hack(environ *ep) {
 		if (s2 == strlen(str) && str[s2-1] == '.') {
 			str[s2-1]= '\0';
 			n1= gram(Name);
-			setchild(&n1, 1, (node) mk_etext(str));
+			setchild(&n1, 1, (nodeptr) mk_etext(str));
 			n2= gram(Number);
-			setchild(&n2, 1, (node) mk_etext(".."));
+			setchild(&n2, 1, (nodeptr) mk_etext(".."));
 			nn= gram(Blocked);
 			setchild(&nn, 1, n1);
 			setchild(&nn, 2, n2);
@@ -541,7 +541,7 @@ Visible bool justgoon = No;
 Visible bool ins_string(environ *ep, string str, queue *pq, int alt_c)
 	/*auto*/ 
 {
-	node nn;
+	nodeptr nn;
 	auto value v;
 	char buf[1024];
 	string repr;
@@ -814,14 +814,14 @@ Visible bool ins_string(environ *ep, string str, queue *pq, int alt_c)
 				Assert(Is_etext(v));
 				buf[len] = 0;
 				putintrim(&v, ep->s2, e_length(v) - ep->s2, buf);
-				treereplace(&ep->focus, (node) v);
+				treereplace(&ep->focus, (nodeptr) v);
 				s_up(ep);
 				ep->spflag = No;
 				ep->s2 += len;
 			}
 			else { /* Nothing inserted */
 				if (ep->s2 == 0) { /* Whole string rejected */
-					addtoqueue(pq, (node)v);
+					addtoqueue(pq, (nodeptr)v);
 					release(v);
 					s_up(ep);
 					delfocus(&ep->focus);
@@ -832,12 +832,12 @@ Visible bool ins_string(environ *ep, string str, queue *pq, int alt_c)
 					value w;
 /*					addstringtoqueue(pq, e_strval(v) + ep->s2); */
 					w= e_ibehead(v, ep->s2 + 1);
-					addtoqueue(pq, (node) w);
+					addtoqueue(pq, (nodeptr) w);
 					release(w);
 					/* putintrim(&v, ep->s2, 0, ""); */
 					v= e_icurtail(w= v, ep->s2);
 					release(w);
-					treereplace(&ep->focus, (node) v);
+					treereplace(&ep->focus, (nodeptr) v);
 				}
 				else
 					release(v);
@@ -863,7 +863,7 @@ Visible bool ins_string(environ *ep, string str, queue *pq, int alt_c)
  */
 
 Hidden bool
-joinnodes(path *pp, node n1, node n2, bool spflag)
+joinnodes(path *pp, nodeptr n1, nodeptr n2, bool spflag)
 {
 	path pa = parent(*pp);
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
@@ -918,7 +918,7 @@ Visible int joinstring(path *pp, string str, bool spflag, int alt_c, bool mayind
 {
 	struct table *tp;
 	path pa = parent(*pp);
-	node n1;
+	nodeptr n1;
 	struct classinfo *ci;
 	classptr cp;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
@@ -991,7 +991,7 @@ add_string(environ *ep, string *pstr)
 {
 	struct table *tp;
 	path pa = parent(ep->focus);
-	node n1;
+	nodeptr n1;
 	struct classinfo *ci;
 	classptr cp;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
@@ -1063,7 +1063,7 @@ canfitchar(int c, struct classinfo *ci)
 
 Visible Procedure qshow(queue q, string where)
 {
-	node n;
+	nodeptr n;
 	char buf[256];
 	string cp;
 	string sp;

@@ -27,7 +27,7 @@ Forward Hidden Procedure sendsave(path p, bufadm *bp, FILE *fp);
  * they are written by recursive calls.
  */
 
-Hidden Procedure savewalk(node n, int level, bufadm *bp, FILE *fp)
+Hidden Procedure savewalk(nodeptr n, int level, bufadm *bp, FILE *fp)
 {
 	string *rp;
 	string cp;

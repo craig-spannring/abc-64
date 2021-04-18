@@ -15,7 +15,7 @@
 #include "bmem.h"
 #include "b1grab.h"
 
-Forward Hidden Procedure repwidth(node *pn, node old, node new);
+Forward Hidden Procedure repwidth(nodeptr *pn, nodeptr old, nodeptr new);
 
 #define Register ??? register ???
 	/* Used for registers 4-6.  Define as empty macro on PDP */
@@ -62,9 +62,9 @@ Visible Procedure nodeuniql(pn)
  * Allocate a new node.
  */
 
-Hidden node mk_node(int nch)
+Hidden nodeptr mk_node(int nch)
 {
-	node n = (node) grab(Nod, nch);
+	nodeptr n = (nodeptr) grab(Nod, nch);
 	int i;
 
 	n->n_marks = 0;
@@ -75,9 +75,9 @@ Hidden node mk_node(int nch)
 	return n;
 }
 
-Visible node newnode(int nch, int sym, node *children)
+Visible nodeptr newnode(int nch, int sym, nodeptr *children)
 {
-	node n = (node) mk_node(nch); /* Must preset with zeros! */
+	nodeptr n = (nodeptr) mk_node(nch); /* Must preset with zeros! */
 
 	Symbol(n) = sym;
 	for (; nch > 0; --nch)
@@ -86,7 +86,7 @@ Visible node newnode(int nch, int sym, node *children)
 	return n;
 }
 
-Visible int nodewidth(node n) {
+Visible int nodewidth(nodeptr n) {
 	if (Is_etext(n))
 		return e_length((value) n);
 	else
@@ -110,10 +110,10 @@ Visible int nodewidth(node n) {
  * Like treereplace(), it does not increase the reference count of n.
  */
 
-Visible Procedure setchild(node *pn, int i, node n)
+Visible Procedure setchild(nodeptr *pn, int i, nodeptr n)
 {
-	node *pch;
-	node oldchild;
+	nodeptr *pch;
+	nodeptr oldchild;
 
 	Assert(Isnode(*pn));
 	pch = Locchild(pn, i);
@@ -179,7 +179,7 @@ Hidden path mk_path(void)
 	return p;
 }
 
-Visible path newpath(path pa, node n, int i)
+Visible path newpath(path pa, nodeptr n, int i)
 {
 	path p = (path) mk_path();
 
@@ -217,7 +217,7 @@ Visible path newpath(path pa, node n, int i)
  * be the major caller of noderepr() and fwidth().
  */
 
-Hidden Procedure repwidth(node *pn, node old, node new)
+Hidden Procedure repwidth(nodeptr *pn, nodeptr old, nodeptr new)
 {
 	int w = Width(*pn);
 	int oldwidth = nodewidth(old);
@@ -249,7 +249,7 @@ Hidden Procedure repwidth(node *pn, node old, node new)
 
 Visible Procedure markpath(path *pp, markbits new)
 {
-	node *pn;
+	nodeptr *pn;
 	markbits old;
 
 	Assert(Is_Node(Tree(*pp)));
@@ -265,7 +265,7 @@ Visible Procedure markpath(path *pp, markbits new)
 
 Visible Procedure unmkpath(path *pp, int del)
 {
-	node *pn;
+	nodeptr *pn;
 	markbits old;
 
 	Assert(Is_Node(Tree(*pp)));
@@ -279,7 +279,7 @@ Visible Procedure unmkpath(path *pp, int del)
 }
 
 
-Hidden Procedure clearmarks(node *pn)
+Hidden Procedure clearmarks(nodeptr *pn)
 {
 	int i;
 
@@ -300,9 +300,9 @@ Hidden Procedure clearmarks(node *pn)
  * Mark bits are copied from the node being replaced.
  */
 
-Visible Procedure treereplace(path *pp, node n)
+Visible Procedure treereplace(path *pp, nodeptr n)
 {
-	node *pn;
+	nodeptr *pn;
 	markbits old;
 
 	pn = Loctree(pp);
@@ -327,11 +327,11 @@ Visible bool up(path *pp)
 	path p = *pp;
 	path pa = Parent(p);
 	path *ppa;
-	node n;
-	node npa;
-	node *pn;
-	node oldchild;
-	node *pnpa;
+	nodeptr n;
+	nodeptr npa;
+	nodeptr *pn;
+	nodeptr oldchild;
+	nodeptr *pnpa;
 	int i;
 	markbits add;
 	markbits del;
@@ -380,7 +380,7 @@ Visible bool up(path *pp)
 
 Visible bool downi(path *pp, int i)
 {
-	node n;
+	nodeptr n;
 	auto int y;
 	auto int x;
 	auto int level;

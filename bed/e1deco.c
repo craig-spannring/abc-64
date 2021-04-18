@@ -117,7 +117,7 @@ Visible bool delbody(environ *ep)
 Hidden bool delvarying(environ *ep)
 {
 	auto queue q = Qnil;
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 	auto value v;
 	value t1, t2;
 
@@ -130,7 +130,7 @@ Hidden bool delvarying(environ *ep)
 			/* Cannot do simple substring deletion. */
 /*			stringtoqueue(strval(v) + ep->s3 + 1, &q); */
 			t1= e_ibehead(v, ep->s3 + 2);
-			preptoqueue((node) t1, &q);
+			preptoqueue((nodeptr) t1, &q);
 			release(t1);
 			delfocus(&ep->focus);
 			ep->mode = WHOLE;
@@ -145,7 +145,7 @@ Hidden bool delvarying(environ *ep)
 	v= e_concat(t1, t2);
 	release(t1); release(t2);
 	s_downi(ep, ep->s1/2);
-	treereplace(&ep->focus, (node) v);
+	treereplace(&ep->focus, (nodeptr) v);
 	s_up(ep);
 	ep->mode = VHOLE;
 	return Yes;
@@ -158,7 +158,7 @@ Hidden bool delvarying(environ *ep)
 
 Hidden bool delfixed(environ *ep)
 {
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 	char buf[15]; /* Long enough for all fixed texts */
 	string *nr= noderepr(n);
 	string repr = nr[ep->s1/2];
@@ -228,8 +228,8 @@ Hidden bool delsubset(environ *ep, bool hack)
 {
 	auto queue q = Qnil;
 	auto queue q2 = Qnil;
-	node n = tree(ep->focus);
-	node nn;
+	nodeptr n = tree(ep->focus);
+	nodeptr nn;
 	string *rp = noderepr(n);
 	int nch = nchildren(n);
 	int i;
@@ -311,7 +311,7 @@ Hidden bool delsubset(environ *ep, bool hack)
 
 bool delsublist(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int i;
 	int sym;
 	queue q = Qnil;
@@ -386,7 +386,7 @@ Hidden bool delwhole(environ *ep)
 
 Hidden bool delhole(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int sym;
 	bool flag = No;
 
@@ -516,7 +516,7 @@ Visible value copyout(environ *ep)
 {
 	auto queue q = Qnil;
 	auto path p;
-	node n;
+	nodeptr n;
 	value v;
 	char buf[15];
 	string *rp;
@@ -559,7 +559,7 @@ Visible value copyout(environ *ep)
 			w= e_icurtail(v, ep->s3 + 1);
 			v= e_ibehead(w, ep->s2 + 1);
 			release(w);
-			preptoqueue((node)v, &q);
+			preptoqueue((nodeptr)v, &q);
 			release(v);
 		}
 		break;
@@ -577,7 +577,7 @@ Visible value copyout(environ *ep)
 
 Hidden Procedure nonewline(queue *pq)
 {
-	node n;
+	nodeptr n;
 	int c;
 
 	if (!emptyqueue(*pq)) {
@@ -709,8 +709,8 @@ Visible bool ishole(environ *ep)
 
 Hidden bool colonhack(environ *ep, int all)
 {
-	node n = tree(ep->focus);
-	node n1;
+	nodeptr n = tree(ep->focus);
+	nodeptr n1;
 	string *rp = noderepr(n);
 	int i0, ii, i;
 	int sym;

@@ -23,7 +23,8 @@ extern "C" {
 #define Is_Pat(p) (Type(p) == Pat)
 #define Is_etext(v) (Type(v) == Etex)
 
-typedef struct node *node;
+typedef struct node *nodeptr;
+typedef struct node *nodeptr;
 typedef struct path *path;
 typedef int markbits;
 
@@ -32,7 +33,7 @@ struct gdb_hostile_node {
 	markbits	n_marks;
 	intlet	n_width;
 	intlet	n_symbol;
-	node	n_child[1];
+	nodeptr	n_child[1];
 };
 struct node {
 	literal  type;
@@ -41,7 +42,7 @@ struct node {
 	markbits n_marks;
 	intlet   n_width;
 	intlet   n_symbol;
-	node     n_child[1];
+	nodeptr  n_child[1];
 };
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
@@ -64,14 +65,14 @@ STATIC_CHECK(offsetof(struct gdb_hostile_node, n_child)
 	     == offsetof(struct node, n_child));
 #pragma GCC diagnostic pop
 
-#define Nnil ((node) Vnil)
+#define Nnil ((nodeptr) Vnil)
 
 #define NodOffset (sizeof(int) + 2*sizeof(intlet))
 
 struct gdb_hostile_path {
 	HEADER;
 	path	p_parent;
-	node	p_tree;
+	nodeptr	p_tree;
 	intlet	p_ichild;
 	intlet	p_ycoord;
 	intlet	p_xcoord;
@@ -84,7 +85,7 @@ struct path {
 	reftype   refcnt;
 	intlet    len FILLER_FIELD;
 	path      p_parent;
-	node      p_tree;
+	nodeptr   p_tree;
 	intlet    p_ichild;
 	intlet    p_ycoord;
 	intlet    p_xcoord;

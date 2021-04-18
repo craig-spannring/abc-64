@@ -30,8 +30,8 @@ extern "C" {
 	Visible int focwidth(environ *ep);
 	Visible int  lenitem(environ *ep);
 	Visible int lenitem(environ *ep);
-	Visible int  nodechar(node n);
-	Visible int nodechar(node n);
+	Visible int  nodechar(nodeptr n);
+	Visible int nodechar(nodeptr n);
 	Visible Procedure firstnnitem(environ *ep);
 	Visible Procedure fixit(environ *ep);
 	Visible Procedure grow(environ *ep, bool deleting);

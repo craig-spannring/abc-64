@@ -314,13 +314,13 @@ readsym(FILE *fp)
  * Return nil pointer if EOF or error.
  */
 
-Hidden node
+Hidden nodeptr
 readnode(FILE *fp)
 {
 	int c;
 	int nch;
-	node ch[MAXCHILD];
-	node n;
+	nodeptr ch[MAXCHILD];
+	nodeptr n;
 	int sym;
 
 	c = skipspace(fp);
@@ -370,7 +370,7 @@ readnode(FILE *fp)
 
 	case '\'':
 	case '"':
-		return (node) readtext(fp, c);
+		return (nodeptr) readtext(fp, c);
 
 	default:
 #ifndef NDEBUG
@@ -389,7 +389,7 @@ Visible value editqueue(string filename)
 {
 	FILE *fp = fopen(filename, "r");
 	auto queue q = Qnil;
-	node n;
+	nodeptr n;
 
 	if (!fp)
 		return Vnil;

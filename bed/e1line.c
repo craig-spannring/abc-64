@@ -31,10 +31,10 @@
  * (Used by screen update algorithm only.)
  */
 
-Visible bool eqlines(node n1, node n2)
+Visible bool eqlines(nodeptr n1, nodeptr n2)
 {
-	node nn1;
-	node nn2;
+	nodeptr nn1;
+	nodeptr nn2;
 	int w1;
 	int w2;
 	int nch;
@@ -73,9 +73,9 @@ Visible bool eqlines(node n1, node n2)
  * Compute the length of the line beginning at the current node.
  */
 
-Visible int linelen(node n)
+Visible int linelen(nodeptr n)
 {
-	node nn;
+	nodeptr nn;
 	string *rp = noderepr(n);
 	int w;
 	int nch = nchildren(n);
@@ -112,8 +112,8 @@ Visible int linelen(node n)
 
 Visible bool nextline(path *pp)
 {
-	node n;
-	node nn;
+	nodeptr n;
+	nodeptr nn;
 	int w;
 	int nch;
 	int i = 0;
@@ -183,8 +183,8 @@ Visible int colno(environ *ep)
 
 Visible Procedure oneline(environ *ep)
 {
-	node n;
-	node nn;
+	nodeptr n;
+	nodeptr nn;
 	string *rp;
 	int s1;
 	int s2;

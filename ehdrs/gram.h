@@ -11,10 +11,10 @@ extern "C" {
  * Routines defined in "gram.c".
  */
 
-string *noderepr(node);
-node gram(int sym);
-// node suggestion();
-// node variable();
+string *noderepr(nodeptr);
+nodeptr gram(int sym);
+// nodeptr suggestion();
+// nodeptr variable();
 string symname(int sym);
 bool allows_colon(int sym);
 

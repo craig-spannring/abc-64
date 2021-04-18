@@ -40,7 +40,7 @@ extern "C" {
 #define Assert(cond) (assert(cond))
 #endif /* NDEBUG */
 
-	node newnode(int nch, int sym, node *children);
+	nodeptr newnode(int nch, int sym, nodeptr *children);
 
 #ifndef NDEBUG
 #define symbol(n) (Assert(Is_Node(n)), (n)->n_symbol)
@@ -61,10 +61,10 @@ extern "C" {
 #define firstchild(n) ((n)->n_child[0])
 #endif /* NDEBUG */
 
-	int nodewidth(node n);
+	int nodewidth(nodeptr n);
 #define marked(p, x) (marks(tree(p))&(x))
 
-	path newpath(path pa, node n, int i);
+	path newpath(path pa, nodeptr n, int i);
 	
 #define parent(p) ((p)->p_parent)
 #define tree(p) ((p)->p_tree)
@@ -112,7 +112,7 @@ extern "C" {
 
 #else
 
-#define nodecopy(n) ((node)copy((value)n))
+#define nodecopy(n) ((nodeptr)copy((value)n))
 #define noderelease(n) release((value) n)
 #define nodeuniql(pn) uniql((value *)pn)
 

@@ -20,7 +20,7 @@
 #include "code.h"	/* not strictly necessary, only for initcodes() */
 #include "port.h"
 
-Forward Hidden Procedure fix_refcnt(node n);
+Forward Hidden Procedure fix_refcnt(nodeptr n);
 Forward Hidden Procedure makesugg(classptr cp);
 
 /*
@@ -52,7 +52,7 @@ Visible bool isinclass(int sym, struct classinfo *ci)
  * In practical use this is no problem at all, however.
  */
 
-Visible string *noderepr(node n)
+Visible string *noderepr(nodeptr n)
 {
 	int sym;
 
@@ -79,7 +79,7 @@ Visible Procedure endnoderepr(void) { /* hack to free noderepr static store */
  * Deliver the prototype node for the given symbol.
  */
 
-Visible node gram(int sym)
+Visible nodeptr gram(int sym)
 {
 	Assert(0 <= sym && sym < TABLEN);
 	return table[sym].r_node;
@@ -148,7 +148,7 @@ Visible Procedure initgram(void)
 	int nch;
 	struct classinfo **cp;
 	struct classinfo *sp;
-	node ch[MAXCHILD];
+	nodeptr ch[MAXCHILD];
 
 	/* Set the node pointers in the table and check the representations.
 	   The code assumes Optional and Hole are the last
@@ -170,7 +170,7 @@ Visible Procedure initgram(void)
  * Set a node's refcnt to infinity, so it will never be released.
  */
 
-Hidden Procedure fix_refcnt(node n)
+Hidden Procedure fix_refcnt(nodeptr n)
 {
 	Assert(n->refcnt > 0);
 	n->refcnt = Maxrefcnt;

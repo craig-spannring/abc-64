@@ -128,7 +128,7 @@ Visible bool ins_char(environ *ep, int c, int alt_c)
 
 Visible bool ins_newline(environ *ep, bool reading_file)
 {
-	node n;
+	nodeptr n;
 	int sym;
 	auto bool mayindent;
 
@@ -278,7 +278,7 @@ Hidden bool fiddle(environ *ep, bool *pmayindent, bool reading_file)
 
 Hidden bool hackhack(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int ich = ichild(ep->focus);
 	string *rp;
 
@@ -306,7 +306,7 @@ Hidden bool hackhack(environ *ep)
 Hidden bool atdedent(environ *ep)
 {
 	path pa;
-	node npa;
+	nodeptr npa;
 	int i;
 	int sym = symbol(tree(ep->focus));
 
@@ -347,7 +347,7 @@ Hidden bool atdedent(environ *ep)
 
 Hidden bool nexthole(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int ich;
 	string repr;
 
@@ -366,7 +366,7 @@ Hidden bool nexthole(environ *ep)
 }
 
 Hidden bool atrealhole(environ *ep) {
-	node n;
+	nodeptr n;
 	int i;
 	
 	n= tree(ep->focus);

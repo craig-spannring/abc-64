@@ -16,7 +16,7 @@ extern "C" {
 
 struct cell {
 	struct cell *c_link;
-	node c_data;
+	nodeptr c_data;
 	short c_onscreen;
 	short c_oldindent;
 	short c_newindent;

@@ -67,8 +67,8 @@ Hidden unsigned getsyze(literal type, intlet len, int *pnptrs)
 			syze= sizeof(ref); nptrs= 1;
 			break;
 		case Nod:
-			syze= sizeof(struct node) - Hdrsize - sizeof(node)
-				+ len*sizeof(node);
+			syze= sizeof(struct node) - Hdrsize - sizeof(nodeptr)
+				+ len*sizeof(nodeptr);
 			nptrs= len;
 			break;
 		case Pat:

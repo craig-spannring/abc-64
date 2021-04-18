@@ -22,8 +22,8 @@
 #include "tabl.h"
 #include "b1grab.h"
 
-Forward Hidden bool subisnull(node n, string *rp, int i, bool ignorespaces);
-Forward Hidden bool isnull(node n, string *rp, int i);
+Forward Hidden bool subisnull(nodeptr n, string *rp, int i, bool ignorespaces);
+Forward Hidden bool isnull(nodeptr n, string *rp, int i);
 Forward Hidden bool nextitem(environ *ep);
 Forward Hidden bool previtem(environ *ep);
 Forward Hidden bool isunititem(environ *ep);
@@ -34,8 +34,8 @@ Forward Hidden bool isunititem(environ *ep);
 
 Visible int lenitem(environ *ep)
 {
-	node n = tree(ep->focus);
-	node nn;
+	nodeptr n = tree(ep->focus);
+	nodeptr nn;
 
 	if (ep->s1&1) { /* Fixed text */
 		string *nr= noderepr(n);
@@ -49,7 +49,7 @@ Visible int lenitem(environ *ep)
 
 Visible Procedure subgrow(environ *ep, bool ignorespaces, bool deleting)
 {
-	node n;
+	nodeptr n;
 	int sym;
 	int i;
 	int len;
@@ -200,7 +200,7 @@ Visible Procedure grow(environ *ep, bool deleting)
 
 Visible Procedure shrink(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int sym;
 
 	for (;;) {
@@ -303,7 +303,7 @@ Visible Procedure growsubset(environ *ep)
 
 Visible Procedure subgrsubset(environ *ep, bool ignorespaces)
 {
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 	string *rp = noderepr(n);
 	int nch21 = nchildren(n)*2 + 1;
 	int i;
@@ -324,7 +324,7 @@ Visible Procedure subgrsubset(environ *ep, bool ignorespaces)
 
 Visible Procedure shrsubset(environ *ep)
 {
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 	string *rp = noderepr(n);
 	int s1 = ep->s1;
 	int s2 = ep->s2;
@@ -342,10 +342,10 @@ Visible Procedure shrsubset(environ *ep)
  * Subroutine for grow/shrink to see whether item i is (almost) invisible.
  */
 
-Hidden bool subisnull(node n, string *rp, int i, bool ignorespaces)
+Hidden bool subisnull(nodeptr n, string *rp, int i, bool ignorespaces)
 {
 	string repr;
-	node nn;
+	nodeptr nn;
 
 	if (i&1) { /* Fixed text */
 		repr = rp[i/2];
@@ -356,7 +356,7 @@ Hidden bool subisnull(node n, string *rp, int i, bool ignorespaces)
 }
 
 
-Hidden bool isnull(node n, string *rp, int i)
+Hidden bool isnull(nodeptr n, string *rp, int i)
 {
 	return subisnull(n, rp, i, Yes);
 }
@@ -367,7 +367,7 @@ Hidden bool isnull(node n, string *rp, int i)
 
 Visible Procedure ritevhole(environ *ep)
 {
-	node n;
+	nodeptr n;
 	int ich;
 	int len;
 	int s1save;
@@ -799,8 +799,8 @@ Visible bool allspaces(string str)
 
 Visible int focwidth(environ *ep)
 {
-	node nn;
-	node n = tree(ep->focus);
+	nodeptr nn;
+	nodeptr n = tree(ep->focus);
 	string *rp = noderepr(n);
 	int i;
 	int w;
@@ -863,8 +863,8 @@ Visible int focwidth(environ *ep)
 
 Visible int focoffset(environ *ep)
 {
-	node nn;
-	node n;
+	nodeptr nn;
+	nodeptr n;
 	string *rp;
 	int w;
 	int len;
@@ -925,7 +925,7 @@ Visible int focoffset(environ *ep)
 
 Visible int focchar(environ *ep)
 {
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 	string *rp;
 	int i;
 	int c;
@@ -980,7 +980,7 @@ Visible int focchar(environ *ep)
  * Subroutine to return first character of node.
  */
 
-Visible int nodechar(node n)
+Visible int nodechar(nodeptr n)
 {
 	string *rp;
 	int nch;
@@ -1014,7 +1014,7 @@ Visible int focindent(environ *ep)
 	int y = Ycoord(ep->focus);
 	int x = Xcoord(ep->focus);
 	int level = Level(ep->focus);
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 
 	switch (ep->mode) {
 

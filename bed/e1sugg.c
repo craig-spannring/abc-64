@@ -53,8 +53,8 @@ Hidden bool suggchanges= No;
 
 Forward Hidden Procedure getsugg(char *sgfile);
 Forward Hidden Procedure savsugg(void);
-Forward Hidden bool getpattern(node n);
-Forward Hidden Procedure addnode(node n);
+Forward Hidden bool getpattern(nodeptr n);
+Forward Hidden Procedure addnode(nodeptr n);
 Forward Hidden Procedure addstr(string s);
 
 /*
@@ -323,7 +323,7 @@ Hidden Procedure savsugg(void) {
 static int lastisugg= -1; /* keep track of last suggestion */
                           /* initialised by firstsugg() */
 
-Hidden node nextsugg(string str, int len, int new_c, bool in_sugghowname, bool colon_allowed)
+Hidden nodeptr nextsugg(string str, int len, int new_c, bool in_sugghowname, bool colon_allowed)
 {
 	int i;
 	int istop;
@@ -347,7 +347,7 @@ Hidden node nextsugg(string str, int len, int new_c, bool in_sugghowname, bool c
 		if (strncmp(str, sugg_i, len+1) == 0) {
 			if (colon_allowed || strchr(sugg_i, ':') == NULL) {
 				lastisugg= i;
-				return (node) sugg[i];
+				return (nodeptr) sugg[i];
 			}
 		}
 		++i;
@@ -361,7 +361,7 @@ Hidden node nextsugg(string str, int len, int new_c, bool in_sugghowname, bool c
  * Place an initial suggestion in a node.
  */
 
-Hidden node firstsugg(string s, int startsugg, bool colon_allowed)
+Hidden nodeptr firstsugg(string s, int startsugg, bool colon_allowed)
 {
 	int i;
 	string sugg_i;
@@ -371,7 +371,7 @@ Hidden node firstsugg(string s, int startsugg, bool colon_allowed)
 		if (strncmp(s, sugg_i, strlen(s)) == 0) {
 			if (colon_allowed || strchr(sugg_i, ':') == 0) {
 				lastisugg= i;
-				return (node) sugg[i];
+				return (nodeptr) sugg[i];
 			}
 		}
 	}
@@ -381,7 +381,7 @@ Hidden node firstsugg(string s, int startsugg, bool colon_allowed)
 Visible bool setsugg(path *pp, char c, environ *ep, bool colon_allowed)
 {
 	char buf[2];
-	node n;
+	nodeptr n;
 	string s;
 
 	if (lefttorite)
@@ -396,7 +396,7 @@ Visible bool setsugg(path *pp, char c, environ *ep, bool colon_allowed)
 			freestr(s);
 		}
 		if (n == Nnil) {
-			n= (node) mk_etext("");
+			n= (nodeptr) mk_etext("");
 		}
 	}
 	else {
@@ -443,8 +443,8 @@ Hidden bool fits_how_to(string str, string *pstr, int alt_c)
 
 Visible bool newsugg(environ *ep, string *pstr, int alt_c) {
 	string str;
-	node n = tree(ep->focus);
-	node nn;
+	nodeptr n = tree(ep->focus);
+	nodeptr nn;
 	int sym = symbol(n);
 	path pa= parent(ep->focus);
 	int sympa= pa ? symbol(tree(pa)) : Rootsymbol;
@@ -505,14 +505,14 @@ Visible bool newsugg(environ *ep, string *pstr, int alt_c) {
 
 Visible Procedure killsugg(environ *ep, string *pstr)
 {
-	node n = tree(ep->focus);
-	node nc;
+	nodeptr n = tree(ep->focus);
+	nodeptr nc;
 	value vstr;
 	
 	Assert(ep->mode == VHOLE && ep->s1 == 2 && symbol(n) == Suggestion);
 	Assert(ep->s2 <= Length((value)firstchild(n)));
 	
-	nc = (node)e_icurtail((value)firstchild(n), ep->s2);
+	nc = (nodeptr)e_icurtail((value)firstchild(n), ep->s2);
 	if (e_ncharval(ep->s2, (value)firstchild(n)) == ' ' 
 	    && pstr != (string*)NULL) {
 	    	/* fix for e.g. APPEND WORD >?<TO ?, inserting X */
@@ -533,15 +533,15 @@ Visible Procedure killsugg(environ *ep, string *pstr)
  */
 
 Visible Procedure acksugg(environ *ep) {
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 	int s2 = ep->s2;
 	int isugg;
 	string str;
-	node nn;
-	node n1;
+	nodeptr nn;
+	nodeptr n1;
 	string rest;
 	queue q = Qnil;
-	node r;
+	nodeptr r;
 
 	Assert(symbol(n) == Suggestion && ep->mode == VHOLE && ep->s1 == 2);
 
@@ -558,7 +558,7 @@ Visible Procedure acksugg(environ *ep) {
 	}
 	else if ((rest= strchr(str, ' ')) == NULL) { /* just one keyword */
 		nn= gram(Keyword);
-		setchild(&nn, 1, (node) mk_etext(str));
+		setchild(&nn, 1, (nodeptr) mk_etext(str));
 		treereplace(&ep->focus, nn);
 		/* mode VHOLE and s1, s2 allright */
 	}
@@ -566,7 +566,7 @@ Visible Procedure acksugg(environ *ep) {
 		/* split off first keyword */
 		*rest++ = '\0';
 		n1= gram(Keyword);
-		setchild(&n1, 1, (node) mk_etext(str));
+		setchild(&n1, 1, (nodeptr) mk_etext(str));
 		
 		/* hang in Kw_plus */
 		nn= gram(Kw_plus);
@@ -579,7 +579,7 @@ Visible Procedure acksugg(environ *ep) {
 		ep->s2= 0;
 		
 		/* rest of suggestion to q */
-		r= (node) mk_etext(rest);
+		r= (nodeptr) mk_etext(rest);
 		preptoqueue(r, &q);
 		noderelease(r);
 		
@@ -597,14 +597,14 @@ Visible Procedure acksugg(environ *ep) {
  * ackhowsugg is only used for [newline] and [accept].
  */
 
-Forward Hidden node adv_howsugg(environ *ep, char prev_c, char new_c);
+Forward Hidden nodeptr adv_howsugg(environ *ep, char prev_c, char new_c);
 
 Visible bool newhowsugg(environ *ep, string *pstr, int alt_c) {
 	string str;
 	string qm;
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 	int sym = symbol(n);
-	node nn;
+	nodeptr nn;
 	int newc;
 
 	Assert(pstr && *pstr);
@@ -661,7 +661,7 @@ Visible bool newhowsugg(environ *ep, string *pstr, int alt_c) {
 	return Yes;
 }
 
-Hidden node adv_howsugg(environ *ep, char prev_c, char new_c)
+Hidden nodeptr adv_howsugg(environ *ep, char prev_c, char new_c)
 {
 	int s2= ep->s2;
 	char buf[2];
@@ -681,7 +681,7 @@ Hidden node adv_howsugg(environ *ep, char prev_c, char new_c)
 		e_concto(&hd, tl);
 		release(tl);
 	
-		return (node) hd;
+		return (nodeptr) hd;
 	}
 	/* else */
 	return Nnil;
@@ -792,7 +792,7 @@ Visible Procedure writesugg(path p)
  */
 
 Hidden bool 
-getpattern(node n)
+getpattern(nodeptr n)
 {
 	string *rp = noderepr(n);
 	int sym;
@@ -873,7 +873,7 @@ getpattern(node n)
 	/*NOTREACHED*/
 }
 
-Hidden Procedure addnode(node n) {
+Hidden Procedure addnode(nodeptr n) {
 	string s;
 	
 	Assert(symbol(n) == Keyword || symbol(n) == Name);

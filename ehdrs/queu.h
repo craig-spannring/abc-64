@@ -15,14 +15,14 @@ typedef struct queue *queue;
 
 struct gdb_hostile_queue {
 	HEADER;
-	node q_data;
-	queue q_link;
+	nodeptr q_data;
+	queue   q_link;
 };
 struct queue {
 	literal type;
 	reftype refcnt;
 	intlet  len FILLER_FIELD;
-	node    q_data;
+	nodeptr q_data;
 	queue   q_link;
 };
 #pragma GCC diagnostic push
@@ -52,7 +52,7 @@ Visible Procedure qrelease();
 #endif
 #define emptyqueue(q) (!(q))
 
-node queuebehead(queue *pq);
+nodeptr queuebehead(queue *pq);
 
 #ifdef __cplusplus
 }

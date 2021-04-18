@@ -29,7 +29,7 @@ struct table {
    string r_name;
    string r_repr[MAXCHILD+1];
    struct classinfo *r_class[MAXCHILD];
-   node r_node;
+   nodeptr r_node;
 };
 
 extern struct table *table;

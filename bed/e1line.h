@@ -6,10 +6,10 @@
 extern "C" {
 #endif
 
-    Visible bool      eqlines(node n1, node n2);
+    Visible bool      eqlines(nodeptr n1, nodeptr n2);
     Visible bool      nextline(path *pp);
     Visible int       colno(environ *ep);
-    Visible int       linelen(node n);
+    Visible int       linelen(nodeptr n);
     Visible int       lineno(environ *ep);
     Visible Procedure oneline(environ *ep);
 

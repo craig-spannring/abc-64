@@ -54,9 +54,9 @@
  * at the initial values of (y, x) and level.
  */
 
-Visible Procedure evalcoord(node n, int jch, int *py, int *px, int *plevel)
+Visible Procedure evalcoord(nodeptr n, int jch, int *py, int *px, int *plevel)
 {
-	node nn;
+	nodeptr nn;
 	int i;
 	string *rp = noderepr(n);
 	int k;
@@ -139,7 +139,7 @@ Visible int fwidth(string str)
  * have correctly been calculated.
  */
 
-Visible int evalwidth(node n)
+Visible int evalwidth(nodeptr n)
 {
 	int w;
 	int i;
@@ -147,7 +147,7 @@ Visible int evalwidth(node n)
 	int y = 0;
 	int x = 0;
 	int nch;
-	node nn;
+	nodeptr nn;
 
 	rp = noderepr(n);
 	nch = Is_etext(n) ? 0 : nchildren(n);

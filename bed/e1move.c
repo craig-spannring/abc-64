@@ -34,8 +34,8 @@ Forward Hidden bool tabstop(environ *ep, int i);
 
 Hidden bool prevnext(environ *ep, int direction)
 {
-	node n;
-	node n1;
+	nodeptr n;
+	nodeptr n1;
 	int nch;
 	int i;
 	int len;
@@ -245,8 +245,8 @@ Hidden bool nextchar(environ *ep, int direction)
 {
 	int ich;
 	int nch;
-	node n;
-	node n1;
+	nodeptr n;
+	nodeptr n1;
 	int len;
 	string *rp;
 
@@ -434,7 +434,7 @@ Visible bool acceptcommand(environ *ep)
 
 Hidden bool tabstop(environ *ep, int i)
 {
-	node n = tree(ep->focus);
+	nodeptr n = tree(ep->focus);
 	int nch;
 	string repr;
 

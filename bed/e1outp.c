@@ -27,7 +27,7 @@
  * Variables used for communication with outfocus.
  */
 
-Hidden node thefocus;
+Hidden nodeptr thefocus;
 Hidden environ wherebuf;
 Hidden environ *where = &wherebuf;
 Hidden bool realvhole;
@@ -37,11 +37,11 @@ Hidden int yfocus;
 Visible int focy; /* Where the cursor must go */
 Visible int focx;
 
-Forward Hidden Procedure focsmash(string *pbuf, string *pmod, node n);
-Forward Hidden Procedure smash(string *pbuf, string *pmod, node n, int mask);
+Forward Hidden Procedure focsmash(string *pbuf, string *pmod, nodeptr n);
+Forward Hidden Procedure smash(string *pbuf, string *pmod, nodeptr n, int mask);
 Forward Hidden Procedure strsmash(string *pbuf, string *pmod, string str, int mask);
 Forward Hidden Procedure subsmash(string *pbuf, string *pmod, string str, int len, int mask);
-Forward Hidden bool chismash(string *pbuf, string *pmod, node n, int i, int mask);
+Forward Hidden bool chismash(string *pbuf, string *pmod, nodeptr n, int i, int mask);
 
 /*
  * Save position of the focus for use by outnode/outfocus.
@@ -160,7 +160,7 @@ Visible Procedure endactupdate(void)
 
 Visible Procedure outline(cell *p, int lineno)
 {
-	node n = p->c_data;
+	nodeptr n = p->c_data;
 	int w = nodewidth(n);
 	int len=  p->c_newindent + 4 + (w < 0 ? linelen(n) : w);
 			/* some 4 extra for spflag and vhole */
@@ -231,7 +231,7 @@ Visible Procedure outline(cell *p, int lineno)
 		strsmash(pbuf, pmod, " ", 0); \
 	strsmash(pbuf, pmod, "?", STANDOUT)
 
-Hidden Procedure focsmash(string *pbuf, string *pmod, node n)
+Hidden Procedure focsmash(string *pbuf, string *pmod, nodeptr n)
 {
 	value v;
 	string str;
@@ -361,7 +361,7 @@ Hidden Procedure focsmash(string *pbuf, string *pmod, node n)
 	}
 }
 
-Hidden Procedure smash(string *pbuf, string *pmod, node n, int mask)
+Hidden Procedure smash(string *pbuf, string *pmod, nodeptr n, int mask)
 {
 	string *rp;
 	int i;
@@ -407,9 +407,9 @@ Hidden Procedure subsmash(string *pbuf, string *pmod, string str, int len, int m
  * Return No if it contained a newline (to stop the parent).
  */
 
-Hidden bool chismash(string *pbuf, string *pmod, node n, int i, int mask)
+Hidden bool chismash(string *pbuf, string *pmod, nodeptr n, int i, int mask)
 {
-	node nn = child(n, i);
+	nodeptr nn = child(n, i);
 	int w;
 
 	if (Is_etext(nn)) {

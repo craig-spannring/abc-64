@@ -20,13 +20,13 @@ extern "C" {
 	extern Visible bool samelevel(int sym, int sym1);
 	extern Visible int  nametosym(string str);
 	extern Visible int nametosym(string str);
-	extern Visible node gram(int sym);
+	extern Visible nodeptr gram(int sym);
 	extern Visible Procedure endnoderepr(void); /* hack to free noderepr static store */
 	extern Visible Procedure initclasses(void);
 	extern Visible Procedure initgram(void);
 	extern Visible Procedure setroot(int isym);
 	extern Visible Procedure setroot(int isym); /* symbols defined in tabl.h */
-	extern Visible string *noderepr(node n);
+	extern Visible string *noderepr(nodeptr n);
 	extern Visible string symname(int sym);
 
 #ifdef __cplusplus

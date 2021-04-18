@@ -31,7 +31,7 @@ Forward Hidden bool ifmatch(environ *ep, string *pstr, string str, int alt_c);
 Visible bool insguess(path *pp, char c, environ *ep)
 {
 	path pa = parent(*pp);
-	node n;
+	nodeptr n;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 	int ich = ichild(*pp);
 	struct classinfo *ci = table[sympa].r_class[ich-1];
@@ -59,7 +59,7 @@ Visible bool insguess(path *pp, char c, environ *ep)
 	if (sym >= LEXICAL) {
 		buf[0] = c;
 		buf[1] = 0;
-		treereplace(pp, (node) mk_etext(buf));
+		treereplace(pp, (nodeptr) mk_etext(buf));
 		ep->mode = VHOLE;
 		ep->s1 = 2*ich;
 		ep->s2 = 1;
@@ -71,7 +71,7 @@ Visible bool insguess(path *pp, char c, environ *ep)
 	if (Fw_zero(rp[0])) {
 		buf[0] = c;
 		buf[1] = 0;
-		setchild(&n, 1, (node) mk_etext(buf));
+		setchild(&n, 1, (nodeptr) mk_etext(buf));
 		treereplace(pp, n);
 		ep->mode = VHOLE;
 		ep->s1 = 2;
@@ -97,7 +97,7 @@ Visible bool insguess(path *pp, char c, environ *ep)
  * child `ich' of node `n'; that child must be a Text.
  */
 
-Visible bool mayinsert(node n, int ich, int s2, char c)
+Visible bool mayinsert(nodeptr n, int ich, int s2, char c)
 {
 	int sympa = symbol(n);
 	struct classinfo *ci;
@@ -134,7 +134,7 @@ Visible bool mayinsert(node n, int ich, int s2, char c)
 Visible bool soften(environ *ep, string *pstr, int alt_c)
 {
 	path pa = parent(ep->focus);
-	node n;
+	nodeptr n;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 	struct classinfo *ci;
 	classptr cp;
@@ -174,7 +174,7 @@ Visible bool soften(environ *ep, string *pstr, int alt_c)
 		return No;
 	strncpy(buf, repr, ep->s2);
 	buf[ep->s2] = 0;
-	setchild(&n, 1, (node) mk_etext(buf));
+	setchild(&n, 1, (nodeptr) mk_etext(buf));
 	if (!mayinsert(n, 1, ep->s2, repr[ep->s2])) {
 		if (!**pstr || (!mayinsert(n, 1, ep->s2, **pstr)
 			&& (!alt_c || !mayinsert(n, 1, ep->s2, alt_c)))) {
@@ -190,7 +190,7 @@ Visible bool soften(environ *ep, string *pstr, int alt_c)
 		} while (ep->s2 < sizeof buf - 1 && **pstr
 				&& mayinsert(n, 1, ep->s2, **pstr));
 		buf[ep->s2] = 0;
-		setchild(&n, 1, (node) mk_etext(buf));
+		setchild(&n, 1, (nodeptr) mk_etext(buf));
 	}
 	treereplace(&ep->focus, n);
 	ep->mode = VHOLE;
@@ -210,8 +210,8 @@ Visible bool resuggest(environ *ep, string *pstr, int alt_c)
 	struct classinfo *ci;
 	classptr cp;
 	path pa;
-	node nn;
-	node n = tree(ep->focus);
+	nodeptr nn;
+	nodeptr n = tree(ep->focus);
 	string *oldrp = noderepr(n);
 	int ich = ep->s1/2;
 	string str = oldrp[ich];
