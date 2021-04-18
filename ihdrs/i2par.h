@@ -225,7 +225,8 @@ extern Visible bool greater_than_sign_(void);
     
 /* keywords */
 
-#define atkw(kw, s)		(strcmp(kw, s) == 0)
+// #define atkw(kw, s)		(strcmp(kw, s) == 0)
+static inline bool atkw(const char* kw, const char* s) {return (strcmp(kw, s) == 0);}
 
 #define check_keyword(kw)	(atkw(kw, K_CHECK))
 #define delete_keyword(kw) 	(atkw(kw, K_DELETE))

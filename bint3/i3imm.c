@@ -27,11 +27,12 @@ Forward Hidden Procedure special(void);
 #define NO_COMMAND	MESS(3302, "I don't recognise this as a command")
 
 Hidden Procedure imm_command(void) {
-	parsetree codeseq= NilTree;
-	parsetree c= NilTree, d= NilTree; 
-	int level;
-	char *kw;
-	txptr tx0;
+	parsetree  codeseq = NilTree;
+	parsetree  c       = NilTree;
+	parsetree  d       = NilTree; 
+	int  	   level;
+	char 	  *kw;
+	txptr	   tx0;
 	
 	cntxt= In_command; still_ok= Yes; interrupted= No;
 	can_interrupt= Yes;

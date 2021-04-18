@@ -89,8 +89,9 @@ Visible parsetree node1(typenode type) {
 }
 
 Visible parsetree node2(typenode type, value a1) {
-	parsetree v= mk_ptn(type, 1); value *p= Ats(v);
-	*p++= a1;
+	parsetree  v = mk_ptn(type, 1);
+	value     *p = Ats(v);
+	*p++ = a1;
 	return v;
 }
 

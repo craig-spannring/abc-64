@@ -1103,10 +1103,17 @@ Hidden bool ens_tfiled(value name, value *fname) {
 /***************************** Values on files ****************************/
 
 Visible value getval(value fname, literal ct) {
-	char *buf; int k; parsetree w, code= NilTree; value v= Vnil;
+	char     *buf  = NULL;
+	int       k    = 0;
+	parsetree w    = NilTree;
+	parsetree code = NilTree;
+	value     v    = Vnil;
+	
 	ifile= fopen(strval(fname), "r");
 	if (ifile) {
-		txptr fcol_save= first_col, tx_save= tx; context c;
+		txptr   fcol_save = first_col;
+		txptr   tx_save   = tx;
+		context c;
 		sv_context(&c);
 		cntxt= ct;
 		buf= (char *) getmem((unsigned)(f_size(ifile)+2)*sizeof(char));
@@ -1116,7 +1123,9 @@ Visible value getval(value fname, literal ct) {
 		*ceol= '\n';
 		fclose(ifile); vs_ifile();
 		w= expr(ceol);
-		if (still_ok) fix_nodes(&w, &code);
+		if (still_ok) {
+			fix_nodes(&w, &code);
+		}
 		curline= w; curlino= one;
 		v= evalthread(code); 
 		if (!env_ok(v)) {

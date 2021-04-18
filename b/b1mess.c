@@ -32,17 +32,21 @@
 Hidden short probe[MAXPROBE];
 Hidden int nprobes= 1;
 
-#define NOT_OPENED ((FILE*)(-1))
-#define NO_MESSFILE "*** Cannot find or read messages file; using numbers\n"
-Hidden FILE *messfp= NOT_OPENED;
-
 char *messbuf; /* used for messages with arguments */
 Hidden char buf[MESSBUFSIZE];
 
 Visible string getmess(int nr) {
-	int last, c; char *cp= NULL;
-	bool new; int block; long ftell(FILE *);
-	static int last_nr= 0;
+	int    last;
+	int    c;
+	char  *cp= NULL;
+	bool   new;
+	int    block;
+	long   ftell(FILE *);
+	
+	static int             last_nr= 0;
+	static const FILE     *NOT_OPENED = ((FILE*)(-1));
+	static const char[]    NO_MESSFILE = "*** Cannot find or read messages file; using numbers\n";
+	static FILE           *messfp= NOT_OPENED;
 
 	if (nr <= 0) 
 		return nr == -1 ? "%s" : nr == -2 ? "%s%s" : "";
