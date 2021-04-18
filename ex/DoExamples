@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Add new examples by creating a directory <name>-ex, and input commands in <name>-ex.in, and the output as it should be in <name>-ex.out. 
 WS='*.ex'
 OK=yes
@@ -15,7 +17,7 @@ fi
 for ws in $WS
 do
 	echo " "
-	echo "Testing $ws example ..."
+	echo "Testing $ws example with input ${ws}.in ..."
 	$abc -w ./$ws <$ws.in > out
 	if cmp -s out $ws.out
 	then
