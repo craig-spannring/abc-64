@@ -68,8 +68,6 @@ set(abc_c_cxx_flags
   -Wall
   
   -Wint-to-pointer-cast
-  -Wstrict-prototypes
-  -Wimplicit-function-declaration
   
   -Wreturn-type
   
@@ -78,19 +76,22 @@ set(abc_c_cxx_flags
   -Wno-unused-value
   
   -Wno-char-subscripts
-  -Wno-sometimes-unitialized
   
-  -Wno-incompatible-pointer-types
   -Wno-int-to-pointer-cast
   -Wint-to-pointer-cast
   -Werror=int-to-pointer-cast
   )
 set(abc_c_only_flags
-    -Wno-implicit-int
+
+  -Wno-incompatible-pointer-types
   -Werror=old-style-definition
+  -Wimplicit-function-declaration
+  -Wno-implicit-int
+  -Wno-sometimes-unitialized
   -Wold-style-declaration
-  -Wstrict-prototypes
   -Wold-style-definition
+  -Wstrict-prototypes
+  
     )
 target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
