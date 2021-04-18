@@ -126,9 +126,9 @@ Visible int nametosym(string str)
  * Test whether `sym' may replace the node in the path `p'.
  */
 
-Visible bool allowed(path p, int sym)
+Visible bool allowed(pathptr p, int sym)
 {
-	path pa = parent(p);
+	pathptr pa = parent(p);
 	int ich = ichild(p);
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 

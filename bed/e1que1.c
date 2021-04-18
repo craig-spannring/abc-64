@@ -197,10 +197,10 @@ Visible Procedure splitnode(nodeptr n, queue *pq)
  * (timo)
  */
 
-Visible bool resttoqueue(path *pp, queue *pq)
+Visible bool resttoqueue(pathptr *pp, queue *pq)
 {
 	auto queue q = Qnil;
-	path pa = parent(*pp);
+	pathptr pa = parent(*pp);
 	nodeptr n = tree(*pp);
 	int sym = symbol(n);
 	/* markbits x; */
@@ -322,7 +322,7 @@ Visible bool issuggestion(environ *ep)
  * See if a node fits in a hole.
  */
 
-Visible bool fitnode(path *pp, nodeptr n)
+Visible bool fitnode(pathptr *pp, nodeptr n)
 {
 	if (!allowed(*pp, symbol(n)))
 		return No;
@@ -339,7 +339,7 @@ Visible bool fitnode(path *pp, nodeptr n)
  * another call.)
  */
 
-Visible int fitstring(path *pp, string str, int alt_c)
+Visible int fitstring(pathptr *pp, string str, int alt_c)
 {
 	environ dummyenv;
 	nodeptr n;
@@ -491,7 +491,7 @@ Visible Procedure fixfocus(environ *ep, int len)
 
 Visible bool spacefix(environ *ep)
 {
-	path pa;
+	pathptr pa;
 	nodeptr n;
 	string *rp;
 

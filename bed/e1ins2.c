@@ -305,7 +305,7 @@ Hidden bool hackhack(environ *ep)
 
 Hidden bool atdedent(environ *ep)
 {
-	path pa;
+	pathptr pa;
 	nodeptr npa;
 	int i;
 	int sym = symbol(tree(ep->focus));

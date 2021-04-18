@@ -40,7 +40,7 @@ typedef struct cell cell;
 	SpaceRound((p)->c_length + (p)->c_oldindent + (p)->c_oldvhole)
 
 cell *replist(cell *tops, cell *rep, int oldlno, int oldlcnt);
-cell *build(path p, int lcnt);
+cell *build(pathptr p, int lcnt);
 
 extern int llength;
 extern int winheight;

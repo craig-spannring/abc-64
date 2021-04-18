@@ -164,9 +164,9 @@ Visible Procedure pathuniql(pp)
  * Allocate a new path entry.
  */
 
-Hidden path mk_path(void)
+Hidden pathptr mk_path(void)
 {
-	path p = (path) grab(Pat, 0);
+	pathptr p = (pathptr) grab(Pat, 0);
 
 	p->p_parent = NilPath;
 	p->p_tree = Nnil;
@@ -179,9 +179,9 @@ Hidden path mk_path(void)
 	return p;
 }
 
-Visible path newpath(path pa, nodeptr n, int i)
+Visible pathptr newpath(pathptr pa, nodeptr n, int i)
 {
-	path p = (path) mk_path();
+	pathptr p = (pathptr) mk_path();
 
 	Parent(p) = pa;
 	Tree(p) = n;
@@ -247,7 +247,7 @@ Hidden Procedure repwidth(nodeptr *pn, nodeptr old, nodeptr new)
 }
 
 
-Visible Procedure markpath(path *pp, markbits new)
+Visible Procedure markpath(pathptr *pp, markbits new)
 {
 	nodeptr *pn;
 	markbits old;
@@ -263,7 +263,7 @@ Visible Procedure markpath(path *pp, markbits new)
 }
 
 
-Visible Procedure unmkpath(path *pp, int del)
+Visible Procedure unmkpath(pathptr *pp, int del)
 {
 	nodeptr *pn;
 	markbits old;
@@ -300,7 +300,7 @@ Hidden Procedure clearmarks(nodeptr *pn)
  * Mark bits are copied from the node being replaced.
  */
 
-Visible Procedure treereplace(path *pp, nodeptr n)
+Visible Procedure treereplace(pathptr *pp, nodeptr n)
 {
 	nodeptr *pn;
 	markbits old;
@@ -322,11 +322,11 @@ Visible Procedure treereplace(path *pp, nodeptr n)
 }
 
 
-Visible bool up(path *pp)
+Visible bool up(pathptr *pp)
 {
-	path p = *pp;
-	path pa = Parent(p);
-	path *ppa;
+	pathptr p = *pp;
+	pathptr pa = Parent(p);
+	pathptr *ppa;
 	nodeptr n;
 	nodeptr npa;
 	nodeptr *pn;
@@ -378,7 +378,7 @@ Visible bool up(path *pp)
 }
 
 
-Visible bool downi(path *pp, int i)
+Visible bool downi(pathptr *pp, int i)
 {
 	nodeptr n;
 	auto int y;
@@ -399,7 +399,7 @@ Visible bool downi(path *pp, int i)
 }
 
 
-Visible bool downrite(path *pp)
+Visible bool downrite(pathptr *pp)
 {
 	if (!Isnode(Tree(*pp)))
 		return No;
@@ -407,7 +407,7 @@ Visible bool downrite(path *pp)
 }
 
 
-Visible bool left(path *pp)
+Visible bool left(pathptr *pp)
 {
 	int i;
 
@@ -420,10 +420,10 @@ Visible bool left(path *pp)
 }
 
 
-Visible bool rite(path *pp)
+Visible bool rite(pathptr *pp)
 {
 	int i;
-	path pa = Parent(*pp);
+	pathptr pa = Parent(*pp);
 
 	i = ichild(*pp) + 1;
 	if (!pa || i > Nchildren(Tree(pa)))
@@ -445,7 +445,7 @@ Visible bool rite(path *pp)
  * ones (lint will tell you which they are).
  */
 
-Visible Procedure top(path *pp)
+Visible Procedure top(pathptr *pp)
 {
 	while (up(pp))
 		;
@@ -539,7 +539,7 @@ nextmarked(pp, x)
 }
 #endif
 
-Visible bool firstmarked(path *pp, markbits x)
+Visible bool firstmarked(pathptr *pp, markbits x)
 {
 	while (!marked(*pp, x)) {
 		if (!up(pp))
@@ -583,7 +583,7 @@ prevmarked(pp, x)
  */
 
 
-Visible int pathlength(path p)
+Visible int pathlength(pathptr p)
 {
 	int n;
 
@@ -614,7 +614,7 @@ Visible Procedure putintrim(value *pn, int head, int tail, string str)
  * Touch the node in focus.
  */
 
-Visible Procedure touchpath(path *pp)
+Visible Procedure touchpath(pathptr *pp)
 {
 	nodeuniql(Loctree(pp));
 }

@@ -51,7 +51,7 @@ Visible string mouseformat;
 
 Forward Hidden bool dosense(environ *ep, string sense, string format);
 Forward Hidden bool gotoscrollbar(environ *ep, int x);
-Forward Hidden int poscomp(path p, int y, int x);
+Forward Hidden int poscomp(pathptr p, int y, int x);
 Forward Hidden Procedure fixsublist(environ *ep);
 
 Visible bool gotocursor(environ *ep) {
@@ -219,7 +219,7 @@ Visible bool gotoyx(environ *ep, int y, int x)
  */
 
 Hidden int
-poscomp(path p, int y, int x)
+poscomp(pathptr p, int y, int x)
 {
 	int ly;
 	int lx;
@@ -345,7 +345,7 @@ Visible Procedure gotofix(environ *ep, int y, int x)
 Hidden Procedure
 fixsublist(environ *ep)
 {
-	path pa = parent(ep->focus);
+	pathptr pa = parent(ep->focus);
 	nodeptr n;
 
 	if (!pa)

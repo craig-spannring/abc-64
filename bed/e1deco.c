@@ -474,9 +474,9 @@ Hidden bool delhole(environ *ep)
  * Subroutine to delete the focus.
  */
 
-Visible Procedure delfocus(path *pp)
+Visible Procedure delfocus(pathptr *pp)
 {
-	path pa = parent(*pp);
+	pathptr pa = parent(*pp);
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 
 	treereplace(pp, child(gram(sympa), ichild(*pp)));
@@ -515,7 +515,7 @@ Visible bool copyinout(environ *ep)
 Visible value copyout(environ *ep)
 {
 	auto queue q = Qnil;
-	auto path p;
+	auto pathptr p;
 	nodeptr n;
 	value v;
 	char buf[15];

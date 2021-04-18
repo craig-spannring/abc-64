@@ -50,7 +50,7 @@ Visible bool lefttorite;
 
 Forward Hidden bool execute(environ *ep, int cmd);
 Forward Hidden bool canexit(environ *ep);
-Forward Hidden bool findhole(path *pp);
+Forward Hidden bool findhole(pathptr *pp);
 Forward Hidden Procedure writetext(value v, FILE *fp);
 
 /*
@@ -568,7 +568,7 @@ Visible Procedure clrenv(environ *ep)
 
 Visible Procedure higher(environ *ep)
 {
-	path p = ep->focus;
+	pathptr p = ep->focus;
 	int pl = 0;
 	int max = ep->highest;
 
@@ -667,7 +667,7 @@ canexit(environ *ep)
 
 
 Hidden bool
-findhole(path *pp)
+findhole(pathptr *pp)
 {
 	nodeptr n = tree(*pp);
 

@@ -28,9 +28,9 @@ Forward Hidden bool ifmatch(environ *ep, string *pstr, string str, int alt_c);
  * Try to insert the character c in the focus *pp.
  */
 
-Visible bool insguess(path *pp, char c, environ *ep)
+Visible bool insguess(pathptr *pp, char c, environ *ep)
 {
-	path pa = parent(*pp);
+	pathptr pa = parent(*pp);
 	nodeptr n;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 	int ich = ichild(*pp);
@@ -133,7 +133,7 @@ Visible bool mayinsert(nodeptr n, int ich, int s2, char c)
 
 Visible bool soften(environ *ep, string *pstr, int alt_c)
 {
-	path pa = parent(ep->focus);
+	pathptr pa = parent(ep->focus);
 	nodeptr n;
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 	struct classinfo *ci;
@@ -209,7 +209,7 @@ Visible bool resuggest(environ *ep, string *pstr, int alt_c)
 	struct table *tp;
 	struct classinfo *ci;
 	classptr cp;
-	path pa;
+	pathptr pa;
 	nodeptr nn;
 	nodeptr n = tree(ep->focus);
 	string *oldrp = noderepr(n);

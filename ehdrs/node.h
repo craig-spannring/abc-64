@@ -64,7 +64,7 @@ extern "C" {
 	int nodewidth(nodeptr n);
 #define marked(p, x) (marks(tree(p))&(x))
 
-	path newpath(path pa, nodeptr n, int i);
+	pathptr newpath(pathptr pa, nodeptr n, int i);
 	
 #define parent(p) ((p)->p_parent)
 #define tree(p) ((p)->p_tree)
@@ -77,14 +77,14 @@ extern "C" {
 /* Procedure markpath(); */
 /* Procedure unmkpath(); */
 /* Procedure treereplace(); */
-	bool up(path *pp);
-	bool downi(path *pp, int i);
+	bool up(pathptr *pp);
+	bool downi(pathptr *pp, int i);
 
 #define down(n) downi(n, 1)
 
-	bool downrite(path*);
-	bool left(path*);
-	bool rite(path*);
+	bool downrite(pathptr*);
+	bool left(pathptr*);
+	bool rite(pathptr*);
 /* Procedure top(); */
 	// bool nextnode();
 /* Procedure firstleaf(); */
@@ -116,7 +116,7 @@ extern "C" {
 #define noderelease(n) release((value) n)
 #define nodeuniql(pn) uniql((value *)pn)
 
-#define pathcopy(p) ((path)copy((value)p))
+#define pathcopy(p) ((pathptr)copy((value)p))
 #define pathrelease(p) release((value)p)
 #define pathuniql(pp) uniql((value *)pp)
 

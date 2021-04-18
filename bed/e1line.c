@@ -110,7 +110,7 @@ Visible int linelen(nodeptr n)
  * it cannot set ep->mode or call higher() properly!
  */
 
-Visible bool nextline(path *pp)
+Visible bool nextline(pathptr *pp)
 {
 	nodeptr n;
 	nodeptr nn;

@@ -20,7 +20,7 @@
 
 Hidden int spaces = 0; /* Saved-up spaces; emitted when non-blank found */
 
-Forward Hidden Procedure sendsave(path p, bufadm *bp, FILE *fp);
+Forward Hidden Procedure sendsave(pathptr p, bufadm *bp, FILE *fp);
 
 /*
  * Write the representation of a node.	If it has children,
@@ -89,7 +89,7 @@ Hidden Procedure savewalk(nodeptr n, int level, bufadm *bp, FILE *fp)
 	}
 }
 
-Visible bool save(path p, string filename) {
+Visible bool save(pathptr p, string filename) {
 	bufadm b, *bp;
 	FILE *fp = fopen(filename, "w");
 	
@@ -104,7 +104,7 @@ Visible bool save(path p, string filename) {
 }
 
 
-Hidden Procedure sendsave(path p, bufadm *bp, FILE *fp) {
+Hidden Procedure sendsave(pathptr p, bufadm *bp, FILE *fp) {
 	p = pathcopy(p);
 	top(&p);
 	spaces = 0;
@@ -117,7 +117,7 @@ Hidden Procedure sendsave(path p, bufadm *bp, FILE *fp) {
  * Interface to top level.
  */
 
-Visible char *senddoc(path p) {
+Visible char *senddoc(pathptr p) {
 	char *res;
 	bufadm b, *bp;
 	

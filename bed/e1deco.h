@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 	extern Visible bool      delbody(environ *ep);
-	extern Visible Procedure delfocus(path *pp);
+	extern Visible Procedure delfocus(pathptr *pp);
 	extern Visible bool      copyinout(environ *ep);
 	extern Visible value     copyout(environ *ep);
 	extern Visible bool      ishole(environ *ep);

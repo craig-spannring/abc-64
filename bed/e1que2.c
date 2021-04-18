@@ -34,7 +34,7 @@ extern bool lefttorite;
 	/* Set by edit() to signal we parse purely left-to-right */
 
 Forward Hidden bool ins_node(environ *ep, nodeptr n, queue *pq);
-Forward Hidden bool joinnodes(path *pp, nodeptr n1, nodeptr n2, bool spflag);
+Forward Hidden bool joinnodes(pathptr *pp, nodeptr n1, nodeptr n2, bool spflag);
 Forward Hidden bool add_string(environ *ep, string *pstr);
 Forward Hidden bool canfitchar(int c, struct classinfo *ci);
 
@@ -490,7 +490,7 @@ Hidden bool ack_or_kill_varsuggrest(environ *ep, string *pstr) {
  */
 
 Hidden bool range_hack(environ *ep) {
-	path pa;
+	pathptr pa;
 	int sympa;
 	string str;
 	nodeptr n1;
@@ -549,7 +549,7 @@ Visible bool ins_string(environ *ep, string str, queue *pq, int alt_c)
 	int sym;
 	int len;
 	bool inter_active = alt_c != 0;
-	path pa;
+	pathptr pa;
 
 	if (alt_c < 0)
 		alt_c = 0;
@@ -863,9 +863,9 @@ Visible bool ins_string(environ *ep, string str, queue *pq, int alt_c)
  */
 
 Hidden bool
-joinnodes(path *pp, nodeptr n1, nodeptr n2, bool spflag)
+joinnodes(pathptr *pp, nodeptr n1, nodeptr n2, bool spflag)
 {
-	path pa = parent(*pp);
+	pathptr pa = parent(*pp);
 	int sympa = pa ? symbol(tree(pa)) : Rootsymbol;
 	struct table *tp = &table[sympa];
 	struct classinfo *ci = tp->r_class[ichild(*pp) - 1];
@@ -914,10 +914,10 @@ joinnodes(path *pp, nodeptr n1, nodeptr n2, bool spflag)
  * Returns the number of characters consumed from str.
  */
 
-Visible int joinstring(path *pp, string str, bool spflag, int alt_c, bool mayindent)
+Visible int joinstring(pathptr *pp, string str, bool spflag, int alt_c, bool mayindent)
 {
 	struct table *tp;
-	path pa = parent(*pp);
+	pathptr pa = parent(*pp);
 	nodeptr n1;
 	struct classinfo *ci;
 	classptr cp;
@@ -990,7 +990,7 @@ Hidden bool
 add_string(environ *ep, string *pstr)
 {
 	struct table *tp;
-	path pa = parent(ep->focus);
+	pathptr pa = parent(ep->focus);
 	nodeptr n1;
 	struct classinfo *ci;
 	classptr cp;

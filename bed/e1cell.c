@@ -198,7 +198,7 @@ Hidden Procedure dupmatch(cell *old, cell *rep, int oldcnt, int repcnt)
  * Build a list of cells consisting of the first `lcnt' lines of the tree.
  */
 
-Visible cell *build(path p, int lcnt)	         
+Visible cell *build(pathptr p, int lcnt)	         
 {
 	cell head;
 	cell *q = &head;

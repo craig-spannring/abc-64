@@ -13,7 +13,7 @@
 extern "C" {
 #endif
 
-	extern Visible bool allowed(path p, int sym);
+	extern Visible bool allowed(pathptr p, int sym);
 	extern Visible bool allows_colon(int sym);
 	extern Visible bool isinclass(int sym, struct classinfo *ci);
 	extern Visible bool issublist(int sym);

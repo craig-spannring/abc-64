@@ -25,7 +25,7 @@ extern "C" {
 
 typedef struct node *nodeptr;
 typedef struct node *nodeptr;
-typedef struct path *path;
+typedef struct path *pathptr;
 typedef int markbits;
 
 struct gdb_hostile_node {
@@ -71,7 +71,7 @@ STATIC_CHECK(offsetof(struct gdb_hostile_node, n_child)
 
 struct gdb_hostile_path {
 	HEADER;
-	path	p_parent;
+	pathptr	p_parent;
 	nodeptr	p_tree;
 	intlet	p_ichild;
 	intlet	p_ycoord;
@@ -84,7 +84,7 @@ struct path {
 	literal   type;
 	reftype   refcnt;
 	intlet    len FILLER_FIELD;
-	path      p_parent;
+	pathptr   p_parent;
 	nodeptr   p_tree;
 	intlet    p_ichild;
 	intlet    p_ycoord;
@@ -111,7 +111,7 @@ STATIC_CHECK(offsetof(struct gdb_hostile_path, p_addmarks) == offsetof(struct pa
 STATIC_CHECK(offsetof(struct gdb_hostile_path, p_delmarks) == offsetof(struct path, p_delmarks));
 #pragma GCC diagnostic pop
 
-#define NilPath ((path) Vnil)
+#define NilPath ((pathptr) Vnil)
 
 
 extern int doctype;	/* type of document edited by editdocument() */

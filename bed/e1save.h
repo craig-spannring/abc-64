@@ -12,8 +12,8 @@
 extern "C" {
 #endif
 
-    Visible bool save(path p, string filename);
-    Visible char *senddoc(path p);
+    Visible bool save(pathptr p, string filename);
+    Visible char *senddoc(pathptr p);
     
 #ifdef __cplusplus
 }

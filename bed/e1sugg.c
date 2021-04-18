@@ -378,7 +378,7 @@ Hidden nodeptr firstsugg(string s, int startsugg, bool colon_allowed)
 	return Nnil;
 }
 
-Visible bool setsugg(path *pp, char c, environ *ep, bool colon_allowed)
+Visible bool setsugg(pathptr *pp, char c, environ *ep, bool colon_allowed)
 {
 	char buf[2];
 	nodeptr n;
@@ -446,7 +446,7 @@ Visible bool newsugg(environ *ep, string *pstr, int alt_c) {
 	nodeptr n = tree(ep->focus);
 	nodeptr nn;
 	int sym = symbol(n);
-	path pa= parent(ep->focus);
+	pathptr pa= parent(ep->focus);
 	int sympa= pa ? symbol(tree(pa)) : Rootsymbol;
 
 	Assert(pstr && *pstr);
@@ -742,7 +742,7 @@ Hidden char *lastsugg= NULL;	/* the buffer */
 Hidden char *pbuf;
 Hidden int buflen= 0;
 
-Visible Procedure readsugg(path p)
+Visible Procedure readsugg(pathptr p)
 {
 	p = pathcopy(p);
 	top(&p);
@@ -763,7 +763,7 @@ Visible Procedure readsugg(path p)
  * 'lastsugg'; we add it again if the unit is not empty.
  */
 
-Visible Procedure writesugg(path p)
+Visible Procedure writesugg(pathptr p)
 {
 	p = pathcopy(p);
 	top(&p);

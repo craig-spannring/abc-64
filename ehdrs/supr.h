@@ -62,7 +62,7 @@ extern "C" {
 #define FHOLE	'F'
 
 typedef struct {
-	path focus;
+	pathptr focus;
 	char mode;
 	char /*bool*/ copyflag;
 	char /*bool*/ spflag;
