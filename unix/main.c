@@ -11,7 +11,7 @@
 #include "port.h"
 
 #include <unistd.h>
-
+#include <stdlib.h>
 
 Visible char *OPTbwsdir= (char *) NULL;
 			/* -g OPTbwsdir: group name workspaces */
@@ -283,7 +283,6 @@ int main(int argc, char** argv)
 	}
 	
 	if (flags & O_e) {
-		char *getenv(const char *);
 		OPTeditor= getenv("EDITOR");
 		if (OPTeditor == (char *)NULL || *OPTeditor == '\0') {
 			putmess(NO_EDITOR);
