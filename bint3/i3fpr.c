@@ -15,7 +15,7 @@
 #include "i3sou.h"
 #include "port.h"
 
-Forward Hidden Procedure defprd(string repr, literal adic, intlet pre);
+Forward Hidden Procedure defprd(conststring repr, literal adic, intlet pre);
 
 #define Other 0
 #define Nume 1		/* e.g. number1 + number2 */
@@ -33,9 +33,9 @@ Forward Hidden Procedure defprd(string repr, literal adic, intlet pre);
  * Table defining all predefined functions (but not propositions).
  */
 struct funtab {
-	string f_name;
-	literal f_adic;
-	literal f_kind;
+	conststring f_name;
+	literal     f_adic;
+	literal     f_kind;
 	union {
 	    value (*f_fun0)(void);
 	    value (*f_fun1)(value);
@@ -138,7 +138,7 @@ Visible Procedure initfpr(void)
 	defprd(P_notin, Dpd, Not_in);
 }
 
-Hidden Procedure defprd(string repr, literal adic, intlet pre)
+Hidden Procedure defprd(conststring repr, literal adic, intlet pre)
 {
 	value r= mk_text(repr), p= mk_prd(adic, pre, NilTree, Yes), pname;
 	pname= permkey(r, adic);

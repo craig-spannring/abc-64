@@ -32,7 +32,7 @@ bool is_abcname(value name);
 bool character(value v);
 
 value mkchar(char c);
-value mk_text(string s);
+value mk_text(conststring s);
 char charval(value v);
 char ncharval(int n, value v);
 string strval(value v);

@@ -21,7 +21,7 @@ extern "C" {
 	extern Visible bool dya_sign(value *v);
 	extern Visible bool findkw(txptr q, txptr* ftx);
 	extern Visible bool findrel(txptr q, txptr* ftx);
-	extern Visible bool find(string s, txptr q, txptr* ftx, txptr* ttx);
+	extern Visible bool find(conststring s, txptr q, txptr* ftx, txptr* ttx);
 	extern Visible bool findtrim(txptr q, txptr *first);
 	extern Visible bool greater_than_sign_(void);
 	extern Visible bool is_abcname(value name);

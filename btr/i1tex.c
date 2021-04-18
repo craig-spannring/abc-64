@@ -105,12 +105,12 @@ Visible bool character(value v) {
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-Hidden btreeptr mkbtext(string s, int len) {
+Hidden btreeptr mkbtext(conststring s, int len) {
 	btreeptr p;
-	int chunk;
-	int i;
-	int n;
-	int nbig;
+	int      chunk;
+	int 	 i;
+	int 	 n;
+	int 	 nbig;
 
 	/*
 	 * Determine level of tree.
@@ -151,7 +151,7 @@ Hidden btreeptr mkbtext(string s, int len) {
 	return p;
 }
 
-Visible value mk_text(string s) {
+Visible value mk_text(conststring s) {
 	value v;
 	int   len = strlen(s);
 

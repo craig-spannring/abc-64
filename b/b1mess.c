@@ -43,10 +43,10 @@ Visible string getmess(int nr) {
 	int    block;
 	long   ftell(FILE *);
 	
-	static int             last_nr= 0;
-	static const FILE     *NOT_OPENED = ((FILE*)(-1));
-	static const char[]    NO_MESSFILE = "*** Cannot find or read messages file; using numbers\n";
-	static FILE           *messfp= NOT_OPENED;
+	static int                last_nr= 0;
+	static FILE* const        NOT_OPENED = ((FILE*)(-1));
+	static const char* const  NO_MESSFILE = "*** Cannot find or read messages file; using numbers\n";
+	static FILE              *messfp= NOT_OPENED;
 
 	if (nr <= 0) 
 		return nr == -1 ? "%s" : nr == -2 ? "%s%s" : "";

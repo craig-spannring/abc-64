@@ -15,6 +15,8 @@
 #include "i1num.h"
 #include "i3err.h"
 
+#include <ctype.h>
+
 #define CHOICE_TLT	MESS(1600, "in choice t, t is not a text list or table")
 #define CHOICE_EMPTY	MESS(1601, "in choice t, t is empty")
 
@@ -104,25 +106,32 @@ Visible value split(value t) {
 	return r;
 }
 
-Hidden value uplower(value t, int (*islowupper) (char), int (*touplower) (int))
+Hidden value uplower(value   t,
+		     int   (*islowupper)(int),
+		     int   (*touplower)(int))
 {
-	value i, sizt, r, ti, c;
-	char s[2];
+	value i;
+	value sizt;
+	value r;
+	value ti;
+	value c;
+	char  s[2];
 	
 	s[1] = '\0';
-	r = mk_text("");
-	i = one;
+	r    = mk_text("");
+	i    = one;
 	sizt = size(t);
 	while (numcomp(i, sizt) <= 0) {
-		ti = item(t, i);
+		ti   = item(t, i);
 		s[0] = charval(ti);
 		if ((*islowupper)(s[0])) {
 			release(ti);
 			s[0] = (*touplower)(s[0]);
-			ti = mk_text(s);
+			ti   = mk_text(s);
 		}
 		c = concat(r, ti);
-		release(r); release(ti);
+		release(r);
+		release(ti);
 		r = c;
 		incr(&i);
 	}
@@ -130,34 +139,13 @@ Hidden value uplower(value t, int (*islowupper) (char), int (*touplower) (int))
 	return r;
 }
 
-/* terrible BSD patch: turn macroos into Functions */
-#ifdef isupper
-int F_isupper(char c) { return isupper(c); }
-#else
-#define F_isupper isupper
-extern int isupper();
-#endif
-#ifdef islower
-int F_islower(char c) { return islower(c); }
-#else
-#define F_islower islower
-extern int islower();
-#endif
-#ifdef toupper
-int F_toupper(c) char c; { return toupper(c); }
-#else
-#define F_toupper toupper
-extern int toupper(int);
-#endif
-#ifdef tolower
-int F_tolower(c) char c; { return tolower(c); }
-#else
-#define F_tolower tolower
-extern int tolower(int);
-#endif
 
-Visible value upper(value t) { return uplower(t, F_islower, F_toupper);}
-Visible value lower(value t) { return uplower(t, F_isupper, F_tolower);}
+Visible value upper(value t) {
+	return uplower(t, islower, toupper);
+}
+Visible value lower(value t) {
+	return uplower(t, isupper, tolower);
+}
 
 /* for RangeElem's */
 

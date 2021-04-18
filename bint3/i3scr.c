@@ -445,14 +445,17 @@ Hidden Procedure end_read() {
 /* Will anybody discover that you're only given 4 chances? */
 
 Visible char q_answer(int m, char c1, char c2, char c3) {
-	char answer; intlet try; txptr tp; bool eof;
+	char   answer;
+	intlet attempt;
+	txptr  tp;
+	bool   eof;
 	
 	if (!interactive)
 		return c1;
 	if (outeractive)
 		oline();
-	for (try= 1; try<=4; try++){
-		if (try == 1 || try == 3)
+	for (attempt= 1; attempt<=4; attempt++){
+		if (attempt == 1 || attempt == 3)
 			q_mess(m, c1, c2);
 		tp= (txptr) read_line(R_answer, Yes, &eof);
 		if (interrupted) {
@@ -474,11 +477,11 @@ Visible char q_answer(int m, char c1, char c2, char c3) {
 			return c2;
 		if (outeractive)
 			oline();
-		if (try == 1)
+		if (attempt == 1)
 			q_mess(ANSWER, c1, c2);
-		else if (try == 2)
+		else if (attempt == 2)
 			q_mess(JUST_YES_OR_NO, c1, c2);
-		else if (try == 3)
+		else if (attempt == 3)
 			q_mess(LAST_CHANCE, c1, c2);
 		else 
 			q_mess(NO_THEN, c2, c1);

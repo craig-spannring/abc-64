@@ -23,7 +23,8 @@ extern "C" {
 typedef int bool;
 #endif
 typedef char *string; /* Strings are always terminated with a char '\0'. */
-
+typedef const char *conststring;
+	
 #define Yes ((bool) 1)
 #define No  ((bool) 0)
 

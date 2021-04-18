@@ -48,9 +48,10 @@ extern "C" {
 /************************************************************************/
 
 	struct prio {
-			string fun;
-			char adic;
-			int L, H;
+			string       fun;
+			char         adic;
+			int          L;
+			int          H;
 	};
 
 #define P_mon '1'

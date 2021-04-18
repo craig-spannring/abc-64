@@ -79,7 +79,7 @@ Visible value cr_text(txptr p, txptr q) {
 
 #define Txnil	((txptr) NULL)
 
-Hidden bool search(bool find_kw, string s, txptr q, txptr *ftx, txptr *ttx) {
+Hidden bool search(bool find_kw, conststring s, txptr q, txptr *ftx, txptr *ttx) {
 	intlet parcnt= 0; bool outs= Yes, kw= No; char aq;
 	txptr lctx= Txnil;
 	
@@ -91,7 +91,7 @@ Hidden bool search(bool find_kw, string s, txptr q, txptr *ftx, txptr *ttx) {
 						return Yes;
 				}
 				else if (Char(*ftx) == *s) {
-					string t= s+1;
+					conststring t= s+1;
 					*ttx= (*ftx)+1;
 					while (*t && *ttx < q) {
 						if (*t != Char(*ttx)) break;
@@ -144,7 +144,7 @@ Hidden bool search(bool find_kw, string s, txptr q, txptr *ftx, txptr *ttx) {
 
 /* ********************************************************************	*/
 
-Visible bool find(string s, txptr q, txptr* ftx, txptr* ttx) {
+Visible bool find(conststring s, txptr q, txptr* ftx, txptr* ttx) {
 	return search(No, s, q, (*ftx= tx, ftx), ttx);
 }
 
@@ -164,7 +164,7 @@ Visible Procedure req(string s, txptr q, txptr *ftx, txptr *ttx) {
 	}
 }
 
-Hidden bool relsearch(string s, txptr q, txptr *ftx) {
+Hidden bool relsearch(conststring s, txptr q, txptr *ftx) {
 	txptr ttx;
 	*ftx= tx;
 	while (search(No, s, q, ftx, &ttx))
@@ -294,13 +294,13 @@ Hidden bool NEXT_keyword(txptr q, char **kw) {
  * e.g. HOW TO HOW ARE YOU isn't allowed
  */
 
-Hidden char *firstkw[] = {
+Hidden const char *firstkw[] = {
 	K_IF, K_WHILE, K_CHECK, K_HOW, K_RETURN, K_REPORT,
 	""
 };
 
 Hidden bool spec_firstkeyword(char *fkw) {
-	char **kw;
+	const char **kw;
 	for (kw= firstkw; **kw != '\0'; kw++) {
 		if (strcmp(fkw, *kw) == 0)
 			return Yes;
@@ -443,7 +443,7 @@ Visible value res_cmdnames;
  * e.g. HOW TO PUT IN x is allowed, but HOW TO PUT x OUT isn't
  */
 
-Hidden string reserved[] = {
+Hidden conststring reserved[] = {
 	K_SHARE, K_CHECK, K_DELETE, K_FAIL, K_FOR,
 	K_HOW, K_IF, K_INSERT, K_PASS, K_PUT, K_QUIT, K_READ, K_REMOVE,
 	K_REPORT, K_RETURN, K_SELECT, K_SETRANDOM, K_SUCCEED,
@@ -456,7 +456,7 @@ Hidden string reserved[] = {
 
 Visible Procedure initsyn(void) {
 	value v;
-	string *kw;
+	conststring *kw;
 	
 	res_cmdnames= mk_elt();
 	for (kw= reserved; **kw != '\0'; kw++) {
@@ -543,9 +543,9 @@ Visible bool greater_than_sign_(void) {
 }
 
 Visible bool dyamon_sign(value *v) {
-	string s;
-	if (plus_sign) s= S_PLUS;
-	else if (minus_sign) s= S_MINUS;
+	conststring s;
+	if (plus_sign)        s= S_PLUS;
+	else if (minus_sign)  s= S_MINUS;
 	else if (number_sign) s= S_NUMBER;
 	else return No;
 	*v= mk_text(s);
@@ -553,26 +553,26 @@ Visible bool dyamon_sign(value *v) {
 }
 
 Visible bool dya_sign(value *v) {
-	string s;
-	if (times_sign) s= S_TIMES;
-	else if (over_sign) s= S_OVER;
-	else if (power_sign) s= S_POWER;
-	else if (behead_sign) s= S_BEHEAD;
-	else if (curtl_sign) s= S_CURTAIL;
-	else if (join_sign) s= S_JOIN;
-	else if (reptext_sign) s= S_REPEAT;
-	else if (leftadj_sign) s= S_LEFT_ADJUST;
-	else if (center_sign) s= S_CENTER;
-	else if (rightadj_sign) s= S_RIGHT_ADJUST;
+	conststring s;
+	if (times_sign)          s= S_TIMES;
+	else if (over_sign)      s= S_OVER;
+	else if (power_sign)     s= S_POWER;
+	else if (behead_sign)    s= S_BEHEAD;
+	else if (curtl_sign)     s= S_CURTAIL;
+	else if (join_sign)      s= S_JOIN;
+	else if (reptext_sign)   s= S_REPEAT;
+	else if (leftadj_sign)   s= S_LEFT_ADJUST;
+	else if (center_sign)    s= S_CENTER;
+	else if (rightadj_sign)  s= S_RIGHT_ADJUST;
 	else return No;
 	*v= mk_text(s);
 	return Yes;
 }
 
 Visible bool mon_sign(value *v) {
-	string s;
-	if (about_sign) s= S_ABOUT;
-	else if (numtor_sign) s= S_NUMERATOR;
+	conststring s;
+	if (about_sign)         s= S_ABOUT;
+	else if (numtor_sign)   s= S_NUMERATOR;
 	else if (denomtor_sign) s= S_DENOMINATOR;
 	else return No;
 	*v= mk_text(s);
@@ -580,7 +580,7 @@ Visible bool mon_sign(value *v) {
 }
 
 Visible bool texdis_sign(value *v) {
-	string s;
+	conststring s;
 	if (apostrophe_sign) s= S_APOSTROPHE;
 	else if (quote_sign) s= S_QUOTE;
 	else return No;
