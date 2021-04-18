@@ -17,7 +17,6 @@ Enter GDB
 
 '''shell
 $ gdb abc
-
 (gdb) run < bug1.abc
 '''
 
