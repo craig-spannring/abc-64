@@ -386,7 +386,7 @@ Visible char *getfmtbuf(string fmt, int n)
 
 /**************************************************************************/
 
-Visible Procedure putserr(string s)
+Visible Procedure putserr(conststring s)
 {
 	putstr(errfile, s);
 }

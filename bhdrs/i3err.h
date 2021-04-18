@@ -9,7 +9,7 @@ extern "C" {
 
 	extern Visible Procedure bye(int ex);
 	extern Visible Procedure immexit(int status);
-	extern Visible Procedure putserr(string s);
+	extern Visible Procedure putserr(conststring s);
 	extern Visible Procedure flusherr(void);
 	extern Visible Procedure syserr(int);
 	extern Visible Procedure memexh(void);

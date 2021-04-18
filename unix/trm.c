@@ -283,13 +283,13 @@ Forward Hidden int setttymode(void);
 Forward Hidden Procedure resetttymode(void);
 Forward Hidden int start_trm(void);
 Forward Hidden bool get_pos(string format, int *py, int *px);
-Forward Hidden void put_line(int y, int xskip, string data, string mode, int len);
+Forward Hidden void put_line(int y, int xskip, conststring data, string mode, int len);
 Forward Hidden Procedure set_mode(int m);
 Forward Hidden Procedure get_so_mode(void);
 Forward Hidden Procedure standout(void);
 Forward Hidden Procedure standend(void);
-Forward Hidden Procedure put_str(char *data, char *mode, int n, bool inserting);
-Forward Hidden Procedure ins_str(char *data, char *mode, int n);
+Forward Hidden Procedure put_str(const char *data, const char *mode, int n, bool inserting);
+Forward Hidden Procedure ins_str(const char *data, const char *mode, int n);
 Forward Hidden Procedure del_str(int n);
 Forward Hidden Procedure put_c(char ch, char mo);
 Forward Hidden Procedure clear_lines(int yfirst, int ylast);
@@ -1028,7 +1028,7 @@ Hidden Procedure move(int y, int x) {
  * Characters for which the corresponding char in "mode" have the value
  * STANDOUT must be put in inverse video.
  */
-Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, string mode)
+Visible Procedure trmputdata(int yfirst, int ylast, int indent, conststring data, string mode)
 {
 	int y;
 	int x, len, lendata, space;
@@ -1073,49 +1073,66 @@ Visible Procedure trmputdata(int yfirst, int ylast, int indent, string data, str
 		clear_lines(y, ylast);
 }
 
-/* 
- * We will first try to get the picture:
- *
- *                  op>>>>>>>>>>>op          oq<<<<<<<<<<<<<<<<<<<<<<<<oq
- *                  ^            ^           ^                         ^
- *           <xskip><-----m1----><----od-----><-----------m2----------->
- *   OLD:   "You're in a maze of twisty little pieces of code, all alike"
- *   NEW:          "in a maze of little twisting pieces of code, all alike"
- *                  <-----m1----><-----nd------><-----------m2----------->
- *                  ^            ^             ^                         ^
- *                  np>>>>>>>>>>>np            nq<<<<<<<<<<<<<<<<<<<<<<<<nq
- * where
- *	op, oq, np, nq are pointers to start and end of Old and New data,
- * and
- *	xskip = length of indent to be skipped,
- *	m1 = length of Matching part at start,
- *	od = length of Differing mid on screen,
- *	nd = length of Differing mid in data to be put,
- *	m2 = length of Matching trail.
- *
- * Then we will try to find a long blank-or-cleared piece in <nd+m2>:
- *
- *    <---m1---><---d1---><---nb---><---d2---><---m2--->
- *              ^         ^         ^        ^         ^
- *              np        bp        bq1      nq        nend
- * where
- *	bp, bq1 are pointers to start and AFTER end of blank piece,
- * and
- *	d1 = length of differing part before blank piece,
- *	nb = length of blank piece to be skipped,
- *	d2 = length of differing part after blank piece.
- * Remarks:
- *	d1 + nb + d2 == nd,
- * and
- *	d2 maybe less than 0.
- */
-Hidden void put_line(int y, int xskip, string data, string mode, int len) {
-	char *op, *oq, *mp;
-	char *np, *nq, *nend, *mo;
-	char *bp, *bq1, *p, *q;
-	int m1, m2, od, nd, delta, dd, d1, nb, d2;
-	bool skipping;
-	int cost, o_cost; 	/* normal and optimising cost */
+Hidden void put_line(int y, int xskip, conststring data, string mode, int len) {
+	/* 
+	 * We will first try to get the picture:
+	 *
+	 *                  op>>>>>>>>>>>op          oq<<<<<<<<<<<<<<<<<<<<<<<<oq
+	 *                  ^            ^           ^                         ^
+	 *           <xskip><-----m1----><----od-----><-----------m2----------->
+	 *   OLD:   "You're in a maze of twisty little pieces of code, all alike"
+	 *   NEW:          "in a maze of little twisting pieces of code, all alike"
+	 *                  <-----m1----><-----nd------><-----------m2----------->
+	 *                  ^            ^             ^                         ^
+	 *                  np>>>>>>>>>>>np            nq<<<<<<<<<<<<<<<<<<<<<<<<nq
+	 * where
+	 *	op, oq, np, nq are pointers to start and end of Old and New data,
+	 * and
+	 *	xskip = length of indent to be skipped,
+	 *	m1 = length of Matching part at start,
+	 *	od = length of Differing mid on screen,
+	 *	nd = length of Differing mid in data to be put,
+	 *	m2 = length of Matching trail.
+	 *
+	 * Then we will try to find a long blank-or-cleared piece in <nd+m2>:
+	 *
+	 *    <---m1---><---d1---><---nb---><---d2---><---m2--->
+	 *              ^         ^         ^        ^         ^
+	 *              np        bp        bq1      nq        nend
+	 * where
+	 *	bp, bq1 are pointers to start and AFTER end of blank piece,
+	 * and
+	 *	d1 = length of differing part before blank piece,
+	 *	nb = length of blank piece to be skipped,
+	 *	d2 = length of differing part after blank piece.
+	 * Remarks:
+	 *	d1 + nb + d2 == nd,
+	 * and
+	 *	d2 maybe less than 0.
+	 */
+	char           *op;
+	char           *oq;
+	char           *mp;
+	const char     *np;
+	const char     *nq;
+	const char     *nend; 
+	char           *mo;
+	const char     *bp;       // pointer to start of blank space
+	const char     *bq1;      // pointer to spot after the end of blank space. 
+	const char     *p;
+	const char     *q;
+	int             m1;
+	int             m2;
+	int             od;
+	int             nd;
+	int             delta;
+	int             dd;
+	int             d1;
+	int             nb;
+	int             d2;
+	bool            skipping;
+	int             cost;
+	int             o_cost;   // normal and optimising cost 
 	
 	/* Bugfix GvR 19-June-87: */
 	while (lengthline[y] < xskip) {
@@ -1344,8 +1361,9 @@ Hidden Procedure standend(void) {
 		linemode[cur_y][cur_x] = SECOOK;
 }
 
-Hidden Procedure put_str(char *data, char *mode, int n, bool inserting) {
-	char ch, mo;
+Hidden Procedure put_str(const char *data, const char *mode, int n, bool inserting) {
+	char ch;
+	char mo;
 	short so;
 	char *ln_y_x, *ln_y_end;
 	
@@ -1374,7 +1392,7 @@ Hidden Procedure put_str(char *data, char *mode, int n, bool inserting) {
 	}
 }
 
-Hidden Procedure ins_str(char *data, char *mode, int n) {
+Hidden Procedure ins_str(const char *data, const char *mode, int n) {
 	int x;
 	
 	/* x will start AFTER the line, because there might be a cookie */

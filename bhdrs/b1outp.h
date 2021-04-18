@@ -11,14 +11,14 @@ extern "C" {
     extern Visible int       getwincol(void);
     extern Visible int       getwinwidth(void);
     extern Visible Procedure c_flush(void);
-    extern Visible Procedure c_putdata(string data);
+    extern Visible Procedure c_putdata(conststring data);
     extern Visible Procedure c_putnewline(void);
-    extern Visible Procedure c_putstr(string s);
+    extern Visible Procedure c_putstr(conststring s);
     extern Visible Procedure doflush(FILE *file);
     extern Visible Procedure init_interpreter_output(int height, int width);
     extern Visible Procedure putchr(FILE* file, char c);
     extern Visible Procedure putnewline(FILE* file);
-    extern Visible Procedure putstr(FILE *file, string s);
+    extern Visible Procedure putstr(FILE *file, conststring s);
     extern Visible Procedure re_interpreter_output(void);
     
 #ifdef __cplusplus

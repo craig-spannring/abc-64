@@ -9,7 +9,7 @@
 
 Forward Hidden Procedure c_putchr(char c);
 
-Visible Procedure putstr(FILE *file, string s)
+Visible Procedure putstr(FILE *file, conststring s)
 {
 	if (file == CONSOLE) c_putstr(s);
 	else fputs(s, file);
@@ -77,7 +77,7 @@ Visible int getwincol(void)
 
 #define LINELENGTH 200
 
-Visible Procedure c_putstr(string s)
+Visible Procedure c_putstr(conststring s)
 {
 	char buf[LINELENGTH];
 	char *pnl;
@@ -105,7 +105,7 @@ Visible Procedure c_putstr(string s)
 	}
 }
 
-Visible Procedure c_putdata(string data)
+Visible Procedure c_putdata(conststring data)
 {
 	int lendata;    /* total data length */
 	int nlines;     /* number of lines needed */
