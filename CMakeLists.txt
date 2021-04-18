@@ -64,17 +64,10 @@ add_executable(abc ${src_main})
 set_property(TARGET abc PROPERTY C_STANDARD 11)
 
 add_dependencies(abc mach_h_AutoGened file_h_AutoGened)
-target_compile_options(abc PRIVATE
-  ${CMAKE_C_FLAGS}
-  
+set(abc_c_cxx_flags
   -Wall
   
   -Wint-to-pointer-cast
-  -Wno-implicit-int
-  -Werror=old-style-definition
-  -Wold-style-declaration
-  -Wstrict-prototypes
-  -Wold-style-definition
   -Wstrict-prototypes
   -Wimplicit-function-declaration
   
@@ -91,6 +84,18 @@ target_compile_options(abc PRIVATE
   -Wno-int-to-pointer-cast
   -Wint-to-pointer-cast
   -Werror=int-to-pointer-cast
+  )
+set(abc_c_only_flags
+    -Wno-implicit-int
+  -Werror=old-style-definition
+  -Wold-style-declaration
+  -Wstrict-prototypes
+  -Wold-style-definition
+    )
+target_compile_options(abc PRIVATE
+  ${CMAKE_C_FLAGS}
+  ${abc_c_only_flags}
+  ${abc_c_cxx_flags}
   )
 target_link_libraries(abc
   PRIVATE
@@ -207,7 +212,9 @@ set(abc_srcs
   ${CMAKE_CURRENT_LIST_DIR}/btr/i1tlt.c
   ${CMAKE_CURRENT_LIST_DIR}/btr/i1btr.c
   ${CMAKE_CURRENT_LIST_DIR}/btr/i1obj.c
-)
+  )
+#set_source_files_properties(${src_main} ${abc_srcs} PROPERTIES LANGUAGE CXX )
+
 target_sources(abc PRIVATE ${abc_srcs})
 
 
