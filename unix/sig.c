@@ -1,18 +1,5 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
-/*Handle interrupts and signals*/
-
-#include "b.h"
-#include "b1mess.h"
-#include "e1scrn.h"
-#include "i3err.h"
-#include "i3ini.h"
-
-#ifdef SIGNAL
-
-#include <signal.h>
-#include <sys/types.h>
-#include <signal.h>
 
 /*The operating system provides a function signal(s,f)
   that associates function f with the signal s, and returns
@@ -38,44 +25,74 @@
   when SIGTSTP is defined.
 */
 
-#ifdef SIGTSTP
+#include "b.h"
+#include "b1mess.h"
+#include "e1scrn.h"
+#include "i3err.h"
+#include "i3ini.h"
 
-Hidden bool must_handle(int sig) {
-	/* Shouldn't we enumerate the list of signals we *do* want to catch? */
-	/* It seems that new signals are all of the type that should be
-	   ignored by most processes... */
-	switch (sig) {
-	case SIGURG:
-	case SIGSTOP:
-	case SIGTSTP:
-	case SIGCONT:
-	case SIGCHLD:
-	case SIGTTIN:
-	case SIGTTOU:
-	case SIGIO:
-#ifdef SIGWINCH
-	case SIGWINCH: /* Window size changed */
-#endif
-		return No;
-	default:
-		return Yes;
-	}
-}
+#include <signal.h>
+#include <assert.h>
+#include <stdio.h>
 
-#else /* !SIGTSTP */
 
-#ifdef SIGCLD /* System V */
-
-#define must_handle(sig) ((sig) != SIGCLD)
-
-#else /* !SIGCLD */
-
-#define must_handle(sig) Yes
-
-#endif /* SIGCLD */
-#endif /* SIGTSTP */
 
 extern bool vtrmactive;
+
+bool must_handle(int sig)
+{
+	if (sig >= 32) {
+		return 0;
+	} else {
+		switch (sig)
+		{
+			// Don't handle the following?
+			case SIGURG:
+			case SIGSTOP:
+			case SIGTSTP:
+			case SIGCONT:
+			case SIGCHLD:
+			case SIGTTIN:
+			case SIGTTOU:
+			case SIGIO:
+			case SIGWINCH:
+				return 0;
+				break;
+		}
+	}
+	return 1;
+}
+			
+		
+void setsig(int sig, void(*handler)(int)) {
+	int rc;
+
+	if (sig!=SIGKILL) {
+		sigset_t           mask;
+		rc = sigfillset(&mask);
+		assert(rc==0); // TODO add proper error handling
+
+		struct sigaction   old;
+		struct sigaction   action;
+		memset(&action, 0, sizeof(action));
+		action.sa_handler = handler;
+		action.sa_mask    = mask;
+		action.sa_flags   = 0;
+
+		// printf("setting up sig %d\n", sig);
+		rc = sigaction(sig, &action, &old);
+		if (rc == -1) {
+			perror("sigaction: ");
+			exit(1); 
+		}
+
+		if ((old.sa_flags & SA_SIGINFO)==0 && old.sa_handler==SIG_IGN) {
+			// If previous handler was ignore, then we'll ignore as well. 
+			rc = sigaction(sig, &action, &old);
+		}
+	}
+}
+	
 
 Hidden Procedure oops(int sig, int m) {
 	signal(sig, SIG_DFL); /* Don't call handler recursive -- just die... */
@@ -94,42 +111,34 @@ Hidden Procedure oops(int sig, int m) {
 #endif
 }
 
-Hidden SIGTYPE burp(int sig) {
+Hidden void burp(int sig) {
 	oops(sig, MESS(3901, "*** Oops, I feel suddenly (BURP!) indisposed. I'll call it a day. Sorry.\n"));
+	return;
 }
 
-Hidden SIGTYPE aog(int sig) {
+Hidden void aog(int sig) {
 	oops(sig, MESS(3902, "*** Oops, an act of God has occurred compelling me to discontinue service.\n"));
+	return; // shouldn't get here. 
 }
 
 Visible bool intrptd= No;
 
-Hidden SIGTYPE intsig(int sig) {   /* sig == SIGINT */
+Hidden void intsig(int sig) {   /* sig == SIGINT */
 	intrptd= Yes;
-	signal(SIGINT, intsig);
+	return; 
 }
 
-Hidden SIGTYPE fpesig(int sig) { /* sig == SIGFPE */
+Hidden void fpesig(int sig) { /* sig == SIGFPE */
 	signal(SIGFPE, SIG_IGN);
 	fpe_signal();
-	signal(SIGFPE, fpesig);
-}
-
-
-/*
-Hidden SIGTYPE (*setsig(sig,     func              ))() int sig; SIGTYPE (*func)(); {  */
-Hidden SIGTYPE (*setsig(int sig, void (*func) (int)))(void) {
-	typedef void (*sighandler)(int); 
-	/*Set a signal, unless it's being ignored*/
-       	sighandler f = signal(sig, SIG_IGN);
-	if (f != SIG_IGN) signal(sig, func);
-	return (void*)f;
+	return;
 }
 
 Visible Procedure initsig(void) {
 	int i;
+	// printf("Initializing %d signals\n", (int)NSIG);
 	for (i = 1; i<=NSIG; ++i)
-		if (must_handle(i)) VOID setsig(i, burp);
+		if (must_handle(i)) setsig(i, burp);
 	VOID setsig(SIGINT,  intsig);
 	VOID setsig(SIGTRAP, burp);
 	VOID setsig(SIGQUIT, aog);
@@ -137,4 +146,4 @@ Visible Procedure initsig(void) {
 	VOID setsig(SIGFPE,  fpesig);
 }
 
-#endif /* SIGNAL */
+
