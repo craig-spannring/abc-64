@@ -28,3 +28,4 @@ stc/*.o
 unix/file.h
 unix/mach.h
 unix/*.o
+unix/sig.c.old
