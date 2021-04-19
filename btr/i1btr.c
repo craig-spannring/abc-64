@@ -71,9 +71,9 @@ Visible Procedure uniqlbtreenode(btreeptr *pptr, literal it) {
 }
 
 Visible btreeptr ccopybtreenode(btreeptr pnode, literal it) {
-	intlet limp;
+	intlet   limp;
 	btreeptr qnode;
-	intlet iw;
+	intlet   iw;
 	
 	iw = Itemwidth(it);
 	qnode = grabbtreenode(Flag(pnode), it);

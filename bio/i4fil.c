@@ -65,7 +65,7 @@ Visible value get_names(char *path, bool (*isabc) (char *path, char *name)) {
 #define DumClass '\0'
 
 
-struct suffix_to_type_map { char *suffix; literal type; };
+struct suffix_to_type_map { const char *suffix; literal type; };
 
 Hidden struct suffix_to_type_map classes[]= {
 	{".cmd", Cmd},
