@@ -10,17 +10,18 @@ extern "C" {
 #endif
 
 /* Private definitions for B texts, lists and tables */
-
-typedef struct gdb_hostile_telita {
+struct gdb_hostile_telita { // The original def was not something GDB liked.
     HEADER;
     btreeptr root;
-} gdb_hostile_a_telita, *gdb_hostile_telita;
-typedef struct telita {
+};
+struct telita {
     literal type;
     reftype refcnt;
     intlet len FILLER_FIELD;
     btreeptr root;
-} a_telita, *telita;
+};
+typedef struct telita *telitaptr;
+		
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
 static struct gdb_hostile_telita old_unused8[0];
@@ -32,8 +33,8 @@ STATIC_CHECK(offsetof(struct gdb_hostile_telita, len)    == offsetof(struct teli
 STATIC_CHECK(offsetof(struct gdb_hostile_telita, root)   == offsetof(struct telita, root));
 #pragma GCC diagnostic pop
 
-#define Itemtype(v) (((telita) (v))->len) /* Itemtype */
-#define Root(v) (((telita) (v))->root)
+#define Itemtype(v) (((telitaptr) (v))->len) /* Itemtype */
+#define Root(v) (((telitaptr) (v))->root)
 #define Tltsize(v) (Root(v) == Bnil ? 0 : Size(Root(v)))
 
 #define Character(v)	((bool) (Type(v) == Tex && Tltsize(v) == 1))

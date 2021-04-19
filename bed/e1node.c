@@ -381,9 +381,9 @@ Visible bool up(pathptr *pp)
 Visible bool downi(pathptr *pp, int i)
 {
 	nodeptr n;
-	auto int y;
-	auto int x;
-	auto int level;
+	int y;
+	int x;
+	int level;
 
 	n = Tree(*pp);
 	if (!Isnode(n) || i < 1 || i > Nchildren(n))

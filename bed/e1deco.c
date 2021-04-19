@@ -116,9 +116,9 @@ Visible bool delbody(enviro *ep)
 
 Hidden bool delvarying(enviro *ep)
 {
-	auto queueptr q = Qnil;
+	queueptr q = Qnil;
 	nodeptr n = tree(ep->focus);
-	auto value v;
+	value v;
 	value t1, t2;
 
 	v = (value) child(n, ep->s1/2);
@@ -226,8 +226,8 @@ Hidden bool hole_ify_keywords(enviro *ep, queueptr *qq)
 
 Hidden bool delsubset(enviro *ep, bool hack)
 {
-	auto queueptr q = Qnil;
-	auto queueptr q2 = Qnil;
+	queueptr q = Qnil;
+	queueptr q2 = Qnil;
 	nodeptr n = tree(ep->focus);
 	nodeptr nn;
 	string *rp = noderepr(n);
@@ -514,8 +514,8 @@ Visible bool copyinout(enviro *ep)
 
 Visible value copyout(enviro *ep)
 {
-	auto queueptr q = Qnil;
-	auto pathptr p;
+	queueptr q = Qnil;
+	pathptr p;
 	nodeptr n;
 	value v;
 	char buf[15];
@@ -638,7 +638,7 @@ Hidden bool copyin(enviro *ep, queueptr q)
 	            
 	/*auto*/         
 {
-	auto queueptr q2 = Qnil;
+	queueptr q2 = Qnil;
 	bool res;
 	
 	if (!q) {

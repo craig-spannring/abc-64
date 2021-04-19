@@ -165,9 +165,9 @@ Visible Procedure outline(cell *p, int lineno)
 	int len=  p->c_newindent + 4 + (w < 0 ? linelen(n) : w);
 			/* some 4 extra for spflag and vhole */
 	string buf;
-	auto string bp;
+	string bp;
 	string mode;
-	auto string mp;
+	string mp;
 	int i;
 	int endarea = lineno+Space(p)-1;
 

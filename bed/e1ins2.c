@@ -52,9 +52,9 @@ Hidden bool quot_in_tag(int c, enviro *ep) {
 
 Visible bool ins_char(enviro *ep, int c, int alt_c)
 {
-	auto queueptr q = Qnil;
-	auto queueptr qf = Qnil;
-	auto string str;
+	queueptr q = Qnil;
+	queueptr qf = Qnil;
+	string str;
 	char buf[2];
 	int where;
 	bool spwhere;
@@ -130,7 +130,7 @@ Visible bool ins_newline(enviro *ep, bool reading_file)
 {
 	nodeptr n;
 	int sym;
-	auto bool mayindent;
+	bool mayindent;
 
 	ep->changed = Yes;
 	if (!fiddle(ep, &mayindent, reading_file))
@@ -225,7 +225,7 @@ Visible bool ins_newline(enviro *ep, bool reading_file)
 Hidden bool fiddle(enviro *ep, bool *pmayindent, bool reading_file)
 {
 	int level;
-	auto string str = "";
+	string str = "";
 
 	higher(ep);
 	while (rnarrow(ep))

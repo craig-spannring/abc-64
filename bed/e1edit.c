@@ -56,8 +56,8 @@ readfile(enviro *ep, string filename, int line, bool creating)
 	FILE *fp = fopen(filename, "r");
 	int c;
 	string buf;
-	auto string cp;
-	auto queueptr q = Qnil;
+	string cp;
+	queueptr q = Qnil;
 
 	if (!fp) {
 		ederrS(MESS(6200, "Sorry, I can't edit file \"%s\""), filename);
@@ -205,11 +205,11 @@ skipspace(FILE *fp)
 Hidden value
 readtext(FILE *fp, char quote)
 {
-	auto value v = Vnil;
+	value v = Vnil;
 	char buf[BUFSIZ];
 	string cp = buf;
 	int c;
-	auto int i;
+	int i;
 	value w;
 
 	for (; ; ++cp) {
@@ -388,7 +388,7 @@ readnode(FILE *fp)
 Visible value editqueue(string filename)
 {
 	FILE *fp = fopen(filename, "r");
-	auto queueptr q = Qnil;
+	queueptr q = Qnil;
 	nodeptr n;
 
 	if (!fp)

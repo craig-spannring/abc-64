@@ -542,7 +542,7 @@ Visible bool ins_string(enviro *ep, string str, queueptr *pq, int alt_c)
 	/*auto*/ 
 {
 	nodeptr nn;
-	auto value v;
+	value v;
 	char buf[1024];
 	string repr;
 	string oldstr;

@@ -88,7 +88,7 @@ Visible Procedure preptoqueue(nodeptr n, queueptr *pq)
 
 Visible Procedure addtoqueue(queueptr *pq, nodeptr n)
 {
-	auto queueptr q = Qnil;
+	queueptr q = Qnil;
 
 	preptoqueue(n, &q);
 	joinqueues(pq, q);
@@ -199,7 +199,7 @@ Visible Procedure splitnode(nodeptr n, queueptr *pq)
 
 Visible bool resttoqueue(pathptr *pp, queueptr *pq)
 {
-	auto queueptr q = Qnil;
+	queueptr q = Qnil;
 	pathptr pa = parent(*pp);
 	nodeptr n = tree(*pp);
 	int sym = symbol(n);
@@ -258,7 +258,7 @@ Hidden bool rest_is_hollow(nodeptr n) {
 
 Visible Procedure nosuggtoqueue(enviro *ep, queueptr *pq)
 {
-	auto queueptr q = Qnil;
+	queueptr q = Qnil;
 	int i;
 	string *rp;
 	nodeptr n;

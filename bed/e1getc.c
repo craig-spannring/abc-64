@@ -21,10 +21,9 @@ extern bool use_bed;
 
 #define ESC '\033'
 
-Forward int maxdeflen;
-Forward Hidden Procedure initsense(void);
-Forward Hidden Procedure initmouse(void);
-Forward Hidden bool equalhead(string keystr, int nkey, string def, int len);
+Hidden Procedure initsense(void);
+Hidden Procedure initmouse(void);
+Hidden bool equalhead(string keystr, int nkey, string def, int len);
 
 /*
 This file contains a little parser for key definition files.
