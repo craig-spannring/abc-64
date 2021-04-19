@@ -15,7 +15,7 @@ extern "C" {
 Visible Procedure initpos(void);
 Visible Procedure endpos(void);
 Visible int getpos(char *fname);
-Visible bool savpos(char *fname, environ *ep);
+Visible bool savpos(char *fname, enviro *ep);
 Visible Procedure delpos(char *fname);
 Visible Procedure movpos(char *ofname, char *nfname);
 

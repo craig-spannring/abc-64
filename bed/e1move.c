@@ -25,14 +25,14 @@
 #define Left (-1)
 #define Rite 1
 
-Forward Hidden bool nextchar(environ *ep, int direction);
-Forward Hidden bool tabstop(environ *ep, int i);
+Forward Hidden bool nextchar(enviro *ep, int direction);
+Forward Hidden bool tabstop(enviro *ep, int i);
 
 /*
  * Common code for PREVIOUS and NEXT commands.
  */
 
-Hidden bool prevnext(environ *ep, int direction)
+Hidden bool prevnext(enviro *ep, int direction)
 {
 	nodeptr n;
 	nodeptr n1;
@@ -180,7 +180,7 @@ Hidden bool prevnext(environ *ep, int direction)
 }
 
 
-Visible bool previous(environ *ep)
+Visible bool previous(enviro *ep)
 {
 	if (!prevnext(ep, Left))
 		return No;
@@ -188,14 +188,14 @@ Visible bool previous(environ *ep)
 }
 
 
-Visible bool nextarrow(environ *ep)
+Visible bool nextarrow(enviro *ep)
 {
 	if (!prevnext(ep, Rite))
 		return No;
 	return Yes;
 }
 
-Visible bool leftarrow(environ *ep)
+Visible bool leftarrow(enviro *ep)
 {
 	int w;
 	bool hole;
@@ -225,7 +225,7 @@ Visible bool leftarrow(environ *ep)
 	return Yes;
 }
 
-Visible bool ritearrow(environ *ep)
+Visible bool ritearrow(enviro *ep)
 {
 	while (narrow(ep))
 		;
@@ -241,7 +241,7 @@ Visible bool ritearrow(environ *ep)
  * Assume current position given as SUBSET.
  */
 
-Hidden bool nextchar(environ *ep, int direction)
+Hidden bool nextchar(enviro *ep, int direction)
 {
 	int ich;
 	int nch;
@@ -304,7 +304,7 @@ Hidden bool nextchar(environ *ep, int direction)
  * Up and down arrows.
  */
 
-Hidden bool updownarrow(environ *ep, int yincr)
+Hidden bool updownarrow(enviro *ep, int yincr)
 {
 	int y, x;
 
@@ -320,17 +320,17 @@ Hidden bool updownarrow(environ *ep, int yincr)
 	return Yes;
 }
 
-Visible bool uparrow(environ *ep)
+Visible bool uparrow(enviro *ep)
 {
 	return updownarrow(ep, -1);
 }
 
-Visible bool downarrow(environ *ep)
+Visible bool downarrow(enviro *ep)
 {
 	return updownarrow(ep, 1);
 }
 
-Visible bool upline(environ *ep)
+Visible bool upline(enviro *ep)
 {
 	int y;
 
@@ -343,7 +343,7 @@ Visible bool upline(environ *ep)
 	return Yes;
 }
 
-Visible bool downline(environ *ep)
+Visible bool downline(enviro *ep)
 {
 	int w;
 
@@ -365,7 +365,7 @@ Visible bool downline(environ *ep)
  */
 
 
-Visible bool acceptcommand(environ *ep)
+Visible bool acceptcommand(enviro *ep)
 {
 	int i;
 	string repr;
@@ -432,7 +432,7 @@ Visible bool acceptcommand(environ *ep)
  * Find suitable tab stops for acceptcommand.
  */
 
-Hidden bool tabstop(environ *ep, int i)
+Hidden bool tabstop(enviro *ep, int i)
 {
 	nodeptr n = tree(ep->focus);
 	int nch;

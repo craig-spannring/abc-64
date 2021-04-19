@@ -830,19 +830,19 @@ Hidden bool same_heading(value pname, value npname, value u_new) {
 		return Yes;
 	else {
 		parsetree old= How_to(*aa)->unit;
-		parsetree new= How_to(u_new)->unit;
+		parsetree new_item= How_to(u_new)->unit;
 		parsetree old_kw, old_fml, old_next;
 		parsetree new_kw, new_fml, new_next;
 		
 		old= *Branch(old, HOW_FORMALS);
-		new= *Branch(new, HOW_FORMALS);
+		new_item= *Branch(new_item, HOW_FORMALS);
 		do {
 			old_kw= *Branch(old, FML_KEYW);
 			old_fml= *Branch(old, FML_TAG);
 			old_next= *Branch(old, FML_NEXT);
-			new_kw= *Branch(new, FML_KEYW);
-			new_fml= *Branch(new, FML_TAG);
-			new_next= *Branch(new, FML_NEXT);
+			new_kw= *Branch(new_item, FML_KEYW);
+			new_fml= *Branch(new_item, FML_TAG);
+			new_next= *Branch(new_item, FML_NEXT);
 			
 			if (compare(old_kw, new_kw) != 0)
 				return No;
@@ -855,7 +855,7 @@ Hidden bool same_heading(value pname, value npname, value u_new) {
 			else if (old_next != NilTree && new_next == NilTree)
 				return No;
 			old= old_next;
-			new= new_next;
+			new_item= new_next;
 		}
 		while (old != NilTree);
 		return Yes;

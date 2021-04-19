@@ -61,7 +61,7 @@ extern "C" {
 #define SUBLIST	'L'
 #define FHOLE	'F'
 
-typedef struct {
+typedef struct Enviro {
 	pathptr focus;
 	char mode;
 	char /*bool*/ copyflag;
@@ -75,7 +75,7 @@ typedef struct {
 	value oldmacro; /* A text */
 	value newmacro; /* A text, too */
 	int generation;
-} environ;
+} enviro;
 
 #ifdef STRUCTASS
 #define Emove(e1, e2) ((e2) = (e1))
@@ -85,7 +85,7 @@ typedef struct {
 #define Ecopy(e1, e2) ecopy(&(e1), &(e2))
 #define Erelease(e) erelease(&(e))
 
-	bool ishole(environ *ep);
+	bool ishole(enviro *ep);
 
 #ifdef __cplusplus
 }

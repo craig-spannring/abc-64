@@ -3,6 +3,8 @@
 #ifndef COMP_h_ffc637d5db31e33ffc31f6acea83e20b
 #define COMP_h_ffc637d5db31e33ffc31f6acea83e20b
 
+#include <signal.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -22,7 +24,8 @@ typedef int frexpint;	/*The 2nd argument of frexp points to this */
 #define SIGNAL
 /* type returned by signal handler function: (used to be int) */
 #define SIGTYPE void
-
+//#define SIGTYPE void*
+	
 /* can #include <setjmp.h> */
 #define SETJMP
 

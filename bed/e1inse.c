@@ -22,13 +22,13 @@
 #include "code.h"
 #include "b1grab.h"
 
-Forward Hidden bool ifmatch(environ *ep, string *pstr, string str, int alt_c);
+Forward Hidden bool ifmatch(enviro *ep, string *pstr, string str, int alt_c);
 
 /*
  * Try to insert the character c in the focus *pp.
  */
 
-Visible bool insguess(pathptr *pp, char c, environ *ep)
+Visible bool insguess(pathptr *pp, char c, enviro *ep)
 {
 	pathptr pa = parent(*pp);
 	nodeptr n;
@@ -131,7 +131,7 @@ Visible bool mayinsert(nodeptr n, int ich, int s2, char c)
  * as possible will have been incorporated in the string node.
  */
 
-Visible bool soften(environ *ep, string *pstr, int alt_c)
+Visible bool soften(enviro *ep, string *pstr, int alt_c)
 {
 	pathptr pa = parent(ep->focus);
 	nodeptr n;
@@ -204,7 +204,7 @@ Visible bool soften(environ *ep, string *pstr, int alt_c)
  * Return Yes if *pstr has been advanced.
  */
 
-Visible bool resuggest(environ *ep, string *pstr, int alt_c)
+Visible bool resuggest(enviro *ep, string *pstr, int alt_c)
 {
 	struct table *tp;
 	struct classinfo *ci;
@@ -323,7 +323,7 @@ Visible bool resuggest(environ *ep, string *pstr, int alt_c)
  * longest match.
  */
 
-Hidden bool ifmatch(environ *ep, string *pstr, string str, int alt_c)
+Hidden bool ifmatch(enviro *ep, string *pstr, string str, int alt_c)
 {
 	int c = str[ep->s2];
 

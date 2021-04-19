@@ -15,7 +15,7 @@
 #include "bmem.h"
 #include "b1grab.h"
 
-Forward Hidden Procedure repwidth(nodeptr *pn, nodeptr old, nodeptr new);
+Forward Hidden Procedure repwidth(nodeptr *pn, nodeptr old, nodeptr new_node);
 
 #define Register ??? register ???
 	/* Used for registers 4-6.  Define as empty macro on PDP */
@@ -217,11 +217,11 @@ Visible pathptr newpath(pathptr pa, nodeptr n, int i)
  * be the major caller of noderepr() and fwidth().
  */
 
-Hidden Procedure repwidth(nodeptr *pn, nodeptr old, nodeptr new)
+Hidden Procedure repwidth(nodeptr *pn, nodeptr old, nodeptr new_node)
 {
 	int w = Width(*pn);
 	int oldwidth = nodewidth(old);
-	int newwidth = nodewidth(new);
+	int newwidth = nodewidth(new_node);
 
 	if (w >= 0) {
 		Assert(oldwidth >= 0);
@@ -247,19 +247,19 @@ Hidden Procedure repwidth(nodeptr *pn, nodeptr old, nodeptr new)
 }
 
 
-Visible Procedure markpath(pathptr *pp, markbits new)
+Visible Procedure markpath(pathptr *pp, markbits new_marks)
 {
 	nodeptr *pn;
 	markbits old;
 
 	Assert(Is_Node(Tree(*pp)));
 	old = Marks(Tree(*pp));
-	if ((old|new) == old)
+	if ((old|new_marks) == old)
 		return; /* Bits already set */
 
 	pn = Loctree(pp);
-	Setmarks(pn, old|new);
-	Addmarks(pp, new&~old);
+	Setmarks(pn, old|new_marks);
+	Addmarks(pp, new_marks&~old);
 }
 
 

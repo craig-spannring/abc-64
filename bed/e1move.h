@@ -12,15 +12,15 @@
 extern "C" {
 #endif
 
-    Visible bool previous(environ *ep);
-    Visible bool nextarrow(environ *ep);
-    Visible bool leftarrow(environ *ep);
-    Visible bool ritearrow(environ *ep);
-    Visible bool uparrow(environ *ep);
-    Visible bool downarrow(environ *ep);
-    Visible bool upline(environ *ep);
-    Visible bool acceptcommand(environ *ep);
-    Visible bool downline(environ *ep);
+    Visible bool previous(enviro *ep);
+    Visible bool nextarrow(enviro *ep);
+    Visible bool leftarrow(enviro *ep);
+    Visible bool ritearrow(enviro *ep);
+    Visible bool uparrow(enviro *ep);
+    Visible bool downarrow(enviro *ep);
+    Visible bool upline(enviro *ep);
+    Visible bool acceptcommand(enviro *ep);
+    Visible bool downline(enviro *ep);
 
 #ifdef __cplusplus
 }

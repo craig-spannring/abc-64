@@ -7,6 +7,7 @@
 #include "main.h" /* for freepath() */
 #include "port.h" /* for makepath() */
 
+#include <unistd.h>
 /* Date and time includes are in os.h, included from b.h */
 
 /* synonyms for current and parent directory */
@@ -126,7 +127,6 @@ Visible Porting char *curdir(void)
 	static char buffer[1024];
 	char *res;
 #ifdef HAS_GETCWD
-	char *getcwd(char *, size_t);
 	errno=0;
 	res= getcwd(buffer, 1024);
 	if (!res) {

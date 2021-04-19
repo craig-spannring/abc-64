@@ -149,7 +149,7 @@ Visible bool nextline(pathptr *pp)
  * on the next line.
  */
 
-Visible int lineno(environ *ep)
+Visible int lineno(enviro *ep)
 {
 	int y;
 
@@ -167,7 +167,7 @@ Visible int lineno(environ *ep)
  * (Hope the abovementioned trick isn't necessary.)
  */
 
-Visible int colno(environ *ep)
+Visible int colno(enviro *ep)
 {
 	int x= focoffset(ep);
 
@@ -181,7 +181,7 @@ Visible int colno(environ *ep)
  * Make the focus exactly one line wide (if at all possible).
  */
 
-Visible Procedure oneline(environ *ep)
+Visible Procedure oneline(enviro *ep)
 {
 	nodeptr n;
 	nodeptr nn;

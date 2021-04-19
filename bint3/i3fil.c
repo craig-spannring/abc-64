@@ -15,6 +15,7 @@
 #include "i3scr.h"
 #include "i3sou.h"
 
+
 Forward Hidden bool fnm_extend(char *fname, int n, char *suffix);
 Forward Hidden bool fnm_narrow(char *fname, int n);
 Forward Hidden Procedure conv_fname(char *fname, char *suffix);
@@ -82,9 +83,9 @@ Visible char *f_getline(FILE *file) {
 	return NULL;
 }
 
-/*Hidden*/ struct class { literal type; char *suffix; };
+struct type_to_suffix_map { literal type; char *suffix; };
 
-Hidden struct class classes[]= {
+Hidden struct type_to_suffix_map classes[]= {
 	{Cmd, Cmd_ext},
 	{Zfd, Zfd_ext},
 	{Mfd, Mfd_ext},
@@ -99,7 +100,7 @@ Hidden struct class classes[]= {
 #define NCLASSES (sizeof classes / sizeof classes[0])
 
 Hidden char *filesuffix(literal type) {
-	struct class *cp;
+	struct type_to_suffix_map *cp;
 
 	for (cp= classes; cp < &classes[NCLASSES]; ++cp) {
 		if (type == cp->type)

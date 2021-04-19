@@ -5,11 +5,11 @@
 extern "C" {
 #endif
 
-    Visible bool narrow(environ *ep);
-    Visible bool rnarrow(environ *ep);
+    Visible bool narrow(enviro *ep);
+    Visible bool rnarrow(enviro *ep);
 
-    Visible bool widen(environ *ep, bool deleting);
-    Visible bool extend(environ *ep);
+    Visible bool widen(enviro *ep, bool deleting);
+    Visible bool extend(enviro *ep);
 
 #ifdef __cplusplus
 }

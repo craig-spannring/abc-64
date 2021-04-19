@@ -95,7 +95,7 @@ set(abc_c_only_flags
     )
 target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
-  ${abc_c_only_flags}
+  # ${abc_c_only_flags}
   ${abc_c_cxx_flags}
   )
 target_link_libraries(abc

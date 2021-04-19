@@ -33,9 +33,9 @@
 extern bool lefttorite;
 	/* Set by edit() to signal we parse purely left-to-right */
 
-Forward Hidden bool ins_node(environ *ep, nodeptr n, queue *pq);
+Forward Hidden bool ins_node(enviro *ep, nodeptr n, queue *pq);
 Forward Hidden bool joinnodes(pathptr *pp, nodeptr n1, nodeptr n2, bool spflag);
-Forward Hidden bool add_string(environ *ep, string *pstr);
+Forward Hidden bool add_string(enviro *ep, string *pstr);
 Forward Hidden bool canfitchar(int c, struct classinfo *ci);
 
 /*
@@ -48,12 +48,12 @@ Forward Hidden bool canfitchar(int c, struct classinfo *ci);
  * are then inserted individually.
  */
 
-Visible bool ins_queue(environ *ep, queue *pq, queue *pq2)
+Visible bool ins_queue(enviro *ep, queue *pq, queue *pq2)
 {
 	bool ok = Yes;
 	nodeptr n;
 	queue oldq2;
-	environ saveenv;
+	enviro saveenv;
 	int oldindentation = focindent(ep);
 	int indentation = oldindentation;
 	string str;
@@ -119,7 +119,7 @@ Visible bool ins_queue(environ *ep, queue *pq, queue *pq2)
  * without affecting the focus position.
  */
 
-Visible bool app_queue(environ *ep, queue *pq)
+Visible bool app_queue(enviro *ep, queue *pq)
 {
 	int where;
 	static int markbit = 1; /* To properly handle recursive calls */
@@ -146,7 +146,7 @@ Visible bool app_queue(environ *ep, queue *pq)
  * Advance to next thing after current position.
  */
 
-Visible bool move_on(environ *ep)
+Visible bool move_on(enviro *ep)
 {
 	nodeptr n;
 	string *rp;
@@ -195,7 +195,7 @@ Visible bool move_on(environ *ep)
  * <<<<< This code is a dinosaur and should be revised. >>>>>
  */
 
-Visible bool fix_move(environ *ep)
+Visible bool fix_move(enviro *ep)
 {
 	int ich;
 	int i;
@@ -245,7 +245,7 @@ Visible bool fix_move(environ *ep)
  * Insert a node in the parse tree.
  */
 
-Hidden bool ins_node(environ *ep, nodeptr n, queue *pq)
+Hidden bool ins_node(enviro *ep, nodeptr n, queue *pq)
 {
 	int sym;
 	nodeptr nn;
@@ -454,7 +454,7 @@ Hidden bool is_varsuggrest(nodeptr n, bool exphole_seen) {
  * following focus;
  * else, if rest resembles suggestion-rest, kill that.
  */
-Hidden bool ack_or_kill_varsuggrest(environ *ep, string *pstr) {
+Hidden bool ack_or_kill_varsuggrest(enviro *ep, string *pstr) {
 	nodeptr nn= tree(ep->focus);
 	
 	if (fits_nextkwstart(child(nn, 2), (int)**pstr)) {
@@ -489,7 +489,7 @@ Hidden bool ack_or_kill_varsuggrest(environ *ep, string *pstr) {
  * userinput ')
  */
 
-Hidden bool range_hack(environ *ep) {
+Hidden bool range_hack(enviro *ep) {
 	pathptr pa;
 	int sympa;
 	string str;
@@ -538,7 +538,7 @@ Visible bool justgoon = No;
 
 #define NEXT_CH (++str, alt_c = 0)
 
-Visible bool ins_string(environ *ep, string str, queue *pq, int alt_c)
+Visible bool ins_string(enviro *ep, string str, queue *pq, int alt_c)
 	/*auto*/ 
 {
 	nodeptr nn;
@@ -987,7 +987,7 @@ Visible int joinstring(pathptr *pp, string str, bool spflag, int alt_c, bool may
  */
 
 Hidden bool
-add_string(environ *ep, string *pstr)
+add_string(enviro *ep, string *pstr)
 {
 	struct table *tp;
 	pathptr pa = parent(ep->focus);

@@ -37,7 +37,7 @@
 static short *indent;
 static int level;
 
-Forward Hidden bool editindentation(environ *ep, FILE *fp);
+Forward Hidden bool editindentation(enviro *ep, FILE *fp);
 
 /*
  * Read (edit) parse tree from file into the focus.
@@ -49,7 +49,7 @@ Forward Hidden bool editindentation(environ *ep, FILE *fp);
  */
 
 Visible bool
-readfile(environ *ep, string filename, int line, bool creating)
+readfile(enviro *ep, string filename, int line, bool creating)
 {
 
 	int lines = 0;
@@ -122,7 +122,7 @@ readfile(environ *ep, string filename, int line, bool creating)
  */
 
 Hidden bool
-editindentation(environ *ep, FILE *fp)
+editindentation(enviro *ep, FILE *fp)
 {
 	int ind= 0;
 	int c;

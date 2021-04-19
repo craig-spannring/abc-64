@@ -10,13 +10,13 @@
 extern "C" {
 #endif
 
-	extern Visible bool      delbody(environ *ep);
+	extern Visible bool      delbody(enviro *ep);
 	extern Visible Procedure delfocus(pathptr *pp);
-	extern Visible bool      copyinout(environ *ep);
-	extern Visible value     copyout(environ *ep);
-	extern Visible bool      ishole(environ *ep);
-	extern Visible bool      delsublist(environ *ep);
-	extern Visible bool      deltext(environ *ep);
+	extern Visible bool      copyinout(enviro *ep);
+	extern Visible value     copyout(enviro *ep);
+	extern Visible bool      ishole(enviro *ep);
+	extern Visible bool      delsublist(enviro *ep);
+	extern Visible bool      deltext(enviro *ep);
 
 
 #ifdef __cplusplus

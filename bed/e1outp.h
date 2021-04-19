@@ -16,7 +16,7 @@ extern "C" {
 	extern Visible int focy; /* Where the cursor must go */
 	extern Visible int focx;
 	
-	extern Visible Procedure savefocus(environ *ep);
+	extern Visible Procedure savefocus(enviro *ep);
 	extern Visible Procedure setfocus(cell *tops);
 	extern Visible Procedure startactupdate(bool nofocus);
 	extern Visible Procedure endactupdate(void);

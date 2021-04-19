@@ -31,15 +31,15 @@
 
 extern bool lefttorite;
 
-Forward Hidden bool delvarying(environ *ep);
-Forward Hidden bool delfixed(environ *ep);
-Forward Hidden bool delsubset(environ *ep, bool hack);
-Forward Hidden bool delwhole(environ *ep);
-Forward Hidden bool delhole(environ *ep);
+Forward Hidden bool delvarying(enviro *ep);
+Forward Hidden bool delfixed(enviro *ep);
+Forward Hidden bool delsubset(enviro *ep, bool hack);
+Forward Hidden bool delwhole(enviro *ep);
+Forward Hidden bool delhole(enviro *ep);
 Forward Hidden Procedure nonewline(queue *pq);
-Forward Hidden Procedure balance(environ *ep);
-Forward Hidden bool copyin(environ *ep, queue q);
-Forward Hidden bool colonhack(environ *ep, int all);
+Forward Hidden Procedure balance(enviro *ep);
+Forward Hidden bool copyin(enviro *ep, queue q);
+Forward Hidden bool colonhack(enviro *ep, int all);
 Forward Hidden bool allright(string repr);
 
 /*
@@ -63,7 +63,7 @@ Forward Hidden bool allright(string repr);
  * if it is only a hole.
  */
 
-Visible bool deltext(environ *ep)
+Visible bool deltext(enviro *ep)
 {
 	higher(ep);
 	shrink(ep);
@@ -81,7 +81,7 @@ Visible bool deltext(environ *ep)
  * Delete the focus under the assumption that it contains some text.
  */
 
-Visible bool delbody(environ *ep)
+Visible bool delbody(enviro *ep)
 {
 	ep->changed = Yes;
 
@@ -114,7 +114,7 @@ Visible bool delbody(environ *ep)
  * Delete portion (ep->mode == SUBRANGE) of varying text ((ep->s1&1) == 0).
  */
 
-Hidden bool delvarying(environ *ep)
+Hidden bool delvarying(enviro *ep)
 {
 	auto queue q = Qnil;
 	nodeptr n = tree(ep->focus);
@@ -156,7 +156,7 @@ Hidden bool delvarying(environ *ep)
  * Delete portion (ep->mode == SUBRANGE) of fixed text ((ep->s1&1) == 1).
  */
 
-Hidden bool delfixed(environ *ep)
+Hidden bool delfixed(enviro *ep)
 {
 	nodeptr n = tree(ep->focus);
 	char buf[15]; /* Long enough for all fixed texts */
@@ -205,7 +205,7 @@ Hidden bool delfixed(environ *ep)
  * (the latter being sent to qq)
  */
 
-Hidden bool hole_ify_keywords(environ *ep, queue *qq)
+Hidden bool hole_ify_keywords(enviro *ep, queue *qq)
 {
 	treereplace(&ep->focus, gram(Kw_plus));
 	ep->mode= VHOLE;
@@ -224,7 +224,7 @@ Hidden bool hole_ify_keywords(environ *ep, queue *qq)
  * Delete focus if ep->mode == SUBSET.
  */
 
-Hidden bool delsubset(environ *ep, bool hack)
+Hidden bool delsubset(enviro *ep, bool hack)
 {
 	auto queue q = Qnil;
 	auto queue q2 = Qnil;
@@ -309,7 +309,7 @@ Hidden bool delsubset(environ *ep, bool hack)
  * Delete the focus if ep->mode == SUBLIST.
  */
 
-bool delsublist(environ *ep)
+bool delsublist(enviro *ep)
 {
 	nodeptr n;
 	int i;
@@ -367,7 +367,7 @@ bool delsublist(environ *ep)
  * Delete the focus if ep->mode == WHOLE.
  */
 
-Hidden bool delwhole(environ *ep)
+Hidden bool delwhole(enviro *ep)
 {
 	int sym = symbol(tree(ep->focus));
 
@@ -384,7 +384,7 @@ Hidden bool delwhole(environ *ep)
  * Assume shrink() has been called before!
  */
 
-Hidden bool delhole(environ *ep)
+Hidden bool delhole(enviro *ep)
 {
 	nodeptr n;
 	int sym;
@@ -489,7 +489,7 @@ Visible Procedure delfocus(pathptr *pp)
  * empty (just a hole).
  */
 
-Visible bool copyinout(environ *ep)
+Visible bool copyinout(enviro *ep)
 {
 	shrink(ep);
 	if (!ishole(ep)) {
@@ -512,7 +512,7 @@ Visible bool copyinout(environ *ep)
  * Copy the focus to the copy buffer.
  */
 
-Visible value copyout(environ *ep)
+Visible value copyout(enviro *ep)
 {
 	auto queue q = Qnil;
 	auto pathptr p;
@@ -610,7 +610,7 @@ Hidden Procedure nonewline(queue *pq)
  * matching \b is immediately following.
  */
 
-Hidden Procedure balance(environ *ep)
+Hidden Procedure balance(enviro *ep)
 {
 	string *rp = noderepr(tree(ep->focus));
 	int i;
@@ -634,7 +634,7 @@ Hidden Procedure balance(environ *ep)
  * Copy the copy buffer to the focus.
  */
 
-Hidden bool copyin(environ *ep, queue q)
+Hidden bool copyin(enviro *ep, queue q)
 	            
 	/*auto*/         
 {
@@ -669,7 +669,7 @@ Hidden bool copyin(environ *ep, queue q)
  * Assumes shrink(ep) has already been performed.
  */
 
-Visible bool ishole(environ *ep)
+Visible bool ishole(enviro *ep)
 {
 	int sym;
 
@@ -707,7 +707,7 @@ Visible bool ishole(environ *ep)
  * Hacked to enable deletion of sequence of hole's at outer level.
  */
 
-Hidden bool colonhack(environ *ep, int all)
+Hidden bool colonhack(enviro *ep, int all)
 {
 	nodeptr n = tree(ep->focus);
 	nodeptr n1;

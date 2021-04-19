@@ -49,12 +49,12 @@ Visible string gotoformat;
 Visible string mousesense;
 Visible string mouseformat;
 
-Forward Hidden bool dosense(environ *ep, string sense, string format);
-Forward Hidden bool gotoscrollbar(environ *ep, int x);
+Forward Hidden bool dosense(enviro *ep, string sense, string format);
+Forward Hidden bool gotoscrollbar(enviro *ep, int x);
 Forward Hidden int poscomp(pathptr p, int y, int x);
-Forward Hidden Procedure fixsublist(environ *ep);
+Forward Hidden Procedure fixsublist(enviro *ep);
 
-Visible bool gotocursor(environ *ep) {
+Visible bool gotocursor(enviro *ep) {
 	int y;
 	int x;
 	
@@ -74,11 +74,11 @@ Visible bool gotocursor(environ *ep) {
 	return dosense(ep, gotosense, gotoformat);
 }
 
-Visible bool gotomouse(environ *ep) {
+Visible bool gotomouse(enviro *ep) {
 	return dosense(ep, mousesense, mouseformat);
 }
 
-Hidden bool dosense(environ *ep, string sense, string format) {
+Hidden bool dosense(enviro *ep, string sense, string format) {
 	int y;
 	int x;
 	
@@ -109,7 +109,7 @@ Hidden bool dosense(environ *ep, string sense, string format) {
  */
 
 Hidden bool
-gotoscrollbar(environ *ep, int x)
+gotoscrollbar(enviro *ep, int x)
 {
 	int w;
 
@@ -140,7 +140,7 @@ gotoscrollbar(environ *ep, int x)
  * the position (y, x).
  */
 
-Visible bool gotoyx(environ *ep, int y, int x)
+Visible bool gotoyx(enviro *ep, int y, int x)
 {
 	nodeptr n;
 	string *rp;
@@ -258,7 +258,7 @@ poscomp(pathptr p, int y, int x)
  * object starting here.
  */
 
-Visible Procedure gotofix(environ *ep, int y, int x)
+Visible Procedure gotofix(enviro *ep, int y, int x)
 {
 	int fx;
 	int fy;
@@ -343,7 +343,7 @@ Visible Procedure gotofix(environ *ep, int y, int x)
  */
 
 Hidden Procedure
-fixsublist(environ *ep)
+fixsublist(enviro *ep)
 {
 	pathptr pa = parent(ep->focus);
 	nodeptr n;

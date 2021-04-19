@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
 	extern Visible int doctype;
-	extern Visible environ *tobesaved;
+	extern Visible enviro *tobesaved;
 	extern Visible string savewhere;
 	
 	extern Visible Procedure initbed(void);

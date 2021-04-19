@@ -40,7 +40,7 @@ extern int getoperation(void);
 
 #define	CANT_SAVE   MESS(6300, "Cannot save how-to on file \"%s\"")
 
-extern environ *tobesaved;
+extern enviro *tobesaved;
 extern string savewhere;
 
 Hidden int highwatmark = Maxintlet;
@@ -48,8 +48,8 @@ Hidden int highwatmark = Maxintlet;
 Visible bool lefttorite;
 	/* Saves some time in nosuggtoqueue() for read from file */
 
-Forward Hidden bool execute(environ *ep, int cmd);
-Forward Hidden bool canexit(environ *ep);
+Forward Hidden bool execute(enviro *ep, int cmd);
+Forward Hidden bool canexit(enviro *ep);
 Forward Hidden bool findhole(pathptr *pp);
 Forward Hidden Procedure writetext(value v, FILE *fp);
 
@@ -57,10 +57,10 @@ Forward Hidden Procedure writetext(value v, FILE *fp);
  * Edit a unit or target, using the environment offered as a parameter.
  */
 
-Visible bool dofile(environ *ep, string filename, int linenumber, literal kind, bool creating, bool *changed)
+Visible bool dofile(enviro *ep, string filename, int linenumber, literal kind, bool creating, bool *changed)
 {
 	bool read_bad= No;
-	bool readfile(environ *ep, string filename, int line, bool creating);
+	bool readfile(enviro *ep, string filename, int line, bool creating);
 	
 #ifdef SAVEPOS
 	if (linenumber <= 0)
@@ -68,7 +68,7 @@ Visible bool dofile(environ *ep, string filename, int linenumber, literal kind, 
 #endif /* SAVEPOS */
 	setroot(kind == '=' ? Target_edit : Unit_edit);
 	savewhere = filename;
-	tobesaved = (environ*)NULL;
+	tobesaved = (enviro*)NULL;
 	*changed = No;
 
 	lefttorite = Yes;
@@ -98,7 +98,7 @@ Visible bool dofile(environ *ep, string filename, int linenumber, literal kind, 
 	savpos(filename, ep);
 #endif /* SAVEPOS */
 	savewhere = (char*)NULL;
-	tobesaved = (environ*)NULL;
+	tobesaved = (enviro*)NULL;
 	return Yes;
 }
 
@@ -119,7 +119,7 @@ Visible bool suspendabc(void) {
 	return r;
 }
 
-Visible bool editdocument(environ *ep, bool bad_file)
+Visible bool editdocument(enviro *ep, bool bad_file)
 {
 	int k;
 	int first = 0;
@@ -127,13 +127,13 @@ Visible bool editdocument(environ *ep, bool bad_file)
 	int current = 0;
 	int onscreen = -1;
 	bool reverse = No;
-	environ newenv;
+	enviro newenv;
 	int cmd;
 	bool errors = No;
 	int undoage = 0;
 	bool done = No;
 	int height;
-	environ history[MAXHIST];
+	enviro history[MAXHIST];
 
 	Ecopy(*ep, history[0]);
 
@@ -147,7 +147,7 @@ Visible bool editdocument(environ *ep, bool bad_file)
 			break;
 		if (!canceled && trmavail() <= 0) {
 			if (onscreen != current)
-				virtupdate(onscreen < 0 ? (environ*)NULL : &history[onscreen],
+				virtupdate(onscreen < 0 ? (enviro*)NULL : &history[onscreen],
 					&history[current],
 					reverse && onscreen >= 0 ?
 						history[onscreen].highest : history[current].highest);
@@ -331,7 +331,7 @@ Visible bool editdocument(environ *ep, bool bad_file)
 	} /* for (;;) */
 
 	if (onscreen != current)
-		virtupdate(onscreen < 0 ? (environ*)NULL : &history[onscreen],
+		virtupdate(onscreen < 0 ? (enviro*)NULL : &history[onscreen],
 			&history[current], highwatmark);
 	actupdate(Vnil, No, Yes);
 	Erelease(*ep);
@@ -351,11 +351,11 @@ Visible bool editdocument(environ *ep, bool bad_file)
 extern bool justgoon;
 
 Hidden bool
-execute(environ *ep, int cmd)
+execute(enviro *ep, int cmd)
 {
 	bool spflag = ep->spflag;
 	int i;
-	environ ev;
+	enviro ev;
 	char buf[2];
 	char ch;
 	int len;
@@ -542,7 +542,7 @@ execute(environ *ep, int cmd)
  * Initialize an environment variable.	Most things are set to 0 or NULL.
  */
 
-Visible Procedure clrenv(environ *ep)
+Visible Procedure clrenv(enviro *ep)
 {
 	ep->focus = newpath(NilPath, gram(Optional), 1);
 	ep->mode = WHOLE;
@@ -566,7 +566,7 @@ Visible Procedure clrenv(environ *ep)
  * (Higher() is called VERY often, so this pays).
  */
 
-Visible Procedure higher(environ *ep)
+Visible Procedure higher(enviro *ep)
 {
 	pathptr p = ep->focus;
 	int pl = 0;
@@ -587,7 +587,7 @@ Visible Procedure higher(environ *ep)
  * Issue debug status message.
  */
 
-Visible Procedure dbmess(environ *ep)
+Visible Procedure dbmess(enviro *ep)
 {
 #ifndef SMALLSYS
 	char stuff[80];
@@ -642,9 +642,9 @@ Visible Procedure dbmess(environ *ep)
 #ifndef SMALLSYS
 
 Hidden bool
-canexit(environ *ep)
+canexit(enviro *ep)
 {
-	environ ev;
+	enviro ev;
 
 	if (symbol(tree(ep->focus)) == Suggestion)
 		acksugg(ep);

@@ -64,9 +64,10 @@ Visible value get_names(char *path, bool (*isabc) (char *path, char *name)) {
 
 #define DumClass '\0'
 
-/*Hidden*/ struct class { char *suffix; literal type; };
 
-Hidden struct class classes[]= {
+struct suffix_to_type_map { char *suffix; literal type; };
+
+Hidden struct suffix_to_type_map classes[]= {
 	{".cmd", Cmd},
 	{".zfd", Zfd},
 	{".mfd", Mfd},
@@ -102,7 +103,7 @@ Hidden struct class classes[]= {
 
 Hidden literal classfile(value fname) {
 	char *sfname, *end;
-	struct class *cp;
+	struct suffix_to_type_map *cp;
 
 	sfname= strval(fname);
 	switch (sfname[0]) {

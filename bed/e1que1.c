@@ -256,7 +256,7 @@ Hidden bool rest_is_hollow(nodeptr n) {
  * Also, it cannot fail.
  */
 
-Visible Procedure nosuggtoqueue(environ *ep, queue *pq)
+Visible Procedure nosuggtoqueue(enviro *ep, queue *pq)
 {
 	auto queue q = Qnil;
 	int i;
@@ -297,7 +297,7 @@ Visible Procedure nosuggtoqueue(environ *ep, queue *pq)
  * Check whether the remainder of the current node is all suggestion.
  */
 
-Visible bool issuggestion(environ *ep)
+Visible bool issuggestion(enviro *ep)
 {
 	nodeptr n;
 	int nch;
@@ -341,7 +341,7 @@ Visible bool fitnode(pathptr *pp, nodeptr n)
 
 Visible int fitstring(pathptr *pp, string str, int alt_c)
 {
-	environ dummyenv;
+	enviro dummyenv;
 	nodeptr n;
 	int ich;
 	int len;
@@ -415,7 +415,7 @@ Visible int fitstring(pathptr *pp, string str, int alt_c)
  * this is implemented incomplete.
  */
 
-Visible Procedure fixfocus(environ *ep, int len)
+Visible Procedure fixfocus(enviro *ep, int len)
 {
 	nodeptr nn;
 	nodeptr n = tree(ep->focus);
@@ -489,7 +489,7 @@ Visible Procedure fixfocus(environ *ep, int len)
  * deserves re-interpretation.
  */
 
-Visible bool spacefix(environ *ep)
+Visible bool spacefix(enviro *ep)
 {
 	pathptr pa;
 	nodeptr n;

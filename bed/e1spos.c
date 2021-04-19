@@ -34,11 +34,11 @@ Hidden pos poshead= PNULL;
 Hidden bool poschanges;
 
 Hidden pos new_pos(char *fname, int line) {
-	pos new= (pos) getmem((unsigned) sizeof(poschain));
-	new->fname= (char *) savestr(fname);
-	new->line= line;
-	new->next= PNULL;
-	return new;
+	pos the_new_pos= (pos) getmem((unsigned) sizeof(poschain));
+	the_new_pos->fname= (char *) savestr(fname);
+	the_new_pos->line= line;
+	the_new_pos->next= PNULL;
+	return the_new_pos;
 }
 
 Hidden Procedure free_pos(pos filpos) {
@@ -69,12 +69,12 @@ Hidden int del_pos(char *fname) {
 }
 
 Hidden Procedure sav_pos(char *fname, int line) {
-	pos new;
+	pos the_new_pos;
 	
 	VOID del_pos(fname);
-	new= new_pos(fname, line);
-	new->next= poshead;
-	poshead= new;
+	the_new_pos= new_pos(fname, line);
+	the_new_pos->next= poshead;
+	poshead= the_new_pos;
 	poschanges= Yes;
 }
 
@@ -82,8 +82,9 @@ Visible Procedure initpos(void) {
 	FILE *file;
 	char *buffer;
 	char *fname;
-	int line;
-	pos tail, new;
+	int   line;
+	pos   tail;
+	pos   newpos;
 	
 	poshead= tail= PNULL;
 	poschanges= No;
@@ -95,12 +96,12 @@ Visible Procedure initpos(void) {
 
 		if (sscanf(buffer, "%s\t%d", fname, &line) == 2) {
 			if (F_exists(fname)) {
-				new= new_pos(fname, line);
+				newpos= new_pos(fname, line);
 				if (!tail)
-					poshead= tail= new;
+					poshead= tail= newpos;
 				else {
-					tail->next= new;
-					tail= new;
+					tail->next= newpos;
+					tail= newpos;
 				}
 			}
 		}
@@ -158,7 +159,7 @@ Visible int getpos(char *fname) {
 
 /* savpos() is called from editor */
 
-Visible bool savpos(char *fname, environ *ep) {
+Visible bool savpos(char *fname, enviro *ep) {
 	sav_pos(fname, lineno(ep) + 1);
   return 1;
 }

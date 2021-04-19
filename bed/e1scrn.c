@@ -35,8 +35,8 @@ Forward cell *gettop(cell *tops);
 Forward Hidden Procedure growwin(void);
 Forward Hidden int makeroom(cell *p, int curlno, int delcnt);
 Forward Hidden int make2room(cell *p, int curlno, int delcnt);
-Forward Hidden bool atlinestart(environ *ep);
-Forward Hidden int fixlevels(environ *oldep, environ *newep, int highest);
+Forward Hidden bool atlinestart(enviro *ep);
+Forward Hidden int fixlevels(enviro *oldep, enviro *newep, int highest);
 Forward Hidden Procedure initvtrm(void);
 
 
@@ -264,10 +264,10 @@ Hidden int make2room(cell *p, int curlno, int delcnt)
  * Routine called for every change in the screen.
  */
 
-Visible Procedure virtupdate(environ *oldep, environ *newep, int highest)
+Visible Procedure virtupdate(enviro *oldep, enviro *newep, int highest)
 {
-	environ old;
-	environ new;
+	enviro old;
+	enviro new_enviro;
 	int oldlno;
 	int newlno;
 	int oldlcnt;
@@ -284,12 +284,12 @@ Visible Procedure virtupdate(environ *oldep, environ *newep, int highest)
 	else {
 		Ecopy(*oldep, old);
 	}
-	Ecopy(*newep, new);
+	Ecopy(*newep, new_enviro);
 
-	savefocus(&new);
+	savefocus(&new_enviro);
 
-	oldlcnt = fixlevels(&old, &new, highest);
-	newlcnt = -nodewidth(tree(new.focus));
+	oldlcnt = fixlevels(&old, &new_enviro, highest);
+	newlcnt = -nodewidth(tree(new_enviro.focus));
 	if (newlcnt < 0)
 		newlcnt = 0;
 	i = -nodewidth(tree(old.focus));
@@ -299,27 +299,27 @@ Visible Procedure virtupdate(environ *oldep, environ *newep, int highest)
 		/* Offset newlcnt as much as oldcnt is offset */
 	
 	oldlno = Ycoord(old.focus);
-	newlno = Ycoord(new.focus);
+	newlno = Ycoord(new_enviro.focus);
 	if (!atlinestart(&old))
 		++oldlcnt;
 	else
 		++oldlno;
-	if (!atlinestart(&new))
+	if (!atlinestart(&new_enviro))
 		++newlcnt;
 	else
 		++newlno;
 	Assert(oldlno == newlno);
 
-	tops = replist(tops, build(new.focus, newlcnt), oldlno, oldlcnt);
+	tops = replist(tops, build(new_enviro.focus, newlcnt), oldlno, oldlcnt);
 
 	setfocus(tops); /* Incorporate the information saved by savefocus */
 
 	Erelease(old);
-	Erelease(new);
+	Erelease(new_enviro);
 }
 
 
-Hidden bool atlinestart(environ *ep)
+Hidden bool atlinestart(enviro *ep)
 {
 	string repr = noderepr(tree(ep->focus))[0];
 
@@ -333,7 +333,7 @@ Hidden bool atlinestart(environ *ep)
  * (0 if the whole unit has no linefeeds.)
  */
 
-Hidden int fixlevels(environ *oldep, environ *newep, int highest)
+Hidden int fixlevels(enviro *oldep, enviro *newep, int highest)
 {
 	int oldpl = pathlength(oldep->focus);
 	int newpl = pathlength(newep->focus);

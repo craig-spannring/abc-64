@@ -39,7 +39,7 @@ Visible string getmess(int nr) {
 	int    last;
 	int    c;
 	char  *cp= NULL;
-	bool   new;
+	bool   is_new;
 	int    block;
 	long   ftell(FILE *);
 	
@@ -71,11 +71,11 @@ Visible string getmess(int nr) {
 			if (probe[block] <= nr)
 				break;
 		}
-		new= block == nprobes-1;
+		is_new= block == nprobes-1;
 		fseek(messfp, (long)block*BUFSIZ, 0);
 		last= 0;
 		while (last < nr) {
-			if (new) block= ftell(messfp) / BUFSIZ;
+			if (is_new) block= ftell(messfp) / BUFSIZ;
 			cp= buf;
 			while ((c= getc(messfp)) != EOF && c != '\n') {
 				if (cp >= buf + MESSBUFSIZE - 2) break;
@@ -99,7 +99,7 @@ Visible string getmess(int nr) {
 			last= atoi(buf);
 			if (last <= 0)
 				continue;
-			if (new && block >= nprobes && nprobes < MAXPROBE) {
+			if (is_new && block >= nprobes && nprobes < MAXPROBE) {
 				probe[block]= last;
 				nprobes= block+1;
 			}
@@ -137,13 +137,13 @@ Visible Procedure putmess(int m)
 
 #ifndef KEYS
 
-Visible Procedure putSmess(int m, string s)
+Visible Procedure putSmess(int m, conststring s)
 {
 	putsSerr(getmess(m), s);
 	flusherr();
 }
 
-Visible Procedure putDSmess(int m, int d, string s)
+Visible Procedure putDSmess(int m, int d, conststring s)
 {
 	putsDSerr(getmess(m), d, s);
 	flusherr();

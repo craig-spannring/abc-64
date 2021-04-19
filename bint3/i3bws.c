@@ -173,7 +173,8 @@ Hidden Procedure put_wsgroup(void)
 
 Hidden bool wschange(value ws) {
 	value name, *aa;
-	bool new= No, changed;
+	bool is_new= No;
+	bool changed;
 	char *path;
 
 	if (gr_exists(ws, &aa))
@@ -182,13 +183,13 @@ Hidden bool wschange(value ws) {
 		name= new_fname(ws, Wsp);
 		if (!Valid(name))
 			return No;
-		new= Yes;
+		is_new= Yes;
 	}
 	path= makepath(bwsdir, strval(name));
 	VOID Mkdir(path);
 	changed= ch_dir(path);
 	if (changed) {
-		if (new) def_group(ws, name);
+		if (is_new) def_group(ws, name);
 #ifdef CK_WS_WRITABLE
 	        ckws_once= Yes;
 #endif

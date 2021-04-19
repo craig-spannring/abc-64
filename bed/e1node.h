@@ -22,7 +22,7 @@ extern "C" {
     Visible int       pathlength(pathptr p);
     Visible nodeptr      newnode(int nch, int sym, nodeptr *children);
     Visible pathptr      newpath(pathptr pa, nodeptr n, int i);
-    Visible Procedure markpath(pathptr *pp, markbits new);
+    Visible Procedure markpath(pathptr *pp, markbits new_marks);
     Visible Procedure putintrim(value *pn, int head, int tail, string str);
     Visible Procedure setchild(nodeptr *pn, int i, nodeptr n);
     Visible Procedure top(pathptr *pp);

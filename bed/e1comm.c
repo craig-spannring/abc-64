@@ -33,16 +33,16 @@
 Visible int doctype;
 extern bool canceled;
 
-Visible environ *tobesaved;
+Visible enviro *tobesaved;
 Visible string savewhere;
 
-environ top_env, *top_ep;
+enviro top_env, *top_ep;
 
 Visible Procedure initbed(void) {
 	top_ep= &top_env;
 
 	savewhere = (string)NULL;
-	tobesaved = (environ*)NULL;
+	tobesaved = (enviro*)NULL;
 	clrenv(top_ep);
 #ifdef SAVEBUF
 	top_ep->copybuffer = editqueue((string) buffile);
@@ -52,9 +52,9 @@ Visible Procedure initbed(void) {
 }
 
 Visible Procedure endbed(void) {
-	environ *ep = tobesaved;
+	enviro *ep = tobesaved;
 
-	tobesaved = (environ*)NULL;
+	tobesaved = (enviro*)NULL;
 		/* To avoid loops if saving is cancelled. */
 	if (savewhere && ep) {
 		if (ep->generation > 0) {
@@ -84,7 +84,7 @@ Visible Procedure endbed(void) {
 
 Visible Procedure abced_file(string filename, intlet errline, literal kind, bool creating, bool *changed)
 {
-	environ *ep= top_ep;
+	enviro *ep= top_ep;
 
 #ifdef GFX
 	if (gfx_mode != TEXT_MODE)
@@ -109,7 +109,7 @@ Visible Procedure abced_file(string filename, intlet errline, literal kind, bool
 
 Visible char *ed_line(literal kind, int indent) {
 	char *buf= (char *) NULL;
-	environ *ep= top_ep;
+	enviro *ep= top_ep;
 
 	if (kind == R_cmd)
 		setroot(Imm_cmd);

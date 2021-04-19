@@ -28,8 +28,8 @@
  */
 
 Hidden nodeptr thefocus;
-Hidden environ wherebuf;
-Hidden environ *where = &wherebuf;
+Hidden enviro wherebuf;
+Hidden enviro *where = &wherebuf;
 Hidden bool realvhole;
 Hidden int multiline; /* Height of focus */
 Hidden int yfocus;
@@ -47,7 +47,7 @@ Forward Hidden bool chismash(string *pbuf, string *pmod, nodeptr n, int i, int m
  * Save position of the focus for use by outnode/outfocus.
  */
 
-Visible Procedure savefocus(environ *ep)
+Visible Procedure savefocus(enviro *ep)
 {
 	int sym;
 	int w;

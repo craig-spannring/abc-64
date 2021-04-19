@@ -378,7 +378,7 @@ Hidden nodeptr firstsugg(string s, int startsugg, bool colon_allowed)
 	return Nnil;
 }
 
-Visible bool setsugg(pathptr *pp, char c, environ *ep, bool colon_allowed)
+Visible bool setsugg(pathptr *pp, char c, enviro *ep, bool colon_allowed)
 {
 	char buf[2];
 	nodeptr n;
@@ -441,7 +441,7 @@ Hidden bool fits_how_to(string str, string *pstr, int alt_c)
  * Interface styled like resuggest: string pointer is advanced here.
  */
 
-Visible bool newsugg(environ *ep, string *pstr, int alt_c) {
+Visible bool newsugg(enviro *ep, string *pstr, int alt_c) {
 	string str;
 	nodeptr n = tree(ep->focus);
 	nodeptr nn;
@@ -503,7 +503,7 @@ Visible bool newsugg(environ *ep, string *pstr, int alt_c) {
  * Kill suggestion -- only the part to the left of the focus is kept.
  */
 
-Visible Procedure killsugg(environ *ep, string *pstr)
+Visible Procedure killsugg(enviro *ep, string *pstr)
 {
 	nodeptr n = tree(ep->focus);
 	nodeptr nc;
@@ -532,7 +532,7 @@ Visible Procedure killsugg(environ *ep, string *pstr)
  * Acknowledge a suggestion -- turn it into real nodes.
  */
 
-Visible Procedure acksugg(environ *ep) {
+Visible Procedure acksugg(enviro *ep) {
 	nodeptr n = tree(ep->focus);
 	int s2 = ep->s2;
 	int isugg;
@@ -597,9 +597,9 @@ Visible Procedure acksugg(environ *ep) {
  * ackhowsugg is only used for [newline] and [accept].
  */
 
-Forward Hidden nodeptr adv_howsugg(environ *ep, char prev_c, char new_c);
+Forward Hidden nodeptr adv_howsugg(enviro *ep, char prev_c, char new_c);
 
-Visible bool newhowsugg(environ *ep, string *pstr, int alt_c) {
+Visible bool newhowsugg(enviro *ep, string *pstr, int alt_c) {
 	string str;
 	string qm;
 	nodeptr n = tree(ep->focus);
@@ -661,7 +661,7 @@ Visible bool newhowsugg(environ *ep, string *pstr, int alt_c) {
 	return Yes;
 }
 
-Hidden nodeptr adv_howsugg(environ *ep, char prev_c, char new_c)
+Hidden nodeptr adv_howsugg(enviro *ep, char prev_c, char new_c)
 {
 	int s2= ep->s2;
 	char buf[2];
@@ -691,7 +691,7 @@ Hidden nodeptr adv_howsugg(environ *ep, char prev_c, char new_c)
  * Acknowledge a how-to name suggestion -- but do NOT turn it into real nodes.
  */
 
-Visible Procedure ackhowsugg(environ *ep) {
+Visible Procedure ackhowsugg(enviro *ep) {
 	ep->mode= VHOLE;
 	ep->s1= 2;
 	ep->s2= strlen(e_strval((value) firstchild(tree(ep->focus))));
@@ -701,7 +701,7 @@ Visible Procedure ackhowsugg(environ *ep) {
  * Kill a how-to name suggestion -- but do NOT turn it into real nodes.
  */
 
-Visible Procedure killhowsugg(environ *ep) {
+Visible Procedure killhowsugg(enviro *ep) {
 	int s2= ep->s2;
 	value hd;
 	
@@ -719,7 +719,7 @@ Visible Procedure killhowsugg(environ *ep) {
  * this is done to avoid the which_funpred dialog in the interpreter.
  */
 
-Visible Procedure check_last_unit(environ *ep, int curr) {
+Visible Procedure check_last_unit(enviro *ep, int curr) {
 	if (curr != 1 
 	    || symbol(tree(ep->focus)) != Edit_unit
 	    || symbol(firstchild(tree(ep->focus))) != Sugghowname)

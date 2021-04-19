@@ -24,7 +24,7 @@
  * Widen -- make the focus larger.
  */
 
-Visible bool widen(environ *ep, bool deleting)
+Visible bool widen(enviro *ep, bool deleting)
 {
 	nodeptr n;
 	nodeptr nn;
@@ -151,7 +151,7 @@ Visible bool widen(environ *ep, bool deleting)
  * Narrow -- make the focus smaller.
  */
 
-Visible bool narrow(environ *ep)
+Visible bool narrow(enviro *ep)
 {
 	nodeptr n;
 	int sym;
@@ -214,7 +214,7 @@ Visible bool narrow(environ *ep)
 }
 
 
-Visible bool extend(environ *ep)
+Visible bool extend(enviro *ep)
 {
 	nodeptr n;
 	int i;
@@ -294,7 +294,7 @@ Visible bool extend(environ *ep)
  * Right-Narrow -- make the focus smaller, going to the last item of a list.
  */
 
-Visible bool rnarrow(environ *ep)
+Visible bool rnarrow(enviro *ep)
 {
 	nodeptr n;
 	nodeptr nn;

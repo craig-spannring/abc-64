@@ -22,12 +22,12 @@ extern "C" {
     Visible nodeptr       queuebehead(queue *pq);
     Visible Procedure  splitnode(nodeptr n, queue *pq);
     Visible bool       resttoqueue(pathptr *pp, queue *pq);
-    Visible Procedure  nosuggtoqueue(environ *ep, queue *pq);
-    Visible bool       issuggestion(environ *ep);
+    Visible Procedure  nosuggtoqueue(enviro *ep, queue *pq);
+    Visible bool       issuggestion(enviro *ep);
     Visible bool       fitnode(pathptr *pp, nodeptr n);
     Visible int        fitstring(pathptr *pp, string str, int alt_c);
-    Visible Procedure  fixfocus(environ *ep, int len);
-    Visible bool       spacefix(environ *ep);
+    Visible Procedure  fixfocus(enviro *ep, int len);
+    Visible bool       spacefix(enviro *ep);
     Visible Procedure  subsettoqueue(nodeptr n, int s1, int s2, queue *pq);
     Visible string     querepr(value qv);
 

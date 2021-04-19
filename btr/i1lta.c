@@ -336,7 +336,9 @@ Hidden btreeptr rem(fingertip f, fingertip ft, intlet it) {
 }
 
 Hidden btreeptr ins(itemptr ip, fingertip f, fingertip ft, intlet it) {
-	btritem new, old; btreeptr p, q= Bnil, pq, oldq, *pp;
+	btritem new_item;
+	btritem old;
+	btreeptr p, q= Bnil, pq, oldq, *pp;
 	intlet l, iw= Itemwidth(it), nn, np, nq; bool inner, overflow;
 	if (ft == f) {
 		/* unify with rest? */
@@ -358,13 +360,13 @@ Hidden btreeptr ins(itemptr ip, fingertip f, fingertip ft, intlet it) {
 		if (overflow) {
 			oldq= q;
 			movnitms(&old, ip, 1, iw);
-			ip= &new;
+			ip= &new_item;
 			overflow= Lim(p) == (inner ? Maxinner : Maxbottom);
 			if (overflow) {
 				nn= Lim(p); np= nn/2; nq= nn-np-1;
 				q= grabbtreenode(inner ? Inner : Bottom, it);
 				Size(q)= Lim(q)= nq;
-				movnitms(&new, Pxitm(p, np, iw), 1, iw);
+				movnitms(&new_item, Pxitm(p, np, iw), 1, iw);
 				movnitms(Pxitm(q, 0, iw), Pxitm(p, np+1, iw), nq, iw);
 				if (inner) 
 					Size(q) += movnptrs(&Ptr(q, 0), &Ptr(p, np+1), nq+1);
@@ -398,8 +400,14 @@ Hidden btreeptr ins(itemptr ip, fingertip f, fingertip ft, intlet it) {
 /* Tables */
 
 Visible Procedure replace(value a, value *pt, value k) {
-	btritem new; finger f; fingertip ft= f; btreeptr p; value *pp;
-	intlet it, iw, l;
+	btritem   new_item;
+	finger    f;
+	fingertip ft= f;
+	btreeptr  p;
+	value    *pp;
+	intlet    it;
+	intlet    iw;
+	intlet    l;
 #ifdef BTRTRACE
 	if (btrfp) check(*pt, " (replace in)");
 #endif
@@ -414,8 +422,8 @@ Visible Procedure replace(value a, value *pt, value k) {
 	}
 	else {
 		if (!comp_ok) return;
-		Keyval(&new)= copy(k); Ascval(&new)= copy(a);
-		Root(*pt)= ins(&new, f, ft, it);
+		Keyval(&new_item)= copy(k); Ascval(&new_item)= copy(a);
+		Root(*pt)= ins(&new_item, f, ft, it);
 	}
 #ifdef BTRTRACE
 	if (btrfp) check(*pt, " (replace out)");
@@ -450,7 +458,7 @@ Hidden bool is_large_range(value v) {
 }
 
 Visible Procedure insert(value v, value *pl) {
-	btritem new; finger f; fingertip ft= f; intlet it= Itemtype(*pl);
+	btritem new_item; finger f; fingertip ft= f; intlet it= Itemtype(*pl);
 #ifdef BTRTRACE
 	if (btrfp) check(*pl, " (insert in)");
 #endif
@@ -461,8 +469,8 @@ Visible Procedure insert(value v, value *pl) {
 	if (Is_ELT(*pl)) (*pl)->type= Lis;
 	VOID searchkey(v, pl, UNIQUE, &ft);
 	if (!comp_ok) return;
-	Keyval(&new)= copy(v); Ascval(&new)= Vnil;
-	Root(*pl)= ins(&new, f, ft, it);
+	Keyval(&new_item)= copy(v); Ascval(&new_item)= Vnil;
+	Root(*pl)= ins(&new_item, f, ft, it);
 #ifdef BTRTRACE
 	if (btrfp) check(*pl, " (insert out)");
 #endif

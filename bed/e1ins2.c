@@ -26,11 +26,11 @@
 #include "tabl.h"
 #include "b1grab.h"
 
-Forward Hidden bool fiddle(environ *ep, bool *pmayindent, bool reading_file);
-Forward Hidden bool hackhack(environ *ep);
-Forward Hidden bool atdedent(environ *ep);
-Forward Hidden bool nexthole(environ *ep);
-Forward Hidden bool atrealhole(environ *ep);
+Forward Hidden bool fiddle(enviro *ep, bool *pmayindent, bool reading_file);
+Forward Hidden bool hackhack(enviro *ep);
+Forward Hidden bool atdedent(enviro *ep);
+Forward Hidden bool nexthole(enviro *ep);
+Forward Hidden bool atrealhole(enviro *ep);
 
 /*
  * Insert a character.
@@ -38,7 +38,7 @@ Forward Hidden bool atrealhole(environ *ep);
 
 extern bool justgoon;
 
-Hidden bool quot_in_tag(int c, environ *ep) {
+Hidden bool quot_in_tag(int c, enviro *ep) {
 	/* hack to not surround part of name or keyword;
 	 * fixes bug 890417
 	 */
@@ -50,7 +50,7 @@ Hidden bool quot_in_tag(int c, environ *ep) {
 		(sym == Name || sym == Keyword));
 }
 
-Visible bool ins_char(environ *ep, int c, int alt_c)
+Visible bool ins_char(enviro *ep, int c, int alt_c)
 {
 	auto queue q = Qnil;
 	auto queue qf = Qnil;
@@ -126,7 +126,7 @@ Visible bool ins_char(environ *ep, int c, int alt_c)
  * Insert a newline.
  */
 
-Visible bool ins_newline(environ *ep, bool reading_file)
+Visible bool ins_newline(enviro *ep, bool reading_file)
 {
 	nodeptr n;
 	int sym;
@@ -222,7 +222,7 @@ Visible bool ins_newline(environ *ep, bool reading_file)
  * Refinement for ins_newline() to do the initial processing.
  */
 
-Hidden bool fiddle(environ *ep, bool *pmayindent, bool reading_file)
+Hidden bool fiddle(enviro *ep, bool *pmayindent, bool reading_file)
 {
 	int level;
 	auto string str = "";
@@ -276,7 +276,7 @@ Hidden bool fiddle(environ *ep, bool *pmayindent, bool reading_file)
  * Return Yes if this happened AND rp[1] contained a \t.
  */
 
-Hidden bool hackhack(environ *ep)
+Hidden bool hackhack(enviro *ep)
 {
 	nodeptr n;
 	int ich = ichild(ep->focus);
@@ -303,7 +303,7 @@ Hidden bool hackhack(environ *ep)
  * decrease-indentation position.
  */
 
-Hidden bool atdedent(environ *ep)
+Hidden bool atdedent(enviro *ep)
 {
 	pathptr pa;
 	nodeptr npa;
@@ -345,7 +345,7 @@ Hidden bool atdedent(environ *ep)
  * skipping blank space only.
  */
 
-Hidden bool nexthole(environ *ep)
+Hidden bool nexthole(enviro *ep)
 {
 	nodeptr n;
 	int ich;
@@ -365,7 +365,7 @@ Hidden bool nexthole(environ *ep)
 	return Yes;
 }
 
-Hidden bool atrealhole(environ *ep) {
+Hidden bool atrealhole(enviro *ep) {
 	nodeptr n;
 	int i;
 	

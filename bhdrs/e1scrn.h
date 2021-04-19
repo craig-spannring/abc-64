@@ -13,7 +13,7 @@ extern "C" {
 #endif
 
     Visible Procedure actupdate(value copybuffer, bool recording, bool lasttime);
-    Visible Procedure virtupdate(environ *oldep, environ *newep, int highest);
+    Visible Procedure virtupdate(enviro *oldep, enviro *newep, int highest);
     Visible Procedure initterm(void);
     Visible Procedure endterm(void);
     Visible Procedure endshow(void);
