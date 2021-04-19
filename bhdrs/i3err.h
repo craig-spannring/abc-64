@@ -21,9 +21,9 @@ extern "C" {
 	extern Visible Procedure fixerr(int m);
 	extern Visible Procedure interr(int m);
 	extern Visible Procedure int_signal(void);
-	extern Visible Procedure putsSerr(string fmt, string s);
-	extern Visible Procedure putsDSerr(string fmt, int d, string s);
-	extern Visible Procedure puts2Cerr(string fmt, char c1, char c2);
+	extern Visible Procedure putsSerr(conststring fmt, conststring s);
+	extern Visible Procedure putsDSerr(conststring fmt, int d, conststring s);
+	extern Visible Procedure puts2Cerr(conststring fmt, char c1, char c2);
 	extern Visible Procedure putsCerr(string fmt, char c);
 	extern Visible Procedure interrV(int m, value v);
 	extern Visible Procedure initfmt(void);
@@ -32,7 +32,7 @@ extern "C" {
 	extern Visible Procedure checkerr(void);
 	extern Visible Procedure typerrV(int m, value v);
 	extern Visible Procedure fpe_signal(void);
-	extern Visible char *getfmtbuf(string fmt, int n);
+	extern Visible char *getfmtbuf(conststring fmt, int n);
     
 #ifdef __cplusplus
 }

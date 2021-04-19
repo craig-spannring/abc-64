@@ -11,19 +11,19 @@ extern "C" {
  * B editor -- Definitions for queues of nodes.
  */
 
-typedef struct queue *queue;
+typedef struct queue *queueptr;
 
 struct gdb_hostile_queue {
 	HEADER;
 	nodeptr q_data;
-	queue   q_link;
+	queueptr   q_link;
 };
 struct queue {
 	literal type;
 	reftype refcnt;
 	intlet  len FILLER_FIELD;
 	nodeptr q_data;
-	queue   q_link;
+	queueptr   q_link;
 };
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
@@ -42,17 +42,17 @@ STATIC_CHECK(offsetof(struct gdb_hostile_queue, q_link)
 	     == offsetof(struct queue, q_link));
 #pragma GCC diagnostic pop
 
-#define Qnil ((queue) Vnil)
+#define Qnil ((queueptr) Vnil)
 #ifdef lint
 Visible queue qcopy();
 Visible Procedure qrelease();
 #else
-#define qcopy(q) ((queue)copy((value)q))
+#define qcopy(q) ((queueptr)copy((value)q))
 #define qrelease(q) release((value)q)
 #endif
 #define emptyqueue(q) (!(q))
 
-nodeptr queuebehead(queue *pq);
+nodeptr queuebehead(queueptr *pq);
 
 #ifdef __cplusplus
 }

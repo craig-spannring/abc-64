@@ -57,7 +57,7 @@ readfile(enviro *ep, string filename, int line, bool creating)
 	int c;
 	string buf;
 	auto string cp;
-	auto queue q = Qnil;
+	auto queueptr q = Qnil;
 
 	if (!fp) {
 		ederrS(MESS(6200, "Sorry, I can't edit file \"%s\""), filename);
@@ -388,7 +388,7 @@ readnode(FILE *fp)
 Visible value editqueue(string filename)
 {
 	FILE *fp = fopen(filename, "r");
-	auto queue q = Qnil;
+	auto queueptr q = Qnil;
 	nodeptr n;
 
 	if (!fp)

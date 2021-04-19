@@ -14,7 +14,7 @@ extern "C" {
     extern Visible Procedure ederrC(int m, char c);
     extern Visible Procedure ederr(int m);
     extern Visible Procedure ederrS(int m, string s);
-    extern Visible Procedure edmessage(string s);
+    extern Visible Procedure edmessage(conststring s);
     extern Visible Procedure end_erro(void);
     extern Visible Procedure enderro(void);
     extern Visible Procedure init_erro(void);

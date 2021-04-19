@@ -135,7 +135,7 @@ addscrollbar(int totlines, int topline, int scrlines)
  * until it has been displayed.
  */
 
-Hidden Procedure ederr1(string s)
+Hidden Procedure ederr1(conststring s)
 {
 	ringbell = Yes;
 	if (s && priority < 3) {
@@ -167,7 +167,7 @@ Visible Procedure ederrC(int m, char c)
  * Unlike error messages, the last such message is displayed.
  */
 
-Visible Procedure edmessage(string s)
+Visible Procedure edmessage(conststring s)
 {
 	if (s && priority <= 2) {
 		priority = 2;

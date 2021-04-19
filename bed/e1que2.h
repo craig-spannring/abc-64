@@ -13,13 +13,13 @@
 extern "C" {
 #endif
 
-    Visible bool      app_queue(enviro *ep, queue *pq);
+    Visible bool      app_queue(enviro *ep, queueptr *pq);
     Visible bool      fix_move(enviro *ep);
-    Visible bool      ins_queue(enviro *ep, queue *pq, queue *pq2);
-    Visible bool      ins_string(enviro *ep, string str, queue *pq, int alt_c);
+    Visible bool      ins_queue(enviro *ep, queueptr *pq, queueptr *pq2);
+    Visible bool      ins_string(enviro *ep, string str, queueptr *pq, int alt_c);
     Visible bool      move_on(enviro *ep);
     Visible int       joinstring(pathptr *pp, string str, bool spflag, int alt_c, bool mayindent);
-    Visible Procedure qshow(queue q, string where);
+    Visible Procedure qshow(queueptr q, string where);
 
 #ifdef __cplusplus
 }

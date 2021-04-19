@@ -79,7 +79,7 @@ Visible int errcount= 0; /* Number of errors detected */
 
 Visible int ndefs;
 
-Hidden Procedure err1(string m)
+Hidden Procedure err1(conststring m)
 {
 	static char errbuf[MESSBUFSIZE];
 		/* since putmess() below overwrites argument m via getmess() */

@@ -80,7 +80,7 @@ Visible int getwincol(void)
 Visible Procedure c_putstr(conststring s)
 {
 	char buf[LINELENGTH];
-	char *pnl;
+	const char *pnl;
 	char *line;
 	int len;
 

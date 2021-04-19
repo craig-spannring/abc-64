@@ -149,7 +149,7 @@ extern bool can_interrupt;
 
 #define MESS(nr, text) nr
 #define GMESS(nr, text) getmess(nr)
-string getmess(int nr);
+conststring getmess(int nr);
 extern char *messbuf;
 #define MESSBUFSIZE 300
 

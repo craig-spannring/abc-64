@@ -33,7 +33,7 @@
 extern bool lefttorite;
 	/* Set by edit() to signal we parse purely left-to-right */
 
-Forward Hidden bool ins_node(enviro *ep, nodeptr n, queue *pq);
+Forward Hidden bool ins_node(enviro *ep, nodeptr n, queueptr *pq);
 Forward Hidden bool joinnodes(pathptr *pp, nodeptr n1, nodeptr n2, bool spflag);
 Forward Hidden bool add_string(enviro *ep, string *pstr);
 Forward Hidden bool canfitchar(int c, struct classinfo *ci);
@@ -48,11 +48,11 @@ Forward Hidden bool canfitchar(int c, struct classinfo *ci);
  * are then inserted individually.
  */
 
-Visible bool ins_queue(enviro *ep, queue *pq, queue *pq2)
+Visible bool ins_queue(enviro *ep, queueptr *pq, queueptr *pq2)
 {
 	bool ok = Yes;
 	nodeptr n;
-	queue oldq2;
+	queueptr oldq2;
 	enviro saveenv;
 	int oldindentation = focindent(ep);
 	int indentation = oldindentation;
@@ -119,7 +119,7 @@ Visible bool ins_queue(enviro *ep, queue *pq, queue *pq2)
  * without affecting the focus position.
  */
 
-Visible bool app_queue(enviro *ep, queue *pq)
+Visible bool app_queue(enviro *ep, queueptr *pq)
 {
 	int where;
 	static int markbit = 1; /* To properly handle recursive calls */
@@ -245,7 +245,7 @@ Visible bool fix_move(enviro *ep)
  * Insert a node in the parse tree.
  */
 
-Hidden bool ins_node(enviro *ep, nodeptr n, queue *pq)
+Hidden bool ins_node(enviro *ep, nodeptr n, queueptr *pq)
 {
 	int sym;
 	nodeptr nn;
@@ -538,7 +538,7 @@ Visible bool justgoon = No;
 
 #define NEXT_CH (++str, alt_c = 0)
 
-Visible bool ins_string(enviro *ep, string str, queue *pq, int alt_c)
+Visible bool ins_string(enviro *ep, string str, queueptr *pq, int alt_c)
 	/*auto*/ 
 {
 	nodeptr nn;
@@ -1061,7 +1061,7 @@ canfitchar(int c, struct classinfo *ci)
  * Debug routine to print a queue.
  */
 
-Visible Procedure qshow(queue q, string where)
+Visible Procedure qshow(queueptr q, string where)
 {
 	nodeptr n;
 	char buf[256];

@@ -36,9 +36,9 @@ Forward Hidden bool delfixed(enviro *ep);
 Forward Hidden bool delsubset(enviro *ep, bool hack);
 Forward Hidden bool delwhole(enviro *ep);
 Forward Hidden bool delhole(enviro *ep);
-Forward Hidden Procedure nonewline(queue *pq);
+Forward Hidden Procedure nonewline(queueptr *pq);
 Forward Hidden Procedure balance(enviro *ep);
-Forward Hidden bool copyin(enviro *ep, queue q);
+Forward Hidden bool copyin(enviro *ep, queueptr q);
 Forward Hidden bool colonhack(enviro *ep, int all);
 Forward Hidden bool allright(string repr);
 
@@ -116,7 +116,7 @@ Visible bool delbody(enviro *ep)
 
 Hidden bool delvarying(enviro *ep)
 {
-	auto queue q = Qnil;
+	auto queueptr q = Qnil;
 	nodeptr n = tree(ep->focus);
 	auto value v;
 	value t1, t2;
@@ -163,7 +163,7 @@ Hidden bool delfixed(enviro *ep)
 	string *nr= noderepr(n);
 	string repr = nr[ep->s1/2];
 	int len;
-	queue q = Qnil;
+	queueptr q = Qnil;
 	bool ok;
 
 	Assert(ep->mode == SUBRANGE && (ep->s1&1));
@@ -205,7 +205,7 @@ Hidden bool delfixed(enviro *ep)
  * (the latter being sent to qq)
  */
 
-Hidden bool hole_ify_keywords(enviro *ep, queue *qq)
+Hidden bool hole_ify_keywords(enviro *ep, queueptr *qq)
 {
 	treereplace(&ep->focus, gram(Kw_plus));
 	ep->mode= VHOLE;
@@ -226,8 +226,8 @@ Hidden bool hole_ify_keywords(enviro *ep, queue *qq)
 
 Hidden bool delsubset(enviro *ep, bool hack)
 {
-	auto queue q = Qnil;
-	auto queue q2 = Qnil;
+	auto queueptr q = Qnil;
+	auto queueptr q2 = Qnil;
 	nodeptr n = tree(ep->focus);
 	nodeptr nn;
 	string *rp = noderepr(n);
@@ -314,7 +314,7 @@ bool delsublist(enviro *ep)
 	nodeptr n;
 	int i;
 	int sym;
-	queue q = Qnil;
+	queueptr q = Qnil;
 	bool flag;
 
 	Assert(ep->mode == SUBLIST);
@@ -500,7 +500,7 @@ Visible bool copyinout(enviro *ep)
 	}
 	else {
 		fixit(ep); /* Make sure it looks like a hole now */
-		if (!copyin(ep, (queue) ep->copybuffer))
+		if (!copyin(ep, (queueptr) ep->copybuffer))
 			return No;
 		ep->copyflag = No;
 		return Yes;
@@ -514,7 +514,7 @@ Visible bool copyinout(enviro *ep)
 
 Visible value copyout(enviro *ep)
 {
-	auto queue q = Qnil;
+	auto queueptr q = Qnil;
 	auto pathptr p;
 	nodeptr n;
 	value v;
@@ -575,7 +575,7 @@ Visible value copyout(enviro *ep)
  * Subroutine to ensure the copy buffer doesn't start with a newline.
  */
 
-Hidden Procedure nonewline(queue *pq)
+Hidden Procedure nonewline(queueptr *pq)
 {
 	nodeptr n;
 	int c;
@@ -634,11 +634,11 @@ Hidden Procedure balance(enviro *ep)
  * Copy the copy buffer to the focus.
  */
 
-Hidden bool copyin(enviro *ep, queue q)
+Hidden bool copyin(enviro *ep, queueptr q)
 	            
 	/*auto*/         
 {
-	auto queue q2 = Qnil;
+	auto queueptr q2 = Qnil;
 	bool res;
 	
 	if (!q) {

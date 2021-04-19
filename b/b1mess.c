@@ -35,7 +35,7 @@ Hidden int nprobes= 1;
 char *messbuf; /* used for messages with arguments */
 Hidden char buf[MESSBUFSIZE];
 
-Visible string getmess(int nr) {
+Visible conststring getmess(int nr) {
 	int    last;
 	int    c;
 	char  *cp= NULL;

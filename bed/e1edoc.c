@@ -752,7 +752,7 @@ writetext(value v, FILE *fp)
 Visible bool savequeue(value v, string filename)
 {
 	FILE *fp;
-	auto queue q = (queue)v;
+	auto queueptr q = (queueptr)v;
 	nodeptr n;
 	bool ok;
 	int lines = 0;

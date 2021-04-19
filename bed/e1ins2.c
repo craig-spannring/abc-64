@@ -52,8 +52,8 @@ Hidden bool quot_in_tag(int c, enviro *ep) {
 
 Visible bool ins_char(enviro *ep, int c, int alt_c)
 {
-	auto queue q = Qnil;
-	auto queue qf = Qnil;
+	auto queueptr q = Qnil;
+	auto queueptr qf = Qnil;
 	auto string str;
 	char buf[2];
 	int where;
@@ -66,7 +66,7 @@ Visible bool ins_char(enviro *ep, int c, int alt_c)
 		    && !ishole(ep)
 		    && !quot_in_tag(c, ep)) {
 			/* Surround something.  Wonder what will happen! */
-			qf = (queue) copyout(ep);
+			qf = (queueptr) copyout(ep);
 			if (!delbody(ep)) {
 				qrelease(qf);
 				return No;

@@ -43,7 +43,7 @@ Visible Procedure qrelease(q)
  * Append queue 2 to the end of queue 1.
  */
 
-Visible Procedure joinqueues(queue *pq, queue q)
+Visible Procedure joinqueues(queueptr *pq, queueptr q)
 {
 	if (emptyqueue(q))
 		return;
@@ -61,9 +61,9 @@ Visible Procedure joinqueues(queue *pq, queue q)
  * Empty strings and Optional holes are silently discarded.
  */
 
-Visible Procedure preptoqueue(nodeptr n, queue *pq)
+Visible Procedure preptoqueue(nodeptr n, queueptr *pq)
 {
-	queue q;
+	queueptr q;
 
 	if (Is_etext(n)) {
 		if (e_length((value) n) == 0)
@@ -75,7 +75,7 @@ Visible Procedure preptoqueue(nodeptr n, queue *pq)
 			return;
 		n = nodecopy(n);
 	}
-	q = (queue) mk_compound(2);
+	q = (queueptr) mk_compound(2);
 	q->q_data = n;
 	q->q_link = *pq;
 	*pq = q;
@@ -86,9 +86,9 @@ Visible Procedure preptoqueue(nodeptr n, queue *pq)
  * Append a node to the end of a queue (same extras as preptoqueue).
  */
 
-Visible Procedure addtoqueue(queue *pq, nodeptr n)
+Visible Procedure addtoqueue(queueptr *pq, nodeptr n)
 {
-	auto queue q = Qnil;
+	auto queueptr q = Qnil;
 
 	preptoqueue(n, &q);
 	joinqueues(pq, q);
@@ -99,7 +99,7 @@ Visible Procedure addtoqueue(queue *pq, nodeptr n)
  * Push a string onto a queue.
  */
 
-Visible Procedure stringtoqueue(string str, queue *pq)
+Visible Procedure stringtoqueue(string str, queueptr *pq)
 {
 	value  v;
 
@@ -133,10 +133,10 @@ addstringtoqueue(pq, str)
  * Get the first node of a queue and delink it ("pop").
  */
 
-Visible nodeptr queuebehead(queue *pq)
+Visible nodeptr queuebehead(queueptr *pq)
 {
 	nodeptr n;
-	queue q = *pq;
+	queueptr q = *pq;
 
 	Assert(q);
 
@@ -153,7 +153,7 @@ Visible nodeptr queuebehead(queue *pq)
  * 'Atomic' nodes (texts and holes) are pushed unadorned.
  */
 
-Visible Procedure splitnode(nodeptr n, queue *pq)
+Visible Procedure splitnode(nodeptr n, queueptr *pq)
 {
 	nodeptr nn;
 	string *rp;
@@ -197,9 +197,9 @@ Visible Procedure splitnode(nodeptr n, queue *pq)
  * (timo)
  */
 
-Visible bool resttoqueue(pathptr *pp, queue *pq)
+Visible bool resttoqueue(pathptr *pp, queueptr *pq)
 {
-	auto queue q = Qnil;
+	auto queueptr q = Qnil;
 	pathptr pa = parent(*pp);
 	nodeptr n = tree(*pp);
 	int sym = symbol(n);
@@ -256,9 +256,9 @@ Hidden bool rest_is_hollow(nodeptr n) {
  * Also, it cannot fail.
  */
 
-Visible Procedure nosuggtoqueue(enviro *ep, queue *pq)
+Visible Procedure nosuggtoqueue(enviro *ep, queueptr *pq)
 {
-	auto queue q = Qnil;
+	auto queueptr q = Qnil;
 	int i;
 	string *rp;
 	nodeptr n;
@@ -517,7 +517,7 @@ Visible bool spacefix(enviro *ep)
  * Prepend a subset of a node to a queue.
  */
 
-Visible Procedure subsettoqueue(nodeptr n, int s1, int s2, queue *pq)
+Visible Procedure subsettoqueue(nodeptr n, int s1, int s2, queueptr *pq)
 {
 	string *rp = noderepr(n);
 
@@ -537,7 +537,7 @@ Visible Procedure subsettoqueue(nodeptr n, int s1, int s2, queue *pq)
 
 Visible string querepr(value qv)
 {
-	queue q = (queue)qv;
+	queueptr q = (queueptr)qv;
 	nodeptr n;
 	static char buf[1000]; /***** Cannot overflow? *****/
 	string cp;

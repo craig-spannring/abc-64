@@ -540,7 +540,7 @@ Visible Procedure acksugg(enviro *ep) {
 	nodeptr nn;
 	nodeptr n1;
 	string rest;
-	queue q = Qnil;
+	queueptr q = Qnil;
 	nodeptr r;
 
 	Assert(symbol(n) == Suggestion && ep->mode == VHOLE && ep->s1 == 2);
