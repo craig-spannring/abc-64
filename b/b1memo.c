@@ -35,7 +35,7 @@ Visible Procedure freemem(ptr p) {
 	free((char *)p);
 }
 
-Visible ptr savestr(char *s) {
+Visible ptr savestr(const char *s) {
 	ptr p= (ptr) getmem((unsigned) strlen(s) + 1);
 	strcpy(p, s);
 	return p;

@@ -301,9 +301,19 @@ Forward Hidden bool is_variable(value v);
 Forward Hidden bool is_cmd_ref(parsetree t);
 
 Visible Procedure fix(parsetree *pt, char flag) {
-	struct state st; value v, function;
-	parsetree t, l1= NilTree, w;
-	typenode nt, nt1; string s; char c; int n, k, len;
+	struct state st;
+	value        v; 
+	value        function;
+	parsetree    t;
+	parsetree    l1= NilTree;
+	parsetree    w;
+	typenode     nt;
+	typenode     nt1;
+	conststring  s; 
+	char 	     c;
+	int  	     n; 
+	int  	     k;
+	int  	     len;
 
 	t= *pt;
 	if (!Is_node(t) || !still_ok) return;

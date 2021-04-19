@@ -71,7 +71,7 @@ bool is_increment();	/* a = b+1 ? */
 double numval(value v);     /* numeric value of any number */
 int intval(value v);        /* numeric value of integral number */
 int propintlet(int i);    /* checks int for fitting in intlet */
-string convnum(value v);    /* character string approximation of any number */
+conststring convnum(value v);    /* character string approximation of any number */
 relation numcomp(value u, value v);  /* comparison of two numbers: yields -1, 0 or 1 */
 double numhash(value v);    /* hashes any abstract number to a 'double' */
 

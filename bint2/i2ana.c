@@ -125,7 +125,13 @@ Hidden Procedure a_fpr_formals(parsetree t) {
 }
 
 Visible Procedure analyze(parsetree t, value *targs) {
-	typenode nt; string s; char c; int n, k, len; value v;
+	typenode    nt;
+	conststring s;
+	char 	    c;     
+	int  	    n;
+	int  	    k;
+	int  	    len;
+	value	    v;
 	if (!Is_node(t) || !still_ok) return;
 	nt= Nodetype(t);
 	if (nt < 0 || nt >= NTYPES) syserr(MESS(1901, "analyze bad tree"));
@@ -288,7 +294,7 @@ Visible Procedure analyze(parsetree t, value *targs) {
 */
 
 
-Visible string gentab[NTYPES]= {
+Visible conststring gentab[NTYPES]= {
 
 	/* HOW_TO */ "1h3xSu6=",
 	/* YIELD */ "2fV4xYu7=",

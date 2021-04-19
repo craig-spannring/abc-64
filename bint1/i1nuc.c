@@ -116,7 +116,7 @@ Hidden int digits_in(value v) {
  * and does not normalize a rational result sometimes.
  */
 
-Visible string convnum(value v) {
+Visible conststring convnum(value v) {
 	value r, re, rre;
 	int rndsize= 0;
 	int num;

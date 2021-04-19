@@ -42,7 +42,7 @@ Forward Hidden Procedure pt_push(polytype pt);
 
 /* ******************************************************************** */
 
-char *tc_code[NTYPES] = {	/* Type checker table; */
+const char *tc_code[NTYPES] = {	/* Type checker table; */
 				/* see comment below for meaning of codes */
 /* How-to's */
 
@@ -154,7 +154,7 @@ char *tc_code[NTYPES] = {	/* Type checker table; */
 
 /************************************************************************/
 
-Hidden char *zerf[]= {
+Hidden const char *zerf[]= {
 	F_pi, "n",
 	F_e, "n",
 	F_random, "n",
@@ -162,7 +162,7 @@ Hidden char *zerf[]= {
 	NULL
 };
 
-Hidden char *monf[]= {
+Hidden const char *monf[]= {
 	S_ABOUT, "nUn",
 	S_PLUS, "nUn",
 	S_MINUS, "nUn",
@@ -195,7 +195,7 @@ Hidden char *monf[]= {
 	NULL
 };
 
-Hidden char *dyaf[]= {
+Hidden const char *dyaf[]= {
 	S_PLUS, "nUnUn",
 	S_MINUS, "nUnUn",
 	S_TIMES, "nUnUn",
@@ -227,16 +227,16 @@ Hidden char *dyaf[]= {
 	NULL
 };
 
-Hidden char *zerp[]= {
+Hidden const char *zerp[]= {
 	NULL
 };
 
-Hidden char *monp[]= {
+Hidden const char *monp[]= {
 	P_exact, "nu",
 	NULL
 };
 
-Hidden char *dyap[]= {
+Hidden const char *dyap[]= {
 	P_in, "~#u",
 	P_notin, "~#u",
 	NULL
@@ -361,10 +361,10 @@ Hidden int nactuals= 0;
 /************************************************************************/
 
 Forward Hidden polytype pt_pop(void);
-Forward Hidden polytype external_type(string *pt);
+Forward Hidden polytype external_type(conststring *pt);
 
 Forward Hidden string get_code(value name, int type, wsenvptr wse);
-Forward Hidden string fpr_code(value name, literal type, char **functab, string defcode);
+Forward Hidden string fpr_code(value name, literal type, const char **functab, string defcode);
 Forward Visible Procedure usetypetable(value t);
 
 Visible Procedure type_check(parsetree v) {
@@ -395,8 +395,8 @@ Visible Procedure type_check(parsetree v) {
 #define Fld(v, f) (*(Branch(v, f)))
 
 Hidden Procedure tc_node(parsetree v) {
-	string t;
-	string t_saved= NULL;
+	conststring t;
+	conststring t_saved= NULL;
 	int f;
 	int nf;
 	int len;	/* length of compound */
@@ -951,7 +951,7 @@ Hidden string get_code(value name, int type, wsenvptr wse)
 	return NULL;
 }
 
-Hidden string pre_fpr_code(value fn, char **func) {
+Hidden string pre_fpr_code(value fn, const char **func) {
 	int i;
 	string f= strval(fn);
 	
@@ -964,7 +964,7 @@ Hidden string pre_fpr_code(value fn, char **func) {
 	/*NOTREACHED*/
 }
 
-Hidden string fpr_code(value name, literal type, char **functab, string defcode)
+Hidden string fpr_code(value name, literal type, const char **functab, string defcode)
 {
 	string t;
 	wsenvptr wse;
@@ -982,9 +982,9 @@ Hidden string fpr_code(value name, literal type, char **functab, string defcode)
 
 /************************************************************************/
 
-Hidden polytype external_type(string *pt) {
+Hidden polytype external_type(conststring *pt) {
 	int n;
-	string t;
+	conststring t;
 	polytype x;
 	char buf[20];
 	

@@ -155,7 +155,7 @@ Visible Procedure findceol(void) {
 	if (!find(S_COMMENT, q, &ceol, &ttx)) ceol= q;
 }
 
-Visible Procedure req(string s, txptr q, txptr *ftx, txptr *ttx) {
+Visible Procedure req(conststring s, txptr q, txptr *ftx, txptr *ttx) {
 	if (!find(s, q, ftx, ttx)) {
 		value v= mk_text(s);
 		parerrV(MESS(2400, "cannot find expected %s"), v);
@@ -318,7 +318,7 @@ Visible bool findkw(txptr q, txptr* ftx) {
 /*		upto, nothing, ateol, need				*/
 /* ******************************************************************** */
 
-Visible Procedure upto(txptr q, string s) {
+Visible Procedure upto(txptr q, conststring s) {
 	skipsp(&tx);
 	if (Text(q)) {
 		value v= mk_text(s);
@@ -357,8 +357,8 @@ Visible bool ateol(void) {
 	return Eol(tx);
 }
 
-Visible Procedure need(string s) {
-	string t= s;
+Visible Procedure need(conststring s) {
+	conststring t= s;
 	skipsp(&tx);
 	while (*t)
 		if (*t++ != Char(tx++)) {

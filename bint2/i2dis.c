@@ -36,7 +36,7 @@ typedef struct {
 
 Forward Hidden Procedure d_linetofile(displadm *da);
 Forward Hidden Procedure displ(value v, displadm *da);
-Forward Hidden Procedure d_special(parsetree v, string *t, displadm *da);
+Forward Hidden Procedure d_special(parsetree v, conststring *t, displadm *da);
 Forward Hidden Procedure indent(value v, displadm *da);
 Forward Hidden Procedure d_comment(value v, displadm *da);
 Forward Hidden Procedure d_textdis(parsetree v, displadm *da);
@@ -59,7 +59,7 @@ Hidden Procedure set_ilevel(displadm *da)
 	}
 }
 
-Hidden Procedure d_string(string s, displadm *da)
+Hidden Procedure d_string(conststring s, displadm *da)
 {
 	if (Datnwl(da) && !Dcomment(da)) set_ilevel(da);
 	bufcpy(&Dline(da), s);
@@ -120,7 +120,7 @@ Visible Procedure display(FILE *file, parsetree v, bool one_line)
 
 /* ******************************************************************** */
 
-Hidden char *text[NTYPES] = {
+Hidden const char *text[NTYPES] = {
 	/* HOW_TO */		"HOW TO #h1:#c2#b34",
 	/* YIELD */		"HOW TO RETURN 2:#c3#b45",
 	/* TEST */		"HOW TO REPORT 2:#c3#b45",
@@ -215,7 +215,7 @@ Hidden char *text[NTYPES] = {
 
 Hidden Procedure displ(value v, displadm *da)
 {
-	string t;
+	conststring t;
 	
 	if (!Valid(v)) {
 		return;
@@ -243,7 +243,7 @@ Hidden Procedure displ(value v, displadm *da)
 	}
 }
 
-Hidden Procedure d_special(parsetree v, string *t, displadm *da)
+Hidden Procedure d_special(parsetree v, conststring *t, displadm *da)
 {
 	(*t)++;
 	switch (**t) {

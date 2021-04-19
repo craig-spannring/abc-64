@@ -13,7 +13,7 @@ typedef char *ptr;
 #define Nil ((ptr) 0)
 
 ptr getmem(unsigned syze);
-ptr savestr(char *s);
+ptr savestr(const char *s);
 #define freestr(s) (freemem((ptr)(s)))
 
 #ifdef MEMTRACE

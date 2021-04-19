@@ -45,11 +45,11 @@ extern "C" {
 	extern Visible Procedure findceol(void);
 	extern Visible Procedure first_ilev(void); /* initialise read buffer for new input */
 	extern Visible Procedure initsyn(void);
-	extern Visible Procedure need(string s);
-	extern Visible Procedure req(string s, txptr q, txptr *ftx, txptr *ttx);
+	extern Visible Procedure need(conststring s);
+	extern Visible Procedure req(conststring s, txptr q, txptr *ftx, txptr *ttx);
 	extern Visible Procedure skipsp(txptr *tx0);
 	extern Visible Procedure upto1(txptr q, int m);
-	extern Visible Procedure upto(txptr q, string s);
+	extern Visible Procedure upto(txptr q, conststring s);
 	extern Visible Procedure veli(void);
 	extern Visible Procedure veli(void); /* After a look-ahead call of ilev */
 	extern Visible txptr fcol(void); /* the first position of the current line */

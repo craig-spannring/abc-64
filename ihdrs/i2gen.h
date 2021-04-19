@@ -16,7 +16,7 @@ extern "C" {
 	
 	extern intptr_t nextvarnumber; /* Counts local targets (including formals) */
 	extern value locals, globals, mysteries, refinements;
-	extern string gentab[];
+	extern conststring gentab[];
 	
 	struct state {
 			parsetree h_last;

@@ -48,7 +48,7 @@ extern "C" {
 /************************************************************************/
 
 	struct prio {
-			string       fun;
+			conststring  fun;
 			char         adic;
 			int          L;
 			int          H;

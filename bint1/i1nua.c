@@ -435,11 +435,11 @@ Visible value app_exactly(real u) {
  */
 
 Visible Procedure app_print(FILE *fp, real v) {
-	double frac= Frac(v);
-	double expo= Expo(v);
-	frexpint ei;
-	integer w;
-	string str;
+	double 	    frac= Frac(v);
+	double 	    expo= Expo(v);
+	frexpint    ei;
+	integer     w;
+	conststring str;
 	
 	frac = b_frexp(frac, &ei);
 	expo += ei;
