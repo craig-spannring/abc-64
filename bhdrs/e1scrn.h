@@ -19,7 +19,7 @@ extern "C" {
     Visible Procedure endshow(void);
     Visible bool      backtranslate(int *py, int *px);
     Visible Procedure setindent(int x);
-    Visible Procedure cmdprompt(string prompt);
+    Visible Procedure cmdprompt(conststring prompt);
 
 #ifdef __cplusplus
 }

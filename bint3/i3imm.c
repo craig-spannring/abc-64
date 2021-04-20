@@ -1,6 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #include "b.h"
+#include "i3imm.h"
 #include "bint.h"
 #include "bobj.h"
 #include "b0lan.h"

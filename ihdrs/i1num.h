@@ -144,6 +144,8 @@ typedef struct gdb_hostile_real_ {
 	double	expo;
 #endif /* EXT_RANGE */
 } *gdb_hostile_real;
+struct real_;
+typedef struct real_ *real; 
 typedef struct real_ {
 	literal type;
 	reftype refcnt;

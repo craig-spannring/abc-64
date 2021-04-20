@@ -2,6 +2,7 @@
 
 #include "b.h"
 #include "b1mess.h"
+#include "port.h"
 
 #define USE00 MESS(7200, "\nUsage: abc [-g ws.group] [-w ws.name] [-c ws.name]\n")
 #define USE01 MESS(7201, "   [ -e [files] | -i tab | -o tab | -l | -p | -u [files] | -r | -x | file ...]\n")

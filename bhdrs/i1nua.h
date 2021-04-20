@@ -11,24 +11,30 @@
 extern "C" {
 #endif
 
-    extern Visible bool about2_to_integral(real ru, value v, real *rv);
-    extern Visible int app_comp(real u, real v);
-    extern Visible integer app_floor(real u);
-    extern Visible Procedure app_print(FILE *fp, real v);
-    extern Visible Procedure endapp(void);
-    extern Visible Procedure initapp(void);
-    extern Visible real app_diff(real u, real v);
-    extern Visible real app_exp(real v);
-    extern Visible real app_log(real v);
-    extern Visible real app_neg(real u);
-    extern Visible real app_power(real u, real v);
-    extern Visible real app_prod(real u, real v);
-    extern Visible real app_quot(real u, real v);
-    extern Visible real app_sum(real u, real v);
-    extern Visible real mk_approx(double frac, double expo);
-    extern Visible value app_exactly(real u);
-    extern Visible value app_frexp(value v);
-    
+	struct real_;
+	typedef struct real_ *real; 
+	
+	struct integer_;
+	typedef struct integer_  *integer;
+	
+	extern Visible bool about2_to_integral(real ru, value v, real *rv);
+	extern Visible int app_comp(real u, real v);
+	extern Visible integer app_floor(real u);
+	extern Visible Procedure app_print(FILE *fp, real v);
+	extern Visible Procedure endapp(void);
+	extern Visible Procedure initapp(void);
+	extern Visible real app_diff(real u, real v);
+	extern Visible real app_exp(real v);
+	extern Visible real app_log(real v);
+	extern Visible real app_neg(real u);
+	extern Visible real app_power(real u, real v);
+	extern Visible real app_prod(real u, real v);
+	extern Visible real app_quot(real u, real v);
+	extern Visible real app_sum(real u, real v);
+	extern Visible real mk_approx(double frac, double expo);
+	extern Visible value app_exactly(real u);
+	extern Visible value app_frexp(value v);
+	
 #ifdef __cplusplus
 }
 #endif

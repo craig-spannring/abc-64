@@ -12,9 +12,9 @@ extern Procedure initkeys(void);
 typedef struct tabent {
 	int code;
 	int deflen;
-	string def;
-	string rep;
-	string name;
+	conststring def;
+	conststring rep;
+	conststring name;
 } tabent;
 
 extern struct tabent deftab[];

@@ -1,6 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
 
 #include "b.h"
+#include "port.h"
 #include "main.h" /* for filemodtime() */
 
 #define COML 200

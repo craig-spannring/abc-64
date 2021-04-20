@@ -16,9 +16,9 @@
 #include "i3sou.h"
 
 
-Forward Hidden bool fnm_extend(char *fname, int n, char *suffix);
+Forward Hidden bool fnm_extend(char *fname, int n, const char *suffix);
 Forward Hidden bool fnm_narrow(char *fname, int n);
-Forward Hidden Procedure conv_fname(char *fname, char *suffix);
+Forward Hidden Procedure conv_fname(char *fname, const char *suffix);
 
 /* f_rename() changes the name of a file via the system call rename();
  * rename() requires that both files are on the same file system, so
@@ -83,7 +83,7 @@ Visible char *f_getline(FILE *file) {
 	return NULL;
 }
 
-struct type_to_suffix_map { literal type; char *suffix; };
+struct type_to_suffix_map { literal type; const char *suffix; };
 
 Hidden struct type_to_suffix_map classes[]= {
 	{Cmd, Cmd_ext},
@@ -99,7 +99,7 @@ Hidden struct type_to_suffix_map classes[]= {
 
 #define NCLASSES (sizeof classes / sizeof classes[0])
 
-Hidden char *filesuffix(literal type) {
+Hidden const char *filesuffix(literal type) {
 	struct type_to_suffix_map *cp;
 
 	for (cp= classes; cp < &classes[NCLASSES]; ++cp) {
@@ -119,7 +119,7 @@ Hidden char *filesuffix(literal type) {
 
 Visible value new_fname(value name, literal type) {
 	char fname[FNMLEN + SUFFIXLEN + 1];
-	char *suffix= filesuffix(type);
+	const char *suffix= filesuffix(type);
 	string sname= strval(name);
 	char *sp= strchr(sname, ' ');
 	intlet len= sp ? sp-sname : strlen(sname);
@@ -139,7 +139,7 @@ Visible value new_fname(value name, literal type) {
 	return mk_text(fname);
 }
 
-Hidden bool fnm_extend(char *fname, int n, char *suffix) {
+Hidden bool fnm_extend(char *fname, int n, const char *suffix) {
 	/* e.g. "ABC.cmd" => "ABC1.cmd" */
 	int m;
 	int k= n;
@@ -198,7 +198,7 @@ Hidden bool fnm_narrow(char *fname, int n) {
  *  the latter is as portably unspecial as possible.
  */
 
-Hidden Procedure conv_fname(char *fname, char *suffix) {
+Hidden Procedure conv_fname(char *fname, const char *suffix) {
 	char *ext_point= fname + strlen(fname) - strlen(suffix);
 	
 	while (fname < ext_point) {

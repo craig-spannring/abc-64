@@ -109,8 +109,9 @@ Visible Procedure pre_init(void) {
 extern bool vtrmactive;
 
 Hidden Procedure print_heading(void) {
-	FILE *fp;
-	char *fmt, *str;
+	FILE       *fp;
+	const char *fmt;
+	char       *str;
 
 	if (!rd_interactive)
 		return;

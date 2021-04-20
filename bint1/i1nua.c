@@ -3,6 +3,7 @@
 /* Approximate arithmetic */
 
 #include "b.h"
+#include "i1nua.h"
 #include "bobj.h"
 #include "i0err.h"
 #include "i1nui.h"

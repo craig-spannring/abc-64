@@ -26,6 +26,7 @@
 */
 
 #include "b.h"
+#include "port.h"
 #include "b1mess.h"
 #include "e1scrn.h"
 #include "i3err.h"

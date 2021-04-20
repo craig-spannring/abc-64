@@ -3,6 +3,7 @@
 /* Stacks used by the interpreter */
 
 #include "b.h"
+#include "i3sta.h"
 #include "bint.h"
 #include "b1memo.h"
 #include "bmem.h"
@@ -165,7 +166,7 @@ Hidden Procedure popenv(env *pe) {
 
 Hidden Procedure call(intlet type, parsetree new_pc)
 {
-	if (type < 0 || type >= MAXTYPE) syserr(MESS(4101, "bad call type"));
+	if (type < 0 || (size_t)type >= MAXTYPE) syserr(MESS(4101, "bad call type"));
 
 	/* Push other stacks */
 
@@ -234,7 +235,7 @@ Visible Procedure ret(void) {
 	/* Pop type and hope it's good: */
 	st_bottom= st_base; /* Trick to allow popping the return info */
 	type= Checksum(Ipop());
-	if (type < 0 || type >= MAXTYPE) syserr(MESS(4102, "stack clobbered"));
+	if (type < 0 || (size_t)type >= MAXTYPE) syserr(MESS(4102, "stack clobbered"));
 
 	/* Pop vital data: */
 	SetBotOffset(Ipop()); --call_level;

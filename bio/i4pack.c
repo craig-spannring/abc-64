@@ -1,5 +1,6 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1991. */
 
+#include "i4pack.h"
 #include "b.h"
 #include "b0lan.h"
 #include "b1memo.h"

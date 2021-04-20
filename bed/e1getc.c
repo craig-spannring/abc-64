@@ -4,6 +4,7 @@
 
 #include "e1getc.h"
 #include "b.h"
+#include "e1edoc.h"
 #include "b1memo.h"
 #include "b1mess.h"
 #include "b1outp.h"
@@ -23,7 +24,7 @@ extern bool use_bed;
 
 Hidden Procedure initsense(void);
 Hidden Procedure initmouse(void);
-Hidden bool equalhead(string keystr, int nkey, string def, int len);
+Hidden bool equalhead(string keystr, int nkey, conststring def, int len);
 
 /*
 This file contains a little parser for key definition files.
@@ -143,7 +144,8 @@ Hidden int lookup(string name)
 Visible Procedure undefine(int code, int deflen, string def)
 {
 	struct tabent *d, *last= deftab+ndefs;
-	string p, q;
+	string p;
+	conststring q;
 	int i;
 
 	if (code < 0) 
@@ -386,7 +388,7 @@ Hidden int getstring(string *pstr)
 
 			}
 		}
-		if (len >= sizeof buf) {
+		if ((size_t)len >= sizeof buf) {
 			err(MESS(6511, "definition string too long"));
 			return -1;
 		}
@@ -427,7 +429,7 @@ Hidden string getrep(void)
 			err(MESS(6514, "unprintable character in representation"));
 			return NULL;
 		}
-		if (len >= sizeof buf) {
+		if ((size_t)len >= sizeof buf) {
 			err(MESS(6515, "representation string too long"));
 			return NULL;
 		}
@@ -647,12 +649,12 @@ Visible Procedure initkeys(void)
 #ifndef KEYS
 
 extern bool cansense;
-extern string gotosense;
-extern string gotoformat;
-extern string mousesense;
-extern string mouseformat;
+extern conststring gotosense;
+extern conststring gotoformat;
+extern conststring mousesense;
+extern conststring mouseformat;
 
-Hidden string defstring(string name) {
+Hidden conststring defstring(string name) {
 	int i;
 
 	i= lookup(name);
@@ -686,7 +688,7 @@ Hidden Procedure outstring(string name)
 	int i= lookup(name);
 
 	if (i >= 0) {
-		string def= deftab[i].def;
+		conststring def= deftab[i].def;
 		if (def != NULL && *def != '\0') {
 			c_putdata(def);
 			c_putnewline();
@@ -788,7 +790,6 @@ Visible int getoperation(void) {
 /* called from interpreter to enable interrupt and suspend: */
 
 #define FAILSUSP	MESS(6521, "Sorry, I failed to suspend ABC\n")
-extern bool suspendabc(void);
 
 Visible int pollcnt= 0;
 
@@ -863,7 +864,7 @@ Visible Procedure pollinterrupt(void) {
 	}
 }
 
-Hidden bool equalhead(string keystr, int nkey, string def, int len) {
+Hidden bool equalhead(string keystr, int nkey, conststring def, int len) {
 	int i;
 
 	if (nkey > len)

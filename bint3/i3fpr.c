@@ -2,6 +2,7 @@
 
 /* B formula/predicate invocation */
 #include "i3sou.h"
+#include "i3fpr.h"
 #include "b.h"
 #include "bint.h"
 #include "bobj.h"

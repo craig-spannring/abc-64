@@ -48,7 +48,13 @@ Forward Hidden Procedure lst_fileheading(value v);
 Forward Hidden bool ens_tfiled(value name, value *fname);
 
 extern int winheight;
+#ifdef __cplusplus
+extern "C" {
+#endif
 bool ask_for(int nr);
+#ifdef __cplusplus
+}
+#endif
 
 #ifdef TYPE_CHECK
 value stc_code(value);

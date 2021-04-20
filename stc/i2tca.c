@@ -364,7 +364,7 @@ Forward Hidden polytype pt_pop(void);
 Forward Hidden polytype external_type(conststring *pt);
 
 Forward Hidden string get_code(value name, int type, wsenvptr wse);
-Forward Hidden string fpr_code(value name, literal type, const char **functab, string defcode);
+Forward Hidden string fpr_code(value name, literal type, const char **functab, conststring defcode);
 Forward Visible Procedure usetypetable(value t);
 
 Visible Procedure type_check(parsetree v) {
@@ -964,7 +964,7 @@ Hidden string pre_fpr_code(value fn, const char **func) {
 	/*NOTREACHED*/
 }
 
-Hidden string fpr_code(value name, literal type, const char **functab, string defcode)
+Hidden string fpr_code(value name, literal type, const char **functab, conststring defcode)
 {
 	string t;
 	wsenvptr wse;

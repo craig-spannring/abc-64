@@ -255,7 +255,7 @@ Visible conststring convnum(value v) {
 
 Visible value numconst(value v) {
 	string txt, txt0;
-	string tp = "";
+	conststring tp = "";
 	int numdigs, fraclen;
 	integer a;
 	digit accu;

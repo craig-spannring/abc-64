@@ -65,10 +65,10 @@ Hidden char modebuffer[MAXBUFFER];
 #define NO_MORE MESS(6701, "Press [SPACE] or [RETURN] to exit help")
 #define NO_HELPFILE MESS(6702, "*** Cannot find or read help file [%s]")
 
-Forward bool ask_for(int nr);
+// Forward bool ask_for(int nr);
 Forward Hidden Procedure start_help(void);
 Forward Hidden Procedure getentryfor(int code);
-Forward Hidden char *addstr(char *bp, string s, int minw);
+Forward Hidden char *addstr(char *bp, conststring s, int minw);
 Forward Hidden Procedure more_help(void);
 
 /*
@@ -87,7 +87,7 @@ Visible bool help(void)
 	
 	if (nitems == 0)
 		start_help();
-	if (llength < (sizeof buffer)-1)
+	if (llength>=0 && ((size_t)llength) < (sizeof buffer)-1)
 		len= llength+1;
 	two_columns= len > 2*maxwidth+GAPWIDTH;
 	trmscrollup(0, winheight-1, 1);
@@ -161,9 +161,9 @@ Hidden Procedure start_help(void)
 }
 
 Hidden Procedure getentryfor(int code) {
-	int d;
-	char *bufp= buffer;
-	bool first= Yes;
+	int         d;
+	char       *bufp = buffer;
+	bool        first= Yes;
 	
 	for (d=ndefs; d > 0; d--) {
 		if (code == deftab[d].code) {
@@ -185,7 +185,7 @@ Hidden Procedure getentryfor(int code) {
 		bufp= addstr(bufp, "", 0);
 }
 
-Hidden char *addstr(char *bp, string s, int minw) {
+Hidden char *addstr(char *bp, conststring s, int minw) {
 	while (*s && bp < buffer+MAXBUFFER) {
 		*bp++= *s++;
 		minw--;
