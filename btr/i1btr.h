@@ -376,6 +376,20 @@ intlet uflow(intlet n, intlet l, char *cbuf, btreeptr *pbuf, intlet it);
 
 /* Private definitions for grabbing and ref count scheme */
 
+static inline item_type	cvt_intlet_to_item_type(intlet il)
+{
+	return (item_type)il;
+}
+static inline item_type cvt_literal_to_item_type(literal lit)
+{
+	return (item_type)lit;
+}
+
+static inline pnode_type cvt_literal_to_pnode_type(literal lit)
+{
+	return (pnode_type)lit;
+}
+
 btreeptr grabbtreenode(pnode_type flag, item_type it);
 btreeptr copybtree(btreeptr pnode);    	/* btreeptr pnode */
 void uniqlbtreenode(btreeptr *pptr, literal it);

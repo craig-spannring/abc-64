@@ -182,7 +182,8 @@ Visible intlet uflow(intlet n, intlet l, char *cbuf, btreeptr *pbuf, intlet it)
 			cp += iw;
 			--nn;
 		}
-		pbuf[l1+i]= q= grabbtreenode(inner ? Inner : Bottom, it);
+		pbuf[l1+i]= q= grabbtreenode(inner ? Inner : Bottom,
+					     cvt_intlet_to_item_type(it));
 		Lim(q)= Size(q)= j= nn/(k-i); nn -= j;
 		movnitms(Pxitm(q, 0, iw), (itemptr)cp, j, iw);
 		cp += j*iw;
@@ -342,7 +343,7 @@ Hidden btreeptr ins(itemptr ip, fingertip f, fingertip ft, intlet it) {
 	intlet l, iw= Itemwidth(it), nn, np, nq; bool inner, overflow;
 	if (ft == f) {
 		/* unify with rest? */
-		p= grabbtreenode(Bottom, it);
+		p= grabbtreenode(Bottom, cvt_intlet_to_item_type(it));
 		movnitms(Pbitm(p, 0, iw), ip, 1, iw);
 		Lim(p)= Size(p)= 1;
 		return p;
@@ -364,7 +365,8 @@ Hidden btreeptr ins(itemptr ip, fingertip f, fingertip ft, intlet it) {
 			overflow= Lim(p) == (inner ? Maxinner : Maxbottom);
 			if (overflow) {
 				nn= Lim(p); np= nn/2; nq= nn-np-1;
-				q= grabbtreenode(inner ? Inner : Bottom, it);
+				q= grabbtreenode(inner ? Inner : Bottom,
+						 cvt_intlet_to_item_type(it));
 				Size(q)= Lim(q)= nq;
 				movnitms(&new_item, Pxitm(p, np, iw), 1, iw);
 				movnitms(Pxitm(q, 0, iw), Pxitm(p, np+1, iw), nq, iw);

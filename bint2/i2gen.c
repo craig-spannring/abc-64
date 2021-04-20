@@ -141,7 +141,7 @@ Hidden Procedure no_mysteries(void) {
    more fields than their length indicates.
 */
 
-#define Flag (MkSmallInt(1))
+//#define Flag (MkSmallInt(1))
 	/* Flag used to indicate Location or TestRefinement node */
 
 Hidden parsetree start; /* First instruction.  Picked up by endthreads() */
@@ -235,7 +235,7 @@ Hidden Procedure visit(parsetree t) {
 /* Visit node 't' and flag it as a location (or test-refinement). */
 
 Hidden Procedure lvisit(parsetree t) {
-	visit2(t, Flag);
+	visit2(t, MkSmallInt(1));
 }
 
 #ifdef NOT_USED

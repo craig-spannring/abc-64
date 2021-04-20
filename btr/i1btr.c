@@ -70,13 +70,15 @@ Visible Procedure uniqlbtreenode(btreeptr *pptr, literal it) {
 	}
 }
 
+
 Visible btreeptr ccopybtreenode(btreeptr pnode, literal it) {
 	intlet   limp;
 	btreeptr qnode;
 	intlet   iw;
 	
 	iw = Itemwidth(it);
-	qnode = grabbtreenode(Flag(pnode), it);
+	qnode = grabbtreenode(cvt_literal_to_pnode_type(pnode->type), // Flag(pnode),
+			      cvt_literal_to_item_type(it));
 	Lim(qnode) = limp = Lim(pnode);
 	Size(qnode) = Size(pnode);
 	switch (Flag(qnode)) {
@@ -104,7 +106,8 @@ Visible btreeptr mknewroot(btreeptr ptr0, itemptr pitm0, btreeptr ptr1, literal 
 {
 	int r;
 	intlet iw = Itemwidth(it);
-	btreeptr qnode = grabbtreenode(Inner, it);
+	btreeptr qnode = grabbtreenode(Inner,
+				       cvt_literal_to_item_type(it)); 
 	Ptr(qnode, 0) = ptr0;
 	movnitms(Piitm(qnode, 0, iw), pitm0, 1, iw);
 	Ptr(qnode, 1) = ptr1;
