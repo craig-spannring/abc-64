@@ -199,7 +199,7 @@ Visible Procedure asserr(cstring file, int line)
 Visible bool dflag = No;
 
 /* VARARGS 1 */
-Visible Procedure debug(const string fmt, ...)
+Visible Procedure debug(cstring fmt, ...)
 {
 	va_list  ap; 
 	if (fmt && priority <= 1) {

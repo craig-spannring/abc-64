@@ -40,7 +40,7 @@ Forward Hidden Procedure nonewline(queueptr *pq);
 Forward Hidden Procedure balance(enviro *ep);
 Forward Hidden bool copyin(enviro *ep, queueptr q);
 Forward Hidden bool colonhack(enviro *ep, int all);
-Forward Hidden bool allright(string repr);
+Forward Hidden bool allright(cstring repr);
 
 /*
  * DELETE and COPY currently share a buffer, called the copy buffer.
@@ -160,8 +160,8 @@ Hidden bool delfixed(enviro *ep)
 {
 	nodeptr n = tree(ep->focus);
 	char buf[15]; /* Long enough for all fixed texts */
-	string *nr= noderepr(n);
-	string repr = nr[ep->s1/2];
+	cstring *nr= noderepr(n);
+	cstring repr = nr[ep->s1/2];
 	int len;
 	queueptr q = Qnil;
 	bool ok;
@@ -175,7 +175,7 @@ Hidden bool delfixed(enviro *ep)
 		/* hack to prevent asserr in app_queue below */
 		ep->s3++;
 	}
-	Assert(fwidth(repr) < sizeof buf - 1);
+	Assert((size_t)(fwidth(repr)) < sizeof buf - 1);
 	len = ep->s2;
 	ep->s2 = ep->s3 + 1;
 	ep->mode = FHOLE;
@@ -230,7 +230,7 @@ Hidden bool delsubset(enviro *ep, bool hack)
 	queueptr q2 = Qnil;
 	nodeptr n = tree(ep->focus);
 	nodeptr nn;
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 	int nch = nchildren(n);
 	int i;
 	bool res;
@@ -519,7 +519,7 @@ Visible value copyout(enviro *ep)
 	nodeptr n;
 	value v;
 	char buf[15];
-	string *rp;
+	cstring *rp;
 	int i;
 	value w;
 
@@ -545,7 +545,7 @@ Visible value copyout(enviro *ep)
 	case SUBRANGE:
 		Assert(ep->s3 >= ep->s2);
 		if (ep->s1&1) { /* Fixed text */
-			Assert(ep->s3 - ep->s2 + 1 < sizeof buf);
+			Assert((size_t)(ep->s3 - ep->s2 + 1) < sizeof buf);
 			rp = noderepr(tree(ep->focus));
 			Assert(ep->s2 < Fwidth(rp[ep->s1/2]));
 			strncpy(buf, rp[ep->s1/2] + ep->s2, ep->s3 - ep->s2 + 1);
@@ -612,7 +612,7 @@ Hidden Procedure nonewline(queueptr *pq)
 
 Hidden Procedure balance(enviro *ep)
 {
-	string *rp = noderepr(tree(ep->focus));
+	cstring *rp = noderepr(tree(ep->focus));
 	int i;
 	int level = 0;
 
@@ -711,7 +711,7 @@ Hidden bool colonhack(enviro *ep, int all)
 {
 	nodeptr n = tree(ep->focus);
 	nodeptr n1;
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 	int i0, ii, i;
 	int sym;
 	
@@ -746,7 +746,7 @@ Hidden bool colonhack(enviro *ep, int all)
  * (i.e. containing only spaces, colons and the allowed control characters).
  */
 
-Hidden bool allright(string repr)
+Hidden bool allright(cstring repr)
 {
 	if (repr) {
 		for (; *repr; ++repr) {

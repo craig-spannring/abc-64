@@ -321,7 +321,7 @@ Visible Procedure virtupdate(enviro *oldep, enviro *newep, int highest)
 
 Hidden bool atlinestart(enviro *ep)
 {
-	string repr = noderepr(tree(ep->focus))[0];
+	cstring repr = noderepr(tree(ep->focus))[0];
 
 	return Fw_negative(repr);
 }

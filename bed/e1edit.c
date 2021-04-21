@@ -103,7 +103,9 @@ readfile(enviro *ep, string filename, int line, bool creating)
 	freemem((ptr) buf);
 	fclose(fp);
 	if (ep->mode == FHOLE || (ep->mode == VHOLE && (ep->s1&1))) {
-		cp = "";
+		static char tmp[2];
+		tmp[0] = tmp[1] = '\0';
+		cp = tmp;
 		VOID soften(ep, &cp, 0);
 	}
 	if (lines > 1 && line > 0) {

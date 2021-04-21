@@ -11,11 +11,11 @@ extern "C" {
  * Routines defined in "gram.c".
  */
 
-string *noderepr(nodeptr);
+cstring *noderepr(nodeptr);
 nodeptr gram(int sym);
 // nodeptr suggestion();
 // nodeptr variable();
-string symname(int sym);
+cstring symname(int sym);
 bool allows_colon(int sym);
 
 /*
@@ -30,7 +30,7 @@ bool allows_colon(int sym);
 
 #define MAXNBUILTIN 50	/* should be calculated by boot/mktable */
 
-extern Visible int fwidth(string str);
+extern Visible int fwidth(cstring str);
 
 #ifdef __cplusplus
 }

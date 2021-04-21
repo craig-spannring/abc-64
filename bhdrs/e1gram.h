@@ -26,8 +26,8 @@ extern "C" {
 	extern Visible Procedure initgram(void);
 	extern Visible Procedure setroot(int isym);
 	extern Visible Procedure setroot(int isym); /* symbols defined in tabl.h */
-	extern Visible string *noderepr(nodeptr n);
-	extern Visible string symname(int sym);
+	extern Visible cstring *noderepr(nodeptr n);
+	extern Visible cstring symname(int sym);
 
 #ifdef __cplusplus
 }

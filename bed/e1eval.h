@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
     extern Visible Procedure evalcoord(nodeptr n, int jch, int *py, int *px, int *plevel); 
-    extern Visible int fwidth(string str);
+    extern Visible int fwidth(cstring str);
     extern Visible int evalwidth(nodeptr n);
 
 #ifdef __cplusplus

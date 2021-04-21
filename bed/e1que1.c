@@ -99,7 +99,7 @@ Visible Procedure addtoqueue(queueptr *pq, nodeptr n)
  * Push a string onto a queue.
  */
 
-Visible Procedure stringtoqueue(string str, queueptr *pq)
+Visible Procedure stringtoqueue(cstring str, queueptr *pq)
 {
 	value  v;
 
@@ -156,7 +156,7 @@ Visible nodeptr queuebehead(queueptr *pq)
 Visible Procedure splitnode(nodeptr n, queueptr *pq)
 {
 	nodeptr nn;
-	string *rp;
+	cstring *rp;
 	int i;
 	int sym;
 
@@ -226,7 +226,7 @@ Visible bool resttoqueue(pathptr *pp, queueptr *pq)
 
 Hidden bool rest_is_hollow(nodeptr n) {
 	nodeptr nn;
-	string *rp;
+	cstring *rp;
 	int i;
 	int sym;
 
@@ -260,11 +260,11 @@ Visible Procedure nosuggtoqueue(enviro *ep, queueptr *pq)
 {
 	queueptr q = Qnil;
 	int i;
-	string *rp;
+	cstring *rp;
 	nodeptr n;
 	nodeptr nn;
 	int sym;
-	string str;
+	cstring str;
 
 	if (issuggestion(ep))
 		return;
@@ -339,13 +339,13 @@ Visible bool fitnode(pathptr *pp, nodeptr n)
  * another call.)
  */
 
-Visible int fitstring(pathptr *pp, string str, int alt_c)
+Visible int fitstring(pathptr *pp, cstring str, int alt_c)
 {
 	enviro dummyenv;
 	nodeptr n;
 	int ich;
 	int len;
-	string cp;
+	cstring cp;
 	int sym;
 	char buf[1024];
 
@@ -419,7 +419,7 @@ Visible Procedure fixfocus(enviro *ep, int len)
 {
 	nodeptr nn;
 	nodeptr n = tree(ep->focus);
-	string *rp;
+	cstring *rp;
 	int i = 0;
 	int nch;
 	int w;
@@ -493,7 +493,7 @@ Visible bool spacefix(enviro *ep)
 {
 	pathptr pa;
 	nodeptr n;
-	string *rp;
+	cstring *rp;
 
 	if (ichild(ep->focus) != 2 || symbol(tree(ep->focus)) != Hole)
 		return No;
@@ -519,7 +519,7 @@ Visible bool spacefix(enviro *ep)
 
 Visible Procedure subsettoqueue(nodeptr n, int s1, int s2, queueptr *pq)
 {
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 
 	for (; s2 >= s1; --s2) {
 		if (s2&1)
@@ -542,7 +542,7 @@ Visible string querepr(value qv)
 	static char buf[1000]; /***** Cannot overflow? *****/
 	string cp;
 	string sp;
-	string *rp;
+	cstring *rp;
 	int nch;
 	int i;
 	int len;

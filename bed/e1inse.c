@@ -22,7 +22,7 @@
 #include "code.h"
 #include "b1grab.h"
 
-Forward Hidden bool ifmatch(enviro *ep, string *pstr, string str, int alt_c);
+Forward Hidden bool ifmatch(enviro *ep, string *pstr, cstring str, int alt_c);
 
 /*
  * Try to insert the character c in the focus *pp.
@@ -36,7 +36,7 @@ Visible bool insguess(pathptr *pp, char c, enviro *ep)
 	int ich = ichild(*pp);
 	struct classinfo *ci = table[sympa].r_class[ich-1];
 	classptr cp;
-	string *rp;
+	cstring *rp;
 	int code = Code(c);
 	int sym;
 	char buf[2];
@@ -66,7 +66,7 @@ Visible bool insguess(pathptr *pp, char c, enviro *ep)
 		return Yes;
 	}
 	Assert(sym < TABLEN);
-	rp = table[sym].r_repr;
+	rp = (cstring*)table[sym].r_repr;
 	n = table[sym].r_node;
 	if (Fw_zero(rp[0])) {
 		buf[0] = c;
@@ -139,7 +139,7 @@ Visible bool soften(enviro *ep, string *pstr, int alt_c)
 	struct classinfo *ci;
 	classptr cp;
 	int code;
-	string repr;
+	cstring repr;
 	struct table *tp;
 	char buf[1024];
 
@@ -187,8 +187,8 @@ Visible bool soften(enviro *ep, string *pstr, int alt_c)
 			buf[ep->s2] = **pstr;
 			++*pstr;
 			++ep->s2;
-		} while (ep->s2 < sizeof buf - 1 && **pstr
-				&& mayinsert(n, 1, ep->s2, **pstr));
+		} while (((size_t)(ep->s2)) < sizeof buf - 1 && **pstr
+			 && mayinsert(n, 1, ep->s2, **pstr));
 		buf[ep->s2] = 0;
 		setchild(&n, 1, (nodeptr) mk_etext(buf));
 	}
@@ -212,12 +212,12 @@ Visible bool resuggest(enviro *ep, string *pstr, int alt_c)
 	pathptr pa;
 	nodeptr nn;
 	nodeptr n = tree(ep->focus);
-	string *oldrp = noderepr(n);
+	cstring *oldrp = noderepr(n);
 	int ich = ep->s1/2;
-	string str = oldrp[ich];
+	cstring str = oldrp[ich];
 	int oldsym = symbol(n);
 	int childsym[MAXCHILD];
-	string *newrp;
+	cstring *newrp;
 	int sympa;
 	int sym;
 	int symfound = -1;
@@ -323,7 +323,7 @@ Visible bool resuggest(enviro *ep, string *pstr, int alt_c)
  * longest match.
  */
 
-Hidden bool ifmatch(enviro *ep, string *pstr, string str, int alt_c)
+Hidden bool ifmatch(enviro *ep, string *pstr, cstring str, int alt_c)
 {
 	int c = str[ep->s2];
 

@@ -9,7 +9,7 @@ extern "C" {
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1988. */
 
 extern int e_length(value v);
-extern value mk_etext(string m);
+extern value mk_etext(cstring m);
 extern char e_ncharval(int n, value v);
 extern string e_strval(value v);
 extern string e_sstrval(value v);

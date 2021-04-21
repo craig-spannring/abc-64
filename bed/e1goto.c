@@ -143,7 +143,7 @@ gotoscrollbar(enviro *ep, int x)
 Visible bool gotoyx(enviro *ep, int y, int x)
 {
 	nodeptr n;
-	string *rp;
+	cstring *rp;
 	int i;
 	int pc;
 
@@ -224,7 +224,7 @@ poscomp(pathptr p, int y, int x)
 	int ly;
 	int lx;
 	int w;
-	string *rp;
+	cstring *rp;
 	nodeptr n;
 
 	ly = Ycoord(p);
@@ -263,7 +263,7 @@ Visible Procedure gotofix(enviro *ep, int y, int x)
 	int fx;
 	int fy;
 	int len;
-	string repr;
+	cstring repr;
 
 	switch (ep->mode) {
 
@@ -279,7 +279,7 @@ Visible Procedure gotofix(enviro *ep, int y, int x)
 			if (len < 0 || fy != y)
 				return;
 			if ((ep->s1&1) && fx + len >= x-1) {
-				string *nr= noderepr(tree(ep->focus));
+				cstring *nr= noderepr(tree(ep->focus));
 				repr = nr[ep->s1/2];
 				if ((repr && repr[0] == ' ') != (fx + len == x))
 					return;
@@ -319,7 +319,7 @@ Visible Procedure gotofix(enviro *ep, int y, int x)
 			break;
 		case FHOLE:
 			{
-			string *nr= noderepr(tree(ep->focus));
+			cstring *nr= noderepr(tree(ep->focus));
 			len = fwidth(nr[ep->s1/2]);
 			}
 			break;

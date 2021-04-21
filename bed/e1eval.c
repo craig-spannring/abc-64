@@ -58,7 +58,7 @@ Visible Procedure evalcoord(nodeptr n, int jch, int *py, int *px, int *plevel)
 {
 	nodeptr nn;
 	int i;
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 	int k;
 	int y = 0;
 	int x = *px;
@@ -113,7 +113,7 @@ Visible Procedure evalcoord(nodeptr n, int jch, int *py, int *px, int *plevel)
  * character, and \b or \t only as last.
  */
 
-Visible int fwidth(string str)
+Visible int fwidth(cstring str)
 {
 	int c;
 	int n = 0;
@@ -143,7 +143,7 @@ Visible int evalwidth(nodeptr n)
 {
 	int w;
 	int i;
-	string *rp;
+	cstring *rp;
 	int y = 0;
 	int x = 0;
 	int nch;

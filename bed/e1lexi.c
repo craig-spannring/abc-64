@@ -24,7 +24,7 @@
  */
 
 Visible bool maystart(char c, int ilex) {
-	string cp;
+	cstring cp;
 
 	ilex-= LEXICAL;
 	Assert(0 <= ilex && ilex < NLEX);
@@ -43,7 +43,7 @@ Visible bool maystart(char c, int ilex) {
  */
 
 Visible bool maycontinue(char c, int ilex) {
-	string cp;
+	cstring cp;
 
 	ilex-= LEXICAL;
 	Assert(0 <= ilex && ilex < NLEX);

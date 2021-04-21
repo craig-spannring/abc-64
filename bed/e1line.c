@@ -76,7 +76,7 @@ Visible bool eqlines(nodeptr n1, nodeptr n2)
 Visible int linelen(nodeptr n)
 {
 	nodeptr nn;
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 	int w;
 	int nch = nchildren(n);
 	int i;
@@ -185,7 +185,7 @@ Visible Procedure oneline(enviro *ep)
 {
 	nodeptr n;
 	nodeptr nn;
-	string *rp;
+	cstring *rp;
 	int s1;
 	int s2;
 	int len;

@@ -54,7 +54,7 @@ Visible Porting Procedure freepath(char *path)
 	if (path != NULL) freestr(path);
 }
 
-Hidden string searchfile(char *base, char *abclib) {
+Hidden string searchfile(const char *base, const char *abclib) {
 	char *file;
 	
 	/* search first in startup directory */

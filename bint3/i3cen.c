@@ -25,7 +25,7 @@
  * workspace.
  */
 
-Forward Hidden value getcentralinfo(string file);
+Forward Hidden value getcentralinfo(cstring file);
 Forward Hidden bool unitinenv(value pname, value **howto, wsenvptr wse);
 Forward Hidden char *mkfilepath(value fname, wsenvptr wse);
 
@@ -145,7 +145,7 @@ Visible Procedure endcentralworkspace(bool last)
  * Read the filename/typecode mapping of the central workspace.
  */
 
-Hidden value getcentralinfo(string file)
+Hidden value getcentralinfo(cstring file)
 {
 	char *cenfile;
 	value v = Vnil;

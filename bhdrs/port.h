@@ -30,7 +30,7 @@ extern char *buffile;
 #define BUFFILE		"copybuf.abc"
 #define FORMAT_KEYSFILE "abc%s.key"    /* abc$TERM.key */
 
-Visible string reprchar(int c);              /* keys.c */
+Visible cstring reprchar(int c);              /* keys.c */
 #ifndef CANLOOKAHEAD
 extern char intrchar;
 #endif

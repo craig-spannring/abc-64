@@ -14,7 +14,7 @@ extern "C" {
     
 
 	
-	Visible bool allspaces(string str);
+	Visible bool allspaces(cstring str);
 	Visible bool checkep(enviro *ep);
 	Visible bool ev_eq(enviro *l, enviro *r);
 	Visible bool ev_eq(enviro *l, enviro *r);

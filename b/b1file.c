@@ -8,7 +8,7 @@
 #include "bmem.h"
 #include "port.h"
 
-Visible string permfile= PERMFILE;	/* saves links file name vs. abc name */
+Visible cstring permfile= PERMFILE;	/* saves links file name vs. abc name */
 Visible string suggfile= SUGGFILE;	/* saves user suggestions */
 Visible string posfile= POSFILE;	/* saves focus positions */
 Visible string typesfile= TYPESFILE;	/* saves typecode's */

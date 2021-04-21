@@ -55,7 +55,6 @@ Forward Hidden Procedure getsugg(char *sgfile);
 Forward Hidden Procedure savsugg(void);
 Forward Hidden bool getpattern(nodeptr n);
 Forward Hidden Procedure addnode(nodeptr n);
-Forward Hidden Procedure addstr(string s);
 
 /*
  * sugg[0..nbuiltin-1]:
@@ -165,7 +164,7 @@ Hidden bool checksugg(string bp)
  * slight variation on bint2/i2syn.c
  */
 
-Hidden char *firstkw[] = {
+Hidden const char *firstkw[] = {
 	K_IF, K_WHILE, K_CHECK, K_HOW, K_RETURN, K_REPORT,
 	NULL
 };
@@ -173,7 +172,7 @@ Hidden char *firstkw[] = {
 Hidden bool res_firstkeyword(string str) {
 	char *fkw;
 	char *fkwend;
-	string *kw;
+	cstring *kw;
 	bool r= No;
 	
 	fkw= savestr(str);
@@ -755,7 +754,17 @@ Visible Procedure readsugg(pathptr p)
 	pathrelease(p);
 }
 
-
+Hidden Procedure addtopbuf(cstring s) {
+	while (*s) {
+		*pbuf++ = *s++;
+		if (pbuf >= lastsugg + buflen) {
+			regetmem((ptr*)&lastsugg, 
+				 (unsigned) (buflen+SUGGBUFSIZE));
+			pbuf= lastsugg+buflen;
+			buflen += SUGGBUFSIZE;
+		}
+	}
+}
 /*
  * Procedure called when a unit is saved.
  * It tries to update the suggestion database.
@@ -794,7 +803,7 @@ Visible Procedure writesugg(pathptr p)
 Hidden bool 
 getpattern(nodeptr n)
 {
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 	int sym;
 	int sym1;
 	int sym2;
@@ -820,19 +829,19 @@ getpattern(nodeptr n)
 			switch (sym) {
 			case Formal_kw_plus:
 				addnode(firstchild(n));
-				addstr(" ");
+				addtopbuf(" ");
 				break;
 			case Keyword:
 				addnode(n);
 				*pbuf= '\0';
 				return Yes;
 			case Formal_naming_plus:
-				addstr("? ");
+				addtopbuf("? ");
 				break;
 			case Name:
 			case Multiple_naming:
 			case Compound_naming:
-				addstr("?");
+				addtopbuf("?");
 				*pbuf= '\0';
 				return Yes;
 			default:
@@ -879,20 +888,10 @@ Hidden Procedure addnode(nodeptr n) {
 	Assert(symbol(n) == Keyword || symbol(n) == Name);
 	
 	s= e_strval((value) firstchild(n));
-	addstr(s);
+	addtopbuf(s);
 }
 
-Hidden Procedure addstr(string s) {
-	while (*s) {
-		*pbuf++ = *s++;
-		if (pbuf >= lastsugg + buflen) {
-			regetmem((ptr*)&lastsugg, 
-				 (unsigned) (buflen+SUGGBUFSIZE));
-			pbuf= lastsugg+buflen;
-			buflen += SUGGBUFSIZE;
-		}
-	}
-}
+
 
 Visible Procedure endclasses(void)
 {

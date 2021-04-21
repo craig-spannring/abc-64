@@ -24,7 +24,7 @@ extern "C" {
 #define DEFAULT_WS	"first" /* default name of startup workspace */
 #define CENTRAL_WS      "abc"   /* default name of central workspace */
 
-extern string permfile;
+extern cstring permfile;
 extern string suggfile;
 extern string posfile;
 extern string typesfile;

@@ -219,7 +219,7 @@ makesugg(cp)
 	classptr cp;
 {
 	struct table *tp;
-	string *rp;
+	cstring *rp;
 	char buffer[1000];
 	string bp;
 	string sp;

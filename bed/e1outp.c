@@ -37,11 +37,238 @@ Hidden int yfocus;
 Visible int focy; /* Where the cursor must go */
 Visible int focx;
 
-Forward Hidden Procedure focsmash(string *pbuf, string *pmod, nodeptr n);
-Forward Hidden Procedure smash(string *pbuf, string *pmod, nodeptr n, int mask);
-Forward Hidden Procedure strsmash(string *pbuf, string *pmod, string str, int mask);
-Forward Hidden Procedure subsmash(string *pbuf, string *pmod, string str, int len, int mask);
-Forward Hidden bool chismash(string *pbuf, string *pmod, nodeptr n, int i, int mask);
+
+Hidden bool chismash(string *pbuf, string *pmod, nodeptr n, int i, int mask);
+Hidden Procedure smash(string *pbuf, string *pmod, nodeptr n, int mask);
+
+/*
+ * Smash -- produce a linear version of a node in a buffer (which had
+ * better be long enough!).  The buffer pointer is moved to the end of
+ * the resulting string.
+ * Care is taken to represent the focus.
+ * Characters in the focus have their upper bit set.
+ */
+
+#define Outvhole()                                      \
+	do {                                            \
+		if (where->spflag) {                    \
+			char space[2] = {' ', '\0'};    \
+			strsmash(pbuf, pmod, space, 0); \
+		}      					\
+		char qmark[2] = {'?', '\0'};            \
+                strsmash(pbuf, pmod, qmark, STANDOUT);  \
+	} while(0)
+
+
+
+
+Hidden Procedure subsmash(string *pbuf, string *pmod, string str, int len, int mask)
+{
+	if (!str)
+		return;
+	for (; len > 0 && *str; --len, ++str) {
+		if (isprint(*str) || *str == ' ') {
+			**pbuf = *str, ++*pbuf;
+			**pmod = mask, ++*pmod;
+		}
+	}
+}
+
+
+Hidden Procedure strsmash(string *pbuf, string *pmod, string str, int mask)
+{
+	if (!str)
+		return;
+	for (; *str; ++str) {
+		if (isprint(*str) || *str == ' ') {
+			**pbuf = *str, ++*pbuf;
+			**pmod = mask, ++*pmod;
+		}
+	}
+}
+
+static inline string* evil_cast_cstring_ptr_to_string_ptr(cstring* ptr)
+{
+	return (string*)ptr;
+}
+
+Hidden Procedure focsmash(string *pbuf, string *pmod, nodeptr n)
+{
+	value v;
+	string str;
+	string *rp;
+	int maxs2;
+	int i;
+	bool ok;
+	int j;
+	int mask;
+
+	switch (where->mode) {
+
+	case WHOLE:
+		smash(pbuf, pmod, n, STANDOUT);
+		break;
+
+	case ATBEGIN:
+		Outvhole();
+		smash(pbuf, pmod, n, 0);
+		break;
+
+	case ATEND:
+		smash(pbuf, pmod, n, 0);
+		Outvhole();
+		break;
+
+	case VHOLE:
+		if (!(where->s1&1)) {
+			v = (value) child(n, where->s1/2);
+			Assert(Is_etext(v));
+			str= e_sstrval(v);
+			subsmash(pbuf, pmod, str, where->s2, 0);
+			Outvhole();
+			j= symbol(n);
+			i= str[where->s2] == '?' &&
+			 (j == Suggestion || j == Sugghowname);
+			strsmash(pbuf, pmod, str + where->s2 + i, 0);
+			e_fstrval(str);
+			break;
+		}
+		/* Else, fall through */
+	case FHOLE:
+		rp = evil_cast_cstring_ptr_to_string_ptr(noderepr(n));
+		maxs2 = 2*nchildren(n) + 1;
+		for (ok = Yes, i = 1; ok && i <= maxs2; ++i) {
+			if (i&1) {
+				if (i == where->s1) {
+					subsmash(pbuf, pmod, rp[i/2], where->s2, 0);
+					Outvhole();
+					if (rp[i/2])
+						strsmash(pbuf, pmod, rp[i/2] + where->s2, 0);
+				}
+				else
+					strsmash(pbuf, pmod, rp[i/2], 0);
+			}
+			else
+				ok = chismash(pbuf, pmod, n, i/2, 0);
+		}
+		break;
+
+	case SUBRANGE:
+		rp = evil_cast_cstring_ptr_to_string_ptr(noderepr(n));
+		maxs2 = 2*nchildren(n) + 1;
+		for (ok = Yes, i = 1; ok && i <= maxs2; ++i) {
+			if (i&1) {
+				if (i == where->s1) {
+					subsmash(pbuf, pmod, rp[i/2], where->s2,0);
+					if (rp[i/2])
+						subsmash(pbuf, pmod, rp[i/2] + where->s2,
+							where->s3 - where->s2 + 1, STANDOUT);
+					if (rp[i/2])
+						strsmash(pbuf, pmod, rp[i/2] + where->s3 + 1, 0);
+				}
+				else
+					strsmash(pbuf, pmod, rp[i/2], 0);
+			}
+			else if (i == where->s1) {
+				v = (value)child(n, i/2);
+				Assert(Is_etext(v));
+				str = e_sstrval(v);
+				subsmash(pbuf, pmod, str, where->s2, 0);
+				subsmash(pbuf, pmod, str + where->s2, where->s3 - where->s2 + 1,
+					STANDOUT);
+				strsmash(pbuf, pmod, str + where->s3 + 1, 0);
+				e_fstrval(str);
+			}
+			else
+				ok = chismash(pbuf, pmod, n, i/2, 0);
+		}
+		break;
+
+	case SUBLIST:
+		for (ok = Yes, j = where->s3; j > 0; --j) {
+			rp = evil_cast_cstring_ptr_to_string_ptr(noderepr(n));
+			maxs2 = 2*nchildren(n) - 1;
+			for (i = 1; ok && i <= maxs2; ++i) {
+				if (i&1)
+					strsmash(pbuf, pmod, rp[i/2], STANDOUT);
+				else
+					ok = chismash(pbuf, pmod, n, i/2, STANDOUT);
+			}
+			if (ok)
+				n = lastchild(n);
+		}
+		if (ok)
+			smash(pbuf, pmod, n, 0);
+		break;
+
+	case SUBSET:
+		rp = evil_cast_cstring_ptr_to_string_ptr(noderepr(n));
+		maxs2 = 2*nchildren(n) + 1;
+		mask = 0;
+		for (ok = Yes, i = 1; ok && i <= maxs2; ++i) {
+			if (i == where->s1)
+				mask = STANDOUT;
+			if (i&1)
+				strsmash(pbuf, pmod, rp[i/2], mask);
+			else
+				ok = chismash(pbuf, pmod, n, i/2, mask);
+			if (i == where->s2)
+				mask = 0;
+		}
+		break;
+
+	default:
+		Abort();
+	}
+}
+
+/*
+ * Smash a node's child.
+ * Return No if it contained a newline (to stop the parent).
+ */
+
+Hidden bool chismash(string *pbuf, string *pmod, nodeptr n, int i, int mask)
+{
+	nodeptr nn = child(n, i);
+	int w;
+
+	if (Is_etext(nn)) {
+		strsmash(pbuf, pmod, e_strval((value)nn), mask);
+		return Yes;
+	}
+	w = nodewidth(nn);
+	if (w < 0 && Fw_negative(noderepr(nn)[0]))
+		return No;
+	if (nn == thefocus)
+		focsmash(pbuf, pmod, nn);
+	else
+		smash(pbuf, pmod, nn, mask);
+	return w >= 0;
+}
+
+static inline string evil_cast_cstring_to_string(cstring ptr)
+{
+	return (string)ptr;
+}
+
+Hidden Procedure smash(string *pbuf, string *pmod, nodeptr n, int mask)
+{
+	cstring *rp;
+	int i;
+	int nch;
+
+	rp = noderepr(n);
+	strsmash(pbuf, pmod, evil_cast_cstring_to_string(rp[0]), mask);
+	nch = nchildren(n);
+	for (i = 1; i <= nch; ++i) {
+		if (!chismash(pbuf, pmod, n, i, mask))
+			break;
+		strsmash(pbuf, pmod, evil_cast_cstring_to_string(rp[i]), mask);
+	}
+}
+
+
+
 
 /*
  * Save position of the focus for use by outnode/outfocus.
@@ -218,210 +445,5 @@ Visible Procedure outline(cell *p, int lineno)
 }
 
 
-/*
- * Smash -- produce a linear version of a node in a buffer (which had
- * better be long enough!).  The buffer pointer is moved to the end of
- * the resulting string.
- * Care is taken to represent the focus.
- * Characters in the focus have their upper bit set.
- */
-
-#define Outvhole() \
-	if (where->spflag) \
-		strsmash(pbuf, pmod, " ", 0); \
-	strsmash(pbuf, pmod, "?", STANDOUT)
-
-Hidden Procedure focsmash(string *pbuf, string *pmod, nodeptr n)
-{
-	value v;
-	string str;
-	string *rp;
-	int maxs2;
-	int i;
-	bool ok;
-	int j;
-	int mask;
-
-	switch (where->mode) {
-
-	case WHOLE:
-		smash(pbuf, pmod, n, STANDOUT);
-		break;
-
-	case ATBEGIN:
-		Outvhole();
-		smash(pbuf, pmod, n, 0);
-		break;
-
-	case ATEND:
-		smash(pbuf, pmod, n, 0);
-		Outvhole();
-		break;
-
-	case VHOLE:
-		if (!(where->s1&1)) {
-			v = (value) child(n, where->s1/2);
-			Assert(Is_etext(v));
-			str= e_sstrval(v);
-			subsmash(pbuf, pmod, str, where->s2, 0);
-			Outvhole();
-			j= symbol(n);
-			i= str[where->s2] == '?' &&
-			 (j == Suggestion || j == Sugghowname);
-			strsmash(pbuf, pmod, str + where->s2 + i, 0);
-			e_fstrval(str);
-			break;
-		}
-		/* Else, fall through */
-	case FHOLE:
-		rp = noderepr(n);
-		maxs2 = 2*nchildren(n) + 1;
-		for (ok = Yes, i = 1; ok && i <= maxs2; ++i) {
-			if (i&1) {
-				if (i == where->s1) {
-					subsmash(pbuf, pmod, rp[i/2], where->s2, 0);
-					Outvhole();
-					if (rp[i/2])
-						strsmash(pbuf, pmod, rp[i/2] + where->s2, 0);
-				}
-				else
-					strsmash(pbuf, pmod, rp[i/2], 0);
-			}
-			else
-				ok = chismash(pbuf, pmod, n, i/2, 0);
-		}
-		break;
-
-	case SUBRANGE:
-		rp = noderepr(n);
-		maxs2 = 2*nchildren(n) + 1;
-		for (ok = Yes, i = 1; ok && i <= maxs2; ++i) {
-			if (i&1) {
-				if (i == where->s1) {
-					subsmash(pbuf, pmod, rp[i/2], where->s2,0);
-					if (rp[i/2])
-						subsmash(pbuf, pmod, rp[i/2] + where->s2,
-							where->s3 - where->s2 + 1, STANDOUT);
-					if (rp[i/2])
-						strsmash(pbuf, pmod, rp[i/2] + where->s3 + 1, 0);
-				}
-				else
-					strsmash(pbuf, pmod, rp[i/2], 0);
-			}
-			else if (i == where->s1) {
-				v = (value)child(n, i/2);
-				Assert(Is_etext(v));
-				str = e_sstrval(v);
-				subsmash(pbuf, pmod, str, where->s2, 0);
-				subsmash(pbuf, pmod, str + where->s2, where->s3 - where->s2 + 1,
-					STANDOUT);
-				strsmash(pbuf, pmod, str + where->s3 + 1, 0);
-				e_fstrval(str);
-			}
-			else
-				ok = chismash(pbuf, pmod, n, i/2, 0);
-		}
-		break;
-
-	case SUBLIST:
-		for (ok = Yes, j = where->s3; j > 0; --j) {
-			rp = noderepr(n);
-			maxs2 = 2*nchildren(n) - 1;
-			for (i = 1; ok && i <= maxs2; ++i) {
-				if (i&1)
-					strsmash(pbuf, pmod, rp[i/2], STANDOUT);
-				else
-					ok = chismash(pbuf, pmod, n, i/2, STANDOUT);
-			}
-			if (ok)
-				n = lastchild(n);
-		}
-		if (ok)
-			smash(pbuf, pmod, n, 0);
-		break;
-
-	case SUBSET:
-		rp = noderepr(n);
-		maxs2 = 2*nchildren(n) + 1;
-		mask = 0;
-		for (ok = Yes, i = 1; ok && i <= maxs2; ++i) {
-			if (i == where->s1)
-				mask = STANDOUT;
-			if (i&1)
-				strsmash(pbuf, pmod, rp[i/2], mask);
-			else
-				ok = chismash(pbuf, pmod, n, i/2, mask);
-			if (i == where->s2)
-				mask = 0;
-		}
-		break;
-
-	default:
-		Abort();
-	}
-}
-
-Hidden Procedure smash(string *pbuf, string *pmod, nodeptr n, int mask)
-{
-	string *rp;
-	int i;
-	int nch;
-
-	rp = noderepr(n);
-	strsmash(pbuf, pmod, rp[0], mask);
-	nch = nchildren(n);
-	for (i = 1; i <= nch; ++i) {
-		if (!chismash(pbuf, pmod, n, i, mask))
-			break;
-		strsmash(pbuf, pmod, rp[i], mask);
-	}
-}
-
-Hidden Procedure strsmash(string *pbuf, string *pmod, string str, int mask)
-{
-	if (!str)
-		return;
-	for (; *str; ++str) {
-		if (isprint(*str) || *str == ' ') {
-			**pbuf = *str, ++*pbuf;
-			**pmod = mask, ++*pmod;
-		}
-	}
-}
-
-Hidden Procedure subsmash(string *pbuf, string *pmod, string str, int len, int mask)
-{
-	if (!str)
-		return;
-	for (; len > 0 && *str; --len, ++str) {
-		if (isprint(*str) || *str == ' ') {
-			**pbuf = *str, ++*pbuf;
-			**pmod = mask, ++*pmod;
-		}
-	}
-}
 
 
-/*
- * Smash a node's child.
- * Return No if it contained a newline (to stop the parent).
- */
-
-Hidden bool chismash(string *pbuf, string *pmod, nodeptr n, int i, int mask)
-{
-	nodeptr nn = child(n, i);
-	int w;
-
-	if (Is_etext(nn)) {
-		strsmash(pbuf, pmod, e_strval((value)nn), mask);
-		return Yes;
-	}
-	w = nodewidth(nn);
-	if (w < 0 && Fw_negative(noderepr(nn)[0]))
-		return No;
-	if (nn == thefocus)
-		focsmash(pbuf, pmod, nn);
-	else
-		smash(pbuf, pmod, nn, mask);
-	return w >= 0;
-}

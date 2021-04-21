@@ -13,7 +13,7 @@ Visible int e_length(value v) {
 	return Length(v);
 }
 
-Visible value mk_etext(string m) {
+Visible value mk_etext(cstring m) {
 	value v; intlet len= strlen(m);
 	v= grab(Etex, len);
 	strcpy(Str(v), m);

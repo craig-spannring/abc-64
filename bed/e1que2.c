@@ -89,8 +89,10 @@ Visible bool ins_queue(enviro *ep, queueptr *pq, queueptr *pq2)
 				Erelease(saveenv);
 				qrelease(*pq2);
 				*pq2 = oldq2;
-				if (symbol(n) == Hole)
-					ok = ins_string(ep, "?", pq2, 0);
+				if (symbol(n) == Hole) {
+					char tmp[2] = {'?', '\0'};
+					ok = ins_string(ep, tmp, pq2, 0);
+				}
 				else
 					splitnode(n, pq);
 			}
@@ -149,7 +151,7 @@ Visible bool app_queue(enviro *ep, queueptr *pq)
 Visible bool move_on(enviro *ep)
 {
 	nodeptr n;
-	string *rp;
+	cstring *rp;
 	int sym;
 	int ich = ichild(ep->focus);
 
@@ -199,8 +201,8 @@ Visible bool fix_move(enviro *ep)
 {
 	int ich;
 	int i;
-	string *rp;
-	string cp;
+	cstring *rp;
+	cstring cp;
 
 	Assert(ep->mode == FHOLE);
 
@@ -250,7 +252,7 @@ Hidden bool ins_node(enviro *ep, nodeptr n, queueptr *pq)
 	int sym;
 	nodeptr nn;
 	markbits x;
-	string *rp;
+	cstring *rp;
 	nodeptr fc;
 
 	if (symbol(n) == Optional)
@@ -391,7 +393,7 @@ Hidden bool fits_kwchar(nodeptr n, int i, int ch) {
 	
 	Assert(symbol(n) == Keyword && i >= 0);
 	s= e_strval((value) firstchild(n));
-	if (strlen(s) < i)
+	if (strlen(s) < (size_t)i)
 		return No;
 	/* else: */
 	si= s[i];
@@ -506,7 +508,7 @@ Hidden bool range_hack(enviro *ep) {
 
 	if (sympa == List_or_table_display || sympa == List_filler_series) {
 		str= e_sstrval((value) firstchild(tree(ep->focus)));
-		if (s2 == strlen(str) && str[s2-1] == '.') {
+		if ((size_t)s2 == strlen(str) && str[s2-1] == '.') {
 			str[s2-1]= '\0';
 			n1= gram(Name);
 			setchild(&n1, 1, (nodeptr) mk_etext(str));
@@ -539,13 +541,12 @@ Visible bool justgoon = No;
 #define NEXT_CH (++str, alt_c = 0)
 
 Visible bool ins_string(enviro *ep, string str, queueptr *pq, int alt_c)
-	/*auto*/ 
 {
 	nodeptr nn;
 	value v;
 	char buf[1024];
-	string repr;
-	string oldstr;
+	cstring repr;
+	cstring oldstr;
 	int sym;
 	int len;
 	bool inter_active = alt_c != 0;
@@ -792,8 +793,8 @@ Visible bool ins_string(enviro *ep, string str, queueptr *pq, int alt_c)
 			v = copy((value) tree(ep->focus));
 			len = 0;
 			if (!ep->spflag) {
-				while (len < sizeof buf - 1 && str[len]
-		&& mayinsert(nn, ep->s1/2, !!(ep->s2 + len), str[len]))
+				while ((size_t)len < sizeof buf - 1 && str[len]
+				       && mayinsert(nn, ep->s1/2, !!(ep->s2 + len), str[len]))
 				{
 					if ((sym == Name || sym == Keyword)
 					    && str[len] == '.' && str[len+1] == '.')
@@ -914,7 +915,7 @@ joinnodes(pathptr *pp, nodeptr n1, nodeptr n2, bool spflag)
  * Returns the number of characters consumed from str.
  */
 
-Visible int joinstring(pathptr *pp, string str, bool spflag, int alt_c, bool mayindent)
+Visible int joinstring(pathptr *pp, cstring str, bool spflag, int alt_c, bool mayindent)
 {
 	struct table *tp;
 	pathptr pa = parent(*pp);
@@ -1061,7 +1062,7 @@ canfitchar(int c, struct classinfo *ci)
  * Debug routine to print a queue.
  */
 
-Visible Procedure qshow(queueptr q, string where)
+Visible Procedure qshow(queueptr q, cstring where)
 {
 	nodeptr n;
 	char buf[256];

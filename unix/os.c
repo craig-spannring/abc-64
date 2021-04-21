@@ -122,7 +122,7 @@ Visible Procedure getdatetime(int *year, int *month, int *day,
 
 /* curdir() - return the current directory */
 
-Visible Porting char *curdir(void)
+Visible Porting const char *curdir(void)
 {
 	static char buffer[1024];
 	char *res;

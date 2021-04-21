@@ -51,16 +51,17 @@ Visible bool isinclass(int sym, struct classinfo *ci)
  * is changed, the representation may change, too.
  * In practical use this is no problem at all, however.
  */
-
-Visible string *noderepr(nodeptr n)
+struct Foo {int x;};
+Visible cstring* noderepr(nodeptr n)
 {
 	int sym;
 
 	if (n && Is_etext(n)) {
-		static string buf[2];
+		static string tmpbuf[2];
+		char **buf = tmpbuf;
 		if (buf[0]) e_fstrval(buf[0]);
 		buf[0] = e_sstrval((value)n);
-		return buf;
+		return (cstring*)buf;
 	}
 	sym = symbol(n);
 	return table[sym].r_repr;
@@ -91,7 +92,7 @@ Visible nodeptr gram(int sym)
  * Deliver the name of a symbol.
  */
 
-Visible string symname(int sym)
+Visible cstring symname(int sym)
 {
 	static char buf[20];
 
@@ -110,7 +111,7 @@ Visible string symname(int sym)
 Visible int nametosym(string str)
 {
 	int sym;
-	string name;
+	cstring name;
 
 	for (sym = 0; sym < TABLEN; ++sym) {
 		name = table[sym].r_name;
@@ -202,10 +203,10 @@ Visible Procedure initclasses(void)
 
 Hidden Procedure makesugg(classptr cp) {
 	struct table *tp;
-	string *rp;
+	cstring *rp;
 	char buffer[1000];
 	string bp;
-	string sp;
+	cstring sp;
 	int i;
 	int nch;
 
@@ -306,7 +307,7 @@ Visible bool samelevel(int sym, int sym1)
 Visible bool issublist(int sym)
 {
 	int i;
-	string repr;
+	cstring repr;
 
 	Assert(sym < TABLEN);
 	if (isinclass(sym, sublists))

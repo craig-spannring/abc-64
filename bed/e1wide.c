@@ -156,7 +156,7 @@ Visible bool narrow(enviro *ep)
 	nodeptr n;
 	int sym;
 	int nch;
-	string repr;
+	cstring repr;
 	
 	higher(ep);
 

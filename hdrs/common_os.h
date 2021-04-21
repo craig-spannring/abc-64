@@ -13,7 +13,7 @@ extern "C" {
 
 extern Visible Porting long filemodtime(char *filename);
 extern Visible Porting Procedure freepath(char *path);
-extern Visible Porting char *curdir(void);
+extern Visible Porting const char *curdir(void);
 
 #ifdef __cplusplus
 }

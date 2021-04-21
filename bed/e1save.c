@@ -29,8 +29,8 @@ Forward Hidden Procedure sendsave(pathptr p, bufadm *bp, FILE *fp);
 
 Hidden Procedure savewalk(nodeptr n, int level, bufadm *bp, FILE *fp)
 {
-	string *rp;
-	string cp;
+	cstring *rp;
+	cstring cp;
 	int nch;
 	int i;
 	char c;

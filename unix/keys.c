@@ -259,7 +259,7 @@ Hidden Procedure getspchars(void) {
 
 /* The following is needed for the helpblurb */
 
-Visible string reprchar(int c) {
+Visible cstring reprchar(int c) {
 
 	static char str[20];
 

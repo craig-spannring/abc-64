@@ -91,7 +91,8 @@ Visible bool ins_char(enviro *ep, int c, int alt_c)
 		if (ep->mode == FHOLE && ep->s2 > 0) {
 			/* If we just caused a suggestion, insert the remains
 			   after the suggested text, not after its first character. */
-			str = "";
+			char emptystr[2] = {0, 0}; 
+			str = emptystr;;
 			if (!soften(ep, &str, 0)) {
 				ep->mode = ATEND;
 				leftvhole(ep);
@@ -225,13 +226,14 @@ Visible bool ins_newline(enviro *ep, bool reading_file)
 Hidden bool fiddle(enviro *ep, bool *pmayindent, bool reading_file)
 {
 	int level;
-	string str = "";
+	char emptystr[2] = {0,0};
+	string str = emptystr;
 
 	higher(ep);
 	while (rnarrow(ep))
 		;
 	fixit(ep);
-	VOID soften(ep, &str, 0);
+	soften(ep, &str, 0);
 	higher(ep);
 	*pmayindent = Yes;
 	if (atdedent(ep)) {
@@ -280,7 +282,7 @@ Hidden bool hackhack(enviro *ep)
 {
 	nodeptr n;
 	int ich = ichild(ep->focus);
-	string *rp;
+	cstring *rp;
 
 	if (!up(&ep->focus))
 		return No;
@@ -349,7 +351,7 @@ Hidden bool nexthole(enviro *ep)
 {
 	nodeptr n;
 	int ich;
-	string repr;
+	cstring repr;
 
 	do {
 		ich = ichild(ep->focus);
@@ -374,7 +376,7 @@ Hidden bool atrealhole(enviro *ep) {
 	if (symbol(n) == Hole)
 		return Yes;
 	if (ep->mode == FHOLE
-	    && strlen(noderepr(n)[i= ep->s1/2]) <= ep->s2) {
+	    && strlen(noderepr(n)[i= ep->s1/2]) <= ((size_t)(ep->s2))) {
 		if (i < nchildren(n)) {
 			n= child(n, i+1);
 			if (Is_etext(n))

@@ -13,7 +13,7 @@ extern "C" {
 
 	Visible value e_concat(value s, value t);
 	Visible int e_length(value v);
-	Visible value mk_etext(string m);
+	Visible value mk_etext(cstring m);
 	Visible char e_ncharval(int n, value v);
 	Visible string e_strval(value v);
 	Visible string e_sstrval(value v);

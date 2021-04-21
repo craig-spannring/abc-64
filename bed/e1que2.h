@@ -18,8 +18,8 @@ extern "C" {
     Visible bool      ins_queue(enviro *ep, queueptr *pq, queueptr *pq2);
     Visible bool      ins_string(enviro *ep, string str, queueptr *pq, int alt_c);
     Visible bool      move_on(enviro *ep);
-    Visible int       joinstring(pathptr *pp, string str, bool spflag, int alt_c, bool mayindent);
-    Visible Procedure qshow(queueptr q, string where);
+    Visible int       joinstring(pathptr *pp, cstring str, bool spflag, int alt_c, bool mayindent);
+    Visible Procedure qshow(queueptr q, cstring where);
 
 #ifdef __cplusplus
 }

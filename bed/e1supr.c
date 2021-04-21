@@ -22,12 +22,34 @@
 #include "tabl.h"
 #include "b1grab.h"
 
-Forward Hidden bool subisnull(nodeptr n, string *rp, int i, bool ignorespaces);
-Forward Hidden bool isnull(nodeptr n, string *rp, int i);
 Forward Hidden bool nextitem(enviro *ep);
 Forward Hidden bool previtem(enviro *ep);
 Forward Hidden bool isunititem(enviro *ep);
-	
+
+
+/*
+ * Subroutine for grow/shrink to see whether item i is (almost) invisible.
+ */
+
+Hidden bool subisnull(nodeptr n, cstring *rp, int i, bool ignorespaces)
+{
+	cstring repr;
+	nodeptr nn;
+
+	if (i&1) { /* Fixed text */
+		repr = rp[i/2];
+		return !Fw_positive(repr) || (ignorespaces && allspaces(repr));
+	}
+	nn = child(n, i/2);
+	return nodewidth(nn) == 0;
+}
+
+
+Hidden bool isnull(nodeptr n, cstring *rp, int i)
+{
+	return subisnull(n, rp, i, Yes);
+}
+
 /*
  * Compute the length of the ep->s1'th item of node tree(ep->focus).
  */
@@ -38,7 +60,7 @@ Visible int lenitem(enviro *ep)
 	nodeptr nn;
 
 	if (ep->s1&1) { /* Fixed text */
-		string *nr= noderepr(n);
+		cstring *nr= noderepr(n);
 		return fwidth(nr[ep->s1/2]);
 	}
 	/* Else, variable text or a whole node */
@@ -53,7 +75,7 @@ Visible Procedure subgrow(enviro *ep, bool ignorespaces, bool deleting)
 	int sym;
 	int i;
 	int len;
-	string repr;
+	cstring repr;
 
 	switch (ep->mode) {
 	case ATBEGIN:
@@ -114,7 +136,7 @@ Visible Procedure subgrow(enviro *ep, bool ignorespaces, bool deleting)
 
 		case SUBRANGE:
 			if (ep->s1&1) {
-				string *nr= noderepr(n);
+				cstring *nr= noderepr(n);
 				repr = nr[ep->s1/2];
 				len = fwidth(repr);
 				if (!ignorespaces) {
@@ -304,7 +326,7 @@ Visible Procedure growsubset(environ *ep)
 Visible Procedure subgrsubset(enviro *ep, bool ignorespaces)
 {
 	nodeptr n = tree(ep->focus);
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 	int nch21 = nchildren(n)*2 + 1;
 	int i;
 
@@ -325,7 +347,7 @@ Visible Procedure subgrsubset(enviro *ep, bool ignorespaces)
 Visible Procedure shrsubset(enviro *ep)
 {
 	nodeptr n = tree(ep->focus);
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 	int s1 = ep->s1;
 	int s2 = ep->s2;
 
@@ -337,29 +359,6 @@ Visible Procedure shrsubset(enviro *ep)
 	ep->s2 = s2;
 }
 
-
-/*
- * Subroutine for grow/shrink to see whether item i is (almost) invisible.
- */
-
-Hidden bool subisnull(nodeptr n, string *rp, int i, bool ignorespaces)
-{
-	string repr;
-	nodeptr nn;
-
-	if (i&1) { /* Fixed text */
-		repr = rp[i/2];
-		return !Fw_positive(repr) || (ignorespaces && allspaces(repr));
-	}
-	nn = child(n, i/2);
-	return nodewidth(nn) == 0;
-}
-
-
-Hidden bool isnull(nodeptr n, string *rp, int i)
-{
-	return subisnull(n, rp, i, Yes);
-}
 
 /*
  * Find the rightmost VHOLE which would look the same as the current one.
@@ -782,7 +781,7 @@ Visible Procedure fixit(enviro *ep)
  * The string pointer must not be null!
  */
 
-Visible bool allspaces(string str)
+Visible bool allspaces(cstring str)
 {
 	Assert(str);
 	for (; *str; ++str) {
@@ -801,7 +800,7 @@ Visible int focwidth(enviro *ep)
 {
 	nodeptr nn;
 	nodeptr n = tree(ep->focus);
-	string *rp = noderepr(n);
+	cstring *rp = noderepr(n);
 	int i;
 	int w;
 	int len = 0;
@@ -865,7 +864,7 @@ Visible int focoffset(enviro *ep)
 {
 	nodeptr nn;
 	nodeptr n;
-	string *rp;
+	cstring *rp;
 	int w;
 	int len;
 	int i;
@@ -926,7 +925,7 @@ Visible int focoffset(enviro *ep)
 Visible int focchar(enviro *ep)
 {
 	nodeptr n = tree(ep->focus);
-	string *rp;
+	cstring *rp;
 	int i;
 	int c;
 
@@ -959,7 +958,7 @@ Visible int focchar(enviro *ep)
 
 	case SUBRANGE:
 		if (ep->s1&1) {
-			string *nr= noderepr(n);
+			cstring *nr= noderepr(n);
 			return nr[ep->s1/2][ep->s2];
 		}
 		else {
@@ -982,7 +981,7 @@ Visible int focchar(enviro *ep)
 
 Visible int nodechar(nodeptr n)
 {
-	string *rp;
+	cstring *rp;
 	int nch;
 	int i;
 	int c;

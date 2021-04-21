@@ -40,7 +40,7 @@ Hidden bool prevnext(enviro *ep, int direction)
 	int i;
 	int len;
 	int sym;
-	string *rp;
+	cstring *rp;
 
 	higher(ep);
 	switch (ep->mode) {
@@ -248,7 +248,7 @@ Hidden bool nextchar(enviro *ep, int direction)
 	nodeptr n;
 	nodeptr n1;
 	int len;
-	string *rp;
+	cstring *rp;
 
 	Assert(ep->mode == SUBSET);
 	for (;;) {
@@ -368,7 +368,7 @@ Visible bool downline(enviro *ep)
 Visible bool acceptcommand(enviro *ep)
 {
 	int i;
-	string repr;
+	cstring repr;
 
 	shrink(ep);
 	switch (ep->mode) {
@@ -436,7 +436,7 @@ Hidden bool tabstop(enviro *ep, int i)
 {
 	nodeptr n = tree(ep->focus);
 	int nch;
-	string repr;
+	cstring repr;
 
 	if (Is_etext(n))
 		return No;
