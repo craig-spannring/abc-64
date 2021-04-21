@@ -94,8 +94,8 @@ Hidden bool know_ttys = No;
 
 /* visible data for termcap */
 char PC;
-char *BC;
-char *UP;
+const char *BC;
+const char *UP;
 short ospeed;
 
 extern int tputs(const char *str, int affcnt, int (*putc)(int));
@@ -160,7 +160,7 @@ static int g_cols;
 /* Insert new entries here only! Don't forget to change the next line! */
 #define NSTRCAPS 40 /* One more than the last entry's index */
 
-Hidden char *strcaps[NSTRCAPS];
+Hidden const char *strcaps[NSTRCAPS];
 Hidden char strcapnames[] =
 "ALCMDLalcdceclcmcpcrcsdcdldmdoedeihoicimndnlsesfsospsrtetivbvevilebcuppckskeusue";
 
@@ -183,7 +183,7 @@ Hidden char flagnames[]= "amdadbinmimsxsbshcxn";
 
 Hidden Procedure getcaps(char **parea) {
 	char *capname;
-	char **capvar;
+	const char **capvar;
 	char *flagvar;
 
 	for (capname= flagnames, flagvar= flagcaps;
@@ -277,7 +277,6 @@ Hidden int ins_mf, ins_oh, del_mf, del_oh;
 Hidden int ed_cost, ei_cost; 		/* used in move() */
 
 Forward Hidden int getttyfp(void);
-Forward Hidden int str0cost(char *str);
 Forward Hidden int gettermcaps(void);
 Forward Hidden int setttymode(void);
 Forward Hidden Procedure resetttymode(void);
@@ -442,17 +441,18 @@ Hidden int countchar(int ch) {
   return ch; 
 }
 
-Hidden int strcost(char *str) {
+Hidden int str0cost(const char *str) {
+	ccc = 0;
+	tputs(str, 1, countchar);
+	return ccc;
+}
+
+Hidden int strcost(const char *str) {
 	if (str == NULL)
 		return Infinity;
 	return str0cost(str);
 }
 
-Hidden int str0cost(char *str) {
-	ccc = 0;
-	tputs(str, 1, countchar);
-	return ccc;
-}
 
 /*
  * Get terminal capabilities from termcap and compute related static

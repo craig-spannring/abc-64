@@ -179,7 +179,7 @@ Visible Procedure edmessage(conststring s)
 
 /* Assertion error */
 
-Visible Procedure asserr(string file, int line)
+Visible Procedure asserr(conststring file, int line)
 {
 	char mess[255];
 	sprintf(mess, "Assertion botched in file %s, line %d.", file, line);
@@ -199,7 +199,7 @@ Visible Procedure asserr(string file, int line)
 Visible bool dflag = No;
 
 /* VARARGS 1 */
-Visible Procedure debug(string fmt, ...)
+Visible Procedure debug(const string fmt, ...)
 {
 	va_list  ap; 
 	if (fmt && priority <= 1) {

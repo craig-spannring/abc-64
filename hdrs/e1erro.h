@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-    extern Visible Procedure asserr(string file, int line);
+    extern Visible Procedure asserr(conststring file, int line);
     extern Visible Procedure debug(string fmt, ...);
     extern Visible Procedure debug(string fmt, ...); 
     extern Visible Procedure ederrC(int m, char c);
