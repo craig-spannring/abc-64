@@ -12,7 +12,7 @@ extern "C" {
     extern Visible Procedure debug(cstring fmt, ...); 
     extern Visible Procedure ederrC(int m, char c);
     extern Visible Procedure ederr(int m);
-    extern Visible Procedure ederrS(int m, string s);
+    extern Visible Procedure ederrS(int m, cstring s);
     extern Visible Procedure edmessage(cstring s);
     extern Visible Procedure end_erro(void);
     extern Visible Procedure enderro(void);

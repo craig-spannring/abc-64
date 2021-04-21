@@ -31,7 +31,7 @@ Forward Hidden Procedure recperm(void);
 Forward Hidden Procedure recsugg(void);
 Forward Hidden Procedure recpos(void);
 Forward Hidden Procedure recerrV(int m, value v);
-Forward Hidden Procedure cantwrite(string file);
+Forward Hidden Procedure cantwrite(cstring file);
 
 /*
  * Code to recover the contents of an ABC workspace.
@@ -336,7 +336,7 @@ Hidden Procedure recerrV(int m, value v) {
 	bioerrV(m, v);
 }
 
-Hidden Procedure cantwrite(string file) {
+Hidden Procedure cantwrite(cstring file) {
 	value fn= mk_text(file);
 	bioerrV(R_FWRITE, fn);
 	release(fn);

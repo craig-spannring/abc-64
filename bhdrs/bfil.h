@@ -25,13 +25,13 @@ extern "C" {
 #define CENTRAL_WS      "abc"   /* default name of central workspace */
 
 extern cstring permfile;
-extern string suggfile;
-extern string posfile;
-extern string typesfile;
-extern string wsgroupfile;
+extern cstring suggfile;
+extern cstring posfile;
+extern cstring typesfile;
+extern cstring wsgroupfile;
 
-extern string tempfile;
-extern string temp1file;
+extern cstring tempfile;
+extern cstring temp1file;
 
 /* extern Procedure freepath(); */
 

@@ -9,14 +9,14 @@
 #include "port.h"
 
 Visible cstring permfile= PERMFILE;	/* saves links file name vs. abc name */
-Visible string suggfile= SUGGFILE;	/* saves user suggestions */
-Visible string posfile= POSFILE;	/* saves focus positions */
-Visible string typesfile= TYPESFILE;	/* saves typecode's */
-Visible string wsgroupfile= WSGROUPFILE; 
+Visible cstring suggfile= SUGGFILE;	/* saves user suggestions */
+Visible cstring posfile= POSFILE;	/* saves focus positions */
+Visible cstring typesfile= TYPESFILE;	/* saves typecode's */
+Visible cstring wsgroupfile= WSGROUPFILE; 
 				/* saves links workspace name vs. abc name */
 
-Visible string tempfile= TEMPFILE;	/* temporary file */
-Visible string temp1file= TEMP1FILE;	/* another temporary file */
+Visible cstring tempfile= TEMPFILE;	/* temporary file */
+Visible cstring temp1file= TEMP1FILE;	/* another temporary file */
 
 Visible Procedure free_path(const char* path) {
 	if (path != NULL)

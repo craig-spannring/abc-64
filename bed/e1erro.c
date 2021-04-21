@@ -150,7 +150,7 @@ Visible Procedure ederr(int m)
 	else ederr1(getmess(m));
 }
 
-Visible Procedure ederrS(int m, string s)
+Visible Procedure ederrS(int m, cstring s)
 {
 	sprintf(messbuf, getmess(m), s);
 	ederr1(messbuf);	

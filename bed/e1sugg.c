@@ -51,7 +51,7 @@ Hidden int nbuiltin= 0;
 Hidden int ncentral= 0;
 Hidden bool suggchanges= No;
 
-Forward Hidden Procedure getsugg(char *sgfile);
+Forward Hidden Procedure getsugg(const char *sgfile);
 Forward Hidden Procedure savsugg(void);
 Forward Hidden bool getpattern(nodeptr n);
 Forward Hidden Procedure addnode(nodeptr n);
@@ -92,7 +92,7 @@ Visible Procedure initsugg(void)
  * Read the suggestion table from (central or current workspace) file.
  */
 
-Hidden Procedure getsugg(char *sgfile) {
+Hidden Procedure getsugg(const char *sgfile) {
 	char *line;
 	FILE *fp;
 
