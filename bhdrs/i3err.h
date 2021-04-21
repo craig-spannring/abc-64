@@ -24,7 +24,7 @@ extern "C" {
 	extern Visible Procedure putsSerr(cstring fmt, cstring s);
 	extern Visible Procedure putsDSerr(cstring fmt, int d, cstring s);
 	extern Visible Procedure puts2Cerr(cstring fmt, char c1, char c2);
-	extern Visible Procedure putsCerr(string fmt, char c);
+	extern Visible Procedure putsCerr(cstring fmt, char c);
 	extern Visible Procedure interrV(int m, value v);
 	extern Visible Procedure initfmt(void);
 	extern Visible Procedure initerr(void);

@@ -424,7 +424,7 @@ Visible Procedure puts2Cerr(cstring fmt, char c1, char c2)
 	putstr(errfile, str);
 }
 
-Visible Procedure putsCerr(string fmt, char c)
+Visible Procedure putsCerr(cstring fmt, char c)
 {
 	puts2Cerr(fmt, c, '\0');
 }

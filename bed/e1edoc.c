@@ -590,8 +590,8 @@ Visible Procedure higher(enviro *ep)
 Visible Procedure dbmess(enviro *ep)
 {
 #ifndef SMALLSYS
-	char stuff[80];
-	string str = stuff;
+	char stuff[80] = {0};
+	cstring str = stuff;
 
 	switch (ep->mode) {
 	case VHOLE:

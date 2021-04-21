@@ -141,7 +141,7 @@ Visible bool ask_for(int nr) {
 
 Hidden Procedure start_help(void)
 {
-	int h;
+	unsigned int h;
 	int code;
 	int w;
 
@@ -154,7 +154,7 @@ Hidden Procedure start_help(void)
 			getentryfor(code); /* result in buffer */
 		}
 		w= strlen(buffer);
-		if (maxwidth < strlen(buffer))
+		if ((size_t)maxwidth < strlen(buffer))
 			maxwidth= w;
 		helpitem[nitems++]= (char*)savestr(buffer);
 	}
@@ -206,7 +206,7 @@ Hidden Procedure more_help(void) {
 	string cp;
 	int nprinted= 0;
 	bool more= Yes;
-	bool len= (llength < sizeof buffer ? llength+1 : sizeof buffer);
+	int len= ((size_t)llength < sizeof buffer ? llength+1 : sizeof buffer);
 	
 	if (helpfp == (FILE*) NULL) {
 		if (helpfile) helpfp= fopen(helpfile, "r");

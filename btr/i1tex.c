@@ -182,8 +182,10 @@ Hidden string bstrval(string buf, btreeptr p) {
 Hidden char *buffer= NULL;
 Visible string strval(value v) {
 	int len = Tltsize(v);
+	static char emptystr[2];
+	emptystr[0] = emptystr[1] = '\0'; 
 	if (len == Bigsize) syserr(MESS(216, "strval on big text"));
-	if (len == 0) return "";
+	if (len == 0) return emptystr;
 	if (buffer != NULL)
 		regetmem(&buffer, (unsigned) len+1);
 	else

@@ -382,7 +382,7 @@ Visible int fitstring(pathptr *pp, cstring str, int alt_c)
 		sym = symbol(n);
 		ich = dummyenv.s1/2;
 		while (*str && mayinsert(n, ich, len, *str)
-		       && len < sizeof buf - 1)
+		       && (size_t)len < sizeof buf - 1)
 		{
 			if (len >= 2 && (sym == Name || sym == Keyword)
 			    && *str == '.' && *(str-1) == '.') {

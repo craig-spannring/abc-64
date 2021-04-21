@@ -124,7 +124,7 @@ Hidden Procedure skipspace(void)
 		adv();
 }
 
-Hidden int lookup(string name)
+Hidden int lookup(cstring name)
 {
 	int i;
 
@@ -654,7 +654,7 @@ extern cstring gotoformat;
 extern cstring mousesense;
 extern cstring mouseformat;
 
-Hidden cstring defstring(string name) {
+Hidden cstring defstring(cstring name) {
 	int i;
 
 	i= lookup(name);
@@ -683,7 +683,7 @@ Hidden Procedure initmouse(void) {
 
 extern bool vtrmactive;
 
-Hidden Procedure outstring(string name)
+Hidden Procedure outstring(cstring name)
 {
 	int i= lookup(name);
 

@@ -249,7 +249,7 @@ Visible bool resuggest(enviro *ep, string *pstr, int alt_c)
 			oldrp[i] = "";
 		childsym[i] = symbol(child(n, i+1));
 	}
-	Assert(ep->s2 + 1 < sizeof buf);
+	Assert(((size_t)(ep->s2 + 1)) < sizeof buf);
 	strcpy(buf, oldrp[ich]);
 	buf[ep->s2] = alt_c ? alt_c : **pstr;
 	buf[ep->s2 + 1] = 0;
