@@ -558,7 +558,8 @@ Visible Procedure endworkspace(void) {
 /************************************************************************/
 
 Hidden Procedure print_wsname(void) {
-	char *fmt, *str;
+	const char *fmt;
+	char *str;
 	char *name = strval(cur_ws);
 
 	str = getfmtbuf(fmt = ">%s\n", strlen(name));

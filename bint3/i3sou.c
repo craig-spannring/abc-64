@@ -1196,7 +1196,7 @@ Visible Procedure initperm(void) {
 	cur_env->permchanges= No;
 }
 
-Visible Procedure putval(value v, char *dir, char *name, literal ct, bool silently)
+Visible Procedure putval(value v, char *dir, const char *name, literal ct, bool silently)
 {
 	char *temp, *file;
 	value tname, fname;

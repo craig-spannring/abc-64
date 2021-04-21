@@ -92,7 +92,7 @@ extern bool need_rec_suggestions;
 	extern Visible Procedure lst_uhds(void);
 	extern Visible Procedure put_perm(void);
 	extern Visible Procedure puttarval(value v, char *dir, value fname, value tname, bool silently);
-	extern Visible Procedure putval(value v, char *dir, char *name, literal ct, bool silently);
+	extern Visible Procedure putval(value v, char *dir, const char *name, literal ct, bool silently);
 	extern Visible Procedure rem_unit(parsetree u, wsenvptr wse);
 	extern Visible Procedure rem_unit(parsetree u, wsenvptr wse);
 	extern Visible string lastunitname(void);
