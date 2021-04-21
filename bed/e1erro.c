@@ -135,7 +135,7 @@ addscrollbar(int totlines, int topline, int scrlines)
  * until it has been displayed.
  */
 
-Hidden Procedure ederr1(conststring s)
+Hidden Procedure ederr1(cstring s)
 {
 	ringbell = Yes;
 	if (s && priority < 3) {
@@ -167,7 +167,7 @@ Visible Procedure ederrC(int m, char c)
  * Unlike error messages, the last such message is displayed.
  */
 
-Visible Procedure edmessage(conststring s)
+Visible Procedure edmessage(cstring s)
 {
 	if (s && priority <= 2) {
 		priority = 2;
@@ -179,7 +179,7 @@ Visible Procedure edmessage(conststring s)
 
 /* Assertion error */
 
-Visible Procedure asserr(conststring file, int line)
+Visible Procedure asserr(cstring file, int line)
 {
 	char mess[255];
 	sprintf(mess, "Assertion botched in file %s, line %d.", file, line);

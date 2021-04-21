@@ -8,8 +8,8 @@ extern "C" {
 #endif
 
 	extern Visible Procedure putmess(int m);
-	extern Visible Procedure putSmess(int m, conststring s);
-	extern Visible Procedure putDSmess(int m, int d, conststring s);
+	extern Visible Procedure putSmess(int m, cstring s);
+	extern Visible Procedure putDSmess(int m, int d, cstring s);
 	extern Visible Procedure initmess(void);
 	extern Visible Procedure endmess(void);
 	extern Visible Procedure put2Cmess(int m, char c1, char c2);

@@ -105,7 +105,7 @@ Visible bool character(value v) {
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-Hidden btreeptr mkbtext(conststring s, int len) {
+Hidden btreeptr mkbtext(cstring s, int len) {
 	btreeptr p;
 	int      chunk;
 	int 	 i;
@@ -151,7 +151,7 @@ Hidden btreeptr mkbtext(conststring s, int len) {
 	return p;
 }
 
-Visible value mk_text(conststring s) {
+Visible value mk_text(cstring s) {
 	value v;
 	int   len = strlen(s);
 

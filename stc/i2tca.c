@@ -361,10 +361,10 @@ Hidden int nactuals= 0;
 /************************************************************************/
 
 Forward Hidden polytype pt_pop(void);
-Forward Hidden polytype external_type(conststring *pt);
+Forward Hidden polytype external_type(cstring *pt);
 
 Forward Hidden string get_code(value name, int type, wsenvptr wse);
-Forward Hidden string fpr_code(value name, literal type, const char **functab, conststring defcode);
+Forward Hidden string fpr_code(value name, literal type, const char **functab, cstring defcode);
 Forward Visible Procedure usetypetable(value t);
 
 Visible Procedure type_check(parsetree v) {
@@ -395,8 +395,8 @@ Visible Procedure type_check(parsetree v) {
 #define Fld(v, f) (*(Branch(v, f)))
 
 Hidden Procedure tc_node(parsetree v) {
-	conststring t;
-	conststring t_saved= NULL;
+	cstring t;
+	cstring t_saved= NULL;
 	int f;
 	int nf;
 	int len;	/* length of compound */
@@ -964,7 +964,7 @@ Hidden string pre_fpr_code(value fn, const char **func) {
 	/*NOTREACHED*/
 }
 
-Hidden string fpr_code(value name, literal type, const char **functab, conststring defcode)
+Hidden string fpr_code(value name, literal type, const char **functab, cstring defcode)
 {
 	string t;
 	wsenvptr wse;
@@ -982,9 +982,9 @@ Hidden string fpr_code(value name, literal type, const char **functab, conststri
 
 /************************************************************************/
 
-Hidden polytype external_type(conststring *pt) {
+Hidden polytype external_type(cstring *pt) {
 	int n;
-	conststring t;
+	cstring t;
 	polytype x;
 	char buf[20];
 	

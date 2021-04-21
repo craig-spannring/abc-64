@@ -23,7 +23,7 @@ extern "C" {
 typedef int bool;
 #endif
 typedef char *string; /* Strings are always terminated with a char '\0'. */
-typedef const char *conststring;
+typedef const char *cstring;
 	
 #define Yes ((bool) 1)
 #define No  ((bool) 0)
@@ -149,7 +149,7 @@ extern bool can_interrupt;
 
 #define MESS(nr, text) nr
 #define GMESS(nr, text) getmess(nr)
-conststring getmess(int nr);
+cstring getmess(int nr);
 extern char *messbuf;
 #define MESSBUFSIZE 300
 

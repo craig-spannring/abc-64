@@ -282,7 +282,7 @@ Forward Hidden int setttymode(void);
 Forward Hidden Procedure resetttymode(void);
 Forward Hidden int start_trm(void);
 Forward Hidden bool get_pos(string format, int *py, int *px);
-Forward Hidden void put_line(int y, int xskip, conststring data, string mode, int len);
+Forward Hidden void put_line(int y, int xskip, cstring data, string mode, int len);
 Forward Hidden Procedure set_mode(int m);
 Forward Hidden Procedure get_so_mode(void);
 Forward Hidden Procedure standout(void);
@@ -1028,7 +1028,7 @@ Hidden Procedure move(int y, int x) {
  * Characters for which the corresponding char in "mode" have the value
  * STANDOUT must be put in inverse video.
  */
-Visible Procedure trmputdata(int yfirst, int ylast, int indent, conststring data, string mode)
+Visible Procedure trmputdata(int yfirst, int ylast, int indent, cstring data, string mode)
 {
 	int y;
 	int x, len, lendata, space;
@@ -1073,7 +1073,7 @@ Visible Procedure trmputdata(int yfirst, int ylast, int indent, conststring data
 		clear_lines(y, ylast);
 }
 
-Hidden void put_line(int y, int xskip, conststring data, string mode, int len) {
+Hidden void put_line(int y, int xskip, cstring data, string mode, int len) {
 	/* 
 	 * We will first try to get the picture:
 	 *

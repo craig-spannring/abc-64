@@ -440,7 +440,7 @@ Visible Procedure app_print(FILE *fp, real v) {
 	double 	    expo= Expo(v);
 	frexpint    ei;
 	integer     w;
-	conststring str;
+	cstring str;
 	
 	frac = b_frexp(frac, &ei);
 	expo += ei;

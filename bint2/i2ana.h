@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-	extern Visible conststring gentab[];
+	extern Visible cstring gentab[];
 	extern Visible intptr_t nextvarnumber; /* Counts local targets (including formals) */
 	extern Visible value locals;
 	extern Visible value globals;

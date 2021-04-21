@@ -126,7 +126,7 @@ Hidden Procedure a_fpr_formals(parsetree t) {
 
 Visible Procedure analyze(parsetree t, value *targs) {
 	typenode    nt;
-	conststring s;
+	cstring s;
 	char 	    c;     
 	int  	    n;
 	int  	    k;
@@ -294,7 +294,7 @@ Visible Procedure analyze(parsetree t, value *targs) {
 */
 
 
-Visible conststring gentab[NTYPES]= {
+Visible cstring gentab[NTYPES]= {
 
 	/* HOW_TO */ "1h3xSu6=",
 	/* YIELD */ "2fV4xYu7=",

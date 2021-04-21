@@ -21,7 +21,7 @@ extern "C" {
 	extern Visible bool dya_sign(value *v);
 	extern Visible bool findkw(txptr q, txptr* ftx);
 	extern Visible bool findrel(txptr q, txptr* ftx);
-	extern Visible bool find(conststring s, txptr q, txptr* ftx, txptr* ttx);
+	extern Visible bool find(cstring s, txptr q, txptr* ftx, txptr* ttx);
 	extern Visible bool findtrim(txptr q, txptr *first);
 	extern Visible bool greater_than_sign_(void);
 	extern Visible bool is_abcname(value name);
@@ -45,11 +45,11 @@ extern "C" {
 	extern Visible Procedure findceol(void);
 	extern Visible Procedure first_ilev(void); /* initialise read buffer for new input */
 	extern Visible Procedure initsyn(void);
-	extern Visible Procedure need(conststring s);
-	extern Visible Procedure req(conststring s, txptr q, txptr *ftx, txptr *ttx);
+	extern Visible Procedure need(cstring s);
+	extern Visible Procedure req(cstring s, txptr q, txptr *ftx, txptr *ttx);
 	extern Visible Procedure skipsp(txptr *tx0);
 	extern Visible Procedure upto1(txptr q, int m);
-	extern Visible Procedure upto(txptr q, conststring s);
+	extern Visible Procedure upto(txptr q, cstring s);
 	extern Visible Procedure veli(void);
 	extern Visible Procedure veli(void); /* After a look-ahead call of ilev */
 	extern Visible txptr fcol(void); /* the first position of the current line */

@@ -45,7 +45,7 @@ extern "C" {
     extern Visible Procedure trmend(void);
     extern Visible Procedure trmundefined(void);
     extern Visible Procedure trmsense(string sense, string format, int* py, int* px);
-    extern Visible Procedure trmputdata(int yfirst, int ylast, int indent, conststring data, string mode);
+    extern Visible Procedure trmputdata(int yfirst, int ylast, int indent, cstring data, string mode);
     extern Visible Procedure trmscrollup(int yfirst, int ylast, int by);
     extern Visible Procedure trmsync(int y, int x);
     extern Visible Procedure trmbell(void);

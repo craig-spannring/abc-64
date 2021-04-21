@@ -79,7 +79,7 @@ Visible value cr_text(txptr p, txptr q) {
 
 #define Txnil	((txptr) NULL)
 
-Hidden bool search(bool find_kw, conststring s, txptr q, txptr *ftx, txptr *ttx) {
+Hidden bool search(bool find_kw, cstring s, txptr q, txptr *ftx, txptr *ttx) {
 	intlet parcnt= 0; bool outs= Yes, kw= No; char aq;
 	txptr lctx= Txnil;
 	
@@ -91,7 +91,7 @@ Hidden bool search(bool find_kw, conststring s, txptr q, txptr *ftx, txptr *ttx)
 						return Yes;
 				}
 				else if (Char(*ftx) == *s) {
-					conststring t= s+1;
+					cstring t= s+1;
 					*ttx= (*ftx)+1;
 					while (*t && *ttx < q) {
 						if (*t != Char(*ttx)) break;
@@ -144,7 +144,7 @@ Hidden bool search(bool find_kw, conststring s, txptr q, txptr *ftx, txptr *ttx)
 
 /* ********************************************************************	*/
 
-Visible bool find(conststring s, txptr q, txptr* ftx, txptr* ttx) {
+Visible bool find(cstring s, txptr q, txptr* ftx, txptr* ttx) {
 	return search(No, s, q, (*ftx= tx, ftx), ttx);
 }
 
@@ -155,7 +155,7 @@ Visible Procedure findceol(void) {
 	if (!find(S_COMMENT, q, &ceol, &ttx)) ceol= q;
 }
 
-Visible Procedure req(conststring s, txptr q, txptr *ftx, txptr *ttx) {
+Visible Procedure req(cstring s, txptr q, txptr *ftx, txptr *ttx) {
 	if (!find(s, q, ftx, ttx)) {
 		value v= mk_text(s);
 		parerrV(MESS(2400, "cannot find expected %s"), v);
@@ -164,7 +164,7 @@ Visible Procedure req(conststring s, txptr q, txptr *ftx, txptr *ttx) {
 	}
 }
 
-Hidden bool relsearch(conststring s, txptr q, txptr *ftx) {
+Hidden bool relsearch(cstring s, txptr q, txptr *ftx) {
 	txptr ttx;
 	*ftx= tx;
 	while (search(No, s, q, ftx, &ttx))
@@ -318,7 +318,7 @@ Visible bool findkw(txptr q, txptr* ftx) {
 /*		upto, nothing, ateol, need				*/
 /* ******************************************************************** */
 
-Visible Procedure upto(txptr q, conststring s) {
+Visible Procedure upto(txptr q, cstring s) {
 	skipsp(&tx);
 	if (Text(q)) {
 		value v= mk_text(s);
@@ -357,8 +357,8 @@ Visible bool ateol(void) {
 	return Eol(tx);
 }
 
-Visible Procedure need(conststring s) {
-	conststring t= s;
+Visible Procedure need(cstring s) {
+	cstring t= s;
 	skipsp(&tx);
 	while (*t)
 		if (*t++ != Char(tx++)) {
@@ -443,7 +443,7 @@ Visible value res_cmdnames;
  * e.g. HOW TO PUT IN x is allowed, but HOW TO PUT x OUT isn't
  */
 
-Hidden conststring reserved[] = {
+Hidden cstring reserved[] = {
 	K_SHARE, K_CHECK, K_DELETE, K_FAIL, K_FOR,
 	K_HOW, K_IF, K_INSERT, K_PASS, K_PUT, K_QUIT, K_READ, K_REMOVE,
 	K_REPORT, K_RETURN, K_SELECT, K_SETRANDOM, K_SUCCEED,
@@ -456,7 +456,7 @@ Hidden conststring reserved[] = {
 
 Visible Procedure initsyn(void) {
 	value v;
-	conststring *kw;
+	cstring *kw;
 	
 	res_cmdnames= mk_elt();
 	for (kw= reserved; **kw != '\0'; kw++) {
@@ -543,7 +543,7 @@ Visible bool greater_than_sign_(void) {
 }
 
 Visible bool dyamon_sign(value *v) {
-	conststring s;
+	cstring s;
 	if (plus_sign)        s= S_PLUS;
 	else if (minus_sign)  s= S_MINUS;
 	else if (number_sign) s= S_NUMBER;
@@ -553,7 +553,7 @@ Visible bool dyamon_sign(value *v) {
 }
 
 Visible bool dya_sign(value *v) {
-	conststring s;
+	cstring s;
 	if (times_sign)          s= S_TIMES;
 	else if (over_sign)      s= S_OVER;
 	else if (power_sign)     s= S_POWER;
@@ -570,7 +570,7 @@ Visible bool dya_sign(value *v) {
 }
 
 Visible bool mon_sign(value *v) {
-	conststring s;
+	cstring s;
 	if (about_sign)         s= S_ABOUT;
 	else if (numtor_sign)   s= S_NUMERATOR;
 	else if (denomtor_sign) s= S_DENOMINATOR;
@@ -580,7 +580,7 @@ Visible bool mon_sign(value *v) {
 }
 
 Visible bool texdis_sign(value *v) {
-	conststring s;
+	cstring s;
 	if (apostrophe_sign) s= S_APOSTROPHE;
 	else if (quote_sign) s= S_QUOTE;
 	else return No;

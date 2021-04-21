@@ -116,7 +116,7 @@ Hidden int digits_in(value v) {
  * and does not normalize a rational result sometimes.
  */
 
-Visible conststring convnum(value v) {
+Visible cstring convnum(value v) {
 	value r, re, rre;
 	int rndsize= 0;
 	int num;
@@ -255,7 +255,7 @@ Visible conststring convnum(value v) {
 
 Visible value numconst(value v) {
 	string txt, txt0;
-	conststring tp = "";
+	cstring tp = "";
 	int numdigs, fraclen;
 	integer a;
 	digit accu;

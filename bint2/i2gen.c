@@ -309,7 +309,7 @@ Visible Procedure fix(parsetree *pt, char flag) {
 	parsetree    w;
 	typenode     nt;
 	typenode     nt1;
-	conststring  s; 
+	cstring  s; 
 	char 	     c;
 	int  	     n; 
 	int  	     k;

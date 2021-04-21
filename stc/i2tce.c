@@ -189,7 +189,7 @@ Hidden value t_repr(polytype u) {
 	}
 }
 
-Hidden value typmess(conststring format, const string s1, conststring s2) {
+Hidden value typmess(cstring format, const string s1, cstring s2) {
 	unsigned len;
 	string bf;
 	value m;

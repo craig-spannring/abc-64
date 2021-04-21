@@ -35,7 +35,7 @@ Hidden int nprobes= 1;
 char *messbuf; /* used for messages with arguments */
 Hidden char buf[MESSBUFSIZE];
 
-Visible conststring getmess(int nr) {
+Visible cstring getmess(int nr) {
 	int    last;
 	int    c;
 	char  *cp= NULL;
@@ -137,13 +137,13 @@ Visible Procedure putmess(int m)
 
 #ifndef KEYS
 
-Visible Procedure putSmess(int m, conststring s)
+Visible Procedure putSmess(int m, cstring s)
 {
 	putsSerr(getmess(m), s);
 	flusherr();
 }
 
-Visible Procedure putDSmess(int m, int d, conststring s)
+Visible Procedure putDSmess(int m, int d, cstring s)
 {
 	putsDSerr(getmess(m), d, s);
 	flusherr();

@@ -372,7 +372,7 @@ Visible Procedure initfmt(void)
 
 #define FMTINTLEN 100 /* space allocated for int's in formats */
 
-Visible char *getfmtbuf(conststring fmt, int n)
+Visible char *getfmtbuf(cstring fmt, int n)
 {
 	static char *fmtstr= NULL;
 
@@ -386,7 +386,7 @@ Visible char *getfmtbuf(conststring fmt, int n)
 
 /**************************************************************************/
 
-Visible Procedure putserr(conststring s)
+Visible Procedure putserr(cstring s)
 {
 	putstr(errfile, s);
 }
@@ -403,21 +403,21 @@ Visible Procedure flusherr(void)
 
 /***************************************************************************/
 
-Visible Procedure putsSerr(conststring fmt, conststring s)
+Visible Procedure putsSerr(cstring fmt, cstring s)
 {
 	char *str= getfmtbuf(fmt, strlen(s));
 	sprintf(str, fmt, s);
 	putstr(errfile, str);
 }
 
-Visible Procedure putsDSerr(conststring fmt, int d, conststring s)
+Visible Procedure putsDSerr(cstring fmt, int d, cstring s)
 {
 	char *str= getfmtbuf(fmt, FMTINTLEN+strlen(s));
 	sprintf(str, fmt, d, s);	
 	putstr(errfile, str);
 }
 
-Visible Procedure puts2Cerr(conststring fmt, char c1, char c2)
+Visible Procedure puts2Cerr(cstring fmt, char c1, char c2)
 {
 	char *str= getfmtbuf(fmt, 1+1);
 	sprintf(str, fmt, c1, c2);

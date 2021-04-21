@@ -24,7 +24,7 @@ extern bool use_bed;
 
 Hidden Procedure initsense(void);
 Hidden Procedure initmouse(void);
-Hidden bool equalhead(string keystr, int nkey, conststring def, int len);
+Hidden bool equalhead(string keystr, int nkey, cstring def, int len);
 
 /*
 This file contains a little parser for key definition files.
@@ -79,7 +79,7 @@ Visible int errcount= 0; /* Number of errors detected */
 
 Visible int ndefs;
 
-Hidden Procedure err1(conststring m)
+Hidden Procedure err1(cstring m)
 {
 	static char errbuf[MESSBUFSIZE];
 		/* since putmess() below overwrites argument m via getmess() */
@@ -145,7 +145,7 @@ Visible Procedure undefine(int code, int deflen, string def)
 {
 	struct tabent *d, *last= deftab+ndefs;
 	string p;
-	conststring q;
+	cstring q;
 	int i;
 
 	if (code < 0) 
@@ -649,12 +649,12 @@ Visible Procedure initkeys(void)
 #ifndef KEYS
 
 extern bool cansense;
-extern conststring gotosense;
-extern conststring gotoformat;
-extern conststring mousesense;
-extern conststring mouseformat;
+extern cstring gotosense;
+extern cstring gotoformat;
+extern cstring mousesense;
+extern cstring mouseformat;
 
-Hidden conststring defstring(string name) {
+Hidden cstring defstring(string name) {
 	int i;
 
 	i= lookup(name);
@@ -688,7 +688,7 @@ Hidden Procedure outstring(string name)
 	int i= lookup(name);
 
 	if (i >= 0) {
-		conststring def= deftab[i].def;
+		cstring def= deftab[i].def;
 		if (def != NULL && *def != '\0') {
 			c_putdata(def);
 			c_putnewline();
@@ -864,7 +864,7 @@ Visible Procedure pollinterrupt(void) {
 	}
 }
 
-Hidden bool equalhead(string keystr, int nkey, conststring def, int len) {
+Hidden bool equalhead(string keystr, int nkey, cstring def, int len) {
 	int i;
 
 	if (nkey > len)

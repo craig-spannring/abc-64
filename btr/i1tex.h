@@ -14,7 +14,7 @@ extern "C" {
     Visible char      charval(value v);
     Visible char      ncharval(int n, value v);
     Visible bool      character(value v);
-    Visible value     mk_text(conststring s);
+    Visible value     mk_text(cstring s);
     Visible string    strval(value v);
     Visible Procedure endstrval(void);
     Visible string    sstrval(value v);

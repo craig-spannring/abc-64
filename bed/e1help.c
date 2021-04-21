@@ -68,7 +68,7 @@ Hidden char modebuffer[MAXBUFFER];
 // Forward bool ask_for(int nr);
 Forward Hidden Procedure start_help(void);
 Forward Hidden Procedure getentryfor(int code);
-Forward Hidden char *addstr(char *bp, conststring s, int minw);
+Forward Hidden char *addstr(char *bp, cstring s, int minw);
 Forward Hidden Procedure more_help(void);
 
 /*
@@ -185,7 +185,7 @@ Hidden Procedure getentryfor(int code) {
 		bufp= addstr(bufp, "", 0);
 }
 
-Hidden char *addstr(char *bp, conststring s, int minw) {
+Hidden char *addstr(char *bp, cstring s, int minw) {
 	while (*s && bp < buffer+MAXBUFFER) {
 		*bp++= *s++;
 		minw--;

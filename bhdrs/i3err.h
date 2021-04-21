@@ -9,7 +9,7 @@ extern "C" {
 
 	extern Visible Procedure bye(int ex);
 	extern Visible Procedure immexit(int status);
-	extern Visible Procedure putserr(conststring s);
+	extern Visible Procedure putserr(cstring s);
 	extern Visible Procedure flusherr(void);
 	extern Visible Procedure syserr(int);
 	extern Visible Procedure memexh(void);
@@ -21,9 +21,9 @@ extern "C" {
 	extern Visible Procedure fixerr(int m);
 	extern Visible Procedure interr(int m);
 	extern Visible Procedure int_signal(void);
-	extern Visible Procedure putsSerr(conststring fmt, conststring s);
-	extern Visible Procedure putsDSerr(conststring fmt, int d, conststring s);
-	extern Visible Procedure puts2Cerr(conststring fmt, char c1, char c2);
+	extern Visible Procedure putsSerr(cstring fmt, cstring s);
+	extern Visible Procedure putsDSerr(cstring fmt, int d, cstring s);
+	extern Visible Procedure puts2Cerr(cstring fmt, char c1, char c2);
 	extern Visible Procedure putsCerr(string fmt, char c);
 	extern Visible Procedure interrV(int m, value v);
 	extern Visible Procedure initfmt(void);
@@ -32,7 +32,7 @@ extern "C" {
 	extern Visible Procedure checkerr(void);
 	extern Visible Procedure typerrV(int m, value v);
 	extern Visible Procedure fpe_signal(void);
-	extern Visible char *getfmtbuf(conststring fmt, int n);
+	extern Visible char *getfmtbuf(cstring fmt, int n);
     
 #ifdef __cplusplus
 }

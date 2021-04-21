@@ -206,7 +206,7 @@ Hidden Procedure dowri(value v, int flags)
 	if (Is_number(v)) {
 		if (perm) printnum(ofile, v);
 		else {
-			conststring cp= convnum(v);
+			cstring cp= convnum(v);
 			while (*cp && !Interrupted()) (*outproc)(*cp++);
 		}
 	}

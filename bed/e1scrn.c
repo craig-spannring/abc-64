@@ -514,7 +514,7 @@ Visible Procedure setindent(int x)
  * Show the command prompt.
  */
 
-Visible Procedure cmdprompt(conststring prompt)
+Visible Procedure cmdprompt(cstring prompt)
 {
 	setindent(strlen(prompt));
 	trmputdata(winstart, winstart, 0, prompt, (string)0);
