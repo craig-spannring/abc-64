@@ -13,7 +13,7 @@ extern "C" {
 Visible bool ed_file(char *editor, char *fname, int line);            /* edit.c */
 
 Visible Procedure initfile(void);      /* file.c */
-Visible char *makepath(char *path1, char *path2);
+Visible char *makepath(const char *path1, const char *path2);
 Visible int Chdir(char *path);
 
 extern char *startdir;

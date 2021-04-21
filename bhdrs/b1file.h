@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-    extern Visible Procedure free_path(char* path);
+    extern Visible Procedure free_path(const char* path);
     extern Visible Procedure endfile(void);
 
 #ifdef __cplusplus

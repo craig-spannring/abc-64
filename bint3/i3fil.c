@@ -36,7 +36,7 @@ Visible Procedure f_rename(value fname, value nfname)
 	/* what if it fails??? */
 }
 
-Visible Procedure f_delete(char *file)
+Visible Procedure f_delete(const char *file)
 {
 	unlink(file);
 }

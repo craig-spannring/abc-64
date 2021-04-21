@@ -19,9 +19,13 @@ Visible char *helpfile;  /* the help file */
 Visible char *keysfile;  /* the keys definition file */
 Visible char *buffile;   /* the file for storing the copy buffer between sessions */
 
-Forward Hidden char *savepath(char *path);
+Hidden char *savepath(const char *path)
+{
+	if (path == NULL) return (char *) NULL;
+	return savestr(path);
+}
 
-Visible char *makepath(char *path1, char *path2)
+Visible char *makepath(const char *path1, const char *path2)
 {
 	if (path1 == NULL || *path1 == '\0')
 		return savepath(path2);
@@ -44,11 +48,6 @@ Visible char *makepath(char *path1, char *path2)
 	}
 }
 
-Hidden char *savepath(char *path)
-{
-	if (path == NULL) return (char *) NULL;
-	return savestr(path);
-}
 
 Visible Porting Procedure freepath(char *path)
 {

@@ -759,7 +759,7 @@ Visible Procedure put_types(void)
 		putval(v, dir, typesfile, In_prmnv, Yes);
 	}
 	else { /* Remove the file if the typecode table is empty */
-		char *file = makepath(dir, typesfile);
+		const char *file = makepath(dir, typesfile);
 		f_delete(file);
 		free_path(file);
 	}
