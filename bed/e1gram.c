@@ -51,7 +51,6 @@ Visible bool isinclass(int sym, struct classinfo *ci)
  * is changed, the representation may change, too.
  * In practical use this is no problem at all, however.
  */
-struct Foo {int x;};
 Visible cstring* noderepr(nodeptr n)
 {
 	int sym;

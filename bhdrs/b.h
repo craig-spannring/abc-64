@@ -108,7 +108,12 @@ STATIC_CHECK(offsetof(struct gdb_hostile_value_, cts)    == offsetof(struct valu
 
 #define Valid(v) ((v) != Vnil)
 
+#if 0
 #define Ats(v) ((value *)&((v)->cts))
+	#else
+inline static value* Ats(value v) {return ((value *)&((v)->cts));}
+#endif
+	
 #define Str(v) ((string)&((v)->cts))
 
 /* Types: */
