@@ -27,7 +27,7 @@ Visible unsigned tltsyze(literal type, intlet len, int *nptrs)
 Visible Procedure rel_subvalues(value v) {
 	if (Is_tlt(v)) {
 		relbtree(Root(v), Itemtype(v));
-		v->type= '\0';
+		v->type= NothingValue;
 		freemem((ptr) v);
 	}
 	else rrelease(v);

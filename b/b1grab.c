@@ -87,7 +87,7 @@ Hidden unsigned getsyze(literal type, intlet len, int *pnptrs)
 	return syze;
 }
 
-Visible value grab(literal type, intlet len) {
+Visible value grab(ValueT type, intlet len) {
 	unsigned syze= getsyze(type, len, (int*)NULL);
 	value v;
 	Grabber();
@@ -123,11 +123,17 @@ Visible Procedure release(value v) {
 }
 
 Hidden value ccopy(value v) {
-	literal type= v->type; intlet len; value w;
-	int nptrs; unsigned syze; string from, to, end;
-	value *pp, *pend;
-	len= Length(v);
-	syze= getsyze(type, len, &nptrs);
+	ValueT type= v->type;
+	intlet len=  Length(v);
+	value w;
+	int nptrs;
+	unsigned syze= getsyze(type, len, &nptrs);
+	string from;
+	string to;
+	string end;
+	value *pp;
+	value **pend;
+		
 	Grabber();
 	w= (value) getmem(Adj(syze));
 	w->type= type; w->len= len; w->refcnt= 1;
@@ -154,6 +160,6 @@ Visible Procedure rrelease(value v) {
 	pp= (value*) ((char*)Ats(v) + Offset(type));
 	pend= pp+nptrs;
 	while (pp < pend) release(*pp++);
-	v->type= '\0';
+	v->type= NothingValue;
 	freemem((ptr) v);
 }

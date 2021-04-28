@@ -64,7 +64,7 @@ add_executable(abc ${src_main})
 set_property(TARGET abc PROPERTY C_STANDARD 11)
 
 add_dependencies(abc mach_h_AutoGened file_h_AutoGened)
-set(abc_c_cxx_flags
+set(abc_c_cxx_warn_flags
   -Wall
   
   -Wint-to-pointer-cast
@@ -81,8 +81,11 @@ set(abc_c_cxx_flags
   -Wint-to-pointer-cast
   -Werror=int-to-pointer-cast
   )
-set(abc_c_only_flags
+set(abc_c_cxx_flags ${abc_c_cxx_warn_flags}
+  -fshort-enums
+  )
 
+set(abc_c_only_warn_flags
   -Wno-incompatible-pointer-types
   -Werror=old-style-definition
   -Wimplicit-function-declaration
@@ -91,8 +94,10 @@ set(abc_c_only_flags
   -Wold-style-declaration
   -Wold-style-definition
   -Wstrict-prototypes
-  
-    )
+  )
+set(abc_c_only_flags ${abc_c_only_warn_flags}
+  )
+
 target_compile_options(abc PRIVATE
   ${CMAKE_C_FLAGS}
   # ${abc_c_only_flags}

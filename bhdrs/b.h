@@ -57,6 +57,28 @@ typedef short intlet;
 /*                                                                      */
 /************************************************************************/
 
+
+/* Types: */
+
+// #define Num '0'
+// #define Tex '"'
+// #define Com ','
+// #define Lis 'L'
+// #define Tab 'M'
+// #define ELT '}'
+// #define Ran 'R'		/* doesn't belong here !!! */ // Is previous comment correct?
+typedef enum ValueT_ {
+	Num = '0',
+	Tex = '"',
+	Com = ',',
+	Lis = 'L',
+	Tab = 'M',
+	ELT = '}',
+	Ran = 'R',		/* doesn't belong here !!! */ // Is previous comment correct?
+
+	NothingValue = '\0',
+} ValueT;
+
 /*
  * "SMALL INTEGERS":
  *
@@ -75,7 +97,8 @@ typedef short intlet;
 		is not defined.) */
 typedef struct gdb_hostile_value_ {HEADER; string *cts;} *gdb_hostile_value;
 typedef struct value_ {
-		literal type;            /* See "Types:" in b.h? */
+		// literal type;            /* See "Types:" in b.h? */
+		ValueT     type;
 		reftype refcnt;
 		intlet len FILLER_FIELD; /* number of fields? */
 		string *cts;
@@ -115,16 +138,6 @@ inline static value* Ats(value v) {return ((value *)&((v)->cts));}
 #endif
 	
 #define Str(v) ((string)&((v)->cts))
-
-/* Types: */
-
-#define Num '0'
-#define Tex '"'
-#define Com ','
-#define Lis 'L'
-#define Ran 'R'		/* doesn't belong here !!! */
-#define Tab 'M'
-#define ELT '}'
 
 #define Is_text(v) (Type(v) == Tex)
 #define Is_number(v) (Type(v) == Num)

@@ -18,7 +18,7 @@ relation compare(value v, value w);
 
 /*************************************************************************/
 
-value grab(literal type, intlet len);
+value grab(ValueT type, intlet len);
 unsigned tltsyze(literal type, intlet len, int *nptrs);
 unsigned numsyze(intlet len, int *nptrs);
 unsigned ptnsyze(intlet len, int *nptrs);
