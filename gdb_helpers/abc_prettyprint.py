@@ -2,44 +2,53 @@
 
 import sys
 import os
+import traceback
+
 from gdb.printing import PrettyPrinter, register_pretty_printer
 import gdb
+
+_lf='\n'
+
+# key-
+# value-  function that returns an object with an __init__() and to_string()
+_printers = {}
+
+
+# Decorator to register pretty printer functions. 
+def prettyprint(typename):
+    global _printers
+    def decorator(func):
+        class inner:
+            def __init__(self, val): self.val = val;
+            def to_string(self): return str(func(self.val))
+        _printers[typename] = inner
+        return func
+    return decorator
+
+
+@prettyprint("struct value_ *")
+def print_struct_value__ptr(v):
+    tmp = int(v.cast(gdb.lookup_type('long')))
+    if (tmp & 0x01)==0x01:
+        result = f"0x{tmp:x} {{i={tmp//2}}}"
+    else:
+        result = f"0x{tmp:x}  " + str(v.dereference())
+    return result
+
+
+def pp_dispatch(value):
+    "Pick a pretty-printer for 'value'."
+    global _printers
     
-class ValuePrettyPrinter(object):
-    def __init__(self, val):
-        self.val = val
+    raw_type        = value.type
+    basic_type      = gdb.types.get_basic_type(value.type)
+    basic_type_tag  = basic_type.tag
+    stripped_type   = raw_type.strip_typedefs()
+    unqualified_type = stripped_type.unqualified()
+    
+    typename = str(value.type.strip_typedefs().unqualified())
 
-    def to_string(self):
-        lf='\n'
-        #print(self.val.keys())
-        return (f'{{ {lf}'
-                f'  type={self.val["type"]} {lf}'
-                f'  refcnt={self.val["refcnt"]} {lf}'
-                f'  len={self.val["len"]} {lf}'
-                f'  cts={self.val["cts"]} {lf}'
-                f'}}')
-        # return '{\n' + f'  e = {self.val["e"]}\n  x = {self.val["x"]}' + '\n}'
+    return _printers[typename](value) if typename in _printers else None
 
-
-class CustomPrettyPrinterLocator(PrettyPrinter):
-    """Given a gdb.Value, search for a custom pretty printer"""
-
-    def __init__(self):
-        super(CustomPrettyPrinterLocator, self).__init__(
-            "my_pretty_printers", []
-        )
-
-    def __call__(self, val):
-        """Return the custom formatter if the type can be handled"""
-
-        typename = gdb.types.get_basic_type(val.type).tag
-        if typename is None:
-            typename = val.type.name
-
-        if typename == "value_":
-            return ValuePrettyPrinter(val)
-        return 
-
-
-register_pretty_printer(None, CustomPrettyPrinterLocator(), replace=True)
+gdb.pretty_printers.append(pp_dispatch)
 
