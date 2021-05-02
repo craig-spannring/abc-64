@@ -132,7 +132,7 @@ Hidden value ccopy(value v) {
 	string to;
 	string end;
 	value *pp;
-	value **pend;
+	value *pend;
 		
 	Grabber();
 	w= (value) getmem(Adj(syze));
