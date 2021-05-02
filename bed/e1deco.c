@@ -58,13 +58,12 @@ Forward Hidden bool allright(cstring repr);
  * placed in the buffer through DELETE.
  */
 
-/*
- * Delete command -- delete the text in the focus, or delete the hole
- * if it is only a hole.
- */
-
 Visible bool deltext(enviro *ep)
 {
+	/*
+	 * Delete command -- delete the text in the focus, or delete the hole
+	 * if it is only a hole.
+	 */
 	higher(ep);
 	shrink(ep);
 	if (ishole(ep))
@@ -77,12 +76,11 @@ Visible bool deltext(enviro *ep)
 }
 
 
-/*
- * Delete the focus under the assumption that it contains some text.
- */
-
 Visible bool delbody(enviro *ep)
 {
+	/*
+	 * Delete the focus under the assumption that it contains some text.
+	 */
 	ep->changed = Yes;
 
 	subgrow(ep, No, Yes); /* Don't ignore spaces */
@@ -508,12 +506,12 @@ Visible bool copyinout(enviro *ep)
 }
 
 
-/*
- * Copy the focus to the copy buffer.
- */
-
 Visible value copyout(enviro *ep)
 {
+	/*
+	 * Copy the focus to the copy buffer.
+	 */
+	
 	queueptr q = Qnil;
 	pathptr p;
 	nodeptr n;

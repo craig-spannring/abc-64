@@ -67,7 +67,7 @@ typedef short intlet;
 // #define Tab 'M'
 // #define ELT '}'
 // #define Ran 'R'		/* doesn't belong here !!! */ // Is previous comment correct?
-typedef enum ValueT_ {
+enum ValueT_ {
 	Num = '0',
 	Tex = '"',
 	Com = ',',
@@ -77,7 +77,11 @@ typedef enum ValueT_ {
 	Ran = 'R',		/* doesn't belong here !!! */ // Is previous comment correct?
 
 	NothingValue = '\0',
-} ValueT;
+};
+/// Type of a value_ node 
+typedef enum ValueT_ ValueT;
+
+STATIC_CHECK(sizeof(ValueT)==1);
 
 /*
  * "SMALL INTEGERS":
@@ -96,13 +100,16 @@ typedef enum ValueT_ {
 	/* (Can't use << and >> because their effect on negative numbers
 		is not defined.) */
 typedef struct gdb_hostile_value_ {HEADER; string *cts;} *gdb_hostile_value;
-typedef struct value_ {
+struct value_ {
 		// literal type;            /* See "Types:" in b.h? */
 		ValueT     type;
 		reftype refcnt;
 		intlet len FILLER_FIELD; /* number of fields? */
 		string *cts;
-} *value;
+};
+/// Basic node in a tree.  Seems to be pretty type-loose 
+typedef struct value_ *value;
+	
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
 static struct gdb_hostile_value_ old_unused0[0];

@@ -61,7 +61,8 @@ extern "C" {
 #define SUBLIST	'L'
 #define FHOLE	'F'
 
-typedef struct Enviro {
+/// Something to do with editor?
+struct Enviro {
 	pathptr focus;
 	char mode;
 	char /*bool*/ copyflag;
@@ -75,7 +76,9 @@ typedef struct Enviro {
 	value oldmacro; /* A text */
 	value newmacro; /* A text, too */
 	int generation;
-} enviro;
+};
+/// Something to do with editor?
+typedef struct Enviro enviro; 
 
 #ifdef STRUCTASS
 #define Emove(e1, e2) ((e2) = (e1))

@@ -290,10 +290,9 @@ Visible bool extend(enviro *ep)
 }
 
 
-/*
+/**
  * Right-Narrow -- make the focus smaller, going to the last item of a list.
  */
-
 Visible bool rnarrow(enviro *ep)
 {
 	nodeptr n;
