@@ -22,10 +22,6 @@ extern bool use_bed;
 
 #define ESC '\033'
 
-Hidden Procedure initsense(void);
-Hidden Procedure initmouse(void);
-Hidden bool equalhead(string keystr, int nkey, cstring def, int len);
-
 /*
 This file contains a little parser for key definition files.
 To allow sufficient freedom in preparing such a file, a simple
@@ -77,7 +73,21 @@ Hidden int errcount= 0; /* Number of errors detected */
 Visible int errcount= 0; /* Number of errors detected */
 #endif
 
-Visible int ndefs;
+Visible int ndefs;  ///< Number of items in deftab
+
+/// Are first nkey characters in keystr and def equal
+Hidden bool equalhead(string keystr, int nkey, cstring def, int len) {
+	int i;
+
+	if (nkey > len)
+		return No;
+
+	for (i= 0; i < nkey; i++) {
+		if (keystr[i] != def[i])
+			return No;
+	}
+	return Yes;
+}
 
 Hidden Procedure err1(cstring m)
 {
@@ -629,22 +639,6 @@ Hidden Procedure readkeysfile(void)
 #endif
 }
 
-Visible Procedure initkeys(void)
-{
-	setdeflen();   /* and count the defs */
-	errcount= 0;
-	addspeckeys(); /* in port directories */
-#ifndef CANLOOKAHEAD
-	sigundef_intrchar();
-#endif
-	readkeysfile();
-	if (errcount > 0)
-		flusherr();
-#ifndef KEYS
-	initsense();
-	initmouse();
-#endif
-}
 
 #ifndef KEYS
 
@@ -729,10 +723,9 @@ Visible Procedure endgetc(void)
 Hidden int *operation;
 Hidden int ophead= 0;
 Hidden int optail= 0;
-/* lookahead keystroke buffer */
-Hidden char *keystroke;
-Hidden int nkeys= 0;
-Visible int maxdeflen= 0;
+Hidden char *keystroke;    ///< lookahead keystroke buffer
+Hidden int   nkeys= 0;     ///< Number of keys in keystroke buffer
+Visible int  maxdeflen= 0;
 
 Visible Procedure initoperations(void) {
 	struct tabent *d;
@@ -747,22 +740,21 @@ Visible Procedure initoperations(void) {
 	keystroke= (char*) getmem((unsigned) maxdeflen);
 }
 
-/* called from editor: */
 
+/// (maybe?) Used by editor to come up with hints about possible command completions
 Visible int getoperation(void) {
-	int c;
-	int oprn;
-	struct tabent *d, *last= deftab+ndefs;
-
 	if (ophead != optail) {
 		/* user typed ahead while interpreter was running */
-		oprn= operation[ophead];
+		int oprn= operation[ophead];
 		ophead= (ophead+1) % MAXTYPEAHEAD;
 		return oprn;
 	}
 	/* else */
 	for ( ; ; ) {
-		c= trminput();
+		struct tabent *d;
+		struct tabent *last= deftab+ndefs;
+		int   c= trminput();
+
 		if (c == -1)
 			return EOF;
 		keystroke[nkeys]= c;
@@ -864,17 +856,22 @@ Visible Procedure pollinterrupt(void) {
 	}
 }
 
-Hidden bool equalhead(string keystr, int nkey, cstring def, int len) {
-	int i;
+#endif /* !KEYS */
 
-	if (nkey > len)
-		return No;
-
-	for (i= 0; i < nkey; i++) {
-		if (keystr[i] != def[i])
-			return No;
-	}
-	return Yes;
+Visible Procedure initkeys(void)
+{
+	setdeflen();   /* and count the defs */
+	errcount= 0;
+	addspeckeys(); /* in port directories */
+#ifndef CANLOOKAHEAD
+	sigundef_intrchar();
+#endif
+	readkeysfile();
+	if (errcount > 0)
+		flusherr();
+#ifndef KEYS
+	initsense();
+	initmouse();
+#endif
 }
 
-#endif /* !KEYS */
