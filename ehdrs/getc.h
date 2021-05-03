@@ -10,8 +10,8 @@ extern "C" {
 extern Procedure initkeys(void);
 
 typedef struct tabent {
-	int code;
-	int deflen;
+	int     code;
+	int     deflen; ///< strlen of the definition
 	cstring def;
 	cstring rep;
 	cstring name;

@@ -15,7 +15,10 @@ char *getenv(const char *);
 
 /* struct tabent {int code; int deflen; string def, rep, name;} in getc.h */
 
-/* Table of key definitions, filled by the following defaults
+/**
+   Table of key definitions
+   
+   filled by the following defaults
    and by reading definitions from a file.
 
    For the code field the following holds:
@@ -40,10 +43,9 @@ char *getenv(const char *);
    
    'def' fields initialized with a string starting with "&" are
    special characters for unix, and taken from tty structures.
-
 */
-
 Visible struct tabent deftab[MAXDEFS] = {
+	// code      deflen     def             rep             name
 	{IGNORE,	0,	NULL,		NULL,		S_IGNORE},
 		/* Entry to ignore a key */
 

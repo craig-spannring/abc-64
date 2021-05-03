@@ -58,7 +58,7 @@ int nitems= 0;
 Hidden int maxwidth= 0;		/* width of maximum helpitem */
 
 #define MAXBUFFER 81
-Hidden char buffer[MAXBUFFER];
+Hidden char buffer[MAXBUFFER];     ///< (?) Scratch space for generating help messages 
 Hidden char modebuffer[MAXBUFFER];
 
 #define MORE MESS(6700, "Press [SPACE] for more, [RETURN] to exit help")
