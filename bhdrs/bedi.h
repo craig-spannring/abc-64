@@ -10,11 +10,11 @@ extern "C" {
 
 #define CMDPROMPT ">>> " /* Prompt user for immediate command */
 
-/* Types */
+// /* Types */
 
-#define Nod 'N'
-#define Pat 'P'
-#define Etex 'E'
+// #define Nod 'N'
+// #define Pat 'P'
+// #define Etex 'E'
 	/* text values in the kernel of the editor are stored
 	 * according to the lineair model.
 	 */

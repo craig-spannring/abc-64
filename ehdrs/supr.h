@@ -72,9 +72,9 @@ struct Enviro {
 	short s2;
 	short s3;
 	short highest;
-	value copybuffer; /* Actually, a queue */
-	value oldmacro; /* A text */
-	value newmacro; /* A text, too */
+	value copybuffer; ///< Actually, a queue 
+	value oldmacro;   ///< A text 
+	value newmacro;   ///< A text, too 
 	int generation;
 };
 /// Something to do with editor?

@@ -15,7 +15,12 @@
 #define Adj(s) (unsigned) (Hdrsize+(s))
 #define Unadj(s) (unsigned) ((s)-Hdrsize)
 
-#define Grabber() {if(len>Maxintlet)syserr(MESS(1500, "big grabber"));}
+// #define Grabber() {if(len>Maxintlet)syserr(MESS(1500, "big grabber"));}
+/// If len is too big print an error message and exit. 
+inline static void Grabber(int len) {
+	if (len>Maxintlet)
+		syserr(MESS(1500, "big grabber"));
+}
 #define Regrabber() {if(len>Maxintlet)syserr(MESS(1501, "big regrabber"));}
 
 #define Offset(type) (type == Nod ? NodOffset : 0)
@@ -87,10 +92,10 @@ Hidden unsigned getsyze(literal type, intlet len, int *pnptrs)
 	return syze;
 }
 
-Visible value grab(ValueT type, intlet len) {
+Visible value grab(NodeTypeT type, intlet len) {
 	unsigned syze= getsyze(type, len, (int*)NULL);
-	value v;
-	Grabber();
+	value    v;
+	Grabber(len);
 	v= (value) getmem(Adj(syze));
 	v->type= type;
 	v->len= len;
@@ -123,7 +128,7 @@ Visible Procedure release(value v) {
 }
 
 Hidden value ccopy(value v) {
-	ValueT type= v->type;
+	NodeTypeT type= v->type;
 	intlet len=  Length(v);
 	value w;
 	int nptrs;
@@ -134,7 +139,7 @@ Hidden value ccopy(value v) {
 	value *pp;
 	value *pend;
 		
-	Grabber();
+	Grabber(len);
 	w= (value) getmem(Adj(syze));
 	w->type= type; w->len= len; w->refcnt= 1;
 	from= Str(v); to= Str(w); end= to+syze;

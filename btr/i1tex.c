@@ -152,10 +152,9 @@ Hidden btreeptr mkbtext(cstring s, int len) {
 }
 
 Visible value mk_text(cstring s) {
-	value v;
 	int   len = strlen(s);
-
-	v = grab(Tex, Ct);
+	value v = grab(Tex, Ct);
+	
 	if (len == 0)
 		Root(v) = Bnil;
 	else

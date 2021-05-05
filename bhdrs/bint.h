@@ -10,18 +10,18 @@ extern "C" {
 
 /* interpreter values */
 
-/* Types */
+// /* Types */
 
-#define ParseTreeNode 'T'		/* parsetree */
-#define How 'h'		/* command howto */
-#define Fun '+'		/* function */
-#define RefinementNode 'r'		/* refinement */
-#define Prd 'i'		/* predicate */
-#define SimpleLoc 'S'		/* simple location */
-#define Tri '@'		/* trimmed text location */
-#define Tse '['		/* table selection location */
-#define Rangebounds 'B'	/* for range as list_item */
-#define Ind 'p'		/* indirection node for targets and formals */
+// #define ParseTreeNode 'T'		/* parsetree */
+// #define How 'h'		/* command howto */
+// #define Fun '+'		/* function */
+// #define RefinementNode 'r'		/* refinement */
+// #define Prd 'i'		/* predicate */
+// #define SimpleLoc 'S'		/* simple location */
+// #define Tri '@'		/* trimmed text location */
+// #define Tse '['		/* table selection location */
+// #define Rangebounds 'B'	/* for range as list_item */
+// #define Ind 'p'		/* indirection node for targets and formals */
 
 /************************************************************************/
 /* environment								*/

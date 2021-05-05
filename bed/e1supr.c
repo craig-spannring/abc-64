@@ -1042,7 +1042,7 @@ Visible int focindent(enviro *ep)
 /*
  * Routines to move 'environ' structures.
  */
-
+/// Move environ structures
 Procedure emove(enviro *s,	enviro *d)
 {
 #ifdef STRUCTASS

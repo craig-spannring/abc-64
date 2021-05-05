@@ -185,6 +185,7 @@ Hidden Procedure show_f_line(void) {
 
 #define PROBLEM		MESS(3114, "*** The problem is:")
 
+/// Print an error message and exit
 Visible Procedure syserr(int m) {
 	static bool beenhere= No;
 	if (beenhere) immexit(-1);
@@ -206,7 +207,7 @@ Visible Procedure syserr(int m) {
 #ifndef MEMEXH_ALERT
 /* MacABC uses an alert to make sure the user gets the message */
 
-Visible Procedure memexh(void) {
+Visible Procedure memExhausted(void) {
 	static bool beenhere= No;
 	if (beenhere) immexit(-1);
 	beenhere= Yes;

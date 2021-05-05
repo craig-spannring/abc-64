@@ -12,7 +12,7 @@ extern "C" {
 	extern Visible Procedure putserr(cstring s);
 	extern Visible Procedure flusherr(void);
 	extern Visible Procedure syserr(int);
-	extern Visible Procedure memexh(void);
+	extern Visible Procedure memExhausted(void);
 	extern Visible Procedure pprerrV(int m, value v);
 	extern Visible Procedure pprerr(int m);
 	extern Visible Procedure parerrV(int m, value v);

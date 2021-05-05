@@ -10,7 +10,7 @@
 Visible ptr getmem(unsigned syze) {
 	ptr p= (ptr) malloc(MALLOC_ARG syze);
 	
-	if (p == Nil) memexh();
+	if (p == Nil) memExhausted();
 	memset(p, 0, syze); // memset(p, 0xFF, MALLOC_ARG syze);
 #ifdef MEMTRACE
 	writetrace(F_ALLOC, p, syze);
@@ -20,7 +20,7 @@ Visible ptr getmem(unsigned syze) {
 
 Visible Procedure regetmem(ptr *v, unsigned syze) {
 	ptr p= (ptr) realloc(*v, syze);
-	if (p == Nil) memexh();
+	if (p == Nil) memExhausted();
 #ifdef MEMTRACE
 	writetrace(F_FREE, *v, 0);
 	writetrace(F_ALLOC, p, syze);

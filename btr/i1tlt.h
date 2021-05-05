@@ -7,6 +7,9 @@
 
 #ifdef __cplusplus
 extern "C" {
+#ifdef GARBAGE_help_emacs_with_indentation
+}
+#endif	
 #endif
 
 /* Private definitions for B texts, lists and tables */
@@ -37,7 +40,9 @@ STATIC_CHECK(offsetof(struct gdb_hostile_telita, root)   == offsetof(struct teli
 #define Root(v) (((telitaptr) (v))->root)
 #define Tltsize(v) (Root(v) == Bnil ? 0 : Size(Root(v)))
 
-#define Character(v)	((bool) (Type(v) == Tex && Tltsize(v) == 1))
+//#define Character(v)	((bool) (Type(v) == Tex && Tltsize(v) == 1))
+inline static bool Character(value v) {return ((bool) (Type(v) == Tex && Tltsize(v) == 1));}
+	
 
 #ifdef __cplusplus
 }

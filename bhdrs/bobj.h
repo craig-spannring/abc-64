@@ -8,6 +8,9 @@
 
 #ifdef __cplusplus
 extern "C" {
+#ifdef GARBAGE_help_emacs_with_indentation
+}
+#endif
 #endif
 
 
@@ -18,7 +21,10 @@ relation compare(value v, value w);
 
 /*************************************************************************/
 
-value grab(ValueT type, intlet len);
+
+/// Create a new value object on the heap
+value grab(NodeTypeT type, intlet len);
+	
 unsigned tltsyze(literal type, intlet len, int *nptrs);
 unsigned numsyze(intlet len, int *nptrs);
 unsigned ptnsyze(intlet len, int *nptrs);
