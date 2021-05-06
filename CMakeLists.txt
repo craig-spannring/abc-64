@@ -219,7 +219,7 @@ set(abc_srcs
   ${CMAKE_CURRENT_LIST_DIR}/btr/i1btr.c
   ${CMAKE_CURRENT_LIST_DIR}/btr/i1obj.c
   )
-#set_source_files_properties(${src_main} ${abc_srcs} PROPERTIES LANGUAGE CXX )
+set_source_files_properties(${src_main} ${abc_srcs} PROPERTIES LANGUAGE CXX )
 
 target_sources(abc PRIVATE ${abc_srcs})
 

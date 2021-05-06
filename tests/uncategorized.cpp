@@ -8,6 +8,7 @@
 #include "b.h"
 #include "bobj.h"
 #include "bint.h"
+#include "i1num.h"
 #include "i2par.h"
 #include "i3int.h"
 // #include "i1nur.h"   // bint1/
@@ -33,8 +34,6 @@ std::shared_ptr<char[]> mk_string(const char* s)
 
 TEST(whitebox, mk_integer_001)
 {
-	integer  myInt;
-	
 	value y = mk_integer(1);
 	EXPECT_TRUE(IsSmallInt(y));
 
@@ -64,7 +63,7 @@ TEST(whitebox, expr_001)
 // TEST(whitebox, singexpr_001)
 // {
 // 	first_col= tx= get_line(); 
-// 
+//
 // 	parsetree  tree = singexpr(first_col);
 // }
 
@@ -73,6 +72,24 @@ TEST(whitebox, expr_001)
 //   rational r = mk_rat(2, 2, 1, true);
 // }
 
+TEST(whitebox, mk_text01)
+{
+	const int count      = 1000000; 
+	value 	  empty      = mk_text("");
+	value 	  nonempty   = mk_text("abcdef");
+	value 	  multichunk = mk_text("abcdef000000000000000000000000000000");
+	char* 	  ptr        = (char*)malloc(count);
+	memset(ptr, 'a', count);
+	ptr[count-1] = '\0';
+	value     big      = mk_text(ptr);
+	
+	EXPECT_EQ(empty->type, Tex);
+	EXPECT_EQ(nonempty->type, Tex);
+	EXPECT_EQ(multichunk->type, Tex);
+	EXPECT_EQ(big->type, Tex);
+
+	free(ptr); 
+}
 int main(int argc, char** argv)
 {
 	::testing::InitGoogleTest(&argc, argv);

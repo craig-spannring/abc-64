@@ -9,6 +9,11 @@ function(add_test name)
   add_executable(${name} ${name}.cpp)
   target_sources(${name} PRIVATE ${abc_srcs})
   add_dependencies(${name} mach_h_AutoGened file_h_AutoGened)
+  target_compile_options(${name} PRIVATE
+    ${CMAKE_C_FLAGS}
+    # ${abc_c_only_flags}
+    ${abc_c_cxx_flags}
+    )
   target_include_directories(${name}
     PRIVATE
     ${mach_inc_dir}
