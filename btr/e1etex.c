@@ -16,21 +16,21 @@ Visible int e_length(value v) {
 Visible value mk_etext(cstring m) {
 	value v; intlet len= strlen(m);
 	v= grab(Etex, len);
-	strcpy(Str(v), m);
+	strcpy(StrPtrField(v), m);
 	return v;
 }
 
 Visible char e_ncharval(int n, value v) {
-	return *(Str(v)+n-1);
+	return *(StrPtrField(v)+n-1);
 }
 
 Visible string e_strval(value v) {
-	return Str(v);
+	return StrPtrField(v);
 }
 
 
 Visible string e_sstrval(value v) {
-	return (string) savestr(Str(v));
+	return (string) savestr(StrPtrField(v));
 }
 
 Visible Procedure e_fstrval(string s) {
@@ -40,15 +40,15 @@ Visible Procedure e_fstrval(string s) {
 
 Visible value e_icurtail(value v, int k) {
 	value w= grab(Etex, k);
-	strncpy(Str(w), Str(v), k);
-	*(Str(w) + k)= '\0';
+	strncpy(StrPtrField(w), StrPtrField(v), k);
+	*(StrPtrField(w) + k)= '\0';
 	return w;
 }
 
 
 Visible value e_ibehead(value v, int k) {
 	value w= grab(Etex, Length(v) - (k - 1));
-	strcpy(Str(w), Str(v) + k - 1);
+	strcpy(StrPtrField(w), StrPtrField(v) + k - 1);
 	return w;
 }
 
@@ -56,8 +56,8 @@ Visible value e_ibehead(value v, int k) {
 
 Visible value e_concat(value s, value t) {
 	value v= grab(Etex, Length(s) + Length(t));
-	strcpy(Str(v), Str(s));
-	strcpy(Str(v) + Length(s), Str(t));
+	strcpy(StrPtrField(v), StrPtrField(s));
+	strcpy(StrPtrField(v) + Length(s), StrPtrField(t));
 	return v;
 }
 

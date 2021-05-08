@@ -140,9 +140,16 @@ Hidden value ccopy(value v) {
 	value *pend;
 		
 	Grabber(len);
+
 	w= (value) getmem(Adj(syze));
-	w->type= type; w->len= len; w->refcnt= 1;
-	from= Str(v); to= Str(w); end= to+syze;
+	w->type= type;
+	w->len= len;
+	w->refcnt= 1;
+
+	from = StrPtrField(v);
+	to   = StrPtrField(w);
+
+	end= to+syze;
 	while (to < end) *to++ = *from++;
 	pp= (value*) ((char*)Ats(w) + Offset(type));
 	pend= pp+nptrs;

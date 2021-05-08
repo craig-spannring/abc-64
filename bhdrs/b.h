@@ -171,6 +171,8 @@ inline static value* Ats(value v) {return ((value *)&((v)->cts));}
 #endif
 	
 #define Str(v) ((string)&((v)->cts))
+static inline string StrPtrField(value v) {return ((string)&((v)->cts));}
+//static inline string GetStr(value v) {return ((string)&((v)->cts));}
 
 ///< Is this a Tex node?	
 //#define Is_text(v) (Type(v) == Tex)
