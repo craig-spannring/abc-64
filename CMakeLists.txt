@@ -234,6 +234,8 @@ add_custom_command(OUTPUT ${CUSTOM_AUTOGENED_FILES}/inc/file.h
 add_custom_target(file_h_AutoGened
   DEPENDS ${CUSTOM_AUTOGENED_FILES}/inc/file.h)
 
+# This approach works in Linux with the Ninja generator but fails
+# with the Xcode generator on OSX
 add_custom_command(OUTPUT ${CUSTOM_AUTOGENED_FILES}/inc/mach.h
   COMMAND date > /tmp/making_mach_h.out
   COMMAND ${MKMACH} > ${CUSTOM_AUTOGENED_FILES}/inc/mach.h.tmp_
