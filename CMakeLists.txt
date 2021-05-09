@@ -6,15 +6,18 @@ enable_testing()
 include(GoogleTest)
 include(CheckIncludeFile)
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+include(OsSpecifics)
+os_specific_defs()
+message("HAVE_TERMIO_H:       ${HAVE_TERMIO_H}")
+message("HAVE_TERMIOS_H:      ${HAVE_TERMIOS_H}")
+
+
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
   set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
   set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif(CCACHE_FOUND)
-
-check_include_file(termio.h HAVE_TERMIO_H)
-check_include_file(termios.h HAVE_TERMIOS_H)
-
 
 set(CURSES_NEED_NCURSES "TRUE")
 find_package(Curses)
@@ -31,10 +34,6 @@ endif()
 if (NOT ${CURSES_FOUND})
   set(CURSES_LIBRARIES -lncurses)
 endif()
-
-message("HAVE_TERMIO_H:       ${HAVE_TERMIO_H}")
-message("HAVE_TERMIOS_H:      ${HAVE_TERMIOS_H}")
-message("CURSES_INCLUDE_DIR:  ${CURSES_INCLUDE_DIR}")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
