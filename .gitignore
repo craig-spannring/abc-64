@@ -30,3 +30,6 @@ unix/mach.h
 unix/*.o
 unix/sig.c.old
 gdb_helpers/__pycache__/
+.DS_Store
+buildm1/
+
