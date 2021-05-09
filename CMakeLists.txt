@@ -50,8 +50,6 @@ set(CUSTOM_AUTOGENED_FILES ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files)
 file(MAKE_DIRECTORY ${CUSTOM_AUTOGENED_FILES})
 file(MAKE_DIRECTORY ${CUSTOM_AUTOGENED_FILES}/inc)
 
-
-set(MKMACH ${CMAKE_CURRENT_BINARY_DIR}/mkmach)
 add_executable(mkmach mkmach.c)
 target_include_directories(mkmach
   PRIVATE ${mach_inc_dir}
@@ -238,7 +236,7 @@ add_custom_target(file_h_AutoGened
 # with the Xcode generator on OSX
 add_custom_command(OUTPUT ${CUSTOM_AUTOGENED_FILES}/inc/mach.h
   COMMAND date > /tmp/making_mach_h.out
-  COMMAND ${MKMACH} > ${CUSTOM_AUTOGENED_FILES}/inc/mach.h.tmp_
+  COMMAND $<TARGET_FILE_DIR:mkmach>/mkmach > ${CUSTOM_AUTOGENED_FILES}/inc/mach.h.tmp_
   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CUSTOM_AUTOGENED_FILES}/inc/mach.h.tmp_ ${CUSTOM_AUTOGENED_FILES}/inc/mach.h
   DEPENDS mkmach
   DEPENDS ${CMAKE_CURRENT_LIST_FILE}
