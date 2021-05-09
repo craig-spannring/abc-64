@@ -5,6 +5,9 @@
 
 #ifdef __cplusplus
 extern "C" {
+#ifdef GARBAGE_help_emacs_with_indentation
+}
+#endif
 #endif
 /* This file was generated and edited by the Setup command. */
 /* To make lasting changes edit the files unix/os.h.gen and Setup, */
