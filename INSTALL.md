@@ -41,7 +41,7 @@ or
 Just like a normal build you'll want to create a build directory and run cmake from 
 there the only difference being you'll specify the Xcode project generator. 
 
-$ mkdir build          # This may be located anywhere.
-$ cd build
-$ cmake -G Xcode ../.   # Path to this directory
+  $ mkdir build          # This may be located anywhere.
+  $ cd build
+  $ cmake -G Xcode ../.   # Path to this directory
 
