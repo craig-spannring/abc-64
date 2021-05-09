@@ -8,9 +8,9 @@
 
 This project follows the standard CMake conventions for building.
 
-   $ mkdir build          # This may be located anywhere.
-   $ cd build
-   $ cmake {FLAGS} ../.   # Path to this directory
+$ mkdir build          # This may be located anywhere.
+$ cd build
+$ cmake {FLAGS} ../.   # Path to this directory
 
 For a native build FLAGS might be something like 
 
@@ -35,4 +35,13 @@ or
 
    `-DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=linux-gcc32.toolchain  ../.`
 
+
+# Using Xcode
+
+Just like a normal build you'll want to create a build directory and run cmake from 
+there the only difference being you'll specify the Xcode project generator. 
+
+$ mkdir build          # This may be located anywhere.
+$ cd build
+$ cmake -G Xcode ../.   # Path to this directory
 
