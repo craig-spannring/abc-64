@@ -8,9 +8,6 @@ include(CheckIncludeFile)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(OsSpecifics)
-os_specific_defs()
-message("HAVE_TERMIO_H:       ${HAVE_TERMIO_H}")
-message("HAVE_TERMIOS_H:      ${HAVE_TERMIOS_H}")
 
 
 find_program(CCACHE_FOUND ccache)
@@ -56,19 +53,21 @@ endif()
 set(CUSTOM_AUTOGENED_FILES ${CMAKE_CURRENT_BINARY_DIR}/custom_autogened_files)
 file(MAKE_DIRECTORY ${CUSTOM_AUTOGENED_FILES})
 file(MAKE_DIRECTORY ${CUSTOM_AUTOGENED_FILES}/inc)
+file(MAKE_DIRECTORY ${CUSTOM_AUTOGENED_FILES}/inc/unix)
 
-add_executable(mkmach mkmach.c)
-target_include_directories(mkmach
-  PRIVATE ${mach_inc_dir}
-  )
-target_link_libraries(mkmach
-  PRIVATE
-  )
+create_comp_h()
+
+os_specific_defs(os_defs)
+message("os_defs = ${os_defs}")
+message("HAVE_TERMIO_H:       ${HAVE_TERMIO_H}")
+message("HAVE_TERMIOS_H:      ${HAVE_TERMIOS_H}")
+
+
+make_mach_h()
 
 add_executable(abc ${src_main})
 set_property(TARGET abc PROPERTY C_STANDARD 11)
 
-add_dependencies(abc mach_h_AutoGened file_h_AutoGened)
 set(abc_c_cxx_warn_flags
   -Wall
   -Wint-to-pointer-cast
@@ -233,17 +232,17 @@ add_custom_command(OUTPUT ${CUSTOM_AUTOGENED_FILES}/inc/file.h
 add_custom_target(file_h_AutoGened
   DEPENDS ${CUSTOM_AUTOGENED_FILES}/inc/file.h)
 
-# This approach works in Linux with the Ninja generator but fails
-# with the Xcode generator on OSX
-add_custom_command(OUTPUT ${CUSTOM_AUTOGENED_FILES}/inc/mach.h
-  COMMAND date > /tmp/making_mach_h.out
-  COMMAND $<TARGET_FILE_DIR:mkmach>/mkmach > ${CUSTOM_AUTOGENED_FILES}/inc/mach.h.tmp_
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CUSTOM_AUTOGENED_FILES}/inc/mach.h.tmp_ ${CUSTOM_AUTOGENED_FILES}/inc/mach.h
-  DEPENDS mkmach
-  DEPENDS ${CMAKE_CURRENT_LIST_FILE}
-  )
-add_custom_target(mach_h_AutoGened
-  DEPENDS ${CUSTOM_AUTOGENED_FILES}/inc/mach.h)
+# # This approach works in Linux with the Ninja generator but fails
+# # with the Xcode generator on OSX
+# add_custom_command(OUTPUT ${CUSTOM_AUTOGENED_FILES}/inc/mach.h
+#   COMMAND date > /tmp/making_mach_h.out
+#   COMMAND $<TARGET_FILE_DIR:mkmach>/mkmach > ${CUSTOM_AUTOGENED_FILES}/inc/mach.h.tmp_
+#   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CUSTOM_AUTOGENED_FILES}/inc/mach.h.tmp_ ${CUSTOM_AUTOGENED_FILES}/inc/mach.h
+#   DEPENDS mkmach
+#   DEPENDS ${CMAKE_CURRENT_LIST_FILE}
+#   )
+# add_custom_target(mach_h_AutoGened
+#   DEPENDS ${CUSTOM_AUTOGENED_FILES}/inc/mach.h)
 
 
 set(GOOGLE_TEST_INSTALLATION_SYMLINK ${CMAKE_CURRENT_LIST_DIR}/googletest-release-1.8.1)

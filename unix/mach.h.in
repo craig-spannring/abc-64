@@ -1,8 +1,8 @@
-/*                                        
- * DO NOT EDIT!                           
- *    Auto-generated: ../mkmach.c 
- *                    May  9 2021 16:32:01 
- */ 
+
+#include <stdint.h>
+#include <stddef.h>
+// #include <sys/types.h>
+#include <limits.h>
 
 /* char=8 bits, signed */
 /* maxshort=32767 (=2**15-1) */
@@ -26,24 +26,25 @@
 /* Double arithmetic uses a hidden bit */
 
 /* Numeric package constants */
-#define Maxintlet 32767 /* Maximum short */
-#define Maxint 2147483647 /* Maximum int */
-typedef int digit; /*here*/
+#define Maxintlet  SHRT_MAX /* Maximum short */
+#define Maxint     INT_MAX  /* Maximum int */
+typedef ${ABC_digit_type} digit; /*here*/
 typedef long twodigit;
 /* ABCBASE must be a power of ten, ABCBASE**2 must fit in a twodigit */
-/* and -2*ABCBASE as well as ABCBASE*2 must fit in a digit */
-#define ABCBASE 1000000000
-#define tenlogBASE 9 /*  = log10(ABCBASE) */
-#define BIG 9007199254740991.0 /* Maximum integral double */
-#define MAXNUMDIG 16 /* The number of decimal digits in BIG */
-#define MINNUMDIG 6 /* Don't change: this is here for consistency */
-#define Maxreal 1.797693e+308 /* Maximum double */
+/* and -2*ABCBASE as well as ABCBASE*2 must fit in a digit           */
+/* Was 1000000000 on 64-bit, 10000 on 32-bit.                        */
+#define ABCBASE     ${ABC_ABCBASE}
+#define tenlogBASE  ${ABC_tenlogBASE} /*  = log10(ABCBASE) (was 9 on 64 bit, 4 on 32 bit  */
+#define BIG         ${ABC_BIG}        /* Maximum integral double (was 9007199254740991.0) */
+#define MAXNUMDIG   ${ABC_MAXNUMDIG}  /* The number of decimal digits in BIG */
+#define MINNUMDIG   6             /* Don't change: this is here for consistency */
+#define Maxreal     1.797693e+308 /* Maximum double */
 #define Maxexpo 1024 /* Maximum value such that 2**Maxexpo<=Maxreal */
 #define Minexpo (-1021) /* Minimum value such that -2**Minexpo>=Minreal */
-#define DBLBITS 53 /* The number of bits in the fraction of a double */
-#define LONGBITS 63 /* The number of bits in a long */
+#define DBLBITS ${ABC_DBL_EXP_BITS} /* The number of bits in the fraction of a double (was 53) */
+#define LONGBITS ${ABC_LONGBITS} /* The number of bits in a long (was 63 or 31)*/
 #define TWOTO_DBLBITSMIN1 4503599627370496.0 /* 2**(DBLBITS-1) */
-#define TWOTO_LONGBITS 9223372036854775808.0 /* 2**LONGBITS */
+#define TWOTO_LONGBITS ${ABC_2to_LONGBITS} /* 2**LONGBITS (was 9223372036854775808.0 or 2147483648.0)*/
 
 /* Enable fair choice from object whose size exceeds */
 
