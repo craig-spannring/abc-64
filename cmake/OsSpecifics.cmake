@@ -2,8 +2,8 @@
 # The original code had 4 auto-gen'd source files for Unix.
 #   1) unix/comp.h
 #   2) unix/os.h
-#   3) file.h
-#   4) mach.h
+#   3) file.h       (finished)
+#   4) mach.h       (finished)
 # 
 
 include(CheckTypeSize)
