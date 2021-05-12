@@ -12,24 +12,40 @@
 #include <sys/file.h>	/* for access(2) modes, like R_OK; only used below */
 #include <dir.h>	/* for readdir(3), and so on */
 #include <sys/stat.h>	/* file status, see stat(2) */
+#include <errno.h"
+#include <unistd.h>
 
-extern int errno;	/* error numbers returned by maths functions */
 
-#define HAS_FTIME	/* ftime() available */
-#define HAS_GETTIMEOFDAY/* gettimeofday() available */
-#define HAS_MKDIR	/* mkdir() and rmdir() available */
-#define HAS_RENAME	/* rename() available */
-#define HAS_SELECT	/* 4.2 BSD select() system call available */
-#define HAS_READDIR	/* Berkeley style directory reading routines */
-			/* opendir(), readdir() and closedir(); */
-#define HAS_DIRECT
-#ifndef HAS_DIRECT
-#define direct dirent	/* newer versions of readdir use struct dirent */
+#if HAS_FTIME
+#include <sys/timeb.h>
+#endif
+#if HAS_GETTIMEOFDAY
+#include <sys/time.h>
+#endif
+#if HAS_MKDIR
+#include <sys/stat.h;sys/types.h>
+#endif
+#if HAS_MKDIR
+#include <sys/types.h>
+#endif
+#if HAS_RMDIR
+#include <unistd.h>
+#endif
+#if HAS_RENAME
+#include <stdio.h>
+#endif
+#if HAS_SELECT
+#include <sys/select.h>
+#endif
+#if HAS_READDIR
+#include <direent.h>
 #endif
 
+#undef HAS_DIRECT
+
 /* define either one of the next two, or neither: */
-#define HAS_GETWD	/* getwd() available */
-#undef  HAS_GETCWD	/* getcwd() available instead */
+#undef  HAS_GETWD	/* getwd() is deprecated */
+#define HAS_GETCWD	/* getcwd() available instead */
 
 /* is this a termio system (unix) */
 #undef  TERMIO		
@@ -51,14 +67,13 @@ extern int errno;	/* error numbers returned by maths functions */
  * trmavail() [trm.c] ?
  * There exists an implementation if TERMIO or HAS_SELECT has defined
  */
+#if HAVE_TERM_H || HAVE_TERMIO_H || HAVE_TERMIOS_H
 #define CANLOOKAHEAD		/* don't change this one */
-#ifndef TERMIO
-#ifndef HAS_SELECT
+#else
 #undef CANLOOKAHEAD
 /* if you do not define it here, you have to enable keyboard interrupts
  * in setttymode() [trm.c]
  */
-#endif
 #endif
 
 #ifdef KEYS

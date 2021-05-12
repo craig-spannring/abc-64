@@ -9,6 +9,18 @@ include(CheckIncludeFile)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(OsSpecifics)
 
+# message("-----------")
+# message("HAS_MKDIR:          ${HAS_MKDIR}")
+# message("HAS_FTIME:          ${HAS_FTIME}")
+# message("HAS_GETTIMEOFDAY:   ${HAS_GETTIMEOFDAY}")
+# message("HAS_RENAME:         ${HAS_RENAME}")
+# message("HAS_SELECT:         ${HAS_SELECT}")
+# message("HAS_READDIR:        ${HAS_READDIR}")
+# message("HAVE_TERM_H:        ${HAVE_TERM_H}")
+# message("HAVE_TERMIO_H:      ${HAVE_TERMIO_H}")
+# message("HAVE_TERMIOS_H:     ${HAVE_TERMIOS_H}")
+# message("-----------")
+
 
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
@@ -57,7 +69,6 @@ file(MAKE_DIRECTORY ${CUSTOM_AUTOGENED_FILES}/inc/unix)
 
 create_comp_h()
 
-os_specific_defs(os_defs)
 message("os_defs = ${os_defs}")
 message("HAVE_TERMIO_H:       ${HAVE_TERMIO_H}")
 message("HAVE_TERMIOS_H:      ${HAVE_TERMIOS_H}")
