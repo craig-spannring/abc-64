@@ -18,6 +18,8 @@
 #include "i1tlt.h"
 #include "i3err.h"
 
+#include <string.h>
+
 Forward Hidden Procedure convbtext(void (*outproc) (char), btreeptr p, char quote);
 
 #define CURTAIL_TEX	MESS(200, "in t|n, t is not a text")

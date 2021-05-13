@@ -9,8 +9,12 @@
 #include "bobj.h"
 #include "i3sou.h"
 #include "port.h"
+#include "os.h"
 #include "dir.h"
 #include "b1grab.h"
+
+#include <string.h>
+
 
 /**************************************************************************/
 /* get_names() is used to get at the names of all ABC files/workspaces	  */
@@ -29,17 +33,18 @@
 
 Visible value get_names(char *path, bool (*isabc) (char *path, char *name)) {
 	DIR *dp;
-	struct direct *dirp;
+	// struct direct *dirp;
+	struct dirent*   dirp; 
 	value v;
 	value name;
-	
+
 	dp= opendir(path);
 	if (dp == (DIR *) NULL)
 		return Vnil;
 	v= mk_elt();
 	for (;;) {
 		dirp= readdir(dp);
-		if (dirp == (struct direct *) NULL) {
+		if (dirp == (struct dirent *) NULL) {
 			closedir(dp);
 			break;
 		}

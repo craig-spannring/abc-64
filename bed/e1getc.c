@@ -17,6 +17,7 @@
 #include "trm.h"
 
 #include <ctype.h>
+#include <string.h>
 
 extern bool use_bed;
 

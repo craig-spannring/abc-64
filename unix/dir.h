@@ -5,8 +5,17 @@
 
 #ifdef __cplusplus
 extern "C" {
+#ifdef GARBAGE_help_emacs_with_indentation_foo
+}
+#endif
 #endif
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1990. */
+
+#ifdef HAS_READDIR
+
+#else
+???
+#endif
 
 #ifndef HAS_READDIR
 
@@ -15,6 +24,7 @@ extern "C" {
 #ifndef DEV_BSIZE
 #define	DEV_BSIZE	512
 #endif
+
 #define DIRBLKSIZ	DEV_BSIZE
 #define	MAXNAMLEN	255
 
@@ -49,6 +59,7 @@ typedef struct _dirdesc {
 #define NULL 0
 #endif
 
+???
 Visible DIR *opendir();
 Visible struct direct *readdir();
 Visible Procedure closedir();
@@ -58,6 +69,5 @@ Visible Procedure closedir();
 #ifdef __cplusplus
 }
 #endif
-
 
 #endif

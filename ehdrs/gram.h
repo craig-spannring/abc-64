@@ -3,6 +3,8 @@
 #ifndef GRAM_h_64b4d3cfdb1487119a98b4694402681d
 #define GRAM_h_64b4d3cfdb1487119a98b4694402681d
 
+#include <string.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

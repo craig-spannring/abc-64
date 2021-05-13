@@ -9,6 +9,8 @@
 #include "bmem.h"
 #include "b1grab.h"
 
+#include <string.h>
+
 Visible int e_length(value v) {
 	return Length(v);
 }

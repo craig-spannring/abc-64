@@ -19,6 +19,9 @@
 #include "supr.h"
 #include "bmem.h"
 
+#include <string.h>
+
+
 /*
  * Keep a simple database of file name vs. line number.
  * The database is kept in most-recently-used-first order.

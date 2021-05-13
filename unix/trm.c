@@ -23,11 +23,17 @@
 
 #include <stdlib.h>
 #include <signal.h>
+#include <string.h>
 
-#ifndef TERMIO
-#include <sgtty.h>
-#else
+#if HAVE_TERMIO_H
 #include <termio.h>
+#elif HAVE_TERMIOS_H
+#include <termio.h>
+#elif HAVE_TERM_H
+#include <term.h>
+#else
+???
+#include <sgtty.h>
 #endif
 
 #include "trm.h"

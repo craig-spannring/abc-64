@@ -15,6 +15,8 @@
 #include "i3sou.h"
 #include "i3err.h"
 
+#include <string.h>
+
 Forward Hidden Procedure st_extend(expadm *adm);
 Forward Hidden Procedure push_dya(expadm *adm, value v);
 Forward Hidden parsetree par_expr(txptr q, expadm *adm);

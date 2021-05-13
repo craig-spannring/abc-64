@@ -13,6 +13,8 @@
 #include "i3err.h"
 #include "b1grab.h"
 
+#include <string.h>
+
 #define FOUND_EG	GMESS(2600, "I found type EG %s where I expected %s")
 #define FOUND		GMESS(2601, "I found type %s where I expected %s")
 

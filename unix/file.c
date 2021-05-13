@@ -7,7 +7,8 @@
 #include "main.h"  /* for curdir() */
 #include "port.h"  /* for MESSFILE, HELPFILE, etc */
 
-extern char *getenv(const char *);
+#include <string.h>
+#include <stdlib.h>
 
 /* the directory delimiter in filename paths */
 #define DELIM '/'

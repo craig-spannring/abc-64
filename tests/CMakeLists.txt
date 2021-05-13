@@ -8,6 +8,13 @@ include(GoogleTest)
 function(add_test name)
   add_executable(${name} ${name}.cpp)
   target_sources(${name} PRIVATE ${abc_srcs})
+
+  foreach(Def HAVE_TERM_H HAVE_TERMIO_H HAVE_TERMIOS_H HAS_FTIME HAS_GETTIMEOFDAY HAS_MKDIR HAS_RMDIR HAS_RENAME HAS_SELECT HAS_READDIR)
+    if ( "${${Def}}" )
+      target_compile_definitions(${name} PRIVATE ${Def}=1)
+    endif()
+  endforeach()
+  
   target_compile_options(${name} PRIVATE
     ${CMAKE_C_FLAGS}
     # ${abc_c_only_flags}
