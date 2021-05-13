@@ -22,6 +22,8 @@
 #include "i3err.h"
 #include "port.h"
 
+#include <string.h>
+
 /* While we are reading the Messages file, we build an index.
    probe[k] contains the first message number found in block k.
    blocks are BUFSIZ in size. */

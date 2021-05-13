@@ -10,6 +10,7 @@
 #include "oper.h"
 #include "port.h"
 
+#include <string.h>
 
 char *getenv(const char *);
 

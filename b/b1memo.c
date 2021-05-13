@@ -7,6 +7,9 @@
 #include "bmem.h"
 #include "i3err.h"
 
+#include <string.h>
+
+
 Visible ptr getmem(unsigned syze) {
 	ptr p= (ptr) malloc(MALLOC_ARG syze);
 	

@@ -9,6 +9,8 @@
 #include "i1tex.h"
 #include "i3err.h"
 
+#include <string.h>
+
 #define MAXDIGITS (MAXNUMDIG)
 	/* Max precision for non-integral, non-rounded numbers */
 #define MAXNUMSIZE (MAXDIGITS+MAXNUMDIG+10)

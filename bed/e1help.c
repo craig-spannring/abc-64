@@ -17,6 +17,8 @@
 #include "port.h"
 #include "trm.h"
 
+#include <string.h>
+
 #ifdef HELPFUL
 
 extern int winheight;

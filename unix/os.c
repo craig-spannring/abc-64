@@ -8,7 +8,7 @@
 #include "port.h" /* for makepath() */
 
 #include <unistd.h>
-/* Date and time includes are in os.h, included from b.h */
+#include <string.h>
 
 /* synonyms for current and parent directory */
 #define SYN_CURDIR "."

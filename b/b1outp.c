@@ -6,6 +6,8 @@
 #include "bmem.h"
 #include "trm.h"
 
+#include <string.h>
+
 
 Forward Hidden Procedure c_putchr(char c);
 

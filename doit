@@ -4,7 +4,7 @@ TOP=$(dirname $(readlink -f $0))
 
 echo -n                                                               &&
     (cd ${TOP}/build32 && ninja -k0 all)                          &&
-    (cd ${TOP} ; ABC=${ABC:-abc32} make -C ${TOP}/. examples) &&
+    # (cd ${TOP} ; ABC=${ABC:-abc32} make -C ${TOP}/. examples) &&
     (cd ${TOP}/build32 && ninja -k0 all && ninja test)            &&
     (cd ${TOP}/build64 && ninja -k0 all && ninja test)            &&
     echo -n

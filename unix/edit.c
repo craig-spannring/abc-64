@@ -4,6 +4,8 @@
 #include "port.h"
 #include "main.h" /* for filemodtime() */
 
+#include <string.h>
+
 #define COML 200
 Hidden char com_line[COML];
 #define At_eos(s) ((s)+= strlen(s))

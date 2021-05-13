@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include "b.h"
 #include "bedi.h"
@@ -20,7 +21,6 @@
 #include "node.h"
 #include "trm.h"
 #include "port.h"
-
 
 extern int winheight; /* From scrn.c */
 extern int winstart; /* From scrn.c */

@@ -35,7 +35,7 @@
 #include <signal.h>
 #include <assert.h>
 #include <stdio.h>
-
+#include <string.h>
 
 
 extern bool vtrmactive;

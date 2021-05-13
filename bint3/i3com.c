@@ -15,6 +15,8 @@
 #include "i3scr.h"
 #include "port.h"
 
+#include <string.h>
+
 /****************************************************************************/
 
 /* Edit a file.  Parameters are the file name (as ABC value), a line

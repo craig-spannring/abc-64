@@ -1,12 +1,28 @@
 #
 # The original code had 4 auto-gen'd source files for Unix.
 #   1) unix/comp.h
-#   2) unix/os.h
+#   2) unix/os.h    (finished)
 #   3) file.h       (finished)
 #   4) mach.h       (finished)
 # 
 
 include(CheckTypeSize)
+include(CheckIncludeFile)
+include(CheckSymbolExists)
+
+
+check_include_file(term.h    HAVE_TERM_H)
+check_include_file(termio.h  HAVE_TERMIO_H)
+check_include_file(termios.h HAVE_TERMIOS_H)
+
+check_symbol_exists(ftime        sys/timeb.h   	   HAS_FTIME)
+check_symbol_exists(gettimeofday sys/time.h    	   HAS_GETTIMEOFDAY)
+check_symbol_exists(mkdir "sys/stat.h;sys/types.h" HAS_MKDIR)
+check_symbol_exists(rmdir        unistd.h      	   HAS_RMDIR)
+check_symbol_exists(rename       stdio.h       	   HAS_RENAME)
+check_symbol_exists(select       sys/select.h  	   HAS_SELECT)
+check_symbol_exists(readdir      dirent.h          HAS_READDIR)
+set(HAS_READDIR 1) # cmake isn't picking up on this function.  Not sure why
 
 function(os_specific_defs defs)
   set(${defs} MySpecialDef PARENT_SCOPE)
@@ -83,18 +99,6 @@ function(make_mach_h)
     ${CMAKE_SOURCE_DIR}/unix/mach.h.in
     ${CUSTOM_AUTOGENED_FILES}/inc/mach.h
     )
-
-
 endfunction()
 
-function(create_comp_h)
-  check_include_file(termio.h  HAVE_TERMIO_H)
-  check_include_file(termios.h HAVE_TERMIOS_H)  
 
-  configure_file(
-    ${CMAKE_SOURCE_DIR}/unix/comp.h.in
-    ${CUSTOM_AUTOGENED_FILES}/inc/comp.h
-    )
-
-  message("CUSTOM_AUTOGENED_FILES ${CUSTOM_AUTOGENED_FILES}")
-endfunction()

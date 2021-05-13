@@ -16,6 +16,8 @@
 #include "port.h"
 #include "b1grab.h"
 
+#include <string.h>
+
 /* The central workspace looks like any other workspace.
  * The difference is that you can call the how-to's of the central workspace
  * in the other workspaces.

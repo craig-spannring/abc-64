@@ -1,3 +1,4 @@
+#line 1 "${ORIGIN}"
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1986. */
 
 #ifndef COMP_h_ffc637d5db31e33ffc31f6acea83e20b
@@ -11,6 +12,7 @@ extern "C" {
 }
 #endif
 #endif
+
 /* This file was generated and edited by the Setup command. */
 /* To make lasting changes edit the files unix/comp.h.gen and Setup, */
 /* and run Setup again. */
@@ -64,6 +66,5 @@ char *realloc();
 #ifdef __cplusplus
 }
 #endif
-
 
 #endif
