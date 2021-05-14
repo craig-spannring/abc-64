@@ -26,10 +26,23 @@
 #include <string.h>
 
 #if HAVE_TERMIO_H
+#pragma message "HAVE_TERMIO_H"
+#endif
+#if HAVE_TERMIOS_H
+#pragma message "HAVE_TERMIOS_H"
+#endif
+#if HAVE_TERM_H
+#pragma message "HAVE_TERM_H"
+#endif
+
+#if HAVE_TERMIO_H
+#pragma message "HAVE_TERMIO_H"
 #include <termio.h>
 #elif HAVE_TERMIOS_H
-#include <termio.h>
+#pragma message "HAVE_TERMIOS_H"
+#include <termios.h>
 #elif HAVE_TERM_H
+#pragma message "HAVE_TERM_H"
 #include <term.h>
 #else
 ???
