@@ -24,30 +24,43 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <string.h>
+#include <sys/types.h>
 
-#if HAVE_TERMIO_H
-#pragma message "HAVE_TERMIO_H"
-#endif
-#if HAVE_TERMIOS_H
-#pragma message "HAVE_TERMIOS_H"
-#endif
-#if HAVE_TERM_H
-#pragma message "HAVE_TERM_H"
-#endif
+/* #if HAVE_TERMIO_H */
+/* #pragma message "HAVE_TERMIO_H" */
+/* #endif */
+/* #if HAVE_TERMIOS_H */
+/* #pragma message "HAVE_TERMIOS_H" */
+/* #endif */
+/* #if HAVE_TERM_H */
+/* #pragma message "HAVE_TERM_H" */
+/* #endif */
 
-#if HAVE_TERMIO_H
-#pragma message "HAVE_TERMIO_H"
-#include <termio.h>
-#elif HAVE_TERMIOS_H
-#pragma message "HAVE_TERMIOS_H"
-#include <termios.h>
-#elif HAVE_TERM_H
-#pragma message "HAVE_TERM_H"
+//#define _SVID_SOURCE 1
+#include <sys/ioctl.h>
+//#include <termios.h>
 #include <term.h>
-#else
+#include <unistd.h>
+
+// #define _SVID_SOURCE 1
+/* #if HAVE_TERMIO_H */
+/* #pragma message "HAVE_TERMIO_H" */
+/* #include <termio.h> */
+/* #endif */
+/* #if HAVE_TERMIOS_H */
+/* #pragma message "HAVE_TERMIOS_H" */
+/* #include <termios.h> */
+/* #endif */
+/* #if HAVE_TERM_H */
+/* #pragma message "HAVE_TERM_H" */
+/* #include <term.h> */
+/* #endif */
+
+#ifndef TERMIO
 ???
 #include <sgtty.h>
 #endif
+
 
 #include "trm.h"
 

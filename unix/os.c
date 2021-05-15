@@ -9,6 +9,7 @@
 
 #include <unistd.h>
 #include <string.h>
+#include <time.h>
 
 /* synonyms for current and parent directory */
 #define SYN_CURDIR "."
