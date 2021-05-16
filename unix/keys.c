@@ -182,13 +182,10 @@ Hidden char *susp_char= NULL;
 Hidden char *erase_char= NULL;
 
 #if HAVE_TERMIO_H
-#pragma message "HAVE_TERMIO_H"
 #include <termio.h>
 #elif HAVE_TERMIOS_H
-#pragma message "HAVE_TERMIOS_H"
 #include <termios.h>
 #elif HAVE_TERM_H
-#pragma message "HAVE_TERM_H"
 #include <term.h>
 #else
 ???

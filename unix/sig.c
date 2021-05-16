@@ -40,60 +40,58 @@
 
 extern bool vtrmactive;
 
+
 bool must_handle(int sig)
 {
-	if (sig >= 32) {
-		return 0;
-	} else {
-		switch (sig)
-		{
-			// Don't handle the following?
-			case SIGURG:
-			case SIGSTOP:
-			case SIGTSTP:
-			case SIGCONT:
-			case SIGCHLD:
-			case SIGTTIN:
-			case SIGTTOU:
-			case SIGIO:
-			case SIGWINCH:
-				return 0;
-				break;
-		}
+	switch (sig)
+	{
+		// Don't handle the following
+		case SIGURG:
+		case SIGSTOP:
+		case SIGTSTP:
+		case SIGCONT:
+		case SIGCHLD:
+		case SIGTTIN:
+		case SIGTTOU:
+		case SIGIO:
+		case SIGWINCH:
+			return 0;
+			break;
 	}
-	return 1;
+	return sig<32; // TODO- probably not correct for modern Unix systems.  
 }
-			
-		
+
 void setsig(int sig, void(*handler)(int)) {
-	int rc;
+	if (must_handle(sig)) {
+		int rc = 0;
 
-	if (sig!=SIGKILL) {
-		sigset_t           mask;
-		rc = sigfillset(&mask);
-		assert(rc==0); // TODO add proper error handling
-
-		struct sigaction   old;
-		struct sigaction   action;
-		memset(&action, 0, sizeof(action));
-		action.sa_handler = handler;
-		action.sa_mask    = mask;
-		action.sa_flags   = 0;
-
-		// printf("setting up sig %d\n", sig);
-		rc = sigaction(sig, &action, &old);
-		if (rc == -1) {
-			perror("sigaction: ");
-			exit(1); 
-		}
-
-		if ((old.sa_flags & SA_SIGINFO)==0 && old.sa_handler==SIG_IGN) {
-			// If previous handler was ignore, then we'll ignore as well. 
+		if (sig!=SIGKILL) {
+			sigset_t           mask;
+			rc = sigfillset(&mask);
+			assert(rc==0); // TODO add proper error handling
+			
+			struct sigaction   old;
+			struct sigaction   action;
+			memset(&action, 0, sizeof(action));
+			action.sa_handler = handler;
+			action.sa_mask    = mask;
+			action.sa_flags   = 0;
+			
+			// printf("setting up sig %d\n", sig);
 			rc = sigaction(sig, &action, &old);
+			if (rc == -1) {
+				perror("sigaction: ");
+				exit(1);
+			}
+			
+			if ((old.sa_flags & SA_SIGINFO)==0 && old.sa_handler==SIG_IGN) {
+				// If previous handler was ignore, then we'll ignore as well.
+				rc = sigaction(sig, &action, &old);
+			}
 		}
-	}
+	}	
 }
-	
+
 
 Hidden Procedure oops(int sig, int m) {
 	signal(sig, SIG_DFL); /* Don't call handler recursive -- just die... */
@@ -119,14 +117,14 @@ Hidden void burp(int sig) {
 
 Hidden void aog(int sig) {
 	oops(sig, MESS(3902, "*** Oops, an act of God has occurred compelling me to discontinue service.\n"));
-	return; // shouldn't get here. 
+	return; // shouldn't get here.
 }
 
 Visible bool intrptd= No;
 
 Hidden void intsig(int sig) {   /* sig == SIGINT */
 	intrptd= Yes;
-	return; 
+	return;
 }
 
 Hidden void fpesig(int sig) { /* sig == SIGFPE */
@@ -136,15 +134,22 @@ Hidden void fpesig(int sig) { /* sig == SIGFPE */
 }
 
 Visible Procedure initsig(void) {
-	int i;
-	// printf("Initializing %d signals\n", (int)NSIG);
-	for (i = 1; i<=NSIG; ++i)
-		if (must_handle(i)) setsig(i, burp);
-	VOID setsig(SIGINT,  intsig);
-	VOID setsig(SIGTRAP, burp);
-	VOID setsig(SIGQUIT, aog);
-	VOID setsig(SIGTERM, aog);
-	VOID setsig(SIGFPE,  fpesig);
+
+	// Effectivly ignore this set of signals. 
+	VOID setsig(SIGURG,    burp);
+	VOID setsig(SIGSTOP,   burp);
+	VOID setsig(SIGTSTP,   burp);
+	VOID setsig(SIGCONT,   burp);
+	VOID setsig(SIGCHLD,   burp);
+	VOID setsig(SIGTTIN,   burp);
+	VOID setsig(SIGTTOU,   burp);
+	VOID setsig(SIGIO,     burp);
+	VOID setsig(SIGWINCH,  burp);
+	VOID setsig(SIGTRAP,   burp);
+	
+	// Here's the set of signals that will need some special handling. 
+	VOID setsig(SIGINT,    intsig);
+	VOID setsig(SIGQUIT,   aog);
+	VOID setsig(SIGTERM,   aog);
+	VOID setsig(SIGFPE,    fpesig);
 }
-
-

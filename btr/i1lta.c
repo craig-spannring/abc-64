@@ -12,6 +12,9 @@
 #include "i1tlt.h"
 #include "b1grab.h"
 
+#include <string.h>
+
+
 Forward Hidden Procedure killranges(value *pv);
 Forward Hidden Procedure killCrange(btreeptr p, value *pv);
 Forward Hidden Procedure killIrange(btreeptr p, value *pv);
