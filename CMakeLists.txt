@@ -68,22 +68,12 @@ configure_file(
   ${CUSTOM_AUTOGENED_FILES}/inc/os.h
   )
 
-
-
-message("HAVE_TERMIO_H:       ${HAVE_TERMIO_H}")
-message("HAVE_TERMIOS_H:      ${HAVE_TERMIOS_H}")
-
-
 make_mach_h()
 
 add_executable(abc ${src_main})
 set_property(TARGET abc PROPERTY C_STANDARD 11)
 os_specific_defs(os_defs)
-message("os_defs = ${os_defs}")
-foreach(Def ${os_defs})
-  message("Adding def ${Def}")
-  target_compile_definitions(abc PRIVATE ${Def})
-endforeach()
+_add_compiler_def(abc "${os_defs}")
 
 set(abc_c_cxx_warn_flags
   -Wall

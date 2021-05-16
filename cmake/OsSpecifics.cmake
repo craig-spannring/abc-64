@@ -50,6 +50,12 @@ function(os_specific_defs os_defs)
   set(${os_defs} ${defs} PARENT_SCOPE)
 endfunction()
 
+function(_add_compiler_def target defs)
+  foreach(Def ${defs})
+    target_compile_definitions(${target} PRIVATE ${Def})
+  endforeach()
+endfunction()
+
 function(_calc_abcbase b)
   check_type_size(int size_of_int)
   check_type_size(long size_of_long)
