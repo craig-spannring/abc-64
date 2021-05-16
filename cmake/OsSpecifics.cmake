@@ -10,7 +10,12 @@ include(CheckTypeSize)
 include(CheckIncludeFile)
 include(CheckSymbolExists)
 
+set(CMAKE_REQUIRED_DEFINITIONS "")
+list(APPEND CMAKE_REQUIRED_DEFINITIONS "-D_POSIX_SOURCE=200809L")
+list(APPEND CMAKE_REQUIRED_DEFINITIONS "-D_POSIX_C_SOURCE=200809L")
+list(APPEND CMAKE_REQUIRED_DEFINITIONS -D_DEFAULT_SOURCE=1)
 
+  
 check_include_file(term.h    HAVE_TERM_H)
 check_include_file(termio.h  HAVE_TERMIO_H)
 check_include_file(termios.h HAVE_TERMIOS_H)
@@ -38,10 +43,10 @@ function(os_specific_defs os_defs)
     list(APPEND defs "TERMIOS=1")
   endif()
 
-  
-  list(APPEND defs "_POSIX_SOURCE=200809L")
-  list(APPEND defs "_POSIX_C_SOURCE=200809L")
-  list(APPEND defs _DEFAULT_SOURCE=1)
+  foreach(Def "${CMAKE_REQUIRED_DEFINITIONS}")
+    list(APPEND defs "${Def}")
+  endforeach()
+
   set(${os_defs} ${defs} PARENT_SCOPE)
 endfunction()
 
