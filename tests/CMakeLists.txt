@@ -20,6 +20,7 @@ function(add_test name)
     # ${abc_c_only_flags}
     ${abc_c_cxx_flags}
     )
+  _add_compiler_def(${name} "${os_defs}")
   target_include_directories(${name}
     PRIVATE
     ${mach_inc_dir}

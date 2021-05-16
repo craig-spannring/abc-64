@@ -248,8 +248,8 @@ file(APPEND ${CUSTOM_AUTOGENED_FILES}/inc/file.h "#define ABCLIB \"${CMAKE_SOURC
 
 set(GOOGLE_TEST_INSTALLATION_SYMLINK ${CMAKE_CURRENT_LIST_DIR}/googletest-release-1.8.1)
 if(EXISTS ${GOOGLE_TEST_INSTALLATION_SYMLINK})
-  #add_subdirectory(${GOOGLE_TEST_INSTALLATION_SYMLINK}/.)
-  #add_subdirectory(tests)
+  add_subdirectory(${GOOGLE_TEST_INSTALLATION_SYMLINK}/.)
+  add_subdirectory(tests)
 endif()
 
 #
