@@ -23,18 +23,26 @@ check_symbol_exists(rename       stdio.h       	   	  HAS_RENAME)
 check_symbol_exists(select       sys/select.h  	   	  HAS_SELECT)
 check_symbol_exists(readdir      dirent.h          	  HAS_READDIR)
 
-message("HAS_FTIME:           ${HAS_FTIME}")
-message("HAS_GETTIMEOFDAY:    ${HAS_GETTIMEOFDAY}")
-message("HAS_MKDIR:           ${HAS_MKDIR}")
-message("HAS_RMDIR:           ${HAS_RMDIR}")
-message("HAS_RENAME:          ${HAS_RENAME}")
-message("HAS_SELECT:          ${HAS_SELECT}")
-message("HAS_READDIR:         ${HAS_READDIR}")
-
 set(HAS_READDIR 1) # cmake isn't picking up on this function.  Not sure why
 
-function(os_specific_defs defs)
-  set(${defs} MySpecialDef PARENT_SCOPE)
+function(os_specific_defs os_defs)
+  set(defs "")
+  foreach(Def HAVE_TERM_H HAVE_TERMIO_H HAVE_TERMIOS_H HAS_FTIME HAS_GETTIMEOFDAY HAS_MKDIR HAS_RMDIR HAS_RENAME HAS_SELECT HAS_READDIR)
+    if ( "${${Def}}" )
+      list(APPEND defs "${Def}=1")
+    endif()
+  endforeach()
+
+  if(HAVE_TERM_H OR HAVE_TERMIO_H OR HAVE_TERMIOS_H)
+    list(APPEND defs "TERM=1")
+    list(APPEND defs "TERMIOS=1")
+  endif()
+
+  
+  list(APPEND defs "_POSIX_SOURCE=200809L")
+  list(APPEND defs "_POSIX_C_SOURCE=200809L")
+  list(APPEND defs _DEFAULT_SOURCE=1)
+  set(${os_defs} ${defs} PARENT_SCOPE)
 endfunction()
 
 function(_calc_abcbase b)
@@ -81,15 +89,6 @@ function(make_mach_h)
   _calc_abcbase(ABC_ABCBASE)
   string(LENGTH "${ABC_ABCBASE}" tmp)
   math(EXPR ABC_tenlogBASE "${tmp}-1")
-
-  #if (2*intpower + 1 <= longpower) {
-  #  printf("typedef int digit; /*here*/\n");
-  #  maxdigit= maxint;
-  #}
-  #else {
-  #  printf("typedef short digit;\n");
-  #  maxdigit= maxshort;
-  #}
   math(EXPR tmp "2*${max_int}+1")
 
   # TODO this isn't exactly what the orginal code did.
@@ -98,11 +97,6 @@ function(make_mach_h)
   else()
     set(ABC_digit_type "short")
   endif()
-  
-  message("long:          ${size_of_long}")
-  message("BIG:           ${ABC_BIG}")
-  message("ABC_ABCBASE:   ${ABC_ABCBASE}")
-  message("ABC_MAXNUMDIG: ${ABC_MAXNUMDIG}")
   
   configure_file(
     ${CMAKE_SOURCE_DIR}/unix/mach.h.in
