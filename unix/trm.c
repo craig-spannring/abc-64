@@ -36,9 +36,8 @@
 /* #pragma message "HAVE_TERM_H" */
 /* #endif */
 
-//#define _SVID_SOURCE 1
 #include <sys/ioctl.h>
-//#include <termios.h>
+#include <termios.h>
 #include <term.h>
 #include <unistd.h>
 

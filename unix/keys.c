@@ -11,6 +11,7 @@
 #include "port.h"
 
 #include <string.h>
+#include <sys/ioctl.h>
 
 char *getenv(const char *);
 
