@@ -27,6 +27,9 @@ check_symbol_exists(rmdir        unistd.h      	   	  HAS_RMDIR)
 check_symbol_exists(rename       stdio.h       	   	  HAS_RENAME)
 check_symbol_exists(select       sys/select.h  	   	  HAS_SELECT)
 check_symbol_exists(readdir      dirent.h          	  HAS_READDIR)
+check_symbol_exists(SIGIO        signal.h                 HAS_SIGIO)
+
+message("HAS_SIGIO) ${HAS_SIGIO}")
 
 set(HAS_READDIR 1) # cmake isn't picking up on this function.  Not sure why
 
