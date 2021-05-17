@@ -53,8 +53,12 @@ bool must_handle(int sig)
 		case SIGCHLD:
 		case SIGTTIN:
 		case SIGTTOU:
+#if HAVE_SIGIO
 		case SIGIO:
+#endif
+#if HAVE_SIGWINCH
 		case SIGWINCH:
+#endif
 			return 0;
 			break;
 	}
@@ -143,8 +147,12 @@ Visible Procedure initsig(void) {
 	VOID setsig(SIGCHLD,   burp);
 	VOID setsig(SIGTTIN,   burp);
 	VOID setsig(SIGTTOU,   burp);
+#if HAVE_SIGIO
 	VOID setsig(SIGIO,     burp);
+#endif
+#if HAVE_SIGWINCH
 	VOID setsig(SIGWINCH,  burp);
+#endif
 	VOID setsig(SIGTRAP,   burp);
 	
 	// Here's the set of signals that will need some special handling. 
